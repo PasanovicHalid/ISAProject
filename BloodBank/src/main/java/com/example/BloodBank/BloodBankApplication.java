@@ -1,13 +1,13 @@
-package com.example.ISAbackend;
+package com.example.BloodBank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IsAbackendApplication {
+public class BloodBankApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IsAbackendApplication.class, args);
+		SpringApplication.run(BloodBankApplication.class, args);
 	}
 
 }
