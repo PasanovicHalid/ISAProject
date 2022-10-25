@@ -13,16 +13,18 @@ public class BloodBank extends Blood{
     )
     private long bankID;
     private String name;
+    private String email;
     private Address address;
     private String description;
     private double rating;
     private ArrayList<Long> adminIDs;
 
     public BloodBank(double aplus, double bplus, double ABplus, double oplus, double aminus, double bminus,
-                     double ABminus, double ominus, long bankID, String name, Address address,
+                     double ABminus, double ominus, long bankID, String name, String email, Address address,
                      String description, double rating, ArrayList<Long> adminIDs) {
         super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.bankID = bankID;
+        this.email = email;
         this.name = name;
         this.address = address;
         this.description = description;
@@ -31,10 +33,11 @@ public class BloodBank extends Blood{
     }
 
     public BloodBank(double aplus, double bplus, double ABplus, double oplus, double aminus, double bminus,
-                     double ABminus, double ominus, String name, Address address, String description,
+                     double ABminus, double ominus, String name, String email, Address address, String description,
                      double rating, ArrayList<Long> adminIDs) {
         super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.name = name;
+        this.email = email;
         this.address = address;
         this.description = description;
         this.rating = rating;
@@ -87,5 +90,13 @@ public class BloodBank extends Blood{
 
     public void setAdminIDs(ArrayList<Long> adminIDs) {
         this.adminIDs = adminIDs;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
