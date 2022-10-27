@@ -14,31 +14,31 @@ public class BloodBank extends Blood{
     private long bankID;
     private String name;
     private String email;
-    private Address address;
+    //private Address address;
     private String description;
     private double rating;
     private ArrayList<Long> adminIDs;
 
     public BloodBank(double aplus, double bplus, double ABplus, double oplus, double aminus, double bminus,
-                     double ABminus, double ominus, long bankID, String name, String email, Address address,
+                     double ABminus, double ominus, long bankID, String name, String email,
                      String description, double rating, ArrayList<Long> adminIDs) {
         super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.bankID = bankID;
         this.email = email;
         this.name = name;
-        this.address = address;
+        //this.address = address;
         this.description = description;
         this.rating = rating;
         this.adminIDs = adminIDs;
     }
 
     public BloodBank(double aplus, double bplus, double ABplus, double oplus, double aminus, double bminus,
-                     double ABminus, double ominus, String name, String email, Address address, String description,
+                     double ABminus, double ominus, String name, String email, String description,
                      double rating, ArrayList<Long> adminIDs) {
         super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.name = name;
         this.email = email;
-        this.address = address;
+       // this.address = address;
         this.description = description;
         this.rating = rating;
         this.adminIDs = adminIDs;
@@ -60,13 +60,13 @@ public class BloodBank extends Blood{
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 
     public String getDescription() {
         return description;
