@@ -1,5 +1,8 @@
 package com.example.BloodBank.model;
 
+import javax.persistence.Entity;
+
+
 public class Address {
     private String country;
     private String city;

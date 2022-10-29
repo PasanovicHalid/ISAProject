@@ -19,8 +19,8 @@ public class BloodBank extends Blood{
     private double rating;
     private ArrayList<Long> adminIDs;
 
-    public BloodBank(double aplus, double bplus, double ABplus, double oplus, double aminus, double bminus,
-                     double ABminus, double ominus, long bankID, String name, String email,
+    public BloodBank(int aplus, int bplus, int ABplus, int oplus, int aminus, int bminus,
+                     int ABminus, int ominus, long bankID, String name, String email,
                      String description, double rating, ArrayList<Long> adminIDs) {
         super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.bankID = bankID;
@@ -32,8 +32,8 @@ public class BloodBank extends Blood{
         this.adminIDs = adminIDs;
     }
 
-    public BloodBank(double aplus, double bplus, double ABplus, double oplus, double aminus, double bminus,
-                     double ABminus, double ominus, String name, String email, String description,
+    public BloodBank(int aplus, int bplus, int ABplus, int oplus, int aminus, int bminus,
+                     int ABminus, int ominus, String name, String email, String description,
                      double rating, ArrayList<Long> adminIDs) {
         super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.name = name;

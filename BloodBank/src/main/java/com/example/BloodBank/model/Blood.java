@@ -2,17 +2,17 @@ package com.example.BloodBank.model;
 
 public class Blood {
 
-    private double Aplus;
-    private double Bplus;
-    private double ABplus;
-    private double Oplus;
-    private double Aminus;
-    private double Bminus;
-    private double ABminus;
-    private double Ominus;
+    private int Aplus;
+    private int Bplus;
+    private int ABplus;
+    private int Oplus;
+    private int Aminus;
+    private int Bminus;
+    private int ABminus;
+    private int Ominus;
 
-    public Blood(double aplus, double bplus, double ABplus, double oplus,
-                 double aminus, double bminus, double ABminus, double ominus) {
+    public Blood(int aplus, int bplus, int ABplus, int oplus,
+                 int aminus, int bminus, int ABminus, int ominus) {
         Aplus = aplus;
         Bplus = bplus;
         this.ABplus = ABplus;
@@ -23,67 +23,67 @@ public class Blood {
         Ominus = ominus;
     }
 
-    public double getAplus() {
+    public int getAplus() {
         return Aplus;
     }
 
-    public void setAplus(double aplus) {
+    public void setAplus(int aplus) {
         Aplus = aplus;
     }
 
-    public double getBplus() {
+    public int getBplus() {
         return Bplus;
     }
 
-    public void setBplus(double bplus) {
+    public void setBplus(int bplus) {
         Bplus = bplus;
     }
 
-    public double getABplus() {
+    public int getABplus() {
         return ABplus;
     }
 
-    public void setABplus(double ABplus) {
+    public void setABplus(int ABplus) {
         this.ABplus = ABplus;
     }
 
-    public double getOplus() {
+    public int getOplus() {
         return Oplus;
     }
 
-    public void setOplus(double oplus) {
+    public void setOplus(int oplus) {
         Oplus = oplus;
     }
 
-    public double getAminus() {
+    public int getAminus() {
         return Aminus;
     }
 
-    public void setAminus(double aminus) {
+    public void setAminus(int aminus) {
         Aminus = aminus;
     }
 
-    public double getBminus() {
+    public int getBminus() {
         return Bminus;
     }
 
-    public void setBminus(double bminus) {
+    public void setBminus(int bminus) {
         Bminus = bminus;
     }
 
-    public double getABminus() {
+    public int getABminus() {
         return ABminus;
     }
 
-    public void setABminus(double ABminus) {
+    public void setABminus(int ABminus) {
         this.ABminus = ABminus;
     }
 
-    public double getOminus() {
+    public int getOminus() {
         return Ominus;
     }
 
-    public void setOminus(double ominus) {
+    public void setOminus(int ominus) {
         Ominus = ominus;
     }
 }
