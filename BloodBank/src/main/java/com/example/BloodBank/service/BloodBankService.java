@@ -24,21 +24,37 @@ public class BloodBankService {
             if(bank.getEmail().equals(bankEmail)){
                 switch (bloodType) {
                     case "Aplus":
-                        return bank.getAplus() > quantity;
+                        if(bank.getAplus() == 0)
+                            return false;
+                        return bank.getAplus() >= quantity;
                     case "ABplus":
-                        return bank.getABplus() > quantity;
+                        if(bank.getABplus() == 0)
+                            return false;
+                        return bank.getABplus() >= quantity;
                     case "Bplus":
-                        return bank.getBplus() > quantity;
+                        if(bank.getBplus() == 0)
+                            return false;
+                        return bank.getBplus() >= quantity;
                     case "Oplus":
-                        return bank.getOplus() > quantity;
+                        if(bank.getOplus() == 0)
+                            return false;
+                        return bank.getOplus() >= quantity;
                     case "Aminus":
-                        return bank.getAminus() > quantity;
+                        if(bank.getAminus() == 0)
+                            return false;
+                        return bank.getAminus() >= quantity;
                     case "ABminus":
-                        return bank.getABminus() > quantity;
+                        if(bank.getABminus() == 0)
+                            return false;
+                        return bank.getABminus() >= quantity;
                     case "Bminus":
-                        return bank.getBminus() > quantity;
+                        if(bank.getBminus() == 0)
+                            return false;
+                        return bank.getBminus() >= quantity;
                     case "Ominus":
-                        return bank.getOminus() > quantity;
+                        if(bank.getOminus() == 0)
+                            return false;
+                        return bank.getOminus() >= quantity;
                 }
             }
         }
