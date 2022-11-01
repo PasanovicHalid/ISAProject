@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table
-public class BloodBank extends Blood{
+public class BloodBank{
 
     @Id
     @GeneratedValue(
@@ -14,34 +14,60 @@ public class BloodBank extends Blood{
     private long bankID;
     private String name;
     private String email;
-    //private Address address;
+    private Address address;
+    private Blood blood;
+    private String APIKey;
     private String description;
     private double rating;
     private ArrayList<Long> adminIDs;
 
-    public BloodBank(int aplus, int bplus, int ABplus, int oplus, int aminus, int bminus,
-                     int ABminus, int ominus, long bankID, String name, String email,
+    public BloodBank(long bankID, String name, String email, Address address, Blood blood, String APIKey,
                      String description, double rating, ArrayList<Long> adminIDs) {
-        super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
         this.bankID = bankID;
-        this.email = email;
         this.name = name;
-        //this.address = address;
+        this.email = email;
+        this.address = address;
+        this.blood = blood;
+        this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
         this.adminIDs = adminIDs;
     }
 
-    public BloodBank(int aplus, int bplus, int ABplus, int oplus, int aminus, int bminus,
-                     int ABminus, int ominus, String name, String email, String description,
-                     double rating, ArrayList<Long> adminIDs) {
-        super(aplus, bplus, ABplus, oplus, aminus, bminus, ABminus, ominus);
+    public BloodBank(String name, String email, Address address, Blood blood, String APIKey,
+                     String description, double rating, ArrayList<Long> adminIDs) {
         this.name = name;
         this.email = email;
-       // this.address = address;
+        this.address = address;
+        this.blood = blood;
+        this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
         this.adminIDs = adminIDs;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Blood getBlood() {
+        return blood;
+    }
+
+    public void setBlood(Blood blood) {
+        this.blood = blood;
+    }
+
+    public String getAPIKey() {
+        return APIKey;
+    }
+
+    public void setAPIKey(String APIKey) {
+        this.APIKey = APIKey;
     }
 
     public long getBankID() {
@@ -59,14 +85,6 @@ public class BloodBank extends Blood{
     public void setName(String name) {
         this.name = name;
     }
-
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
 
     public String getDescription() {
         return description;

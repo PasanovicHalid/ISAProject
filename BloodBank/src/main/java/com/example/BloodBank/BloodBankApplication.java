@@ -19,17 +19,17 @@ public class BloodBankApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BloodBankApplication.class, args);
 
-		BloodBank bloodBank1 = new BloodBank(2, 4, 0, 0, 5, 3, 2, 6, 1,
-				"New Life", "newlife@gmail.com", "bla bla", 4.4, new ArrayList<>());
-		BloodBank bloodBank2 = new BloodBank(1, 0, 0, 0, 0, 8, 7, 0, 2,
-				"Bloody Hell", "bloodyhell@gmail.com", "bla bla", 3.4, new ArrayList<>());
-		BloodBank bloodBank3 = new BloodBank(0, 0, 1, 3, 5, 5, 9, 3, 3,
-				"Bloody Mary", "bloodymary@gmail.com", "bla bla", 2.4, new ArrayList<>());
-
-		bloodBanks = new ArrayList<BloodBank>();
-		bloodBanks.add(bloodBank1);
-		bloodBanks.add(bloodBank2);
-		bloodBanks.add(bloodBank3);
+//		BloodBank bloodBank1 = new BloodBank(2, 4, 0, 0, 5, 3, 2, 6, 1,
+//				"New Life", "newlife@gmail.com", "bla bla", 4.4, new ArrayList<>());
+//		BloodBank bloodBank2 = new BloodBank(1, 0, 0, 0, 0, 8, 7, 0, 2,
+//				"Bloody Hell", "bloodyhell@gmail.com", "bla bla", 3.4, new ArrayList<>());
+//		BloodBank bloodBank3 = new BloodBank(0, 0, 1, 3, 5, 5, 9, 3, 3,
+//				"Bloody Mary", "bloodymary@gmail.com", "bla bla", 2.4, new ArrayList<>());
+//
+//		bloodBanks = new ArrayList<BloodBank>();
+//		bloodBanks.add(bloodBank1);
+//		bloodBanks.add(bloodBank2);
+//		bloodBanks.add(bloodBank3);
 	}
 	// da bismo slali headere sa fronta na back
 	@Bean
