@@ -8,21 +8,25 @@ import java.util.ArrayList;
 public class BloodBank{
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue
     private long bankID;
     private String name;
     private String email;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "blood_id", referencedColumnName = "id")
     private Blood blood;
     private String APIKey;
     private String description;
     private double rating;
-    private ArrayList<Long> adminIDs;
+
+    public BloodBank() {
+    }
 
     public BloodBank(long bankID, String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating, ArrayList<Long> adminIDs) {
+                     String description, double rating) {
         this.bankID = bankID;
         this.name = name;
         this.email = email;
@@ -31,11 +35,10 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
-        this.adminIDs = adminIDs;
     }
 
     public BloodBank(String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating, ArrayList<Long> adminIDs) {
+                     String description, double rating) {
         this.name = name;
         this.email = email;
         this.address = address;
@@ -43,7 +46,6 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
-        this.adminIDs = adminIDs;
     }
 
     public Address getAddress() {
@@ -102,13 +104,13 @@ public class BloodBank{
         this.rating = rating;
     }
 
-    public ArrayList<Long> getAdminIDs() {
-        return adminIDs;
-    }
-
-    public void setAdminIDs(ArrayList<Long> adminIDs) {
-        this.adminIDs = adminIDs;
-    }
+//    public ArrayList<Long> getAdminIDs() {
+//        return adminIDs;
+//    }
+//
+//    public void setAdminIDs(ArrayList<Long> adminIDs) {
+//        this.adminIDs = adminIDs;
+//    }
 
     public String getEmail() {
         return email;

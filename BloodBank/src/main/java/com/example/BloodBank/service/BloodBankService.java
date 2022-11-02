@@ -5,9 +5,11 @@ import com.example.BloodBank.repository.BloodBankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.BlockingDeque;
 
-import static com.example.BloodBank.BloodBankApplication.bloodBanks;
 
 @Service
 public class BloodBankService {
@@ -20,44 +22,55 @@ public class BloodBankService {
 
     public boolean checkForBlood(String bankEmail, String bloodType, int quantity){
 
-        for(BloodBank bank : bloodBanks){
+        for(BloodBank bank : bloodBankRepository.findAll()){
             if(bank.getEmail().equals(bankEmail)){
                 switch (bloodType) {
                     case "Aplus":
-                        if(bank.getAplus() == 0)
+                        if(bank.getBlood().getAplus() == 0)
                             return false;
-                        return bank.getAplus() >= quantity;
+                        return bank.getBlood().getAplus() >= quantity;
                     case "ABplus":
-                        if(bank.getABplus() == 0)
+                        if(bank.getBlood().getABplus() == 0)
                             return false;
-                        return bank.getABplus() >= quantity;
+                        return bank.getBlood().getABplus() >= quantity;
                     case "Bplus":
-                        if(bank.getBplus() == 0)
+                        if(bank.getBlood().getBplus() == 0)
                             return false;
-                        return bank.getBplus() >= quantity;
+                        return bank.getBlood().getBplus() >= quantity;
                     case "Oplus":
-                        if(bank.getOplus() == 0)
+                        if(bank.getBlood().getOplus() == 0)
                             return false;
-                        return bank.getOplus() >= quantity;
+                        return bank.getBlood().getOplus() >= quantity;
                     case "Aminus":
-                        if(bank.getAminus() == 0)
+                        if(bank.getBlood().getAminus() == 0)
                             return false;
-                        return bank.getAminus() >= quantity;
+                        return bank.getBlood().getAminus() >= quantity;
                     case "ABminus":
-                        if(bank.getABminus() == 0)
+                        if(bank.getBlood().getABminus() == 0)
                             return false;
-                        return bank.getABminus() >= quantity;
+                        return bank.getBlood().getABminus() >= quantity;
                     case "Bminus":
-                        if(bank.getBminus() == 0)
+                        if(bank.getBlood().getBminus() == 0)
                             return false;
-                        return bank.getBminus() >= quantity;
+                        return bank.getBlood().getBminus() >= quantity;
                     case "Ominus":
-                        if(bank.getOminus() == 0)
+                        if(bank.getBlood().getOminus() == 0)
                             return false;
-                        return bank.getOminus() >= quantity;
+                        return bank.getBlood().getOminus() >= quantity;
                 }
             }
         }
         return false;
+    }
+
+    public void checkAPIKey(String bankEmail, String APIKey) throws IllegalAccessException {
+
+        Optional<BloodBank> bank = bloodBankRepository.findByEmail(bankEmail);
+        if(!bank.isPresent())
+            throw new IllegalStateException("Bank with that kind of email doesn't exist!");
+
+        if(APIKey.equals("") || !APIKey.contains(bank.get().getAPIKey()))
+            throw new IllegalAccessException("Authorization failed!");
+
     }
 }
