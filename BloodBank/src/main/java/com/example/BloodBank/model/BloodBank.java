@@ -1,7 +1,9 @@
 package com.example.BloodBank.model;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table
@@ -22,11 +24,13 @@ public class BloodBank{
     private String description;
     private double rating;
 
+    @OneToMany(mappedBy = "bloodBank")
+    private Set<Admin> admins;
     public BloodBank() {
     }
 
     public BloodBank(long bankID, String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating) {
+                     String description, double rating, Set<Admin> admins) {
         this.bankID = bankID;
         this.name = name;
         this.email = email;
@@ -35,10 +39,11 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
+        this.admins = admins;
     }
 
     public BloodBank(String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating) {
+                     String description, double rating, Set<Admin> admins) {
         this.name = name;
         this.email = email;
         this.address = address;
@@ -46,6 +51,7 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
+        this.admins = admins;
     }
 
     public Address getAddress() {
@@ -104,13 +110,13 @@ public class BloodBank{
         this.rating = rating;
     }
 
-//    public ArrayList<Long> getAdminIDs() {
-//        return adminIDs;
-//    }
-//
-//    public void setAdminIDs(ArrayList<Long> adminIDs) {
-//        this.adminIDs = adminIDs;
-//    }
+    public Set<Admin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(Set<Admin> admins) {
+        this.admins = admins;
+    }
 
     public String getEmail() {
         return email;

@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 
 @SpringBootApplication
@@ -28,6 +32,12 @@ public class BloodBankApplication {
 				registry.addMapping("/api/**").allowedOrigins("http://localhost:4200");
 			}
 		};
+	}
+
+	@Bean
+	public Validator validator() {
+		ValidatorFactory validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
+		return validatorFactory.getValidator();
 	}
 
 }

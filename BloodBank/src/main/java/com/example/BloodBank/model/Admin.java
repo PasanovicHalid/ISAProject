@@ -1,21 +1,28 @@
 package com.example.BloodBank.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
+@Entity
 public class Admin extends User{
-    private long bloodBankID;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bank_id", referencedColumnName = "bankID")
+    private BloodBank bloodBank;
 
     public Admin(String firstName, String lastName, String username, String password, String email,
-                 Gender gender, LocalDate dob, Role role, long bloodBankID) {
+                 Gender gender, LocalDate dob, Role role, BloodBank bloodBank) {
         super(firstName, lastName, username, password, email, gender, dob, role);
-        this.bloodBankID = bloodBankID;
+        this.bloodBank = bloodBank;
     }
 
-    public long getBloodBankID() {
-        return bloodBankID;
+    public BloodBank getBloodBank() {
+        return bloodBank;
     }
 
-    public void setBloodBankID(long bloodBankID) {
-        this.bloodBankID = bloodBankID;
+    public void setBloodBank(BloodBank bloodBank) {
+        this.bloodBank = bloodBank;
     }
 }

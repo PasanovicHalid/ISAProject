@@ -1,5 +1,6 @@
 package com.example.BloodBank.service;
 
+import com.example.BloodBank.dto.BloodBankDTO;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.repository.BloodBankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,9 @@ public class BloodBankService {
 
         if(APIKey.equals("") || !APIKey.contains(bank.get().getAPIKey()))
             throw new IllegalAccessException("Authorization failed!");
+    }
+
+    public void registerBloodBank(BloodBankDTO bloodBank){
 
     }
 }

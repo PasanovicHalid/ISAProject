@@ -1,5 +1,7 @@
 package com.example.BloodBank.controller;
 
+import com.example.BloodBank.dto.BloodBankDTO;
+import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
 import com.example.BloodBank.model.User;
@@ -53,5 +55,17 @@ public class BloodBankController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.checkForBlood(bankEmail, bloodType, quantity));
+    }
+    @PostMapping
+    public HttpStatus registerBloodBank(@RequestBody BloodBankDTO bloodBank){
+
+        try{
+            bloodBankService.registerBloodBank(bloodBank);
+            return HttpStatus.OK;
+        }
+        catch(Exception e){
+            return HttpStatus.NOT_FOUND;
+        }
+
     }
 }
