@@ -1,4 +1,83 @@
 package com.example.BloodBank.dto;
 
+import com.example.BloodBank.model.Address;
+import com.example.BloodBank.model.Admin;
+import com.example.BloodBank.model.Blood;
+
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.Set;
+
 public class BloodBankDTO {
+    @NotNull
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message="Invalid email address!" )
+    private String email;
+
+    @NotNull
+    @Valid
+    private Address address;
+    private String description;
+
+    @Size(min = 1, max = 10)
+    private ArrayList<Long> adminIDs;
+
+    public BloodBankDTO(String name, String email, Address address, String description, ArrayList<Long> adminIDs) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.description = description;
+        this.adminIDs = adminIDs;
+    }
+
+    public BloodBankDTO() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<Long> getAdminIDs() {
+        return adminIDs;
+    }
+
+    public void setAdminIDs(ArrayList<Long> adminIDs) {
+        this.adminIDs = adminIDs;
+    }
 }

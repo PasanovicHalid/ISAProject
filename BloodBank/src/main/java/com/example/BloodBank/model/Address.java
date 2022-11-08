@@ -1,6 +1,7 @@
 package com.example.BloodBank.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "address")
@@ -8,9 +9,22 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)?", message="Invalid country input!")
     private String country;
+
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)?", message="Invalid city input!")
     private String city;
+
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)?", message="Invalid street input!")
     private String street;
+    @Min(1)
+    @Max(200)
     private int number;
     @OneToOne(mappedBy = "address")
     private BloodBank bloodBank;
