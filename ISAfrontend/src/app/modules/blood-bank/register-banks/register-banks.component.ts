@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BloodBankService } from '../services/blood-bank.service';
 import { BloodBank } from '../model/blood-bank.model';
 
@@ -11,23 +12,50 @@ import { BloodBank } from '../model/blood-bank.model';
 export class RegisterBanksComponent implements OnInit {
 
   public bloodBank : BloodBank = new BloodBank();
-  public errorMessage: any;
+  public errorMessage: Error = new Error;
+  public errorMap: Map<string, string> = new Map();
+  public bb : string = '';
 
-  constructor(private bloodBankService: BloodBankService, private router: Router) { }
+  constructor(private bloodBankService: BloodBankService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   public registerBloodBank(){
     if (!this.isValidInput()) return;
+    this.bloodBankService.registerBloodBank(this.bloodBank).subscribe( res => 
+      {
+        console.log("reEEs")
+      }, (error) => {
+        console.log(error)
+        this.errorMessage = error;
+        this.toastError();
+      });
 
   }
   private isValidInput(): boolean {
-    
+    this.bloodBank.adminIDs = []
+    this.bloodBank.adminIDs.push(1);
+    console.log(this.bloodBank.adminIDs)
     if(this.bloodBank.address.number <1 || this.bloodBank.address.number > 200
        || this.bloodBank.address.number == null )
       return false;
   
     return true;
   }
+
+  private toastError() {
+    if (String(this.errorMessage).includes('406')){
+      var error = localStorage.getItem('errormap')!;
+      this.errorMap = new Map(JSON.parse(error));
+
+      for (let entry of this.errorMap.entries()) {
+        this.toastr.error('Validation error: ' + entry[1]);
+      }
+    }
+    else{
+      this.toastr.error(this.errorMessage.message);
+    }
+  }
+
 }

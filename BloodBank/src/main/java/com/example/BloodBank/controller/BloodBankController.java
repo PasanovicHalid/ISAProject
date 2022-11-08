@@ -11,10 +11,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/bloodbank")
@@ -57,15 +62,23 @@ public class BloodBankController {
         return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.checkForBlood(bankEmail, bloodType, quantity));
     }
     @PostMapping
-    public HttpStatus registerBloodBank(@RequestBody BloodBankDTO bloodBank){
+    public ResponseEntity<Object> registerBloodBank(@Valid @RequestBody BloodBankDTO bloodBankDTO, BindingResult bindingResult){
 
-        try{
-            bloodBankService.registerBloodBank(bloodBank);
-            return HttpStatus.OK;
+//        try{
+//            bloodBankService.registerBloodBank(bloodBankDTO);
+//            return HttpStatus.OK;
+//        }
+//        catch(Exception e){
+//            return HttpStatus.NOT_FOUND;
+//        }
+        if(bindingResult.hasErrors()){
+            System.err.println("error!");
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error:bindingResult.getFieldErrors()){
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
-        catch(Exception e){
-            return HttpStatus.NOT_FOUND;
-        }
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

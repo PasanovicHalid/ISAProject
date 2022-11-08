@@ -3,6 +3,7 @@ package com.example.BloodBank.service;
 import com.example.BloodBank.dto.BloodBankDTO;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.repository.BloodBankRepository;
+import com.example.BloodBank.service.service_interface.IBloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.concurrent.BlockingDeque;
 
 
 @Service
-public class BloodBankService {
+public class BloodBankService implements IBloodBankService {
     private final BloodBankRepository bloodBankRepository;
 
     @Autowired

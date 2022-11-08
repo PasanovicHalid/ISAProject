@@ -4,15 +4,15 @@ export class BloodBank {
     name: string = '';
     email: string = '';
     description: string = '';
-    adminID: string ;
-    address: Address;
+    adminIDs: number[] = [] ;
+    address: Address = new Address;
 
     public constructor(obj?: any) {
         if (obj){
             this.name = obj.name;
             this.email = obj.email;
             this.description = obj.description;
-            this.adminID = obj.adminID;
+            this.adminIDs = obj.adminIDs;
             this.address = obj.address;
         }
     }

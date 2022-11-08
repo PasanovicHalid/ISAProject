@@ -7,7 +7,7 @@
                 Bank name: 
             </td>
             <td>
-                <input type="text" [(ngModel)]="bloodBank.name"/> 
+                <input type="text" [(ngModel)]="bloodBank.name" name="name"/> 
             </td>
         </tr>
         <tr >
@@ -15,7 +15,7 @@
                 Email: 
             </td>
             <td >
-                <input type="text" [(ngModel)]="bloodBank.email"/> 
+                <input type="text" [(ngModel)]="bloodBank.email" name="email"/> 
             </td>
         </tr>
         <tr >
@@ -23,7 +23,7 @@
                 Description: 
             </td>
             <td>
-                <input type="text" [(ngModel)]="bloodBank.description"/> 
+                <input type="text" [(ngModel)]="bloodBank.description" name="description"/> 
             </td>
         </tr>      
         <tr >
@@ -31,7 +31,7 @@
                 Admin: 
             </td>
             <td style="padding-bottom: 15px;">
-                <input type="text" [(ngModel)]="bloodBank.adminID"/> 
+                <input type="text" [(ngModel)]="bb" name="ad"/> 
             </td>
         </tr>
         <tr >
@@ -44,7 +44,7 @@
                 Country: 
             </td>
             <td>
-                <input type="text" [(ngModel)]="bloodBank.address.country"/> 
+                <input type="text" [(ngModel)]="bloodBank.address.country" name="country"/> 
             </td>
         </tr>
         <tr >
@@ -52,7 +52,7 @@
                 City: 
             </td>
             <td>
-                <input type="text" [(ngModel)]="bloodBank.address.city"/> 
+                <input type="text" [(ngModel)]="bloodBank.address.city" name="city"/> 
             </td>
         </tr>
         <tr >
@@ -60,7 +60,7 @@
                 Street name: 
             </td>
             <td>
-                <input type="text" [(ngModel)]="bloodBank.address.street"/> 
+                <input type="text" [(ngModel)]="bloodBank.address.street" name="street"/> 
             </td>
         </tr>
         <tr >
@@ -68,7 +68,7 @@
                 Street number: 
             </td>
             <td style="padding-bottom: 15px;">
-                <input type="number" min="1" max="200" [(ngModel)]="bloodBank.address.number"/> 
+                <input type="number" min="1" max="200" [(ngModel)]="bloodBank.address.number" name="number"/> 
             </td>
         </tr>
         

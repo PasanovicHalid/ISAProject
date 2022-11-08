@@ -16,6 +16,7 @@ import java.util.Set;
 public class BloodBankDTO {
     @NotNull
     @NotBlank
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)*", message="Invalid bank name input!")
     private String name;
 
     @NotBlank
@@ -27,7 +28,7 @@ public class BloodBankDTO {
     private Address address;
     private String description;
 
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 10, message="Max 10 admins for a bank allowed")
     private ArrayList<Long> adminIDs;
 
     public BloodBankDTO(String name, String email, Address address, String description, ArrayList<Long> adminIDs) {

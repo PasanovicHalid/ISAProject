@@ -12,7 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BloodBankModule } from './modules/blood-bank/blood-bank.module';
-import { BloodtransfusionModule } from './modules/bloodtransfusion/bloodtransfusion.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,8 @@ import { BloodtransfusionModule } from './modules/bloodtransfusion/bloodtransfus
     MatInputModule,
     FormsModule,
     BrowserAnimationsModule,
-    BloodtransfusionModule,
-    BloodBankModule
+    BloodBankModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
