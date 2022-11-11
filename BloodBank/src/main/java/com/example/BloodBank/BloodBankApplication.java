@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.ArrayList;
 
+//vrv ce se izbaciti posle
 @EnableScheduling
 @SpringBootApplication
 public class BloodBankApplication {
