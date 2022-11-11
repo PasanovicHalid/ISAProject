@@ -10,7 +10,7 @@ import java.util.Set;
 public class BloodBank{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bankID;
     private String name;
     private String email;
@@ -24,7 +24,7 @@ public class BloodBank{
     private String description;
     private double rating;
 
-    @OneToMany(mappedBy = "bloodBank")
+    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Admin> admins;
     public BloodBank() {
     }
