@@ -1,5 +1,7 @@
 package com.example.BloodBank.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String firstName;
     private String lastName;

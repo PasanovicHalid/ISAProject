@@ -17,14 +17,12 @@ public class Blood {
     private int Bminus;
     private int ABminus;
     private int Ominus;
-    @OneToOne(mappedBy = "blood")
-    private BloodBank bloodBank;
 
     public Blood() {
     }
 
     public Blood(Long id, int aplus, int bplus, int ABplus, int oplus, int aminus, int bminus,
-                 int ABminus, int ominus, BloodBank bloodBank) {
+                 int ABminus, int ominus) {
         this.id = id;
         Aplus = aplus;
         Bplus = bplus;
@@ -34,11 +32,10 @@ public class Blood {
         Bminus = bminus;
         this.ABminus = ABminus;
         Ominus = ominus;
-        this.bloodBank = bloodBank;
     }
 
     public Blood(int aplus, int bplus, int ABplus, int oplus,
-                 int aminus, int bminus, int ABminus, int ominus, BloodBank bloodBank) {
+                 int aminus, int bminus, int ABminus, int ominus) {
         Aplus = aplus;
         Bplus = bplus;
         this.ABplus = ABplus;
@@ -47,7 +44,6 @@ public class Blood {
         Bminus = bminus;
         this.ABminus = ABminus;
         Ominus = ominus;
-        this.bloodBank = bloodBank;
     }
 
     public Long getId() {
@@ -56,14 +52,6 @@ public class Blood {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BloodBank getBloodBank() {
-        return bloodBank;
-    }
-
-    public void setBloodBank(BloodBank bloodBank) {
-        this.bloodBank = bloodBank;
     }
 
     public int getAplus() {

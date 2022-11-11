@@ -23,46 +23,32 @@ public class Address {
     @NotBlank
     @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)?", message="Invalid street input!")
     private String street;
-    @Min(1)
-    @Max(200)
+    @Min(value = 1, message = "Street number has to be between 1 and 200.")
+    @Max(value = 200, message = "Street number has to be between 1 and 200.")
     private int number;
-    @OneToOne(mappedBy = "address")
-    private BloodBank bloodBank;
-
     public Address() {
     }
 
-    public Address(Long id, String country, String city, String street, int number, BloodBank bloodBank) {
+    public Address(Long id, String country, String city, String street, int number) {
         this.id = id;
         this.country = country;
         this.city = city;
         this.street = street;
         this.number = number;
-        this.bloodBank = bloodBank;
     }
 
-    public Address(String country, String city, String street, int number, BloodBank bloodBank) {
+    public Address(String country, String city, String street, int number) {
         this.country = country;
         this.city = city;
         this.street = street;
         this.number = number;
-        this.bloodBank = bloodBank;
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BloodBank getBloodBank() {
-        return bloodBank;
-    }
-
-    public void setBloodBank(BloodBank bloodBank) {
-        this.bloodBank = bloodBank;
     }
 
     public String getCountry() {
