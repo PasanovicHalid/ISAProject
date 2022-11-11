@@ -2,9 +2,14 @@ package com.example.BloodBank.dto;
 
 import java.util.Date;
 
+import com.example.BloodBank.model.News;
+
 public class MessageDto {
     private String text;
-    private Date timestamp;
+    private News content;
+    
+
+	private Date timestamp;
 
     public MessageDto() {
     }
@@ -30,11 +35,20 @@ public class MessageDto {
         this.timestamp = timestamp;
     }
 
-    @Override
-    public String toString() {
-        return "MessageDto{" +
-                "text='" + text + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
-    }
+	public News getContent() {
+		return content;
+	}
+
+	public void setContent(News content) {
+		this.content = content;
+	}
+
+	@Override
+	public String toString() {
+		return "MessageDto [text=" + text + ", content=" + content + ", timestamp=" + timestamp + "]";
+	}
+    
+    
+
+    
 }

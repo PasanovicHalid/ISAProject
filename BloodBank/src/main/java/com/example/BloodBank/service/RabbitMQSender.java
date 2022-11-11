@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.example.BloodBank.dto.MessageDto;
+import com.example.BloodBank.model.News;
 
 @Service
 public class RabbitMQSender {
@@ -23,6 +24,10 @@ public class RabbitMQSender {
     private String routingKey;
 
     public void send(MessageDto message) {
+    	News news = new News();
+    	news.setId("idNesto");
+    	news.setContent("contentNesto");
+    	message.setContent(news);
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }
 }
