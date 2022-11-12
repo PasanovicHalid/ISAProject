@@ -3,9 +3,7 @@ package com.example.BloodBank.controller;
 import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +15,15 @@ public class CustomerController {
     public CustomerController(CustomerService customerService){
         this.customerService = customerService;
     }
-    @GetMapping("/all")
+    @GetMapping()
     public List<Customer> getAllCustomers(){
         return customerService.getAll();
+    }
+    @PostMapping(
+            value = "/register", consumes = "application/json",
+            produces = "application/json"
+    )
+    public Customer registerCustomer(@RequestBody Customer newCustomer){
+        return customerService.registerCustomer(newCustomer);
     }
 }

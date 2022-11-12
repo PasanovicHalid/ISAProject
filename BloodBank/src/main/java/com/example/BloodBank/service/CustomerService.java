@@ -15,10 +15,10 @@ public class CustomerService implements ICustomerService {
     public CustomerService(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
     }
-    public void registerCustomer(Customer customer) {
+    public Customer registerCustomer(Customer customer) {
         customerRepository.save(customer);
+        return customer;
     }
-
     public List<Customer> getAll() {
         return customerRepository.findAll();
     }
