@@ -26,3 +26,5 @@ insert into admin
 values(3, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', null);
 insert into customer
 values(1, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00');
+insert into customer
+values(2, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra123', 3, 'cust00');
