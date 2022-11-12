@@ -1,16 +1,13 @@
 .containerr {
     border-radius: 40px;
-    border-width: 5px;
-    border-style: solid;
     width: fit-content;
     margin: auto;
-    border-color: #D7C0AE;
-    background-color: #967E76;
+    background-color: #F05454;
     padding: 20px;
     text-align: center;
   }
 .text {
-    color: #EEE3CB;
+    color: #F5F5F5;
 }
 mat-form-field {
     width: 100%;

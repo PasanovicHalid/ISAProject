@@ -34,9 +34,7 @@ export class RegisterBanksComponent implements OnInit {
 
   }
   private isValidInput(): boolean {
-    this.bloodBank.adminIDs = []
-    this.bloodBank.adminIDs.push(1);
-    console.log(this.bloodBank.adminIDs)
+    
     if(this.bloodBank.address.number <1 || this.bloodBank.address.number > 200
        || this.bloodBank.address.number == null )
       return false;

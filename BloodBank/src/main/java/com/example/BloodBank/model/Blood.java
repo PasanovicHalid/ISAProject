@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Blood {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int Aplus;
     private int Bplus;

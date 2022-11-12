@@ -10,16 +10,14 @@ export class BloodBankService {
 
   apiHost: string = "http://localhost:8086/";
   headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-  public keys: string[];
-  public errorMap: Map<string, string> = new Map<string, string>();
 
   constructor(private http: HttpClient) { }
 
   registerBloodBank(bloodBank: any): Observable<any>{
-    return this.http.post<any>(this.apiHost + 'api/bloodbank', bloodBank, {headers: this.headers}).pipe(catchError(this.handleError));
+    return this.http.post<any>(this.apiHost + 'api/bloodbank', bloodBank, {headers: this.headers}).pipe(catchError(this.handleValidationError));
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleValidationError(error: HttpErrorResponse) {
     var map = new Map<string, string>();
     Object.keys(error.error).forEach(key => {  
       map.set(key, error.error[key] )
