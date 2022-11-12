@@ -1,17 +1,9 @@
 package com.example.BloodBank.dto;
 
 import com.example.BloodBank.model.Address;
-import com.example.BloodBank.model.Admin;
-import com.example.BloodBank.model.Blood;
-
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class BloodBankDTO {
     @NotNull

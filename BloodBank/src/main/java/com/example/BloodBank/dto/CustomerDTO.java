@@ -1,17 +1,11 @@
-package com.example.BloodBank.model;
+package com.example.BloodBank.dto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import com.example.BloodBank.model.Gender;
+import com.example.BloodBank.model.Role;
+
 import java.time.LocalDate;
 
-@MappedSuperclass
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+public class CustomerDTO {
     private String firstName;
     private String lastName;
     private String username;
@@ -21,9 +15,10 @@ public class User {
     private LocalDate dob;
     private Role role;
 
-    public User(String id, String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role) {
-        this.id = id;
+    public CustomerDTO(String firstName, String lastName,
+                       String username, String password,
+                       String email, Gender gender,
+                       LocalDate dob, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -33,28 +28,7 @@ public class User {
         this.dob = dob;
         this.role = role;
     }
-
-    public User(String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.role = role;
-    }
-
-    public User() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public CustomerDTO() {
     }
 
     public String getFirstName() {

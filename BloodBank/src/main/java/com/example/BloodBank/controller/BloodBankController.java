@@ -1,10 +1,7 @@
 package com.example.BloodBank.controller;
 
 import com.example.BloodBank.dto.BloodBankDTO;
-import com.example.BloodBank.model.BloodBank;
-import com.example.BloodBank.model.Gender;
-import com.example.BloodBank.model.Role;
-import com.example.BloodBank.model.User;
+import com.example.BloodBank.model.*;
 import com.example.BloodBank.service.BloodBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -81,4 +79,10 @@ public class BloodBankController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+//    @GetMapping("/customers")
+//    public List<Customer> getAllCustomers(){
+//        return
+//    }
+//    @PostMapping
+//    public ResponseEntity<Object>
 }
