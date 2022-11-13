@@ -1,0 +1,48 @@
+<div class="container">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Email:</mat-label>
+            <input disabled matInput [(ngModel)]="user.email">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Username:</mat-label>
+            <input matInput [(ngModel)]="user.username">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>First name:</mat-label>
+            <input matInput [(ngModel)]="user.firstName">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Last name:</mat-label>
+            <input matInput [(ngModel)]="user.lastName">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="start"
+            [(ngModel)]="user.dob">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+            <mat-datepicker #start></mat-datepicker>
+          </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="user.gender" matInput>
+                <mat-option [value]=0>Male</mat-option>
+                <mat-option [value]=1>Female</mat-option>
+                <mat-option [value]=2>Other</mat-option>
+            </mat-select>
+        </mat-form-field ><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Role</mat-label>
+            <mat-select [(ngModel)]="user.role" matInput>
+                <mat-option [value]=0>Head Admin</mat-option>
+                <mat-option [value]=1>Admin</mat-option>
+                <mat-option [value]=2>Health worker</mat-option>
+                <mat-option [value]=3>Customer</mat-option>
+            </mat-select>
+        </mat-form-field ><br>
+        <button mat-stroked-button>
+            Submit
+        </button>
+    </div>
+</div>
