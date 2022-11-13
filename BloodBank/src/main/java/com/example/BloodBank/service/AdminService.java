@@ -48,4 +48,12 @@ public class AdminService implements IAdminService {
     public Iterable<Admin> GetAll() {
         return adminRepository.findAll();
     }
+    public Admin getById(long id){
+        return  adminRepository.getById(id);
+    }
+
+    @Override
+    public Optional<Admin> findByBloodBankId(long id) {
+        return adminRepository.findByBlodBankId(id);
+    }
 }
