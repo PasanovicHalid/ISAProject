@@ -15,7 +15,6 @@ export class RegisterBanksComponent implements OnInit {
   public bloodBank : BloodBank = new BloodBank();
   public errorMessage: Error = new Error;
   public errorMap: Map<string, string> = new Map();
-  public bb : string = '';
 
   constructor(private bloodBankService: BloodBankService, private router: Router,private toastr: ToastrService) { }
 

@@ -1,6 +1,7 @@
 package com.example.BloodBank.dto;
 
 import com.example.BloodBank.model.Address;
+import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
 
@@ -11,21 +12,21 @@ import java.time.LocalDate;
 public class AdminDTO {
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)*", message="Invalid first name input!")
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid first name input!")
     private String firstName;
 
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)*", message="Invalid last name input!")
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid last name input!")
     private String lastName;
 
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Za-z0-9]{3})", message="Invalid username input!")
+    @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid username input!")
     private String username;
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Za-z0-9]{3})", message="Invalid password input!")
+    @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid password input!")
     private String password;
     @NotBlank
     @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message="Invalid email address!" )
@@ -38,9 +39,11 @@ public class AdminDTO {
     @NotNull
     @Valid
     private Address adress;
+    @NotNull
+    private BloodBank bloodBank;
 
     public AdminDTO(String firstName, String lastName, String username, String password, String email,
-                    Gender gender, LocalDate dob, Address adress) {
+                    Gender gender, LocalDate dob, Address adress, BloodBank bloodBank) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -49,6 +52,7 @@ public class AdminDTO {
         this.gender = gender;
         this.dob = dob;
         this.adress = adress;
+        this.bloodBank = bloodBank;
     }
 
     public AdminDTO() {
@@ -116,5 +120,13 @@ public class AdminDTO {
 
     public void setAdress(Address adress) {
         this.adress = adress;
+    }
+
+    public BloodBank getBloodBank() {
+        return bloodBank;
+    }
+
+    public void setBloodBank(BloodBank bloodBank) {
+        this.bloodBank = bloodBank;
     }
 }
