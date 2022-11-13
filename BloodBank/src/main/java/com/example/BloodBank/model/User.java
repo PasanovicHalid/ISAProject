@@ -1,28 +1,45 @@
 package com.example.BloodBank.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@MappedSuperclass
+@Entity(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+
     private String firstName;
     private String lastName;
+    @NotNull
+    @NotBlank
+    @Column(unique=true)
     private String username;
+    @NotNull
+    @NotBlank
     private String password;
+    @Column(unique=true)
+    @NotNull
+    @NotBlank
+    @Email
     private String email;
     private Gender gender;
     private LocalDate dob;
+    @NotNull
+    @NotBlank
     private Role role;
 
-    public User(Long id, String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role) {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+    
+    public User(int id, String firstName, String lastName, String username, String password, String email,
+                Gender gender, LocalDate dob, Role role, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,10 +49,11 @@ public class User {
         this.gender = gender;
         this.dob = dob;
         this.role = role;
+        this.address = address;
     }
 
     public User(String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role) {
+                Gender gender, LocalDate dob, Role role, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -44,16 +62,18 @@ public class User {
         this.gender = gender;
         this.dob = dob;
         this.role = role;
+        this.address = address;
     }
 
     public User() {
     }
 
-    public Long getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -119,5 +139,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

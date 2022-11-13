@@ -1,152 +1,166 @@
 <h1 align-center>Blood Bank registration</h1>
-<div class="containerr" >
-<form>
-    <table >
-        <tr >
-            <td >
-                Bank name: 
-            </td>
-            <td>
-                <input type="text" [(ngModel)]="bloodBank.name" name="name"/> 
-            </td>
-        </tr>
-        <tr >
-            <td >
-                Email: 
-            </td>
-            <td >
-                <input type="text" [(ngModel)]="bloodBank.email" name="email"/> 
-            </td>
-        </tr>
-        <tr >
-            <td>
-                Description: 
-            </td>
-            <td>
-                <input type="text" [(ngModel)]="bloodBank.description" name="description"/> 
-            </td>
-        </tr>      
-        <tr >
-            <td style="padding-bottom: 15px;">
-                Admin: 
-            </td>
-            <td style="padding-bottom: 15px;">
-                <input type="text" [(ngModel)]="bb" name="ad"/> 
-            </td>
-        </tr>
-        <tr >
-            <td colspan="2" style="text-align: center;">
-                Address information 
-            </td>   
-        </tr>
-        <tr >
-            <td>
-                Country: 
-            </td>
-            <td>
-                <input type="text" [(ngModel)]="bloodBank.address.country" name="country"/> 
-            </td>
-        </tr>
-        <tr >
-            <td>
-                City: 
-            </td>
-            <td>
-                <input type="text" [(ngModel)]="bloodBank.address.city" name="city"/> 
-            </td>
-        </tr>
-        <tr >
-            <td>
-                Street name: 
-            </td>
-            <td>
-                <input type="text" [(ngModel)]="bloodBank.address.street" name="street"/> 
-            </td>
-        </tr>
-        <tr >
-            <td style="padding-bottom: 15px;">
-                Street number: 
-            </td>
-            <td style="padding-bottom: 15px;">
-                <input type="number" min="1" max="200" [(ngModel)]="bloodBank.address.number" name="number"/> 
-            </td>
-        </tr>
-        
-        <tr>
-            <button mat-stroked-button (click)="registerBloodBank()" >
-                Submit
-            </button>
-        </tr>
-    </table >
-</form>
-<!-- <form >
-    
-    <div class="form-group col-md-16">
-        <label for="inputname">Bank name</label>
-        <input type="email" class="form-control" id="inputname" placeholder="Name">
-    </div>
-    <div class="form-group col-md-16" style="padding-top: 10px;">
-        <label for="inputEmail4">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-    </div>
 
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
+<section class="vh-100 gradient-custom" style="color: #121212">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">Blood Bank Registration Form</h3>
+              <form novalidate #registrationForm="ngForm" (ngSubmit)="saveBank(registrationForm)">
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input type="text" id="firstName" class="form-control form-control-lg" 
+                      name="firstName"
+                      required
+                      pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*"
+                      [(ngModel)]="bloodBank.name"
+                          #nameVar="ngModel"
+                            [ngClass]="{'is-invalid': (nameVar.touched || nameVar.dirty) && !nameVar.valid }"/>
+                        <span class="invalid-feedback">
+                            <span *ngIf="nameVar.errors?.['pattern']">
+                                Please use first capital letter.
+                            </span>
+                            <span *ngIf="nameVar.errors?.['required']">
+                                Please enter bank name.
+                            </span>
+                        </span>
+                      <label class="form-label" for="firstName">Name</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                        <input type="email" id="email" class="form-control form-control-lg"
+                        name="email" required
+                        pattern="[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,4}$"
+                        [(ngModel)]="bloodBank.email"
+                          #emailVar="ngModel"
+                            [ngClass]="{'is-invalid': (emailVar.touched || emailVar.dirty) && !emailVar.valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="emailVar.errors?.['pattern']">
+                                Please use convention 'aa@aa.aa'.
+                            </span>
+                            <span *ngIf="emailVar.errors?.['required']">
+                                Please enter bank email.
+                            </span>
+                        </span>
+                        <label class="form-label" for="email">Email</label>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-12 mb-4 align-items-center">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="comment" style="resize: none;" [(ngModel)]="bloodBank.description" name="description"></textarea>
+                        <label for="description">Description</label>
+                      </div>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      <input type="text" id="country" class="form-control form-control-lg" 
+                      name="country" required
+                      pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
+                      [(ngModel)]="bloodBank.address.country"
+                          #countryVar="ngModel"
+                            [ngClass]="{'is-invalid': (countryVar.touched || countryVar.dirty) && !countryVar.valid }"/>
+                        <span class="invalid-feedback">
+                            <span *ngIf="countryVar.errors?.['pattern']">
+                                Please use first capital letters.
+                            </span>
+                            <span *ngIf="countryVar.errors?.['required']">
+                                Please enter country value of address.
+                            </span>
+                        </span>
+                      <label class="form-label" for="country">Country</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      <input type="text" id="city" class="form-control form-control-lg" 
+                      name="city" required=""
+                      pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*" 
+                      [(ngModel)]="bloodBank.address.city"
+                          #cityVar="ngModel"
+                            [ngClass]="{'is-invalid': (cityVar.touched || cityVar.dirty) && !cityVar.valid }"/>
+                        <span class="invalid-feedback">
+                            <span *ngIf="cityVar.errors?.['pattern']">
+                                Please use first capital letters.
+                            </span>
+                            <span *ngIf="cityVar.errors?.['required']">
+                                Please enter city value of address.
+                            </span>
+                        </span>
+                      <label class="form-label" for="city">City</label>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                    <div class="col-md-6 mb-4 pb-2">
+  
+                        <div class="form-outline">
+                          <input type="text" id="street" class="form-control form-control-lg" 
+                          name="street" required
+                          pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*" 
+                          [(ngModel)]="bloodBank.address.street"
+                          #streetVar="ngModel"
+                            [ngClass]="{'is-invalid': (streetVar.touched || streetVar.dirty) && !streetVar.valid }"/>
+                            <span class="invalid-feedback">
+                                <span *ngIf="streetVar.errors?.['pattern']">
+                                    Please use first capital letters.
+                                </span>
+                                <span *ngIf="streetVar.errors?.['required']">
+                                    Please enter street value of address.
+                                </span>
+                            </span>
+                          <label class="form-label" for="street">Street</label>
+                        </div>
+      
+                      </div>
+                      <div class="col-md-6  pb-2">
+      
+                        <div class="form-outline">
+                          <input type="text" id="streetNumber" class="form-control form-control-lg"
+                          name="streetNumber" required
+                          pattern="([0-9]{1,3})[A-Z]?"
+                          [(ngModel)]="bloodBank.address.number"
+                          #numberVar="ngModel"
+                            [ngClass]="{'is-invalid': (numberVar.touched || numberVar.dirty) && !numberVar.valid }" />
+                            <span class="invalid-feedback">
+                                <span *ngIf="numberVar.errors?.['pattern']">
+                                    Please have at least one number and possibly a letter.
+                                </span>
+                                <span *ngIf="numberVar.errors?.['required']">
+                                    Please enter number value of street.
+                                </span>
+                            </span>
+                          <label class="form-label" for="streetNumber">Street Number</label>
+                        </div>
+      
+                      </div>
+                </div>
+                <div>
+                  <input class="btn btn-primary btn-lg submit" type="submit" value="Register"  [disabled]="!registrationForm.valid"/>
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
     </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-  </form> -->
-</div>
-
-<!-- <div class="container">
-    <div class="progress">
-        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 0%"></div>
-     </div>
-    <div class="containerr">
-        <mat-form-field appearance="fill">
-            <mat-label >Bank name</mat-label>
-            <input type="text" [(ngModel)]="name" matInput >
-        </mat-form-field ><br>
-        <mat-form-field appearance="fill">
-            <mat-label>Bank address</mat-label>
-            <input type="text" matInput >
-            </mat-form-field ><br>         
-        <mat-form-field appearance="fill"  >
-            <mat-label>Bank email</mat-label>
-            <input type="text" matInput >
-        </mat-form-field><br>
-        <button mat-stroked-button >
-            Submit
-        </button>
-    </div>
-</div> -->
-
+  </section>

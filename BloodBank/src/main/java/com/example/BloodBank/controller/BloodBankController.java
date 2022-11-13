@@ -29,19 +29,6 @@ public class BloodBankController {
         this.bloodBankService = bloodBankService;
     }
 
-//    @GetMapping//(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public User hello(){
-//        System.out.println("e tu smo");
-//        String hello = "Hello from back!";
-//        User user = new User("Ana", "Ana", "ana", "ana", "ana", Gender.FEMALE,LocalDate.of(2000,5,5), Role.ADMIN);
-//        return user;
-//
-    @GetMapping//(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String hello(){
-        System.out.println("e tu smo");
-        return "Hello from back!" ;
-    }
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Boolean> fromPSW(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,
@@ -77,7 +64,13 @@ public class BloodBankController {
             }
             return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        try{
+            bloodBankService.registerBloodBank(bloodBankDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 //    @GetMapping("/customers")
 //    public List<Customer> getAllCustomers(){

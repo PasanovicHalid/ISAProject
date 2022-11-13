@@ -21,8 +21,6 @@ public class ScheduledTasks {
         this.rabbitMQSender = rabbitMQSender;
     }
 
-//    @Scheduled(fixedRate = 3000)
-//    commented out for now
     public void sendMessage() {
        MessageDto message = new MessageDto("AAA Random message from Java client: " + UUID.randomUUID().toString(),
                new Date());
