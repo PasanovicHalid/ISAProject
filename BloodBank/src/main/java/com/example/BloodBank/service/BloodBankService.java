@@ -1,11 +1,18 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.BloodBankDTO;
+import com.example.BloodBank.model.Address;
+import com.example.BloodBank.model.Blood;
 import com.example.BloodBank.model.BloodBank;
+import com.example.BloodBank.repository.AddressRepository;
 import com.example.BloodBank.repository.BloodBankRepository;
+import com.example.BloodBank.repository.BloodRepository;
 import com.example.BloodBank.service.service_interface.IBloodBankService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.yaml.snakeyaml.tokens.ScalarToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +23,15 @@ import java.util.concurrent.BlockingDeque;
 @Service
 public class BloodBankService implements IBloodBankService {
     private final BloodBankRepository bloodBankRepository;
+    private final AddressRepository addressRepository;
 
+    private final BloodRepository bloodRepository;
+    ModelMapper modelMapper = new ModelMapper();
     @Autowired
-    public BloodBankService(BloodBankRepository bloodBankRepository) {
+    public BloodBankService(BloodBankRepository bloodBankRepository, AddressRepository addressRepository,BloodRepository bloodRepository) {
         this.bloodBankRepository = bloodBankRepository;
+        this.addressRepository = addressRepository;
+        this.bloodRepository = bloodRepository;
     }
 
     public boolean checkForBlood(String bankEmail, String bloodType, int quantity){
@@ -75,7 +87,24 @@ public class BloodBankService implements IBloodBankService {
             throw new IllegalAccessException("Authorization failed!");
     }
 
-    public void registerBloodBank(BloodBankDTO bloodBank){
+    @Transactional
+    public void registerBloodBank(BloodBankDTO bloodBankDTO){
+        BloodBank bloodBank = modelMapper.map(bloodBankDTO, BloodBank.class);
+        try{
+            bloodBankRepository.save(bloodBank);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            throw new UnsupportedOperationException("Can't save bank!");
+        }
 
     }
+
+//    public BloodBank convertToModel(BloodBankDTO bloodBankDTO){
+//        BloodBank bloodBank = new BloodBank(bloodBankDTO.getName(), bloodBankDTO.getEmail(), bloodBankDTO.getAddress(), bloodBankDTO.getDescription());
+////        Blood blood = new Blood(1,1,1,1,1,1,1,1);
+////        bloodRepository.save(blood);
+////        bloodBank.setBlood(blood);
+//       // bloodBank.setBankID(null);
+//        return bloodBank;
+//    }
 }

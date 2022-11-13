@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BloodBankService } from '../services/blood-bank.service';
 import { BloodBank } from '../model/blood-bank.model';
+import { NgForm } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-register-banks',
@@ -22,7 +25,7 @@ export class RegisterBanksComponent implements OnInit {
   }
 
   public registerBloodBank(){
-    if (!this.isValidInput()) return;
+
     this.bloodBankService.registerBloodBank(this.bloodBank).subscribe( res => 
       {
         console.log("reEEs")
@@ -33,15 +36,13 @@ export class RegisterBanksComponent implements OnInit {
       });
 
   }
-  private isValidInput(): boolean {
-    this.bloodBank.adminIDs = []
-    this.bloodBank.adminIDs.push(1);
-    console.log(this.bloodBank.adminIDs)
-    if(this.bloodBank.address.number <1 || this.bloodBank.address.number > 200
-       || this.bloodBank.address.number == null )
-      return false;
-  
-    return true;
+
+  saveBank(registrationForm: NgForm): void {
+    if (registrationForm.dirty && registrationForm.valid) {
+
+        this.registerBloodBank();
+    }
+    
   }
 
   private toastError() {

@@ -1,9 +1,6 @@
 package com.example.BloodBank.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @MappedSuperclass
@@ -15,7 +12,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String username;
+    @Column(unique=true)
     private String password;
+    @Column(unique=true)
     private String email;
     private Gender gender;
     private LocalDate dob;

@@ -2,7 +2,7 @@ export class Address {
     country: string = '';
     city: string = '';
     street: string = '';
-    number: number = 0;
+    number: string = '';
 
     public constructor(obj?: any) {
         if (obj){

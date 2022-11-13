@@ -10,16 +10,19 @@ import java.util.Set;
 public class BloodBank{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long bankID;
+    @Column(unique=true, nullable = false)
     private String name;
+    @Column(unique=true)
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
     private Address address;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "blood_id", referencedColumnName = "id")
+    @JoinColumn(name = "blood_id", referencedColumnName = "id", nullable = true)
     private Blood blood;
+    @Column(unique=true, nullable = true)
     private String APIKey;
     private String description;
     private double rating;
@@ -52,6 +55,12 @@ public class BloodBank{
         this.description = description;
         this.rating = rating;
         this.admins = admins;
+    }
+    public BloodBank(String name, String email, Address address, String description) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.description = description;
     }
 
     public Address getAddress() {

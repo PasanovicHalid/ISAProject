@@ -7,29 +7,30 @@ import javax.validation.constraints.*;
 @Table(name = "address")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)?", message="Invalid country input!")
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid country input!")
     private String country;
 
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)?", message="Invalid city input!")
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid city input!")
     private String city;
 
     @NotNull
     @NotBlank
-    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)?", message="Invalid street input!")
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z]?[a-z]+)*", message="Invalid street input!")
     private String street;
-    @Min(value = 1, message = "Street number has to be between 1 and 200.")
-    @Max(value = 200, message = "Street number has to be between 1 and 200.")
-    private int number;
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([0-9]{1,3})[A-Z]?", message="Invalid street number input!")
+    private String number;
     public Address() {
     }
 
-    public Address(Long id, String country, String city, String street, int number) {
+    public Address(Long id, String country, String city, String street, String number) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -37,7 +38,7 @@ public class Address {
         this.number = number;
     }
 
-    public Address(String country, String city, String street, int number) {
+    public Address(String country, String city, String street, String number) {
         this.country = country;
         this.city = city;
         this.street = street;
@@ -75,11 +76,11 @@ public class Address {
         this.street = street;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 }
