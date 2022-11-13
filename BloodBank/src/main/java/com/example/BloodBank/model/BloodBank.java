@@ -12,6 +12,7 @@ public class BloodBank{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long bankID;
+    @Column(unique=true, nullable = false)
     private String name;
     @Column(unique=true)
     private String email;

@@ -13,3 +13,14 @@ mat-form-field {
     width: 100%;
     margin: auto;
 }
+
+input:invalid {
+    color: #F05454;
+}
+
+.submit{
+    background-color: #30475E;
+    color: #F5F5F5;
+    border: none ;
+}
+  
