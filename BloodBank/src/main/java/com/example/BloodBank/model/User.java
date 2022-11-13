@@ -13,6 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String firstName;
     private String lastName;
     @NotNull
@@ -66,6 +67,7 @@ public class User {
 
     public User() {
     }
+
 
     public int getId() {
         return id;

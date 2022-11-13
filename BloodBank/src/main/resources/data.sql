@@ -1,3 +1,5 @@
+insert into address(city, country, number, street)
+values('Novi Sad', 'Serbia', 8,'Strazilovska');
 insert into address
 values(1004,'Novi Sad', 'Serbia', 8,'Strazilovska');
 insert into address
