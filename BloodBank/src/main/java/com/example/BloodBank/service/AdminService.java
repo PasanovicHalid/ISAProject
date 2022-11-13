@@ -1,19 +1,13 @@
 package com.example.BloodBank.service;
 
-<<<<<<< HEAD
 import com.example.BloodBank.repository.AddressRepository;
 import com.example.BloodBank.repository.AdminRepository;
-import com.example.BloodBank.repository.BloodBankRepository;
-import com.example.BloodBank.repository.BloodRepository;
 import com.example.BloodBank.service.service_interface.IAdminService;
-import com.example.BloodBank.service.service_interface.ICRUDService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.Admin;
-import com.example.BloodBank.repository.AdminRepository;
-import com.example.BloodBank.service.service_interface.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +17,7 @@ import java.util.Optional;
 public class AdminService implements IAdminService {
 
     private final AdminRepository adminRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     public AdminService(AdminRepository adminRepository){
