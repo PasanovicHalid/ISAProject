@@ -3,16 +3,26 @@ package com.example.BloodBank.dto;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class CustomerDTO {
     private String firstName;
     private String lastName;
+    @NotNull
+    @NotBlank
     private String username;
+    @NotNull
+    @NotBlank
     private String password;
+    @NotNull
+    @Email
     private String email;
     private Gender gender;
     private LocalDate dob;
+    @NotNull
     private Role role;
 
     public CustomerDTO(String firstName, String lastName,

@@ -11,6 +11,7 @@ public class Customer extends User {
     }
 
 
+
     //    //NOT NEEDED, DELETE LATER
 //    public Customer(String id, String firstName, String lastName,
 //                    String username, String password,

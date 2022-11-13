@@ -39,6 +39,8 @@ insert into users
 values(4, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1017);
 insert into users
 values(5, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1016);
+insert into users
+values(6, '2000-05-05', 'customer12@gmail.com', 'CustFi2', 0, 'CustLa2', 'sifra12', 3, 'cust002', null);
 
 insert into customer
 values(4);

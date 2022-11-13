@@ -20,13 +20,14 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public void Create(Admin entity){
-        adminRepository.save(entity);
+    public Admin Create(Admin entity){
+        return adminRepository.save(entity);
+
     }
 
     @Override
-    public Admin Read(int id) throws Exception {
-        Optional<Admin> admin = adminRepository.findById(Long.valueOf(id));
+    public Admin Read(Long id) throws Exception {
+        Optional<Admin> admin = adminRepository.findById(id);
         if(admin.isPresent()){
             return admin.get();
         } else {
@@ -35,8 +36,8 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public void Update(Admin entity){
-        adminRepository.save(entity);
+    public Admin Update(Admin entity){
+        return adminRepository.save(entity);
     }
 
     @Override
