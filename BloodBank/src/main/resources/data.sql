@@ -1,5 +1,5 @@
-insert into address(city, country, number, street)
-values('Novi Sad', 'Serbia', 8,'Strazilovska');
+--insert into address(city, country, number, street)
+--values('Novi Sad', 'Serbia', 8,'Strazilovska');
 insert into address
 values(1004,'Novi Sad', 'Serbia', 8,'Strazilovska');
 insert into address
@@ -32,24 +32,24 @@ insert into blood_bank
 values(1009, '4rijtG2K/XHcaesRU2gLHS5LC0QJoqMmKGKQrj4OmNLoxQjsjwUc+w60BFi3fR+0pO/BtrSma8yEJ1+bwAoQHQ==', 'Best blood bank', 'bloodymary@gmail.com',  'Bloody Mary', 2.4, 1006, 1003);
 
 insert into users
-values(1, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana', 1010);
+values(1001, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana', 1010);
 insert into users
-values(2, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '1234', 1011);
+values(1002, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '1234', 1011);
 insert into users
-values(3, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', 1012);
+values(1003, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', 1012);
 insert into users
-values(4, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1017);
+values(1004, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1017);
 insert into users
-values(5, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1016);
+values(1005, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1016);
 
 insert into customer
-values(4);
+values(1004);
 insert into customer
-values(5);
+values(1005);
 
 insert into admin
-values(1, 1007);
+values(1001, 1007);
 insert into admin
-values(2, 1008);
+values(1002, 1008);
 insert into admin
-values(3, 1009);
+values(1003, 1009);

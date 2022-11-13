@@ -31,9 +31,8 @@ public class User {
     private Gender gender;
     private LocalDate dob;
     @NotNull
-    @NotBlank
+//    @NotBlank
     private Role role;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
