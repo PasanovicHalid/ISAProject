@@ -13,6 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BloodBankModule } from './modules/blood-bank/blood-bank.module';
 import { ToastrModule } from 'ngx-toastr';
+import { UserModule } from './modules/user/user.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     BrowserAnimationsModule,
     BloodBankModule,
+    UserModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

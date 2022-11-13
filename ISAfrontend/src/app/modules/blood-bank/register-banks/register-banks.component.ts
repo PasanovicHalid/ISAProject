@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BloodBankService } from '../services/blood-bank.service';
-import { BloodBank } from '../model/blood-bank.model';
 import { NgForm } from '@angular/forms';
-
-
+import { BloodBank } from '../../../model/blood-bank.model';
 
 @Component({
   selector: 'app-register-banks',

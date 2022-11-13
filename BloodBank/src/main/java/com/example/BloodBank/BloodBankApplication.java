@@ -1,6 +1,7 @@
 package com.example.BloodBank;
 
 import com.example.BloodBank.model.BloodBank;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +37,12 @@ public class BloodBankApplication {
 			}
 		};
 	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+
 
 	@Bean
 	public Validator validator() {
