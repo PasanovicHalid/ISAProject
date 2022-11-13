@@ -18,9 +18,15 @@ values(2, 'W3QW1vpKFX9NUJ94HF0klON+lRaPBaSgx7mwAgV0b0ml4uVu7t2+2FoNDLqweFKzw4drC
 insert into blood_bank
 values(3, '4rijtG2K/XHcaesRU2gLHS5LC0QJoqMmKGKQrj4OmNLoxQjsjwUc+w60BFi3fR+0pO/BtrSma8yEJ1+bwAoQHQ==', 'Best blood bank', 'bloodymary@gmail.com',  'Bloody Mary', 2.4, 3, 3);
 
+insert into users
+values(1, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana');
+insert into users
+values(2, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '1234');
+insert into users
+values(3, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123');
 insert into admin
-values(1, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana', null);
+values(1, 1);
 insert into admin
-values(2, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '123', null);
+values(2, 2);
 insert into admin
-values(3, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', null);
+values(3, 3);
