@@ -8,6 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
+
 //Qeuery
-    Optional<Admin> findByBlodBankId(Long aLong);
+   // Optional<Admin> findByBlodBankId(Long aLong);
+
 }

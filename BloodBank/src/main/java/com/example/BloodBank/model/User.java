@@ -11,8 +11,9 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String firstName;
     private String lastName;
     @NotNull
@@ -30,9 +31,8 @@ public class User {
     private Gender gender;
     private LocalDate dob;
     @NotNull
-    @NotBlank
+//    @NotBlank
     private Role role;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
@@ -66,6 +66,7 @@ public class User {
 
     public User() {
     }
+
 
     public int getId() {
         return id;

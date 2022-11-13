@@ -1,9 +1,13 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
-import com.example.BloodBank.model.Admin;
+import com.example.BloodBank.repository.AddressRepository;
 import com.example.BloodBank.repository.AdminRepository;
 import com.example.BloodBank.service.service_interface.IAdminService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,7 @@ import java.util.Optional;
 public class AdminService implements IAdminService {
 
     private final AdminRepository adminRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     public AdminService(AdminRepository adminRepository){
@@ -48,12 +53,11 @@ public class AdminService implements IAdminService {
     public Iterable<Admin> GetAll() {
         return adminRepository.findAll();
     }
-    public Admin getById(long id){
-        return  adminRepository.getById(id);
-    }
 
-    @Override
-    public Optional<Admin> findByBloodBankId(long id) {
-        return adminRepository.findByBlodBankId(id);
-    }
+
+   // @Override
+  //  public Optional<Admin> findByBloodBankId(long id) {
+     //   return adminRepository.findByBlodBankId(id);
+   // }
+
 }

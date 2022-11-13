@@ -29,6 +29,18 @@ public class BloodBankController {
         this.bloodBankService = bloodBankService;
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BloodBankDTO>> getAll(){
+
+        try{
+            List<BloodBankDTO> bloodBanks = bloodBankService.GetBanksAsDTO();
+           return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
+        }
+        catch(Exception e){
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Boolean> fromPSW(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,

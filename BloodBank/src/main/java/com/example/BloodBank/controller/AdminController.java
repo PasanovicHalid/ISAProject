@@ -1,5 +1,6 @@
 package com.example.BloodBank.controller;
 
+
 import com.example.BloodBank.dto.GetAdminDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.Admin;
@@ -18,20 +19,22 @@ import java.util.Optional;
 public class AdminController {
 
     private final AdminService adminService;
+
     @Autowired
-    public AdminController(AdminService adminService){
+    public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 
-@GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-public Admin FindById(GetAdminDTO getAdminDTO){
-        try{
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Admin Read(GetAdminDTO getAdminDTO) {
+        try {
             return adminService.Read(getAdminDTO.getId());
         } catch (Exception e) {
-            if(e instanceof EntityDoesntExistException){
-                 new EntityDoesntExistException(getAdminDTO.getId());
+            if (e instanceof EntityDoesntExistException) {
+                new EntityDoesntExistException(getAdminDTO.getId());
             }
-                throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
+    }
 }
-}
+
