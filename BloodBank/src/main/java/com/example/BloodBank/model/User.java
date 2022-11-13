@@ -1,29 +1,43 @@
 package com.example.BloodBank.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@MappedSuperclass
+@Entity(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String firstName;
     private String lastName;
-    private String username;
+    @NotNull
+    @NotBlank
     @Column(unique=true)
+    private String username;
+    @NotNull
+    @NotBlank
     private String password;
     @Column(unique=true)
+    @NotNull
+    @NotBlank
+    @Email
     private String email;
     private Gender gender;
     private LocalDate dob;
+    @NotNull
+    @NotBlank
     private Role role;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-    public User(String id, String firstName, String lastName, String username, String password, String email,
+    
+    public User(int id, String firstName, String lastName, String username, String password, String email,
                 Gender gender, LocalDate dob, Role role, Address address) {
         this.id = id;
         this.firstName = firstName;
@@ -53,11 +67,11 @@ public class User {
     public User() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
