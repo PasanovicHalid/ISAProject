@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Customer extends User {
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
@@ -24,7 +24,7 @@ public class Customer extends User {
     }
 
     //NOT NEEDED, DELETE LATER
-    public Customer(String id, String firstName, String lastName,
+    public Customer(Long id, String firstName, String lastName,
                     String username, String password,
                     String email, Gender gender,
                     LocalDate dob, Role role) {
