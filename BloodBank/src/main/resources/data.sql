@@ -18,19 +18,27 @@ values(1008, 'W3QW1vpKFX9NUJ94HF0klON+lRaPBaSgx7mwAgV0b0ml4uVu7t2+2FoNDLqweFKzw4
 insert into blood_bank
 values(1009, '4rijtG2K/XHcaesRU2gLHS5LC0QJoqMmKGKQrj4OmNLoxQjsjwUc+w60BFi3fR+0pO/BtrSma8yEJ1+bwAoQHQ==', 'Best blood bank', 'bloodymary@gmail.com',  'Bloody Mary', 2.4, 1006, 1003);
 
-insert into admin
-values(1010, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana', null);
-insert into admin
-values(1011, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '123', null);
-insert into admin
-values(1012, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', null);
 
 insert into address
-values(1013, 'Novi Sad', 'Serbia', 2,'Bulevar Oslobodjenja');
+values(1010, 'Novi Sad', 'Serbia', 2,'Zeleznicka');
 insert into address
-values(1014,'Novi Sad', 'Serbia', 2,'Bulevar Jase Tomica');
+values(1011,'Novi Sad', 'Serbia', 2,'Bulevar Kralja Petra');
+insert into address
+values(1012, 'Novi Sad', 'Serbia', 2,'Temerinska');
+
+insert into admin
+values(1013, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana', 1010, null);
+insert into admin
+values(1014, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '123', 1011, null);
+insert into admin
+values(1015, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', 1012, null);
+
+insert into address
+values(1016, 'Novi Sad', 'Serbia', 2,'Bulevar Oslobodjenja');
+insert into address
+values(1017,'Novi Sad', 'Serbia', 2,'Bulevar Jase Tomica');
 
 insert into customer
-values(1015, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1013);
+values(1018, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1016);
 insert into customer
-values(1016, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1014);
+values(1019, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1016);

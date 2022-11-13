@@ -9,9 +9,13 @@ public class Admin extends User{
     @JoinColumn(name = "bank_id", referencedColumnName = "bankID")
     private BloodBank bloodBank;
 
-    public Admin(String firstName, String lastName, String username, String password, String email,
-                 Gender gender, LocalDate dob, Role role, BloodBank bloodBank) {
-        super(firstName, lastName, username, password, email, gender, dob, role);
+    public Admin(String firstName, String lastName, String username, String password, String email, Gender gender,
+                 LocalDate dob, Role role, Address address, BloodBank bloodBank) {
+        super(firstName, lastName, username, password, email, gender, dob, role, address);
+        this.bloodBank = bloodBank;
+    }
+
+    public Admin(BloodBank bloodBank) {
         this.bloodBank = bloodBank;
     }
 

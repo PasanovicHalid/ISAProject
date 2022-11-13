@@ -99,12 +99,4 @@ public class BloodBankService implements IBloodBankService {
 
     }
 
-//    public BloodBank convertToModel(BloodBankDTO bloodBankDTO){
-//        BloodBank bloodBank = new BloodBank(bloodBankDTO.getName(), bloodBankDTO.getEmail(), bloodBankDTO.getAddress(), bloodBankDTO.getDescription());
-////        Blood blood = new Blood(1,1,1,1,1,1,1,1);
-////        bloodRepository.save(blood);
-////        bloodBank.setBlood(blood);
-//       // bloodBank.setBankID(null);
-//        return bloodBank;
-//    }
 }

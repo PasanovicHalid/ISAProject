@@ -20,8 +20,11 @@ public class User {
     private LocalDate dob;
     private Role role;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
     public User(String id, String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role) {
+                Gender gender, LocalDate dob, Role role, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,10 +34,11 @@ public class User {
         this.gender = gender;
         this.dob = dob;
         this.role = role;
+        this.address = address;
     }
 
     public User(String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role) {
+                Gender gender, LocalDate dob, Role role, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -43,6 +47,7 @@ public class User {
         this.gender = gender;
         this.dob = dob;
         this.role = role;
+        this.address = address;
     }
 
     public User() {
@@ -118,5 +123,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
