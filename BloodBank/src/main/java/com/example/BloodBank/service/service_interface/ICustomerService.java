@@ -5,6 +5,6 @@ import com.example.BloodBank.model.Customer;
 import java.util.List;
 
 public interface ICustomerService {
-    Customer registerCustomer(Customer customer);
+    void registerCustomer(Customer customer) throws Exception;
     List<Customer> getAll();
 }

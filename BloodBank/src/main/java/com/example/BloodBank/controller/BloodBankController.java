@@ -72,10 +72,4 @@ public class BloodBankController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-//    @GetMapping("/customers")
-//    public List<Customer> getAllCustomers(){
-//        return
-//    }
-//    @PostMapping
-//    public ResponseEntity<Object>
 }
