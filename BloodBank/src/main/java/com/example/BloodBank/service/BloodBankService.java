@@ -101,6 +101,13 @@ public class BloodBankService implements IBloodBankService {
     }
 
     @Override
+    public Optional<BloodBank> findByEmail(String email) {
+        if(!bloodBankRepository.findByEmail(email).isPresent())
+            throw new IllegalStateException("Bank with that kind of email doesn't exist!");
+        return bloodBankRepository.findByEmail(email);
+    }
+
+    @Override
     public void Create(BloodBank entity) throws Exception {
 
     }

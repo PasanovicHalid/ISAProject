@@ -2,3 +2,19 @@
     font-size: medium;
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+input:invalid {
+    color: #F05454;
+}
+
+.submit{
+    background-color: #30475E;
+    color: #F5F5F5;
+    border: none ;
+}

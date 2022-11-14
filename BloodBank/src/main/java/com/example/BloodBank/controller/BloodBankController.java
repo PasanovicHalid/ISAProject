@@ -61,13 +61,6 @@ public class BloodBankController {
     @PostMapping
     public ResponseEntity<Object> registerBloodBank(@Valid @RequestBody BloodBankDTO bloodBankDTO, BindingResult bindingResult){
 
-//        try{
-//            bloodBankService.registerBloodBank(bloodBankDTO);
-//            return HttpStatus.OK;
-//        }
-//        catch(Exception e){
-//            return HttpStatus.NOT_FOUND;
-//        }
         if(bindingResult.hasErrors()){
             System.err.println("error!");
             Map<String, String> errors = new HashMap<>();
