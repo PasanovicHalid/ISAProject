@@ -34,7 +34,7 @@ public class UserDTO {
 
     private Gender gender;
 
-    @Past
+    @Past(message = "Date has to be in the past!")
     private LocalDate dob;
     @NotNull
     @Valid

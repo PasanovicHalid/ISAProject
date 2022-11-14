@@ -64,6 +64,8 @@ public class AdminService implements IAdminService {
         try{
             Admin admin = modelMapper.map(registrationAdminDTO, Admin.class);
             Optional<BloodBank> bank = bloodBankService.findByEmail(registrationAdminDTO.getBankEmail());
+            if(!bank.isPresent())
+                throw new IllegalStateException();
             admin.setBloodBank(bank.get());
             adminRepository.save(admin);
         }catch(Exception e){
