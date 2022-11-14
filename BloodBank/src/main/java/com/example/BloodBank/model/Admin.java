@@ -22,6 +22,9 @@ public class Admin extends User{
         this.bloodBank = bloodBank;
     }
 
+    public Admin() {
+    }
+
     public BloodBank getBloodBank() {
         return bloodBank;
     }

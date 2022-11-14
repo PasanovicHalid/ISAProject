@@ -1,26 +1,51 @@
 package com.example.BloodBank.dto;
 
+import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UserDTO {
-    private Long id;
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid first name input!")
     private String firstName;
+
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid last name input!")
     private String lastName;
+
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid username input!")
     private String username;
+    @NotNull
+    @NotBlank
+    @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid password input!")
     private String password;
+    @NotBlank
+    @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message="Invalid email address!" )
     private String email;
+
+    @NotNull(message = "Gender has to be selected!")
     private Gender gender;
+
+    @Past(message = "Date has to be in the past!")
     private LocalDate dob;
-    private Role role;
+    @NotNull
+    @Valid
+    private Address address;
 
-    public UserDTO() {
-    }
+    public long id;
+    public Role role;
 
-    public UserDTO(Long id, String firstName, String lastName, String username, String password, String email, Gender gender, LocalDate dob, Role role) {
-        this.id = id;
+    public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender, LocalDate dob, Address address, Role role, String id) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -29,8 +54,26 @@ public class UserDTO {
         this.gender = gender;
         this.dob = dob;
         this.role = role;
+        this.address = address;
+        this.role = role;
+        this.id = id;
     }
 
+    public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender,
+                   LocalDate dob, Address address, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.gender = gender;
+        this.dob = dob;
+        this.address = address;
+        this.role = role;
+    }
+
+    public UserDTO() {
+    }
     public Long getId() {
         return id;
     }
@@ -93,6 +136,14 @@ public class UserDTO {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Role getRole() {

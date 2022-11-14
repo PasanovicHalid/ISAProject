@@ -31,7 +31,7 @@ public class User {
     private LocalDate dob;
     @NotNull
     private Role role;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     
