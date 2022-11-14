@@ -13,14 +13,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule} from '@angular/material/datepicker';
+import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 
 const routes: Routes = [
-  { path: 'edit-user', component: EditUserComponent }
+  { path: 'edit-user', component: EditUserComponent },
+  { path: 'register-customer', component: RegisterCustomerComponent }
 ];
 
 @NgModule({
   declarations: [
-    EditUserComponent
+    EditUserComponent,
+    RegisterCustomerComponent
   ],
   imports: [
     CommonModule,

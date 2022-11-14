@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Observable, catchError, throwError } from 'rxjs';
-import { BloodBank } from '../../../model/blood-bank.model';
+import { BloodBank } from 'src/app/model/blood-bank.model';
 
 @Injectable({
   providedIn: 'root'
