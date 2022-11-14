@@ -1,9 +1,12 @@
 import { User } from "./user";
+import { BloodBank } from "../blood-bank.model";
+import { Role } from "./role";
+import {Address} from "../address.model"
 
 export class Admin extends User {
-    bloodBankID: number = -1;
+    bloodBank: BloodBank = new BloodBank();
     public constructor(obj?: any) {
-        super(obj.user);
-        this.bloodBankID = obj.bloodBankID;
+        super(obj?.user);
+        this.bloodBank = obj.bloodBank;
     }
 }
