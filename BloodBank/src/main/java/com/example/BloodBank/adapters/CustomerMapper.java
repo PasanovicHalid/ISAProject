@@ -1,6 +1,7 @@
 package com.example.BloodBank.adapters;
 
 import com.example.BloodBank.dto.CustomerDTO;
+import com.example.BloodBank.dto.CustomerUpdateDTO;
 import com.example.BloodBank.dto.UserDTO;
 import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.model.User;
@@ -19,6 +20,16 @@ public class CustomerMapper {
     }
 
     public static Customer fromCustomerDTO(CustomerDTO customerDTO){
+        Customer customer = modelMapper.map(customerDTO, Customer.class);
+        return customer;
+    }
+
+    public static CustomerUpdateDTO toCustomerUpdateDTO(Customer customer){
+        CustomerUpdateDTO customerDTO = modelMapper.map(customer, CustomerUpdateDTO.class);
+        return customerDTO;
+    }
+
+    public static Customer fromCustomerUpdateDTO(CustomerUpdateDTO customerDTO){
         Customer customer = modelMapper.map(customerDTO, Customer.class);
         return customer;
     }

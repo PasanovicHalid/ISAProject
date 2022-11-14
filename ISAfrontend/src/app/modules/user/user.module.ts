@@ -16,7 +16,7 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 
 const routes: Routes = [
-  { path: 'edit-user', component: EditUserComponent },
+  { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-admin', component: RegisterAdminComponent }
 ];
 

@@ -3,6 +3,7 @@ package com.example.BloodBank.controller;
 import com.example.BloodBank.adapters.CustomerMapper;
 import com.example.BloodBank.adapters.UserMapper;
 import com.example.BloodBank.dto.CustomerDTO;
+import com.example.BloodBank.dto.CustomerUpdateDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.model.User;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/customer")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -44,11 +46,23 @@ public class CustomerController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> Update(@Valid @RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<Object> Update(@Valid @RequestBody CustomerUpdateDTO customerDTO){
         try {
-            Customer customer = customerService.FindByUsername(customerDTO.getUsername());
-            customerService.Update(updateCustomer(customer, customerDTO));
+            Customer customer = customerMapper.fromCustomerUpdateDTO(customerDTO);
+            customerService.Update(customer);
             return ResponseEntity.status(HttpStatus.OK).body(customerService.Read(customer.getId()));
+        } catch (Exception e){
+            if(e instanceof EntityDoesntExistException){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> FindByID(@PathVariable("id") Long id){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(customerService.Read(id));
         } catch (Exception e){
             if(e instanceof EntityDoesntExistException){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
