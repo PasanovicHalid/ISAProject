@@ -146,6 +146,7 @@
                     <div class="form-outline">
                         <input type="text" id="email" class="form-control form-control-lg"
                         name="email" required
+                        disabled
                         pattern="[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,4}$"
                         [(ngModel)]="user.email"
                           #emailVar="ngModel"
@@ -161,6 +162,23 @@
                         <label class="form-label" for="email">Email</label>
                     </div>
                 </div>
+
+                <div class="row">
+                  <div class="form-outline">
+                      <input type="text" id="points" class="form-control form-control-lg"
+                      name="points" required
+                      disabled/>
+                      <span class="invalid-feedback">
+                          <span *ngIf="emailVar.errors?.['pattern']">
+                              Please use convention 'aa@aa.aa'.
+                          </span>
+                          <span *ngIf="emailVar.errors?.['required']">
+                              Please enter bank email.
+                          </span>
+                      </span>
+                      <label class="form-label" for="points">Points</label>
+                  </div>
+              </div>
   
                 <div class="row">
                   <div class="col-md-6 mb-4 pb-2">
