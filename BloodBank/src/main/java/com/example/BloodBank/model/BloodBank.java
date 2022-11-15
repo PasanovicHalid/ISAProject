@@ -28,13 +28,13 @@ public class BloodBank{
     private String description;
     private double rating;
 
-    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
-    private List<Admin> admins;
+//    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+//    private List<Admin> admins;
     public BloodBank() {
     }
 
     public BloodBank(long bankID, String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating, List<Admin> admins) {
+                     String description, double rating) {
         this.bankID = bankID;
         this.name = name;
         this.email = email;
@@ -43,11 +43,10 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
-        this.admins = admins;
     }
 
     public BloodBank(String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating, List<Admin> admins) {
+                     String description, double rating) {
         this.name = name;
         this.email = email;
         this.address = address;
@@ -55,7 +54,6 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
-        this.admins = admins;
     }
     public BloodBank(String name, String email, Address address, String description) {
         this.name = name;
@@ -120,13 +118,13 @@ public class BloodBank{
         this.rating = rating;
     }
 
-    public List<Admin> getAdmins() {
-        return admins;
-    }
-
-    public void setAdmins(List<Admin> admins) {
-        this.admins = admins;
-    }
+//    public List<Admin> getAdmins() {
+//        return admins;
+//    }
+//
+//    public void setAdmins(List<Admin> admins) {
+//        this.admins = admins;
+//    }
 
     public String getEmail() {
         return email;
