@@ -15,17 +15,18 @@ export abstract class User {
     address: Address = new Address();
 
     public constructor(obj?: any) {
-        if (obj){
-            this.id = obj.id;
-            this.firstName = obj.firstName;
-            this.lastName = obj.lastName;
-            this.username = obj.username;
-            this.password = obj.password;
-            this.email = obj.email;
-            this.gender = obj.gender;
-            this.dob = obj.dob;
-            this.role = obj.role;
-            this.address = obj.address
-        }
+        //?? kaze da ako je undefined ili null onda daje 
+        //vrednost desno od ??
+        //u sustini ako mu damo prazan konstruktor, on
+        //ce objekat popuniti sa svim podacima desno od ??
+        this.id = obj?.id ?? -1;
+        this.firstName = obj?.firstName ?? "";
+        this.lastName = obj?.lastName ?? "";
+        this.username = obj?.username ?? "";
+        this.password = obj?.password ?? "";
+        this.email = obj?.email ?? "";
+        this.gender = obj?.gender ?? Gender.OTHER;
+        this.dob = obj?.dob ?? new Date();
+        this.role = obj?.role ?? Role.HEADADMIN;
     }
 }

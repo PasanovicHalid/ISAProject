@@ -13,16 +13,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule} from '@angular/material/datepicker';
+import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 
 const routes: Routes = [
   { path: 'edit-user/:id', component: EditUserComponent },
+  { path: 'register-customer', component: RegisterCustomerComponent },
   { path: 'register-admin', component: RegisterAdminComponent }
+
 ];
 
 @NgModule({
   declarations: [
     EditUserComponent,
+    RegisterCustomerComponent,
     RegisterAdminComponent
   ],
   imports: [

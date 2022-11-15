@@ -34,15 +34,24 @@ public class CustomerController {
         this.customerMapper = new CustomerMapper(modelMapper);
     }
     @GetMapping()
-    public List<Customer> getAllCustomers(){
-        return customerService.getAll();
+    public ResponseEntity<List<Customer>> getAllCustomers(){
+        try {
+            return new ResponseEntity<>(customerService.getAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @PostMapping(
             value = "/register", consumes = "application/json",
             produces = "application/json"
     )
-    public Customer registerCustomer(@RequestBody Customer newCustomer){
-        return customerService.registerCustomer(newCustomer);
+    public ResponseEntity<Object> registerCustomer(@Valid @RequestBody Customer newCustomer){
+        try {
+            customerService.registerCustomer(newCustomer);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

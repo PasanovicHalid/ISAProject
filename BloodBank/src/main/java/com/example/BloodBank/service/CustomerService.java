@@ -1,5 +1,7 @@
 package com.example.BloodBank.service;
 
+import com.example.BloodBank.excpetions.EmailTakenException;
+import com.example.BloodBank.excpetions.UsernameTakenException;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.Admin;
 import com.example.BloodBank.model.Customer;
@@ -18,12 +20,32 @@ public class CustomerService implements ICustomerService {
     public CustomerService(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
     }
-    public Customer registerCustomer(Customer customer) {
-        customerRepository.save(customer);
-        return customer;
+    public void registerCustomer(Customer customer) throws Exception {
+
+        try {
+            for (Customer customerIt : customerRepository.findAll()){
+                if (customerIt.getUsername().equals(customer.getUsername())){
+                    System.out.println("Username: " + customer.getUsername() +
+                            " is taken!");
+                    throw new UsernameTakenException(customer.getUsername());
+                }
+                if (customerIt.getEmail().equals(customer.getEmail())){
+                    System.out.println("Email: " + customer.getEmail() +
+                            " is taken!");
+                    throw new EmailTakenException(customer.getEmail());
+                }
+            }
+            customerRepository.save(customer);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
-    public List<Customer> getAll() {
-        return customerRepository.findAll();
+    public List<Customer> getAll() throws Exception {
+        try {
+            return customerRepository.findAll();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override

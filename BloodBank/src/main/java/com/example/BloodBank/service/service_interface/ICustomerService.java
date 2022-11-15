@@ -5,7 +5,7 @@ import com.example.BloodBank.model.Customer;
 import java.util.List;
 
 public interface ICustomerService extends ICRUDService<Customer> {
-    Customer registerCustomer(Customer customer);
-    List<Customer> getAll();
+    void registerCustomer(Customer customer) throws Exception;
+    List<Customer> getAll() throws Exception;
     Customer FindByUsername(String username) throws Exception;
 }

@@ -58,6 +58,16 @@ public class BloodBankController {
 
         return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.checkForBlood(bankEmail, bloodType, quantity));
     }
+    @GetMapping()
+    public ResponseEntity<List<BloodBank>> getAllBloodBank() {
+        try {
+            System.out.println("in getAllBloodBank()");
+            return new ResponseEntity<>(bloodBankService.getAll(),HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Object> registerBloodBank(@Valid @RequestBody BloodBankDTO bloodBankDTO, BindingResult bindingResult){
 
@@ -77,10 +87,4 @@ public class BloodBankController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-//    @GetMapping("/customers")
-//    public List<Customer> getAllCustomers(){
-//        return
-//    }
-//    @PostMapping
-//    public ResponseEntity<Object>
 }
