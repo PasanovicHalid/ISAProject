@@ -3,6 +3,7 @@ package com.example.BloodBank.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,13 +28,13 @@ public class BloodBank{
     private String description;
     private double rating;
 
-    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Admin> admins;
+    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    private List<Admin> admins;
     public BloodBank() {
     }
 
     public BloodBank(long bankID, String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating, Set<Admin> admins) {
+                     String description, double rating, List<Admin> admins) {
         this.bankID = bankID;
         this.name = name;
         this.email = email;
@@ -46,7 +47,7 @@ public class BloodBank{
     }
 
     public BloodBank(String name, String email, Address address, Blood blood, String APIKey,
-                     String description, double rating, Set<Admin> admins) {
+                     String description, double rating, List<Admin> admins) {
         this.name = name;
         this.email = email;
         this.address = address;
@@ -119,11 +120,11 @@ public class BloodBank{
         this.rating = rating;
     }
 
-    public Set<Admin> getAdmins() {
+    public List<Admin> getAdmins() {
         return admins;
     }
 
-    public void setAdmins(Set<Admin> admins) {
+    public void setAdmins(List<Admin> admins) {
         this.admins = admins;
     }
 

@@ -37,7 +37,11 @@ public class CustomerService implements ICustomerService {
             throw new Exception(e.getMessage());
         }
     }
-    public List<Customer> getAll() {
-        return customerRepository.findAll();
+    public List<Customer> getAll() throws Exception {
+        try {
+            return customerRepository.findAll();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

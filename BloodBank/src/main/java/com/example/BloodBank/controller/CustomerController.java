@@ -19,8 +19,12 @@ public class CustomerController {
         this.customerService = customerService;
     }
     @GetMapping()
-    public List<Customer> getAllCustomers(){
-        return customerService.getAll();
+    public ResponseEntity<List<Customer>> getAllCustomers(){
+        try {
+            return new ResponseEntity<>(customerService.getAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @PostMapping(
             value = "/register", consumes = "application/json",

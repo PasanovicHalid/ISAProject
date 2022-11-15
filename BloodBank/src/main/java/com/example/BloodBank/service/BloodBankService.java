@@ -1,8 +1,6 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.BloodBankDTO;
-import com.example.BloodBank.model.Address;
-import com.example.BloodBank.model.Blood;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.repository.AddressRepository;
 import com.example.BloodBank.repository.BloodBankRepository;
@@ -12,12 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.yaml.snakeyaml.tokens.ScalarToken;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.BlockingDeque;
 
 
 @Service
@@ -97,6 +92,15 @@ public class BloodBankService implements IBloodBankService {
             throw new UnsupportedOperationException("Can't save bank!");
         }
 
+    }
+
+    @Override
+    public List<BloodBank> getAll() throws Exception {
+        try {
+            return bloodBankRepository.findAll();
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
 }

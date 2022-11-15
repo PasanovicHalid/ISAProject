@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ICustomerService {
     void registerCustomer(Customer customer) throws Exception;
-    List<Customer> getAll();
+    List<Customer> getAll() throws Exception;
 }
