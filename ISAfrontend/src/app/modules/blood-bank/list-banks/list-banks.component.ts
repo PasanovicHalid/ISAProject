@@ -12,7 +12,14 @@ import { BloodBankService } from '../services/blood-bank.service';
 })
 export class ListBanksComponent implements OnInit {
   public dataSource = new MatTableDataSource<BloodBank>();
-  public displayedColumns = ['name', 'email'];
+  public displayedColumns = [
+    'name',
+    'email',
+    'address-country',
+    'address-city',
+    'address-street',
+    'address-number',
+  ];
   public bloodBanks: BloodBank[] = [];
   public errorMessage: any;
 
@@ -32,6 +39,7 @@ export class ListBanksComponent implements OnInit {
         this.errorMessage = error;
       }
     );
+    console.log(this.bloodBanks[0]);
   }
   public chooseBloodBank(bankId: number) {}
 }
