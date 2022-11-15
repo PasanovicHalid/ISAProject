@@ -14,23 +14,19 @@ export class RegisterBanksComponent implements OnInit {
   public bloodBank: BloodBank = new BloodBank();
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
-  public bb: string = '';
 
-  constructor(
-    private bloodBankService: BloodBankService,
-    private router: Router,
-    private toastr: ToastrService
-  ) {}
+  constructor(private bloodBankService: BloodBankService, private router: Router,private toastr: ToastrService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-  public registerBloodBank() {
-    this.bloodBankService.registerBloodBank(this.bloodBank).subscribe(
-      (res) => {
-        console.log('reEEs');
-      },
-      (error) => {
-        console.log(error);
+  public registerBloodBank(){
+
+    this.bloodBankService.registerBloodBank(this.bloodBank).subscribe( res => 
+      {
+        console.log("reEEs")
+      }, (error) => {
+        console.log(error)
         this.errorMessage = error;
         this.toastError();
       }

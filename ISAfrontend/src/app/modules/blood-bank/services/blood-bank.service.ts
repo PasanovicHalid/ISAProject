@@ -32,7 +32,9 @@ export class BloodBankService {
       })
       .pipe(catchError(this.handleValidationError));
   }
-
+  getAll(): Observable<BloodBank[]>{
+    return this.http.get<BloodBank[]>(this.apiHost + 'api/bloodbank', {headers: this.headers}).pipe(catchError(this.handleValidationError));
+  }
   private handleValidationError(error: HttpErrorResponse) {
     var map = new Map<string, string>();
     Object.keys(error.error).forEach((key) => {

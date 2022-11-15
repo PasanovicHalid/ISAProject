@@ -1,20 +1,20 @@
 <section class="vh-100 gradient-custom" style="color: #121212">
     <div class="container py-5 h-100">
       <div class="row justify-content-center align-items-center h-100">
-        <div class="col-12 col-lg-9 col-xl-7">
+        <div class="col-12 col-lg-9 col-xl-9">
           <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
             <div class="card-body p-4 p-md-5">
-              <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">Edit customer</h3>
-              <form novalidate #registrationForm="ngForm" (ngSubmit)="editCustomer()">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Admin Registration Form</h3>
+              <form novalidate #registrationForm="ngForm" (ngSubmit)="saveAdmin(registrationForm)">
   
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                      <input type="text" id="firstName" class="form-control form-control-lg" 
+                      <input type="text" id="firstName" class="form-control" 
                       name="firstName"
                       required
                       pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
-                      [(ngModel)]="user.firstName"
+                      [(ngModel)]="admin.firstName"
                           #firstNameVar="ngModel"
                             [ngClass]="{'is-invalid': (firstNameVar.touched || firstNameVar.dirty) && !firstNameVar.valid }"/>
                         <span class="invalid-feedback">
@@ -30,13 +30,12 @@
                   </div>
 
                   <div class="col-md-6 mb-4">
-                    
                     <div class="form-outline">
-                        <input type="text" id="lastName" class="form-control form-control-lg" 
+                        <input type="text" id="lastName" class="form-control" 
                         name="lastName"
                         required
                         pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
-                        [(ngModel)]="user.lastName"
+                        [(ngModel)]="admin.lastName"
                             #lastNameVar="ngModel"
                               [ngClass]="{'is-invalid': (lastNameVar.touched || lastNameVar.dirty) && !lastNameVar.valid }"/>
                           <span class="invalid-feedback">
@@ -47,9 +46,6 @@
                                   Please enter first name.
                               </span>
                           </span>
-                          <span class="valid-feedback">
-                            Looks good!
-                            </span>
                         <label class="form-label" for="lastName">Last name</label>
                       </div>
                   </div>
@@ -57,11 +53,11 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
-                        <input type="text" id="username" class="form-control form-control-lg" 
+                        <input type="text" id="username" class="form-control" 
                         name="username"
                         required
                         pattern="([A-Za-z0-9]{3,})"
-                        [(ngModel)]="user.username"
+                        [(ngModel)]="admin.username"
                             #usernameVar="ngModel"
                               [ngClass]="{'is-invalid': (usernameVar.touched || usernameVar.dirty) && !usernameVar.valid }"/>
                           <span class="invalid-feedback">
@@ -79,11 +75,11 @@
                     <div class="col-md-6 mb-4">
                       
                       <div class="form-outline">
-                          <input type="text" id="password" class="form-control form-control-lg" 
+                          <input type="text" id="password" class="form-control" 
                           name="password"
                           required
                           pattern="([A-Za-z0-9]{3,})*"
-                          [(ngModel)]="user.password"
+                          [(ngModel)]="admin.password"
                               #passwordVar="ngModel"
                                 [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }"/>
                             <span class="invalid-feedback">
@@ -102,9 +98,9 @@
                     <div class="col-md-6 mb-4 d-flex align-items-center">
     
                       <div class="form-outline datepicker w-100">
-                        <input type="date" min="1900-01-01" class="form-control form-control-lg" id="dob" name="dob"
+                        <input type="date" min="1900-01-01" class="form-control" id="dob" name="dob"
                         required 
-                        [(ngModel)]="user.dob"
+                        [(ngModel)]="admin.dob"
                             #dobVar="ngModel"
                               [ngClass]="{'is-invalid': (dobVar.touched || dobVar.dirty) && !dobVar.valid }"/>
                               
@@ -119,75 +115,37 @@
                     </div>
                     <div class="col-md-6 mb-4">
     
-                      <h6 class="mb-2 pb-1 gender">Gender: </h6>
+                      <h6 class="mb-1 pb-1 gender">Gender: </h6>
     
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                          value="FEMALE" [(ngModel)]="user.gender" />
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="FEMALE" [(ngModel)]="admin.gender" />
                         <label class="form-check-label" for="femaleGender">Female</label>
                       </div>
     
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                          value="MALE" [(ngModel)]="user.gender"/>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" [(ngModel)]="admin.gender"  
+                          value="MALE" />
                         <label class="form-check-label" for="maleGender">Male</label>
                       </div>
     
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                          value="OTHER" [(ngModel)]="user.gender"/>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender" [(ngModel)]="admin.gender" 
+                          value="OTHER"/>
                         <label class="form-check-label" for="otherGender">Other</label>
                       </div>
     
                     </div>
                   </div>
                   
-                <div class="row">
-                    <div class="form-outline">
-                        <input type="text" id="email" class="form-control form-control-lg"
-                        name="email" required
-                        disabled
-                        pattern="[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,4}$"
-                        [(ngModel)]="user.email"
-                          #emailVar="ngModel"
-                            [ngClass]="{'is-invalid': (emailVar.touched || emailVar.dirty) && !emailVar.valid }" />
-                        <span class="invalid-feedback">
-                            <span *ngIf="emailVar.errors?.['pattern']">
-                                Please use convention 'aa@aa.aa'.
-                            </span>
-                            <span *ngIf="emailVar.errors?.['required']">
-                                Please enter bank email.
-                            </span>
-                        </span>
-                        <label class="form-label" for="email">Email</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-outline">
-                      <input type="text" id="points" class="form-control form-control-lg"
-                      name="points" required
-                      disabled/>
-                      <span class="invalid-feedback">
-                          <span *ngIf="emailVar.errors?.['pattern']">
-                              Please use convention 'aa@aa.aa'.
-                          </span>
-                          <span *ngIf="emailVar.errors?.['required']">
-                              Please enter bank email.
-                          </span>
-                      </span>
-                      <label class="form-label" for="points">Points</label>
-                  </div>
-              </div>
-  
+                
                 <div class="row">
                   <div class="col-md-6 mb-4 pb-2">
   
                     <div class="form-outline">
-                      <input type="text" id="country" class="form-control form-control-lg" 
+                      <input type="text" id="country" class="form-control" 
                       name="country" required
                       pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
-                      [(ngModel)]="user.address.country"
+                      [(ngModel)]="admin.address.country"
                           #countryVar="ngModel"
                             [ngClass]="{'is-invalid': (countryVar.touched || countryVar.dirty) && !countryVar.valid }"/>
                         <span class="invalid-feedback">
@@ -205,10 +163,10 @@
                   <div class="col-md-6 mb-4 pb-2">
   
                     <div class="form-outline">
-                      <input type="text" id="city" class="form-control form-control-lg" 
+                      <input type="text" id="city" class="form-control" 
                       name="city" required=""
                       pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*" 
-                      [(ngModel)]="user.address.city"
+                      [(ngModel)]="admin.address.city"
                           #cityVar="ngModel"
                             [ngClass]="{'is-invalid': (cityVar.touched || cityVar.dirty) && !cityVar.valid }"/>
                         <span class="invalid-feedback">
@@ -229,10 +187,10 @@
                     <div class="col-md-6 mb-4 pb-2">
   
                         <div class="form-outline">
-                          <input type="text" id="street" class="form-control form-control-lg" 
+                          <input type="text" id="street" class="form-control" 
                           name="street" required
                           pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*" 
-                          [(ngModel)]="user.address.street"
+                          [(ngModel)]="admin.address.street"
                           #streetVar="ngModel"
                             [ngClass]="{'is-invalid': (streetVar.touched || streetVar.dirty) && !streetVar.valid }"/>
                             <span class="invalid-feedback">
@@ -250,10 +208,10 @@
                       <div class="col-md-6  pb-2">
       
                         <div class="form-outline">
-                          <input type="text" id="streetNumber" class="form-control form-control-lg"
+                          <input type="text" id="streetNumber" class="form-control"
                           name="streetNumber" required
                           pattern="([0-9]{1,3})[A-Z]?"
-                          [(ngModel)]="user.address.number"
+                          [(ngModel)]="admin.address.number"
                           #numberVar="ngModel"
                             [ngClass]="{'is-invalid': (numberVar.touched || numberVar.dirty) && !numberVar.valid }" />
                             <span class="invalid-feedback">
@@ -269,8 +227,46 @@
       
                       </div> 
                 </div>
+                <div class="row">
+                    <div class="form-outline col-md-6 mb-4 pb-2">
+                        <input type="text" id="email" class="form-control"
+                        name="email" required
+                        pattern="[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,4}$"
+                        [(ngModel)]="admin.email"
+                          #emailVar="ngModel"
+                            [ngClass]="{'is-invalid': (emailVar.touched || emailVar.dirty) && !emailVar.valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="emailVar.errors?.['pattern']">
+                                Please use convention 'aa@aa.aa'.
+                            </span>
+                            <span *ngIf="emailVar.errors?.['required']">
+                                Please enter bank email.
+                            </span>
+                        </span>
+                        <label class="form-label" for="email">Email</label>
+                    </div>
+                    <div class=" form-outline col-md-6 mb-4 pb-2">
+    
+                        <select class="select form-control" [(ngModel)]="admin.bankEmail" [value]="0" name="bank" required
+                        #selectVar="ngModel"
+                              [ngClass]="{'is-invalid': (selectVar.touched || selectVar.dirty) && !selectVar.valid }">
+                          <option value="0" disabled>Choose a bank for admin</option>
+                          <option *ngFor="let bank of bloodBanks" [value]="bank.email">
+                              {{bank.name}}
+                            </option>
+                        </select>
+                        <span class="invalid-feedback">
+                          <span *ngIf="selectVar.errors?.['required']">
+                              Please choose a bank.
+                          </span>
+                      </span>
+                        <label class="form-label select-label">Choose a bank</label>
+      
+                      </div>
+                </div>
+  
                 <div>
-                  <input class="btn btn-primary btn-lg submit" type="submit" value="Edit"  [disabled]="!registrationForm.valid"/>
+                  <input class="btn btn-primary submit " type="submit" value="Register"  [disabled]="!registrationForm.valid"/>
                 </div>
   
               </form>
@@ -280,4 +276,3 @@
       </div>
     </div>
   </section>
-

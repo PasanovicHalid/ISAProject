@@ -1,3 +1,4 @@
+import { Address } from "../address.model";
 import { Gender } from "./gender";
 import { Role } from "./role";
 
@@ -10,7 +11,8 @@ export abstract class User {
     email: String = "";
     gender: Gender = Gender.OTHER;
     dob: Date = new Date();
-    role: Role = Role.HEADADMIN;
+    role: Role;
+    address: Address = new Address();
 
     public constructor(obj?: any) {
         //?? kaze da ako je undefined ili null onda daje 

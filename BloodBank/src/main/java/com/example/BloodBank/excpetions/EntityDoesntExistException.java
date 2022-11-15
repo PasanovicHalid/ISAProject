@@ -5,7 +5,7 @@ public class EntityDoesntExistException extends Exception {
         super("Entity doesn't exist");
     }
 
-    public EntityDoesntExistException(int id) {
+    public EntityDoesntExistException(Long id) {
         super("Entity with id: " + id + " doesn't exist");
     }
 }

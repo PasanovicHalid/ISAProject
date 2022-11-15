@@ -7,6 +7,7 @@ import com.example.BloodBank.repository.BloodBankRepository;
 import com.example.BloodBank.repository.BloodRepository;
 import com.example.BloodBank.service.service_interface.IBloodBankService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -103,4 +104,39 @@ public class BloodBankService implements IBloodBankService {
         }
     }
 
+    public Optional<BloodBank> findByEmail(String email) {
+        if(!bloodBankRepository.findByEmail(email).isPresent())
+            throw new IllegalStateException("Bank with that kind of email doesn't exist!");
+        return bloodBankRepository.findByEmail(email);
+    }
+
+    public List<BloodBankDTO> GetBanksAsDTO() throws Exception {
+        List<BloodBankDTO> bankDTOS = modelMapper.map(bloodBankRepository.findAll(), new TypeToken<List<BloodBankDTO>>() {}.getType());
+        return bankDTOS;
+    }
+
+    @Override
+    public BloodBank Create(BloodBank entity) throws Exception {
+        return null;
+    }
+
+    @Override
+    public BloodBank Read(Long id) throws Exception {
+        return null;
+    }
+
+    @Override
+    public BloodBank Update(BloodBank entity) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void Delete(BloodBank entity) throws Exception {
+
+    }
+
+    @Override
+    public Iterable<BloodBank> GetAll() throws Exception {
+        return null;
+    }
 }

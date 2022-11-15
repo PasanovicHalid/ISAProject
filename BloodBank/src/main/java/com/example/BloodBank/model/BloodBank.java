@@ -1,6 +1,8 @@
 package com.example.BloodBank.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class BloodBank{
 
 //    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 //    private List<Admin> admins;
+
     public BloodBank() {
     }
 

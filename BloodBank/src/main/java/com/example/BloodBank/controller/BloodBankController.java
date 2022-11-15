@@ -29,6 +29,18 @@ public class BloodBankController {
         this.bloodBankService = bloodBankService;
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BloodBankDTO>> getAll(){
+
+        try{
+            List<BloodBankDTO> bloodBanks = bloodBankService.GetBanksAsDTO();
+           return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
+        }
+        catch(Exception e){
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Boolean> fromPSW(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,
@@ -59,13 +71,6 @@ public class BloodBankController {
     @PostMapping
     public ResponseEntity<Object> registerBloodBank(@Valid @RequestBody BloodBankDTO bloodBankDTO, BindingResult bindingResult){
 
-//        try{
-//            bloodBankService.registerBloodBank(bloodBankDTO);
-//            return HttpStatus.OK;
-//        }
-//        catch(Exception e){
-//            return HttpStatus.NOT_FOUND;
-//        }
         if(bindingResult.hasErrors()){
             System.err.println("error!");
             Map<String, String> errors = new HashMap<>();

@@ -20,6 +20,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping(path = "api/user")
@@ -29,7 +31,7 @@ public class UserController {
 
     private final ModelMapper modelMapper;
 
-    private static UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Autowired
     public UserController(UserService userService, ModelMapper modelMapper) {
@@ -47,11 +49,12 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content) })
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> Update(@RequestBody UserDTO userDTO){
+    public ResponseEntity<Object> Update(@Valid @RequestBody UserDTO userDTO){
         try {
             User user = userMapper.fromDTO(userDTO);
             userService.Update(user);
-            return ResponseEntity.status(HttpStatus.OK).body(userService.Read(user.getId()));
+            user = userService.Read(user.getId());
+            return ResponseEntity.status(HttpStatus.OK).body(userMapper.toDTO(user));
         } catch (Exception e){
             if(e instanceof EntityDoesntExistException){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

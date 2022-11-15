@@ -8,7 +8,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-public class CustomerDTO {
+public class CustomerUpdateDTO {
+
+    @NotNull
+    private Long id;
+
     private String firstName;
     private String lastName;
     @NotNull
@@ -24,21 +28,17 @@ public class CustomerDTO {
     private LocalDate dob;
     @NotNull
     private Role role;
+    private AddressDTO address;
 
-    public CustomerDTO(String firstName, String lastName,
-                       String username, String password,
-                       String email, Gender gender,
-                       LocalDate dob, Role role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.role = role;
+    public CustomerUpdateDTO() {
     }
-    public CustomerDTO() {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -103,5 +103,13 @@ public class CustomerDTO {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDTO adress) {
+        this.address = adress;
     }
 }
