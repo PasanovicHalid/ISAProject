@@ -35,7 +35,7 @@ public class CustomerService implements ICustomerService {
                     throw new EmailTakenException(customer.getEmail());
                 }
             }
-            customerRepository.save(customer);
+            Create(customer);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

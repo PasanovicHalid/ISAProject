@@ -15,9 +15,6 @@ public class Admin extends User{
         this.bloodBank = bloodBank;
     }
 
-    public Admin() {
-    }
-
     public Admin(BloodBank bloodBank) {
         this.bloodBank = bloodBank;
     }
