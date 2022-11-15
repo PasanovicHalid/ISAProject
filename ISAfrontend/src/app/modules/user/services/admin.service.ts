@@ -16,4 +16,12 @@ export class AdminService {
   // registerBloodBank(bloodBank: any): Observable<any>{
   //   return this.http.post<any>(this.apiHost + 'api/bloodbank', bloodBank, {headers: this.headers}).pipe(catchError(this.handleValidationError));
   // }
+
+  getAdminById(): Observable<any>{
+    return this.http.get<any>(this.apiHost + 'api/admin' , {headers: this.headers});
+  }
+
+  saveAdminChanges(admin: any): Observable<any>{
+    return this.http.post<any>(this.apiHost + 'api/admin/', admin ,{headers: this.headers})
+  }
 }

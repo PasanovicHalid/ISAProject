@@ -14,16 +14,22 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
+import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
-  { path: 'register-admin', component: RegisterAdminComponent }
+  { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'admin-home-page', component: AdminHomePageComponent},
+  { path: 'admins-profile', component: AdminsProfileComponent}
 ];
 
 @NgModule({
   declarations: [
     EditUserComponent,
-    RegisterAdminComponent
+    RegisterAdminComponent,
+    AdminHomePageComponent,
+    AdminsProfileComponent
   ],
   imports: [
     CommonModule,

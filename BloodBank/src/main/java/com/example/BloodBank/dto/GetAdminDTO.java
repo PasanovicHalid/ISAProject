@@ -6,5 +6,5 @@ public class GetAdminDTO {
     @NotNull
     private int id;
 
-    public int getId(){ return     id ;}
+    public int getId(){ return     1001 ;}
 }

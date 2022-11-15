@@ -38,12 +38,18 @@ public class AdminDTO {
     private LocalDate dob;
     @NotNull
     @Valid
-    private Address adress;
+    private Address address;
     @NotNull
     private BloodBank bloodBank;
 
-    public AdminDTO(String firstName, String lastName, String username, String password, String email,
+    @NotNull
+    private Long id;
+    @NotNull
+    private Role role = Role.ADMIN;
+
+    public AdminDTO(int id ,String firstName, String lastName, String username, String password, String email,
                     Gender gender, LocalDate dob, Address adress, BloodBank bloodBank) {
+       this.id = Long.valueOf(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -51,7 +57,8 @@ public class AdminDTO {
         this.email = email;
         this.gender = gender;
         this.dob = dob;
-        this.adress = adress;
+        this.address = adress;
+
         this.bloodBank = bloodBank;
     }
 
@@ -114,13 +121,14 @@ public class AdminDTO {
         this.dob = dob;
     }
 
-    public Address getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdress(Address adress) {
-        this.adress = adress;
+    public void setAddress(Address adress) {
+        this.address = adress;
     }
+
 
     public BloodBank getBloodBank() {
         return bloodBank;
@@ -128,5 +136,20 @@ public class AdminDTO {
 
     public void setBloodBank(BloodBank bloodBank) {
         this.bloodBank = bloodBank;
+    }
+
+    public long getId(){return  id;}
+    public void setId(long id){ this.id = id; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

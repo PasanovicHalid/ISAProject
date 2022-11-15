@@ -12,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private String firstName;
     private String lastName;
@@ -68,7 +68,7 @@ public class User {
     }
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -147,4 +147,5 @@ public class User {
     public void setAddress(Address address) {
         this.address = address;
     }
+
 }

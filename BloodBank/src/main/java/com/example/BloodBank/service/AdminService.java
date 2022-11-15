@@ -30,12 +30,12 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public Admin Read(int id) throws Exception {
+    public Admin Read(long id) throws Exception {
         Optional<Admin> admin = adminRepository.findById(Long.valueOf(id));
         if(admin.isPresent()){
             return admin.get();
         } else {
-            throw new EntityDoesntExistException(id);
+            throw new EntityDoesntExistException(Integer.valueOf((int) id));
         }
     }
 

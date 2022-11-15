@@ -106,7 +106,7 @@ public class BloodBankService implements IBloodBankService {
     }
 
     @Override
-    public BloodBank Read(int id) throws Exception {
+    public BloodBank Read(long id) throws Exception {
         return null;
     }
 

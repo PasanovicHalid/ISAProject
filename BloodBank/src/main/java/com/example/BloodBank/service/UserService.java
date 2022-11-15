@@ -27,12 +27,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User Read(int id) throws Exception {
+    public User Read(long id) throws Exception {
         Optional<User> admin = userRepository.findById(Long.valueOf(id));
         if(admin.isPresent()){
             return admin.get();
         } else {
-            throw new EntityDoesntExistException(id);
+            throw new EntityDoesntExistException(Integer.valueOf((int) id));
         }
     }
 
