@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController
 @RequestMapping(path = "api/bloodbank")
@@ -84,6 +89,30 @@ public class BloodBankController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}")
+    public ResponseEntity<Boolean> getBloodReportsFromPSW(@RequestBody byte[] pdf,
+                                                          @PathVariable("bankEmail") String bankEmail,
+                                                          @RequestHeader(name = HttpHeaders.AUTHORIZATION) String APIkey){
+
+
+        try{
+            System.out.println("Got it");
+            System.out.println(pdf);
+            bloodBankService.checkAPIKey(bankEmail, APIkey);
+            LocalDateTime today = LocalDateTime.now();
+
+            String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy_hhmmss"));
+            try (FileOutputStream fos = new FileOutputStream("D://Faks//3. Internet softverske arhitekture//PROJEKAT_ISA//ISAProject//BloodBank/src/report_" + formattedDate + ".pdf")) {
+                fos.write(pdf);
+                //fos.close // no need, try-with-resources auto close
+            }
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

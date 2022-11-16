@@ -14,7 +14,6 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   registerAdmin(admin: any): Observable<RegistrationAdmin>{
-    console.log("evo nas")
     return this.http.post<any>(this.apiHost + 'api/admin', admin, {headers: this.headers}).pipe(catchError(this.handleError));
   }
 
