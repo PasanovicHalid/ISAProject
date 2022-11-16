@@ -5,10 +5,9 @@ import com.example.BloodBank.service.QuestionnaireService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "api/questionnaire")
@@ -28,5 +27,17 @@ public class QuestionnaireController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+    @PostMapping(
+            value = "/create", consumes = "application/json",
+            produces = "application/json"
+    )
+    public ResponseEntity<Object> createQuestionnaire(@Valid @RequestBody Questionnaire newQuestionnaire){
+        try {
+            questionnaireService.Create(newQuestionnaire);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

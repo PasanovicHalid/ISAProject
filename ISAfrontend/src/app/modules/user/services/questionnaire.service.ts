@@ -1,39 +1,26 @@
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { User } from '../edit-user/model/user';
-
+import { Questionnaire } from '../model/questionnaire.model';
 @Injectable({
   providedIn: 'root',
 })
-export class CustomerService {
+export class QuestionnaireService {
   apiHost: string = 'http://localhost:8086/';
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
   constructor(private http: HttpClient) {}
 
-  updateCustomer(customer: any): Observable<any> {
+  createQuestionnaire(questionnaire: any): Observable<any> {
     return this.http
-      .put<any>(this.apiHost + 'api/customer', customer, {
+      .post<any>(this.apiHost + 'api/questionnaire/create', questionnaire, {
         headers: this.headers,
       })
-      .pipe(catchError(this.handleValidationError));
-  }
-
-  getAllCustomers(): Observable<User[]> {
-    return this.http
-      .get<User[]>(this.apiHost + 'api/customer', { headers: this.headers })
-      .pipe(catchError(this.handleValidationError));
-  }
-
-  getCustomerByID(id: number): Observable<User> {
-    return this.http
-      .get<User>(this.apiHost + 'api/customer/' + id, { headers: this.headers })
       .pipe(catchError(this.handleValidationError));
   }
 
@@ -44,6 +31,8 @@ export class CustomerService {
     });
     localStorage.setItem('errormap', JSON.stringify(Array.from(map.entries())));
 
-    return throwError(() => new Error(error.status + '\n' + error.error));
+    return throwError(
+      () => new Error(error.status + '\n' + error.error.message)
+    );
   }
 }

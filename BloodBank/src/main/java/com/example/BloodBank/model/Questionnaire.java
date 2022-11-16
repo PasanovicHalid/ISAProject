@@ -13,8 +13,8 @@ public class Questionnaire {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private Boolean donated;
 
     public Questionnaire(Long id, User user, Boolean donated) {

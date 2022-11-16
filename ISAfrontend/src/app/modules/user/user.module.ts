@@ -12,22 +12,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import { FillFormComponent } from './fill-form/fill-form.component';
 
 const routes: Routes = [
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
-  { path: 'register-admin', component: RegisterAdminComponent }
-
+  { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'fill-form', component: FillFormComponent },
 ];
 
 @NgModule({
   declarations: [
     EditUserComponent,
     RegisterCustomerComponent,
-    RegisterAdminComponent
+    RegisterAdminComponent,
+    FillFormComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,7 @@ const routes: Routes = [
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class UserModule { }
+export class UserModule {}
