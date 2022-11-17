@@ -1,19 +1,19 @@
 package com.example.BloodBank.controller;
 
 import com.example.BloodBank.adapters.UserMapper;
+import com.example.BloodBank.dto.BloodBankDTO;
 import com.example.BloodBank.dto.UserDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -60,6 +61,18 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        try {
+            System.out.println("in getusers()");
+            //List<User> users = (List<User>) userService.GetAll();
+            List<UserDTO> users = userMapper.toDTO((List<User>) userService.GetAll());
+            return new ResponseEntity<>(users, HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

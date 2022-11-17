@@ -18,6 +18,7 @@ import { RegisterAdminComponent } from './register-admin/register-admin.componen
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'admins-blood-bank', component: AdminsBloodbankComponent},
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
-  { path: 'register-admin', component: RegisterAdminComponent }
+  { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'view-users', component: ViewUsersComponent }
 
 ];
 
@@ -39,7 +41,8 @@ const routes: Routes = [
     AdminsProfileComponent,
     AdminsBloodbankComponent,
     RegisterCustomerComponent,
-    RegisterAdminComponent
+    RegisterAdminComponent,
+    ViewUsersComponent
   ],
   imports: [
     CommonModule,
