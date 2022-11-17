@@ -1,26 +1,4 @@
-.containerr {
-    border-radius: 40px;
-    width: fit-content;
-    margin: auto;
-    background-color: #f05454;
-    padding: 20px;
-    text-align: center;
-  }
-  .text {
-    color: #f5f5f5;
-  }
-  mat-form-field {
-    width: 100%;
-    margin: auto;
-  }
-  
-  input:invalid {
-    color: #f05454;
-  }
-  
-  .submit {
-    background-color: #30475e;
-    color: #f5f5f5;
-    border: none;
-  }
+.search{
+  width: 500px;
+}
   

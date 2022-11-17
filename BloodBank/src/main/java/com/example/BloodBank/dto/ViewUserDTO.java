@@ -3,13 +3,12 @@ package com.example.BloodBank.dto;
 import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class UserDTO {
+public class ViewUserDTO {
     @NotNull
     @NotBlank
     @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid first name input!")
@@ -20,14 +19,6 @@ public class UserDTO {
     @Pattern(regexp="([A-Z][a-z]+)(\\s[A-Z][a-z]+)*", message="Invalid last name input!")
     private String lastName;
 
-    @NotNull
-    @NotBlank
-    @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid username input!")
-    private String username;
-    @NotNull
-    @NotBlank
-    @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid password input!")
-    private String password;
     @NotBlank
     @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message="Invalid email address!" )
     private String email;
@@ -41,45 +32,20 @@ public class UserDTO {
     @Valid
     private Address address;
 
-    public long id;
+    @NotNull
     public Role role;
 
-    public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender, LocalDate dob, Address address, Role role, Long id) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.role = role;
-        this.address = address;
-        this.role = role;
-        this.id = id;
+    public ViewUserDTO() {
     }
 
-    public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender,
-                   LocalDate dob, Address address, Role role) {
+    public ViewUserDTO(String firstName, String lastName, String email, Gender gender, LocalDate dob, Address address, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
-        this.password = password;
         this.email = email;
         this.gender = gender;
         this.dob = dob;
         this.address = address;
         this.role = role;
-    }
-
-    public UserDTO() {
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -96,22 +62,6 @@ public class UserDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {

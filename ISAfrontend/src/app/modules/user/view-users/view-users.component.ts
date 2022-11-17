@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/model/Users/user';
 import { UserService } from '../services/user.service';
+import { Gender } from 'src/app/model/Users/gender';
+import { Role } from 'src/app/model/Users/role';
+
 
 
 @Component({
@@ -12,20 +15,10 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./view-users.component.css']
 })
 export class ViewUsersComponent implements OnInit {
-  public dataSource = new MatTableDataSource<User>();
-  public displayedColumns = [
-    'name',
-    'dob',
-    'gender',
-    'role',
-    'email',
-    'address-country',
-    'address-city',
-    'address-street',
-    'address-number',
-  ];
 
+  public tableUsers: User[] = [];
   public users: User[] = [];
+  public term: string;
   public errorMessage: any;
 
   constructor(
@@ -38,7 +31,7 @@ export class ViewUsersComponent implements OnInit {
     this.userService.getAll().subscribe(
       (res) => {
         this.users = res;
-        this.dataSource.data = res;
+        this.tableUsers = this.users
         console.log(this.users);
       },
       (error) => {
@@ -47,5 +40,11 @@ export class ViewUsersComponent implements OnInit {
     );
     
   }
-
+  public searchUsers(name: string): void {
+    
+    this.tableUsers = this.users.filter((user) =>
+    (user.firstName.toLowerCase() + " " +user.lastName.toLowerCase()).includes(name.toLowerCase())
+    );
+  }
+  
 }

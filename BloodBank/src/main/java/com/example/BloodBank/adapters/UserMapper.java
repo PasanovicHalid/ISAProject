@@ -14,13 +14,9 @@ public class UserMapper {
         this.modelMapper = modelMapper;
     }
 
-    public static UserDTO toDTO(User user){
+    public static UserDTO toDTO(User user) {
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         return userDTO;
-    }
-    public static List<UserDTO> toDTO(List<User> users){
-        List<UserDTO> usersDTO = modelMapper.map(users, new TypeToken<List<User>>() {}.getType());
-        return usersDTO;
     }
 
     public static User fromDTO(UserDTO userDTO){

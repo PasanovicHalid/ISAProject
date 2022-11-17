@@ -1,8 +1,10 @@
 package com.example.BloodBank.controller;
 
 import com.example.BloodBank.adapters.UserMapper;
+import com.example.BloodBank.adapters.ViewUserMapper;
 import com.example.BloodBank.dto.BloodBankDTO;
 import com.example.BloodBank.dto.UserDTO;
+import com.example.BloodBank.dto.ViewUserDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.User;
@@ -33,12 +35,14 @@ public class UserController {
     private final ModelMapper modelMapper;
 
     private UserMapper userMapper;
+    private ViewUserMapper viewUserMapper;
 
     @Autowired
     public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         userMapper = new UserMapper(modelMapper);
+        viewUserMapper = new ViewUserMapper(modelMapper);
     }
 
     @Operation(summary = "Update an existing user", description = "Update an existing user")
@@ -65,11 +69,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
+    public ResponseEntity<List<ViewUserDTO>> getAllUsers() {
         try {
             System.out.println("in getusers()");
-            //List<User> users = (List<User>) userService.GetAll();
-            List<UserDTO> users = userMapper.toDTO((List<User>) userService.GetAll());
+            List<User> userrs = (List<User>) userService.GetAll();
+            List<ViewUserDTO> users = viewUserMapper.toDTO(userrs);
             return new ResponseEntity<>(users, HttpStatus.OK) ;
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
