@@ -12,8 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
+    private Long id;
     private String firstName;
     private String lastName;
     @NotNull
@@ -31,13 +30,12 @@ public class User {
     private Gender gender;
     private LocalDate dob;
     @NotNull
-//    @NotBlank
     private Role role;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     
-    public User(int id, String firstName, String lastName, String username, String password, String email,
+    public User(Long id, String firstName, String lastName, String username, String password, String email,
                 Gender gender, LocalDate dob, Role role, Address address) {
         this.id = id;
         this.firstName = firstName;
@@ -51,8 +49,7 @@ public class User {
         this.address = address;
     }
 
-    public User(String firstName, String lastName, String username, String password, String email,
-                Gender gender, LocalDate dob, Role role, Address address) {
+    public User(String firstName, String lastName, String username, String password, String email, Gender gender, LocalDate dob, Role role, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -67,12 +64,23 @@ public class User {
     public User() {
     }
 
+    public void updateUserInfo(User user){
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.username = user.username;
+        this.password = user.password;
+        this.email = user.email;
+        this.gender = user.gender;
+        this.dob = user.dob;
+        this.role = user.role;
+        this.address = user.address;
+    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

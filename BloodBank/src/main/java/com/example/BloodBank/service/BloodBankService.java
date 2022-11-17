@@ -1,8 +1,6 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.BloodBankDTO;
-import com.example.BloodBank.model.Address;
-import com.example.BloodBank.model.Blood;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.repository.AddressRepository;
 import com.example.BloodBank.repository.BloodBankRepository;
@@ -13,12 +11,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.yaml.snakeyaml.tokens.ScalarToken;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.BlockingDeque;
 
 
 @Service
@@ -101,18 +96,38 @@ public class BloodBankService implements IBloodBankService {
     }
 
     @Override
-    public void Create(BloodBank entity) throws Exception {
+    public List<BloodBank> getAll() throws Exception {
+        try {
+            return bloodBankRepository.findAll();
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
+    public Optional<BloodBank> findByEmail(String email) {
+        if(!bloodBankRepository.findByEmail(email).isPresent())
+            throw new IllegalStateException("Bank with that kind of email doesn't exist!");
+        return bloodBankRepository.findByEmail(email);
+    }
+
+    public List<BloodBankDTO> GetBanksAsDTO() throws Exception {
+        List<BloodBankDTO> bankDTOS = modelMapper.map(bloodBankRepository.findAll(), new TypeToken<List<BloodBankDTO>>() {}.getType());
+        return bankDTOS;
     }
 
     @Override
-    public BloodBank Read(long id) throws Exception {
+    public BloodBank Create(BloodBank entity) throws Exception {
         return null;
     }
 
     @Override
-    public void Update(BloodBank entity) throws Exception {
+    public BloodBank Read(Long id) throws Exception {
+        return null;
+    }
 
+    @Override
+    public BloodBank Update(BloodBank entity) throws Exception {
+        return null;
     }
 
     @Override
@@ -123,11 +138,5 @@ public class BloodBankService implements IBloodBankService {
     @Override
     public Iterable<BloodBank> GetAll() throws Exception {
         return null;
-    }
-
-
-    public List<BloodBankDTO> GetBanksAsDTO() throws Exception {
-        List<BloodBankDTO> bankDTOS = modelMapper.map(bloodBankRepository.findAll(), new TypeToken<List<BloodBankDTO>>() {}.getType());
-        return bankDTOS;
     }
 }

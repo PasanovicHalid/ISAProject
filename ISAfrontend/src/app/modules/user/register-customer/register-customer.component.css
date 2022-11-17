@@ -1,0 +1,26 @@
+.containerr {
+    border-radius: 40px;
+    width: fit-content;
+    margin: auto;
+    background-color: #F05454;
+    padding: 20px;
+    text-align: center;
+  }
+.text {
+    color: #F5F5F5;
+}
+mat-form-field {
+    width: 100%;
+    margin: auto;
+}
+
+input:invalid {
+    color: #F05454;
+}
+
+.submit{
+    background-color: #30475E;
+    color: #F5F5F5;
+    border: none ;
+}
+  

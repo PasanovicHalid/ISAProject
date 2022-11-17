@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -122,12 +123,12 @@ public class BloodBank{
     }
 
     public Set<Admin> getAdmins() {
-        return admins;
-    }
+       return admins;
+   }
 
     public void setAdmins(Set<Admin> admins) {
-        this.admins = admins;
-    }
+       this.admins = admins;
+   }
 
     public String getEmail() {
         return email;

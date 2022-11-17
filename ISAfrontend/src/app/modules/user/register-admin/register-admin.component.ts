@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../services/admin.service';
-import { NgForm } from '@angular/forms';
-import { Admin } from '../../../model/Users/admin';
+import { FormGroup, NgForm, FormControl } from '@angular/forms';
+import { RegistrationAdmin } from '../model/registration-admin.model';
 import { BloodBank } from '../../../model/blood-bank.model';
 import { BloodBankService } from '../../blood-bank/services/blood-bank.service';
 
@@ -14,9 +14,11 @@ import { BloodBankService } from '../../blood-bank/services/blood-bank.service';
 })
 export class RegisterAdminComponent implements OnInit {
   public bloodBanks : BloodBank[] = [];
-  public admin: Admin = new Admin({user:{}});
+  public admin: RegistrationAdmin = new RegistrationAdmin({user:{address:{}}});
   public errorMessage: Error = new Error;
   public errorMap: Map<string, string> = new Map();
+  private pastDate: Date = new Date(1900,1,1);
+  public todaysDate: Date = new Date();
 
   constructor(private adminService: AdminService, private router: Router,private toastr: ToastrService,
           private bloodBankService: BloodBankService) { }
@@ -25,36 +27,38 @@ export class RegisterAdminComponent implements OnInit {
     this.bloodBankService.getAll().subscribe( res => 
         {
           this.bloodBanks = res;
-          console.log(this.bloodBanks)
          }, (error) => {
-          console.log(error)
           this.errorMessage = error;
           this.toastError();
-        }
-        );
+        });
+    
   }
 
   public registerAdmin(){
-
-    // this.adminService.registerAdmin(this.admin).subscribe( res => 
-    //   {
-    //     console.log("reEEs")
-    //   }, (error) => {
-    //     console.log(error)
-    //     this.errorMessage = error;
-    //     this.toastError();
-    //   });
+    this.adminService.registerAdmin(this.admin).subscribe( res => 
+      {
+        console.log("reEEs")
+      }, (error) => {
+        console.log(error)
+        this.errorMessage = error;
+        this.toastError();
+      });
 
   }
 
   saveAdmin(registrationForm: NgForm): void {
+    
+    // console.log(this.pastDate)
+    // console.log(this.todaysDate)
+    // if(this.admin.dob.getFullYear < this.pastDate.getFullYear || (this.admin.dob.getFullYear >= this.todaysDate.getFullYear && this.admin.dob.getMonth >= this.todaysDate.getMonth && this.admin.dob.getDate >= this.todaysDate.getDate)){
+    //     console.log("not good")
+    // }
     if (registrationForm.dirty && registrationForm.valid) {
-
         this.registerAdmin();
     }
     
   }
-
+ 
   private toastError() {
     if (String(this.errorMessage).includes('406')){
       var error = localStorage.getItem('errormap')!;
@@ -68,4 +72,5 @@ export class RegisterAdminComponent implements OnInit {
       this.toastr.error(this.errorMessage.message);
     }
   }
+
 }

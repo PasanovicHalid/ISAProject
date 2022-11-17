@@ -2,6 +2,8 @@ package com.example.BloodBank.service;
 
 import com.example.BloodBank.adapters.UserMapper;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.model.Address;
+import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IUserService;
@@ -9,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -22,23 +25,30 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void Create(User entity) throws Exception {
-        userRepository.save(entity);
+    public User Create(User entity) throws Exception {
+        return userRepository.save(entity);
     }
 
     @Override
-    public User Read(long id) throws Exception {
-        Optional<User> admin = userRepository.findById(Long.valueOf(id));
+    public User Read(Long id) throws Exception {
+        Optional<User> admin = userRepository.findById(id);
         if(admin.isPresent()){
             return admin.get();
         } else {
-            throw new EntityDoesntExistException(Integer.valueOf((int) id));
+            throw new EntityDoesntExistException(id);
         }
     }
 
     @Override
-    public void Update(User entity) throws Exception {
-        userRepository.save(entity);
+    public User Update(User entity) throws Exception {
+        Optional<User> user = userRepository.findById(entity.getId());
+        if(user.isPresent()){
+            User temp = user.get();
+            temp.updateUserInfo(entity);
+            return userRepository.save(temp);
+        } else {
+            throw new EntityDoesntExistException(entity.getId());
+        }
     }
 
     @Override
