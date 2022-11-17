@@ -6,6 +6,7 @@ import { Questionnaire } from '../model/questionnaire.model';
 import { QuestionnaireService } from '../services/questionnaire.service';
 import { Gender } from '../edit-user/model/gender';
 import { Role } from '../edit-user/model/role';
+import { Customer } from 'src/app/model/Users/customer';
 
 @Component({
   selector: 'app-fill-form',
@@ -16,6 +17,7 @@ export class FillFormComponent implements OnInit {
   public questionnaire: Questionnaire = new Questionnaire();
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
+  public logedCustomer: Customer = new Customer();
   constructor(
     private questionnaireService: QuestionnaireService,
     private router: Router,
@@ -25,7 +27,7 @@ export class FillFormComponent implements OnInit {
   ngOnInit(): void {}
   public saveQuestionnaire(): void {
     //umesto ovoga ce biti trenutno ulogovani korisnik
-    this.questionnaire.user = {
+    this.logedCustomer = {
       id: -1,
       firstName: 'Nasdf',
       lastName: 'Sasdlk',
@@ -36,13 +38,17 @@ export class FillFormComponent implements OnInit {
       dob: new Date(),
       role: Role.CUSTOMER,
       address: {
-        id: -1,
         country: 'Aasdflk',
         city: 'Asdf',
         street: 'Skljk',
         number: '123',
       },
+      jmbg: '123321',
+      phoneNumber: '066555333',
+      profession: 'student',
+      professionInfo: 'ftn',
     };
+    this.questionnaire.customer = this.logedCustomer;
     this.createQuestionnaire();
   }
   public createQuestionnaire() {

@@ -3,6 +3,7 @@ package com.example.BloodBank.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity()
 public class Questionnaire {
@@ -10,22 +11,32 @@ public class Questionnaire {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
 
 //    @NotNull
 //    @NotBlank
     private Boolean donated;
+    private String donorNumber;
+    private LocalDate date;
 
-    public Questionnaire(Long id, User user, Boolean donated) {
+    public Questionnaire(Long id, Customer customer, Boolean donated) {
         this.id = id;
-        this.user = user;
+        this.customer = customer;
         this.donated = donated;
     }
 
-    public Questionnaire(User user, Boolean donated) {
-        this.user = user;
+    public Questionnaire(Customer customer, Boolean donated) {
+        this.customer = customer;
         this.donated = donated;
+    }
+
+    public Questionnaire(Long id, Customer customer, Boolean donated, String donorNumber, LocalDate date) {
+        this.id = id;
+        this.customer = customer;
+        this.donated = donated;
+        this.donorNumber = donorNumber;
+        this.date = date;
     }
 
     public Questionnaire() { }
@@ -38,12 +49,12 @@ public class Questionnaire {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Boolean getDonated() {
@@ -52,5 +63,21 @@ public class Questionnaire {
 
     public void setDonated(Boolean donated) {
         this.donated = donated;
+    }
+
+    public String getDonorNumber() {
+        return donorNumber;
+    }
+
+    public void setDonorNumber(String donorNumber) {
+        this.donorNumber = donorNumber;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
