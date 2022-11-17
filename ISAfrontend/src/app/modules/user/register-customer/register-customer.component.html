@@ -137,35 +137,37 @@
                 </div>
               </div>
 
-              <div class="form-outline">
-                <input
-                  type="password"
-                  id="password"
-                  class="form-control form-control-lg"
-                  name="password"
-                  required
-                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                  [(ngModel)]="customer.password"
-                  #passwordVar="ngModel"
-                  [ngClass]="{
-                    'is-invalid':
-                      (passwordVar.touched || passwordVar.dirty) &&
-                      !passwordVar.valid
-                  }"
-                />
-                <span class="invalid-feedback">
-                  <span *ngIf="passwordVar.errors?.['pattern']">
-                    Password must be over 8 characters, must contain letter and
-                    number.
-                  </span>
-                  <span *ngIf="passwordVar.errors?.['required']">
-                    Please enter password.
-                  </span>
-                </span>
-                <label class="form-label" for="password">Password</label>
-              </div>
-
-              <!-- CONFIRM PASSWORD ZAKOMENTARISAN
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control form-control-lg"
+                      name="password"
+                      required
+                      pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                      [(ngModel)]="customer.password"
+                      #passwordVar="ngModel"
+                      [ngClass]="{
+                        'is-invalid':
+                          (passwordVar.touched || passwordVar.dirty) &&
+                          !passwordVar.valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="passwordVar.errors?.['pattern']">
+                        Password must be over 8 characters, must contain letter
+                        and number.
+                      </span>
+                      <span *ngIf="passwordVar.errors?.['required']">
+                        Please enter password.
+                      </span>
+                    </span>
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <input
                       type="password"
@@ -173,8 +175,8 @@
                       class="form-control form-control-lg"
                       name="confirmPassword"
                       required
-                      match="password"
-                      [(ngModel)]="customer.password"
+                      pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                      [(ngModel)]="confirmPassword"
                       #confirmPasswordVar="ngModel"
                       [ngClass]="{
                         'is-invalid':
@@ -184,7 +186,7 @@
                       }"
                     />
                     <span class="invalid-feedback">
-                      <span *ngIf="confirmPasswordVar.errors?.MustMatch">
+                      <span *ngIf="confirmPasswordVar.errors?.['pattern']">
                         Password must be over 8 characters, must contain letter
                         and number.
                       </span>
@@ -195,7 +197,9 @@
                     <label class="form-label" for="confirmPassword"
                       >Confirm Password</label
                     >
-                  </div> -->
+                  </div>
+                </div>
+              </div>
 
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
@@ -426,7 +430,7 @@
                         class="form-control form-control-lg"
                         name="professionInfo"
                         required
-                        pattern="[a-zA-Z]+"
+                        pattern=".*"
                         [(ngModel)]="customer.professionInfo"
                         #professionInfoVar="ngModel"
                         [ngClass]="{
