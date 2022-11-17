@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 public class AddressDTO {
     @NotNull
     @NotBlank
+    private Long id;
+    @NotNull
+    @NotBlank
     private String country;
 
     @NotNull
@@ -22,20 +25,13 @@ public class AddressDTO {
     public AddressDTO() {
     }
 
-    public AddressDTO(String country, String city, String street, String number) {
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.number = number;
+    public Long getId() {
+        return id;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCountry() {
         return country;

@@ -14,7 +14,7 @@ public class RegistrationAdminDTO extends UserDTO{
     private String bankEmail;
 
     public RegistrationAdminDTO(String firstName, String lastName, String username, String password, String email, Gender gender,
-                                LocalDate dob, AddressDTO address, String bankEmail) {
+                                LocalDate dob, Address address, String bankEmail) {
         super(firstName, lastName, username, password, email, gender, dob, address, Role.ADMIN);
         this.bankEmail = bankEmail;
     }
