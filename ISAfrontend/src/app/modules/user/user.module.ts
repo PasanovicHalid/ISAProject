@@ -15,8 +15,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
+import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
+import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 
 const routes: Routes = [
+  { path: 'edit-user', component: EditUserComponent },
+  { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'admin-home-page', component: AdminHomePageComponent},
+  { path: 'admins-profile', component: AdminsProfileComponent},
+  { path: 'admins-blood-bank', component: AdminsBloodbankComponent},
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
   { path: 'register-admin', component: RegisterAdminComponent }
@@ -26,6 +34,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     EditUserComponent,
+    RegisterAdminComponent,
+    AdminHomePageComponent,
+    AdminsProfileComponent,
+    AdminsBloodbankComponent,
     RegisterCustomerComponent,
     RegisterAdminComponent
   ],

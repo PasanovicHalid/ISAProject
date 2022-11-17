@@ -29,10 +29,9 @@ public class BloodBank{
     private String APIKey;
     private String description;
     private double rating;
-
-//    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
-//    private List<Admin> admins;
-
+    @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Admin> admins;
     public BloodBank() {
     }
 
@@ -46,6 +45,7 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
+      //  this.admins = admins;
     }
 
     public BloodBank(String name, String email, Address address, Blood blood, String APIKey,
@@ -57,6 +57,7 @@ public class BloodBank{
         this.APIKey = APIKey;
         this.description = description;
         this.rating = rating;
+      //  this.admins = admins;
     }
     public BloodBank(String name, String email, Address address, String description) {
         this.name = name;
@@ -121,13 +122,13 @@ public class BloodBank{
         this.rating = rating;
     }
 
-//    public List<Admin> getAdmins() {
-//        return admins;
-//    }
-//
-//    public void setAdmins(List<Admin> admins) {
-//        this.admins = admins;
-//    }
+    public Set<Admin> getAdmins() {
+       return admins;
+   }
+
+    public void setAdmins(Set<Admin> admins) {
+       this.admins = admins;
+   }
 
     public String getEmail() {
         return email;

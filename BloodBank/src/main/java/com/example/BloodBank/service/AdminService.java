@@ -58,6 +58,12 @@ public class AdminService implements IAdminService {
         return adminRepository.findAll();
     }
 
+
+   // @Override
+  //  public Optional<Admin> findByBloodBankId(long id) {
+     //   return adminRepository.findByBlodBankId(id);
+   // }
+
     @Transactional
     @Override
     public void registerAdmin(RegistrationAdminDTO registrationAdminDTO) {
