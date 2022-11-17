@@ -13,10 +13,6 @@ export class AdminService {
   headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
-  // registerBloodBank(bloodBank: any): Observable<any>{
-  //   return this.http.post<any>(this.apiHost + 'api/bloodbank', bloodBank, {headers: this.headers}).pipe(catchError(this.handleValidationError));
-  // }
-
   getAdminById(): Observable<any>{
     return this.http.get<any>(this.apiHost + 'api/admin' , {headers: this.headers});
   }
@@ -26,7 +22,7 @@ export class AdminService {
   }
   
   registerAdmin(admin: any): Observable<RegistrationAdmin>{
-    return this.http.post<any>(this.apiHost + 'api/admin', admin, {headers: this.headers}).pipe(catchError(this.handleError));
+    return this.http.post<any>(this.apiHost + 'api/admin/register/', admin, {headers: this.headers}).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
