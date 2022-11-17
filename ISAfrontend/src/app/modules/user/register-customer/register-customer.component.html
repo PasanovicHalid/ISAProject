@@ -45,7 +45,9 @@
                     </span>
                     <label class="form-label" for="firstName">First Name</label>
                   </div>
+                </div>
 
+                <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <input
                       type="text"
@@ -72,7 +74,10 @@
                     </span>
                     <label class="form-label" for="lastName">Last Name</label>
                   </div>
-
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <input
                       type="username"
@@ -100,36 +105,67 @@
                     </span>
                     <label class="form-label" for="username">Username</label>
                   </div>
+                </div>
 
+                <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <input
-                      type="password"
-                      id="password"
+                      type="email"
+                      id="email"
                       class="form-control form-control-lg"
-                      name="password"
+                      name="email"
                       required
-                      pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                      [(ngModel)]="customer.password"
-                      #passwordVar="ngModel"
+                      pattern="[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,4}$"
+                      [(ngModel)]="customer.email"
+                      #emailVar="ngModel"
                       [ngClass]="{
                         'is-invalid':
-                          (passwordVar.touched || passwordVar.dirty) &&
-                          !passwordVar.valid
+                          (emailVar.touched || emailVar.dirty) &&
+                          !emailVar.valid
                       }"
                     />
                     <span class="invalid-feedback">
-                      <span *ngIf="passwordVar.errors?.['pattern']">
-                        Password must be over 8 characters, must contain letter
-                        and number.
+                      <span *ngIf="emailVar.errors?.['pattern']">
+                        Please use convention 'aa@aa.aa'.
                       </span>
-                      <span *ngIf="passwordVar.errors?.['required']">
-                        Please enter password.
+                      <span *ngIf="emailVar.errors?.['required']">
+                        Please enter email.
                       </span>
                     </span>
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label" for="email">Email</label>
                   </div>
+                </div>
+              </div>
 
-                  <!-- CONFIRM PASSWORD ZAKOMENTARISAN
+              <div class="form-outline">
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control form-control-lg"
+                  name="password"
+                  required
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                  [(ngModel)]="customer.password"
+                  #passwordVar="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      (passwordVar.touched || passwordVar.dirty) &&
+                      !passwordVar.valid
+                  }"
+                />
+                <span class="invalid-feedback">
+                  <span *ngIf="passwordVar.errors?.['pattern']">
+                    Password must be over 8 characters, must contain letter and
+                    number.
+                  </span>
+                  <span *ngIf="passwordVar.errors?.['required']">
+                    Please enter password.
+                  </span>
+                </span>
+                <label class="form-label" for="password">Password</label>
+              </div>
+
+              <!-- CONFIRM PASSWORD ZAKOMENTARISAN
                   <div class="form-outline">
                     <input
                       type="password"
@@ -161,132 +197,325 @@
                     >
                   </div> -->
 
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
                     <input
-                      type="email"
-                      id="email"
+                      type="text"
+                      id="country"
                       class="form-control form-control-lg"
-                      name="email"
+                      name="country"
                       required
-                      pattern="[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,4}$"
-                      [(ngModel)]="customer.email"
-                      #emailVar="ngModel"
+                      pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
+                      [(ngModel)]="customer.address.country"
+                      #countryVar="ngModel"
                       [ngClass]="{
                         'is-invalid':
-                          (emailVar.touched || emailVar.dirty) &&
-                          !emailVar.valid
+                          (countryVar.touched || countryVar.dirty) &&
+                          !countryVar.valid
                       }"
                     />
                     <span class="invalid-feedback">
-                      <span *ngIf="emailVar.errors?.['pattern']">
-                        Please use convention 'aa@aa.aa'.
+                      <span *ngIf="countryVar.errors?.['pattern']">
+                        Please use first capital letters.
                       </span>
-                      <span *ngIf="emailVar.errors?.['required']">
-                        Please enter email.
+                      <span *ngIf="countryVar.errors?.['required']">
+                        Please enter country value of address.
                       </span>
                     </span>
-                    <label class="form-label" for="email">Email</label>
+                    <label class="form-label" for="country">Country</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="city"
+                      class="form-control form-control-lg"
+                      name="city"
+                      required=""
+                      pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
+                      [(ngModel)]="customer.address.city"
+                      #cityVar="ngModel"
+                      [ngClass]="{
+                        'is-invalid':
+                          (cityVar.touched || cityVar.dirty) && !cityVar.valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="cityVar.errors?.['pattern']">
+                        Please use first capital letters.
+                      </span>
+                      <span *ngIf="cityVar.errors?.['required']">
+                        Please enter city value of address.
+                      </span>
+                    </span>
+                    <label class="form-label" for="city">City</label>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 mb-4"></div>
 
-              <!-- <div class="row">
-                  <div class="col-md-6 mb-4 pb-2">
-  
-                    <div class="form-outline">
-                      <input type="text" id="country" class="form-control form-control-lg" 
-                      name="country" required
-                      pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*"
-                      [(ngModel)]="bloodBank.address.country"
-                          #countryVar="ngModel"
-                            [ngClass]="{'is-invalid': (countryVar.touched || countryVar.dirty) && !countryVar.valid }"/>
-                        <span class="invalid-feedback">
-                            <span *ngIf="countryVar.errors?.['pattern']">
-                                Please use first capital letters.
-                            </span>
-                            <span *ngIf="countryVar.errors?.['required']">
-                                Please enter country value of address.
-                            </span>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="street"
+                      class="form-control form-control-lg"
+                      name="street"
+                      required
+                      pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*"
+                      [(ngModel)]="customer.address.street"
+                      #streetVar="ngModel"
+                      [ngClass]="{
+                        'is-invalid':
+                          (streetVar.touched || streetVar.dirty) &&
+                          !streetVar.valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="streetVar.errors?.['pattern']">
+                        Please use first capital letters.
+                      </span>
+                      <span *ngIf="streetVar.errors?.['required']">
+                        Please enter street value of address.
+                      </span>
+                    </span>
+                    <label class="form-label" for="street">Street</label>
+                  </div>
+                </div>
+                <div class="col-md-6 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="streetNumber"
+                      class="form-control form-control-lg"
+                      name="streetNumber"
+                      required
+                      pattern="([0-9]{1,3})[A-Z]?"
+                      [(ngModel)]="customer.address.number"
+                      #numberVar="ngModel"
+                      [ngClass]="{
+                        'is-invalid':
+                          (numberVar.touched || numberVar.dirty) &&
+                          !numberVar.valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="numberVar.errors?.['pattern']">
+                        Please have at least one number and possibly a letter.
+                      </span>
+                      <span *ngIf="numberVar.errors?.['required']">
+                        Please enter number value of street.
+                      </span>
+                    </span>
+                    <label class="form-label" for="streetNumber"
+                      >Street Number</label
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+                    <div class="form-outline datepicker w-100">
+                      <input
+                        type="date"
+                        min="1900-01-01"
+                        class="form-control form-control-lg"
+                        id="dob"
+                        name="dob"
+                        required
+                        [(ngModel)]="customer.dob"
+                        #dobVar="ngModel"
+                        [ngClass]="{
+                          'is-invalid':
+                            (dobVar.touched || dobVar.dirty) && !dobVar.valid
+                        }"
+                      />
+
+                      <span class="invalid-feedback">
+                        <span *ngIf="dobVar.errors?.['required']">
+                          Please enter your date of birth.
                         </span>
-                      <label class="form-label" for="country">Country</label>
+                      </span>
+                      <label for="dob" class="form-label">Date of birth</label>
                     </div>
-  
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h6 class="mb-2 pb-1 gender">Gender:</h6>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="femaleGender"
+                        value="FEMALE"
+                        [(ngModel)]="customer.gender"
+                      />
+                      <label class="form-check-label" for="femaleGender"
+                        >Female</label
+                      >
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="maleGender"
+                        value="MALE"
+                        [(ngModel)]="customer.gender"
+                      />
+                      <label class="form-check-label" for="maleGender"
+                        >Male</label
+                      >
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="otherGender"
+                        value="OTHER"
+                        [(ngModel)]="customer.gender"
+                      />
+                      <label class="form-check-label" for="otherGender"
+                        >Other</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+                    <div class="form-outline">
+                      <input
+                        type="text"
+                        id="profession"
+                        class="form-control form-control-lg"
+                        name="profession"
+                        required
+                        pattern="[a-zA-Z]+"
+                        [(ngModel)]="customer.profession"
+                        #professionVar="ngModel"
+                        [ngClass]="{
+                          'is-invalid':
+                            (professionVar.touched || professionVar.dirty) &&
+                            !professionVar.valid
+                        }"
+                      />
+                      <span class="invalid-feedback">
+                        <span *ngIf="professionVar.errors?.['pattern']">
+                          Please only use letters.
+                        </span>
+                        <span *ngIf="countryVar.errors?.['required']">
+                          Please enter profession.
+                        </span>
+                      </span>
+                      <label class="form-label" for="profession"
+                        >Profession</label
+                      >
+                    </div>
                   </div>
                   <div class="col-md-6 mb-4 pb-2">
-  
                     <div class="form-outline">
-                      <input type="text" id="city" class="form-control form-control-lg" 
-                      name="city" required=""
-                      pattern="([A-Z][a-z]+)(\s[A-Z][a-z]+)*" 
-                      [(ngModel)]="bloodBank.address.city"
-                          #cityVar="ngModel"
-                            [ngClass]="{'is-invalid': (cityVar.touched || cityVar.dirty) && !cityVar.valid }"/>
-                        <span class="invalid-feedback">
-                            <span *ngIf="cityVar.errors?.['pattern']">
-                                Please use first capital letters.
-                            </span>
-                            <span *ngIf="cityVar.errors?.['required']">
-                                Please enter city value of address.
-                            </span>
+                      <input
+                        type="text"
+                        id="professionInfo"
+                        class="form-control form-control-lg"
+                        name="professionInfo"
+                        required
+                        pattern="[a-zA-Z]+"
+                        [(ngModel)]="customer.professionInfo"
+                        #professionInfoVar="ngModel"
+                        [ngClass]="{
+                          'is-invalid':
+                            (professionInfoVar.touched ||
+                              professionInfoVar.dirty) &&
+                            !professionInfoVar.valid
+                        }"
+                      />
+                      <span class="invalid-feedback">
+                        <span *ngIf="professionInfoVar.errors?.['pattern']">
+                          Please use only letters.
                         </span>
-                      <label class="form-label" for="city">City</label>
+                        <span *ngIf="cityVar.errors?.['required']">
+                          Please enter profession information.
+                        </span>
+                      </span>
+                      <label class="form-label" for="professionInfo"
+                        >Profession information</label
+                      >
                     </div>
-  
                   </div>
-                </div> -->
+                </div>
 
-              <!-- <div class="row">
-                    <div class="col-md-6 mb-4 pb-2">
-  
-                        <div class="form-outline">
-                          <input type="text" id="street" class="form-control form-control-lg" 
-                          name="street" required
-                          pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*" 
-                          [(ngModel)]="bloodBank.address.street"
-                          #streetVar="ngModel"
-                            [ngClass]="{'is-invalid': (streetVar.touched || streetVar.dirty) && !streetVar.valid }"/>
-                            <span class="invalid-feedback">
-                                <span *ngIf="streetVar.errors?.['pattern']">
-                                    Please use first capital letters.
-                                </span>
-                                <span *ngIf="streetVar.errors?.['required']">
-                                    Please enter street value of address.
-                                </span>
-                            </span>
-                          <label class="form-label" for="street">Street</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6  pb-2">
-      
-                        <div class="form-outline">
-                          <input type="text" id="streetNumber" class="form-control form-control-lg"
-                          name="streetNumber" required
-                          pattern="([0-9]{1,3})[A-Z]?"
-                          [(ngModel)]="bloodBank.address.number"
-                          #numberVar="ngModel"
-                            [ngClass]="{'is-invalid': (numberVar.touched || numberVar.dirty) && !numberVar.valid }" />
-                            <span class="invalid-feedback">
-                                <span *ngIf="numberVar.errors?.['pattern']">
-                                    Please have at least one number and possibly a letter.
-                                </span>
-                                <span *ngIf="numberVar.errors?.['required']">
-                                    Please enter number value of street.
-                                </span>
-                            </span>
-                          <label class="form-label" for="streetNumber">Street Number</label>
-                        </div>
-      
-                      </div>
-                </div> -->
-              <div>
-                <input
-                  class="btn btn-primary btn-lg submit"
-                  type="submit"
-                  value="Register"
-                  [disabled]="!registrationForm.valid"
-                />
+                <div class="row">
+                  <div class="col-md-6 pb-2">
+                    <div class="form-outline">
+                      <input
+                        type="text"
+                        id="jmbg"
+                        class="form-control form-control-lg"
+                        name="jmbg"
+                        required
+                        pattern="[0-9]+"
+                        [(ngModel)]="customer.jmbg"
+                        #jmbgVar="ngModel"
+                        [ngClass]="{
+                          'is-invalid':
+                            (jmbgVar.touched || jmbgVar.dirty) && !jmbgVar.valid
+                        }"
+                      />
+                      <span class="invalid-feedback">
+                        <span *ngIf="jmbgVar.errors?.['pattern']">
+                          Please have at least one number.
+                        </span>
+                        <span *ngIf="jmbgVar.errors?.['required']">
+                          Please enter value of jmbg.
+                        </span>
+                      </span>
+                      <label class="form-label" for="jmbg">Jmbg</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pb-2">
+                    <div class="form-outline">
+                      <input
+                        type="text"
+                        id="phoneNumber"
+                        class="form-control form-control-lg"
+                        name="phoneNumber"
+                        required
+                        pattern="(\+)?[0-9]+"
+                        [(ngModel)]="customer.phoneNumber"
+                        #phoneNumberVar="ngModel"
+                        [ngClass]="{
+                          'is-invalid':
+                            (phoneNumberVar.touched || phoneNumberVar.dirty) &&
+                            !phoneNumberVar.valid
+                        }"
+                      />
+                      <span class="invalid-feedback">
+                        <span *ngIf="phoneNumberVar.errors?.['pattern']">
+                          Only numbers and + is allowed.
+                        </span>
+                        <span *ngIf="phoneNumberVar.errors?.['required']">
+                          Please enter phone nuber.
+                        </span>
+                      </span>
+                      <label class="form-label" for="jmbg">Phone number</label>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    class="btn btn-primary btn-lg submit"
+                    type="submit"
+                    value="Register"
+                    [disabled]="!registrationForm.valid"
+                  />
+                </div>
               </div>
             </form>
           </div>
