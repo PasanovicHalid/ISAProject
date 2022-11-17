@@ -104,8 +104,8 @@ public class BloodBankController {
             bloodBankService.checkAPIKey(bankEmail, APIkey);
             LocalDateTime today = LocalDateTime.now();
 
-            String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy_hhmmss"));
-            try (FileOutputStream fos = new FileOutputStream("D://Faks//3. Internet softverske arhitekture//PROJEKAT_ISA//ISAProject//BloodBank/src/report_" + formattedDate + ".pdf")) {
+            String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy_hhmmss_"));
+            try (FileOutputStream fos = new FileOutputStream("D://Faks//3. Internet softverske arhitekture//PROJEKAT_ISA//ISAProject//BloodBank/src/report_" + formattedDate + bankEmail +".pdf")) {
                 fos.write(pdf);
                 //fos.close // no need, try-with-resources auto close
             }
@@ -113,7 +113,7 @@ public class BloodBankController {
         }
         catch(Exception e){
             System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
     }
 }
