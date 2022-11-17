@@ -39,12 +39,12 @@ public class UserDTO {
     private LocalDate dob;
     @NotNull
     @Valid
-    private Address address;
+    private AddressDTO addressDTO;
 
     public long id;
     public Role role;
 
-    public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender, LocalDate dob, Address address, Role role, Long id) {
+    public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender, LocalDate dob, AddressDTO address, Role role, Long id) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,13 +54,13 @@ public class UserDTO {
         this.gender = gender;
         this.dob = dob;
         this.role = role;
-        this.address = address;
+        this.addressDTO = address;
         this.role = role;
         this.id = id;
     }
 
     public UserDTO(String firstName, String lastName, String username, String password, String email, Gender gender,
-                   LocalDate dob, Address address, Role role) {
+                   LocalDate dob, AddressDTO address, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -68,7 +68,7 @@ public class UserDTO {
         this.email = email;
         this.gender = gender;
         this.dob = dob;
-        this.address = address;
+        this.addressDTO = address;
         this.role = role;
     }
 
@@ -138,12 +138,12 @@ public class UserDTO {
         this.dob = dob;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressDTO getAddress() {
+        return addressDTO;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(AddressDTO address) {
+        this.addressDTO = address;
     }
 
     public Role getRole() {

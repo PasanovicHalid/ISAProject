@@ -65,7 +65,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping
+    @PostMapping(path = "/register")
     public ResponseEntity<Object> registerAdmin(@Valid @RequestBody RegistrationAdminDTO registrationAdminDTO, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
