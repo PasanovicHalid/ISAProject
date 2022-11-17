@@ -1,13 +1,13 @@
 package com.example.BloodBank.controller;
 
 import com.example.BloodBank.adapters.CustomerMapper;
-import com.example.BloodBank.adapters.UserMapper;
 import com.example.BloodBank.dto.CustomerDTO;
 import com.example.BloodBank.dto.CustomerUpdateDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.Customer;
-import com.example.BloodBank.model.User;
+import com.example.BloodBank.model.Questionnaire;
 import com.example.BloodBank.service.CustomerService;
+import com.example.BloodBank.service.QuestionnaireService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
     private final CustomerService customerService;
-
     private final ModelMapper modelMapper;
-
     private CustomerMapper customerMapper;
     @Autowired
     public CustomerController(CustomerService customerService, ModelMapper modelMapper){
