@@ -22,8 +22,10 @@ export class ListBanksComponent implements OnInit {
     'address.city',
     'address.street',
     'address.number',
+    'rating',
   ];
-  public bloodBanks: BloodBank[] = [];
+  public bloodBanks: any;
+  // public bloodBanks: BloodBank[] = [];
   public errorMessage: any;
   public searchQuery : string = '';
   public searchSelect : Search = Search.Name;
@@ -73,7 +75,6 @@ export class ListBanksComponent implements OnInit {
         this.errorMessage = error;
       }
     );
-    console.log(this.bloodBanks[0]);
   }
 
   ngAfterViewInit() {
@@ -120,4 +121,7 @@ export class ListBanksComponent implements OnInit {
     });
     return uniqChk;
   }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

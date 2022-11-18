@@ -7,7 +7,7 @@ values(1003,0, 0, 1, 3, 5, 5, 9, 3);
 
 
 insert into address
-values(1004,'Novi Sad', 'Serbia', 8,'Strazilovska');
+values(1004,'New York', 'USA', 8,'Saint Johns');
 insert into address
 values(1005, 'Novi Sad', 'Serbia', 18,'Bulevar Oslobodjenja');
 insert into address
@@ -41,9 +41,9 @@ insert into users
 values(1018, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1013);
 
 insert into customer
-values(1017);
+values('123123', '066433123', 'student', 'ftn', 1017);
 insert into customer
-values(1018);
+values('321321', '066433123', 'student', 'pmf', 1018);
 
 insert into admin
 values(1014, 1007);

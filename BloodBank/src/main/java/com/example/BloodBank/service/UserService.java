@@ -1,17 +1,12 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.adapters.UserMapper;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
-import com.example.BloodBank.model.Address;
-import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IUserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service

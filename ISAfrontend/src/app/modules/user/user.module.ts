@@ -12,12 +12,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import { FillFormComponent } from './fill-form/fill-form.component';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -27,7 +29,9 @@ const routes: Routes = [
   { path: 'admins-blood-bank', component: AdminsBloodbankComponent},
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
-  { path: 'register-admin', component: RegisterAdminComponent }
+  { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'fill-form', component: FillFormComponent },
+  { path: 'view-users', component: ViewUsersComponent }
 
 ];
 
@@ -39,7 +43,10 @@ const routes: Routes = [
     AdminsProfileComponent,
     AdminsBloodbankComponent,
     RegisterCustomerComponent,
-    RegisterAdminComponent
+    RegisterAdminComponent,
+    FillFormComponent,
+    ViewUsersComponent
+
   ],
   imports: [
     CommonModule,
@@ -56,7 +63,7 @@ const routes: Routes = [
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class UserModule { }
+export class UserModule {}

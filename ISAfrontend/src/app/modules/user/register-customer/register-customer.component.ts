@@ -15,7 +15,7 @@ export class RegisterCustomerComponent implements OnInit {
   public customer: Customer = new Customer({});
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
-  public bb: string = '';
+  public confirmPassword: string = '';
 
   constructor(
     private customerService: CustomerService,
@@ -33,38 +33,34 @@ export class RegisterCustomerComponent implements OnInit {
   }
   public registerCustomer() {
     console.log('in registerCustomer');
-    this.customer.role = Role.CUSTOMER;
-    this.customerService.registerCustomer(this.customer).subscribe(
-      (res) => {
-        console.log('In register customer');
-      },
-      (error) => {
-        console.log('!!!!!error.message!!!!!!!');
-        console.log(error.message);
-        this.errorMessage = error;
-        this.toastError();
-      }
-    );
+    console.log(this.confirmPassword);
+    console.log(this.customer.password);
+    if (this.confirmPassword === this.customer.password) {
+      console.log('password check passed');
+      this.customer.role = Role.CUSTOMER;
+      this.customerService.registerCustomer(this.customer).subscribe(
+        (res) => {
+          console.log('Registered customer');
+          this.toastr.success('Registered user');
+        },
+        (error) => {
+          console.log(error.message);
+          this.errorMessage = error;
+          this.toastError();
+        }
+      );
+    } else {
+      this.toastr.error('Confirmed password must match');
+      console.log('Confirmed password must match');
+    }
   }
   private toastError() {
     console.log('in toastError');
     console.log(this.errorMessage.message);
     if (String(this.errorMessage.message).includes('Username is taken')) {
       console.log('in if');
-      // this.toastr.error(this.errorMessage.message);
-      this.toastr.error('test');
+      this.toastr.error(this.errorMessage.message);
       console.log('nakon testa');
     }
-    //String(this.errorMessage).includes('406')
-    // if (true) {
-    //   var error = localStorage.getItem('errormap')!;
-    //   this.errorMap = new Map(JSON.parse(error));
-
-    //   for (let entry of this.errorMap.entries()) {
-    //     this.toastr.error('Validation error: ' + entry[1]);
-    //   }
-    // } else {
-    //   this.toastr.error(this.errorMessage.message);
-    // }
   }
 }

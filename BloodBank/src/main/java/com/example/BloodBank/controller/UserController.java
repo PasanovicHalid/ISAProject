@@ -1,7 +1,9 @@
 package com.example.BloodBank.controller;
 
-import com.example.BloodBank.adapters.UserMapper;
+import adapters.UserMapper;
+import adapters.ViewUserMapper;
 import com.example.BloodBank.dto.UserDTO;
+import com.example.BloodBank.dto.ViewUserDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.UserService;
@@ -10,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -32,12 +32,14 @@ public class UserController {
     private final ModelMapper modelMapper;
 
     private UserMapper userMapper;
+    private ViewUserMapper viewUserMapper;
 
     @Autowired
     public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         userMapper = new UserMapper(modelMapper);
+        viewUserMapper = new ViewUserMapper(modelMapper);
     }
 
     @Operation(summary = "Update an existing user", description = "Update an existing user")
@@ -60,6 +62,18 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ViewUserDTO>> getAllUsers() {
+        try {
+            System.out.println("in getusers()");
+            List<User> userrs = (List<User>) userService.GetAll();
+            List<ViewUserDTO> users = viewUserMapper.toDTO(userrs);
+            return new ResponseEntity<>(users, HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }
