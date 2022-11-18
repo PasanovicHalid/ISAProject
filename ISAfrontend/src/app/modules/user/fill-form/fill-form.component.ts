@@ -18,23 +18,22 @@ export class FillFormComponent implements OnInit {
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
   public logedCustomer: Customer = new Customer();
+  genders = Gender;
   constructor(
     private questionnaireService: QuestionnaireService,
     private router: Router,
     private toastr: ToastrService
   ) {}
 
-  ngOnInit(): void {}
-  public saveQuestionnaire(): void {
-    //umesto ovoga ce biti trenutno ulogovani korisnik
+  ngOnInit(): void {
     this.logedCustomer = {
       id: -1,
       firstName: 'Loged',
       lastName: 'Customer',
-      username: 'logCus00',
+      username: 'logCus99',
       password: 'sadfsdf123',
-      email: 'logCus@gmail.com',
-      gender: Gender.MALE,
+      email: 'logCus1@gmail.com',
+      gender: Gender.FEMALE,
       dob: new Date(),
       role: Role.CUSTOMER,
       address: {
@@ -48,10 +47,20 @@ export class FillFormComponent implements OnInit {
       profession: 'student',
       professionInfo: 'ftn',
     };
+  }
+  public saveQuestionnaire(): void {
+    //umesto ovoga ce biti trenutno ulogovani korisnik
+
     this.questionnaire.customer = this.logedCustomer;
     this.createQuestionnaire();
   }
   public createQuestionnaire() {
+    if (this.questionnaire.customer.gender.valueOf() !== 2) {
+      console.log('not female');
+      this.questionnaire.secondState = false;
+      this.questionnaire.menstruating = false;
+      this.questionnaire.pregnant = false;
+    }
     this.questionnaireService.createQuestionnaire(this.questionnaire).subscribe(
       (res) => {
         console.log('created questionnaire');
@@ -63,5 +72,8 @@ export class FillFormComponent implements OnInit {
         //this.toastError();
       }
     );
+  }
+  public isFemale(customer: Customer) {
+    customer.gender.valueOf() === 0;
   }
 }
