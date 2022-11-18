@@ -56,8 +56,14 @@
               </ng-container>
               <ng-container matColumnDef="address.country">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  Country
+                  <select matNativeControl [ngModel]="countrySelect"
+                  (ngModelChange)="countrySelect = $event;
+                  applySecondaryFilter()">
+                    <option value="">Country</option>
+                    <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+                  </select>
                 </th>
+                
                 <td
                   mat-cell
                   *matCellDef="let bloodBank"
@@ -69,7 +75,12 @@
               </ng-container>
               <ng-container matColumnDef="address.city">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  City
+                  <select matNativeControl [ngModel]="citySelect"
+                  (ngModelChange)="citySelect = $event;
+                  applySecondaryFilter()">
+                    <option value="">City</option>
+                    <option [value]="city" *ngFor="let city of cities">{{city}}</option>
+                  </select>
                 </th>
                 <td
                   mat-cell

@@ -29,6 +29,8 @@ export class ListBanksComponent implements OnInit {
   public searchSelect : Search = Search.Name;
   public countrySelect : string = '';
   public citySelect : string = '';
+  public cities: string[] = [];
+  public countries: string[] = [];
 
   constructor(
     private bloodBankService: BloodBankService,
@@ -44,17 +46,20 @@ export class ListBanksComponent implements OnInit {
       (res) => {
         this.bloodBanks = res;
         this.dataSource.data = res;
+        var addresses = this.getFilterObject(res, 'address')
+        this.cities = this.getFilterObject(addresses, "city")
+        this.countries = this.getFilterObject(addresses, "country")
         this.dataSource.sortingDataAccessor = this.pathDataAccessor;
         this.dataSource.filterPredicate = (data: BloodBank, filter: string) => {
           var firstFilter = true;
             switch (this.searchSelect) {
                 case 'Name':
-                  firstFilter = data.name.toLowerCase().indexOf(filter) != -1;
+                  firstFilter = data.name.toLowerCase().indexOf(filter.toLowerCase()) != -1;
                   break;
                 case 'Address':
                   let address = data.address.country.toLowerCase() + ' ' + data.address.city.toLowerCase()
                   + ' ' + data.address.street.toLowerCase() + ' ' + data.address.number.toLowerCase();
-                  firstFilter = (address.indexOf(filter) != -1);
+                  firstFilter = (address.indexOf(filter.toLowerCase()) != -1);
                   break;
                 default:
                   firstFilter = true;
@@ -97,22 +102,22 @@ export class ListBanksComponent implements OnInit {
   }
 
   applyFilter(searchQuery: string) {
-    this.searchQuery = searchQuery.toLowerCase();
-    this.dataSource.filter = searchQuery.toLowerCase();
+    this.searchQuery = searchQuery;
+    this.dataSource.filter = searchQuery;
   }
 
-  createFilter() {
-    var select = this.searchSelect
-    let filterFunction = function (data: BloodBank, filter: string): boolean {
-        switch (select) {
-          case 'Name':
-            return data.name.toLowerCase().indexOf(filter.toLowerCase()) != -1;
-          case 'Address':
-            return data.address.city.toLowerCase().indexOf(filter.toLowerCase()) != -1;
-          default:
-            return true;
-        }
+  applySecondaryFilter() {
+    this.dataSource.filter = this.searchQuery;
+  }
+
+  getFilterObject(fullObj: any[], key: string | number) {
+    const uniqChk: any[] = [];
+    fullObj.filter((obj) => {
+      if (!uniqChk.includes(obj[key])) {
+        uniqChk.push(obj[key]);
       }
-      return filterFunction;
+      return obj;
+    });
+    return uniqChk;
   }
 }
