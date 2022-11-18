@@ -33,4 +33,16 @@ public class CustomerMapper {
         Customer customer = modelMapper.map(customerDTO, Customer.class);
         return customer;
     }
+
+    public static Customer combineWithCustomerUpdateDTO(Customer customer, CustomerUpdateDTO customerUpdateDTO){
+        customer.setFirstName(customerUpdateDTO.getFirstName());
+        customer.setLastName(customerUpdateDTO.getLastName());
+        customer.setUsername(customerUpdateDTO.getUsername());
+        customer.setPassword(customerUpdateDTO.getPassword());
+        customer.setEmail(customerUpdateDTO.getEmail());
+        customer.setGender(customerUpdateDTO.getGender());
+        customer.setDob(customerUpdateDTO.getDob());
+        customer.setRole(customerUpdateDTO.getRole());
+        return customer;
+    }
 }
