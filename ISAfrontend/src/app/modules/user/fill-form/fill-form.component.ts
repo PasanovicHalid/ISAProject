@@ -29,11 +29,11 @@ export class FillFormComponent implements OnInit {
     //umesto ovoga ce biti trenutno ulogovani korisnik
     this.logedCustomer = {
       id: -1,
-      firstName: 'Nasdf',
-      lastName: 'Sasdlk',
-      username: 'asdkjkl',
+      firstName: 'Loged',
+      lastName: 'Customer',
+      username: 'logCus00',
       password: 'sadfsdf123',
-      email: 'nesfd@gmail.com',
+      email: 'logCus@gmail.com',
       gender: Gender.MALE,
       dob: new Date(),
       role: Role.CUSTOMER,
@@ -52,7 +52,6 @@ export class FillFormComponent implements OnInit {
     this.createQuestionnaire();
   }
   public createQuestionnaire() {
-    console.log('in createQuestionnaire');
     this.questionnaireService.createQuestionnaire(this.questionnaire).subscribe(
       (res) => {
         console.log('created questionnaire');
