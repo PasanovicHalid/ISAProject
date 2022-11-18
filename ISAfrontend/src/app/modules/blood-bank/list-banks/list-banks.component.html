@@ -8,11 +8,28 @@
           class="card shadow-2-strong card-registration"
           style="border-radius: 15px"
         >
-          <div class="card-body p-4 p-md-5">
-            <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">All blood banks</h3>
-            <table mat-table [dataSource]="dataSource">
+          <div class="card-body p-1 p-md-4">
+            <h2 class="text-center">All blood banks</h2>
+            <div style="display: flex;">
+              <table style="margin-left: auto; margin-right: 0%;" cellspacing="0"><tr>
+                <td><mat-form-field appearance="standard" class="w-100" >
+                  <mat-label>Search</mat-label>
+                  <input matInput [ngModel]="searchQuery" (ngModelChange)="applyFilter($event)" type="text">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field></td>
+                <td><mat-form-field appearance="standard">
+                  <mat-label>Search Criteria</mat-label>
+                  <select matNativeControl [ngModel]="searchSelect"
+                  (ngModelChange)="searchSelect = $event">
+                    <option value="Name">Name</option>
+                    <option value="Address">Address</option>
+                  </select>
+                </mat-form-field></td>
+              </tr></table>
+            </div>
+            <table mat-table [dataSource]="dataSource" matSort class="w-100">
               <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef class="cell-center">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
                   Bank name
                 </th>
                 <td
@@ -25,7 +42,7 @@
                 </td>
               </ng-container>
               <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef class="cell-center">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
                   Email
                 </th>
                 <td
@@ -37,9 +54,9 @@
                   {{ bloodBank.email }}
                 </td>
               </ng-container>
-              <ng-container matColumnDef="address-country">
-                <th mat-header-cell *matHeaderCellDef class="cell-center">
-                  Bank address
+              <ng-container matColumnDef="address.country">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                  Country
                 </th>
                 <td
                   mat-cell
@@ -50,8 +67,10 @@
                   {{ bloodBank.address.country }}
                 </td>
               </ng-container>
-              <ng-container matColumnDef="address-city">
-                <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
+              <ng-container matColumnDef="address.city">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                  City
+                </th>
                 <td
                   mat-cell
                   *matCellDef="let bloodBank"
@@ -61,8 +80,10 @@
                   {{ bloodBank.address.city }}
                 </td>
               </ng-container>
-              <ng-container matColumnDef="address-street">
-                <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
+              <ng-container matColumnDef="address.street">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                  Street
+                </th>
                 <td
                   mat-cell
                   *matCellDef="let bloodBank"
@@ -72,8 +93,10 @@
                   {{ bloodBank.address.street }}
                 </td>
               </ng-container>
-              <ng-container matColumnDef="address-number">
-                <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
+              <ng-container matColumnDef="address.number">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                  Number
+                </th>
                 <td
                   mat-cell
                   *matCellDef="let bloodBank"
