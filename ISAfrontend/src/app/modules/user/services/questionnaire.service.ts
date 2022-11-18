@@ -17,6 +17,7 @@ export class QuestionnaireService {
   constructor(private http: HttpClient) {}
 
   createQuestionnaire(questionnaire: any): Observable<any> {
+    console.log(questionnaire);
     return this.http
       .post<any>(this.apiHost + 'api/questionnaire/create', questionnaire, {
         headers: this.headers,
