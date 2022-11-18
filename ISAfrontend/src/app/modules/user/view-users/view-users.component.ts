@@ -32,7 +32,6 @@ export class ViewUsersComponent implements OnInit {
       (res) => {
         this.users = res;
         this.tableUsers = this.users
-        console.log(this.users);
       },
       (error) => {
         this.errorMessage = error;
