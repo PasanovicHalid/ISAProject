@@ -5,6 +5,9 @@ import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -54,5 +57,10 @@ public class UserService implements IUserService {
     @Override
     public Iterable<User> GetAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Page<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page) {
+        return userRepository.findAllByFirstNameOrLastName(searchTerm, page);
     }
 }

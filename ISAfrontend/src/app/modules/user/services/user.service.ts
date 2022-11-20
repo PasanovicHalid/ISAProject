@@ -18,8 +18,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<User[]>{
-    return this.http.get<User[]>(this.apiHost + 'api/user', {headers: this.headers}).pipe(catchError(this.handleError));
+  getAll(search : string = ''): Observable<User[]>{
+    console.log(search)
+    return this.http.get<User[]>(this.apiHost + 'api/user?search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

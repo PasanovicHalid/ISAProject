@@ -20,6 +20,7 @@ import { AdminHomePageComponent } from './admin-home-page/admin-home-page.compon
 import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -64,6 +65,7 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    NgxPaginationModule
   ],
 })
 export class UserModule {}

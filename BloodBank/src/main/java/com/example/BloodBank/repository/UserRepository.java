@@ -1,7 +1,14 @@
 package com.example.BloodBank.repository;
 
 import com.example.BloodBank.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    @Query("select u from users u where lower(u.firstName) like %?1% or lower(u.lastName) like %?1%")
+    Page<User> findAllByFirstNameOrLastName(String searchTerm, Pageable pageable);
 }

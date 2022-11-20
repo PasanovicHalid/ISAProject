@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BloodBankModule } from './modules/blood-bank/blood-bank.module';
 import { ToastrModule } from 'ngx-toastr';
 import { UserModule } from './modules/user/user.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserModule } from './modules/user/user.module';
     BloodBankModule,
     UserModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

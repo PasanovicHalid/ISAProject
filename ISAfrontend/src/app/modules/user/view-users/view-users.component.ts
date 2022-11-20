@@ -18,8 +18,11 @@ export class ViewUsersComponent implements OnInit {
 
   public tableUsers: User[] = [];
   public users: User[] = [];
-  public term: string;
+  public search: string;
   public errorMessage: any;
+  page: number = 0;
+  count: number = 0;
+  tableSize: number = 2;
 
   constructor(
     private userService: UserService,
@@ -28,22 +31,29 @@ export class ViewUsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAll().subscribe(
+    this.getUsers();
+    
+  }
+  public getUsers(searchTerm : string = ''): void{
+    console.log(searchTerm)
+    this.userService.getAll(searchTerm).subscribe(
       (res) => {
         this.users = res;
+        this.count = this.users.length
         this.tableUsers = this.users
       },
       (error) => {
         this.errorMessage = error;
       }
     );
-    
   }
   public searchUsers(name: string): void {
-    
-    this.tableUsers = this.users.filter((user) =>
-    (user.firstName.toLowerCase() + " " +user.lastName.toLowerCase()).includes(name.toLowerCase())
-    );
+    console.log(this.search)
+    this.getUsers(this.search);
+  }
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getUsers(this.search);
   }
   
 }

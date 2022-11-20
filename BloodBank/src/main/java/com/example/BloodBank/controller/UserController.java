@@ -9,6 +9,8 @@ import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +22,19 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import javax.validation.Valid;
+import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 @RequestMapping(path = "api/user")
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
-
     private final ModelMapper modelMapper;
-
     private UserMapper userMapper;
     private ViewUserMapper viewUserMapper;
 
@@ -66,13 +70,21 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ViewUserDTO>> getAllUsers() {
+    public ResponseEntity<List<User>> getUsers(Pageable page,
+                                               @RequestParam("search") Optional<String> searchTerm) {
         try {
-            System.out.println("in getusers()");
-            List<User> userrs = (List<User>) userService.GetAll();
-            List<ViewUserDTO> users = viewUserMapper.toDTO(userrs);
-            return new ResponseEntity<>(users, HttpStatus.OK) ;
+            Page<User> students = userService.findAllByFirstNameOrLastName(searchTerm.get(), page);
+
+            // convert students to DTOs
+            List<User> studentsDTO = new ArrayList<>();
+            for (User s : students) {
+                studentsDTO.add(s);
+            }
+
+            return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
+
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
