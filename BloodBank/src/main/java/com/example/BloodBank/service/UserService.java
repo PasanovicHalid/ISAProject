@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,7 +62,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Page<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page) {
-        return userRepository.findAllByFirstNameOrLastName(searchTerm, page);
+    public List<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page) {
+        Page<User> pageUsers =  userRepository.findAllByFirstNameOrLastName(searchTerm, page);
+        List<User> users = new ArrayList<>();
+        for (User u : pageUsers) {
+            users.add(u);
+        }
+        return users;
     }
 }

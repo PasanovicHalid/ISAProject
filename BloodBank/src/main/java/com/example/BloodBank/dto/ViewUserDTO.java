@@ -24,7 +24,7 @@ public class ViewUserDTO {
     private String email;
 
     @NotNull(message = "Gender has to be selected!")
-    private Gender gender;
+    private String gender;
 
     @Past(message = "Date has to be in the past!")
     private LocalDate dob;
@@ -33,12 +33,12 @@ public class ViewUserDTO {
     private Address address;
 
     @NotNull
-    public Role role;
+    public String role;
 
     public ViewUserDTO() {
     }
 
-    public ViewUserDTO(String firstName, String lastName, String email, Gender gender, LocalDate dob, Address address, Role role) {
+    public ViewUserDTO(String firstName, String lastName, String email, String gender, LocalDate dob, Address address, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -72,11 +72,11 @@ public class ViewUserDTO {
         this.email = email;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -96,11 +96,11 @@ public class ViewUserDTO {
         this.address = address;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

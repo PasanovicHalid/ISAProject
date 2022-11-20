@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { User } from 'src/app/model/Users/user';
+import { ViewUser } from '../model/view-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(search : string = ''): Observable<User[]>{
-    console.log(search)
-    return this.http.get<User[]>(this.apiHost + 'api/user?search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
+  getUsersWithSearch(search : string = ''): Observable<ViewUser[]>{
+    return this.http.get<ViewUser[]>(this.apiHost + 'api/user?search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

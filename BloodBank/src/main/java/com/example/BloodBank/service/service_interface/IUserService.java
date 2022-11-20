@@ -4,6 +4,8 @@ import com.example.BloodBank.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface IUserService extends ICRUDService<User> {
-    Page<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page);
+    List<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page);
 }

@@ -70,18 +70,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers(Pageable page,
+    public ResponseEntity<List<ViewUserDTO>> getUsers(Pageable page,
                                                @RequestParam("search") Optional<String> searchTerm) {
         try {
-            Page<User> students = userService.findAllByFirstNameOrLastName(searchTerm.get(), page);
-
-            // convert students to DTOs
-            List<User> studentsDTO = new ArrayList<>();
-            for (User s : students) {
-                studentsDTO.add(s);
-            }
-
-            return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
+            List<User> users = userService.findAllByFirstNameOrLastName(searchTerm.get(), page);
+            return new ResponseEntity<>(viewUserMapper.toDTO(users), HttpStatus.OK);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
