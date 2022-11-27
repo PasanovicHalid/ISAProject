@@ -25,9 +25,15 @@ public class RabbitMQSender {
 
     public void send(MessageDto message) {
     	News news = new News();
-    	news.setId("idNesto");
-    	news.setContent("contentNesto");
+//    	news.setId("idNesto");
+//    	news.setContent("contentNesto");
     	message.setContent(news);
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
+    }
+    public void sendNews(News news){
+        String message = "{_title : \"" + news.getTitle() + "\",\n" +
+                "_text : \"" + news.getText() + "\"\n" +
+                "}";
+        rabbitTemplate.convertAndSend(exchange, routingKey, "news");
     }
 }
