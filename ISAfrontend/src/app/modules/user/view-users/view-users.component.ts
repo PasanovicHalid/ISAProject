@@ -19,7 +19,7 @@ export class ViewUsersComponent implements OnInit {
   public errorMessage: any;
   page: number = 0;
   count: number = 0;
-  tableSize: number = 2;
+  tableSize: number = 5;
 
   constructor(
     private userService: UserService,

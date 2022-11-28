@@ -4,138 +4,134 @@
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div
-          class="card shadow-2-strong card-registration"
-          style="border-radius: 15px"
-        >
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
           <div class="card-body p-1 p-md-4">
             <h2 class="text-center">All blood banks</h2>
             <div style="display: flex;">
-              <table style="margin-left: auto; margin-right: 0%;" cellspacing="0"><tr>
-                <td><mat-form-field appearance="standard" class="w-100" >
-                  <mat-label>Search</mat-label>
-                  <input matInput [ngModel]="searchQuery" (ngModelChange)="applyFilter($event)" type="text">
-                  <mat-icon matSuffix>search</mat-icon>
-                </mat-form-field></td>
-                <td><mat-form-field appearance="standard">
-                  <mat-label>Search Criteria</mat-label>
-                  <select matNativeControl [ngModel]="searchSelect"
-                  (ngModelChange)="searchSelect = $event">
-                    <option value="Name">Name</option>
-                    <option value="Address">Address</option>
-                  </select>
-                </mat-form-field></td>
-              </tr></table>
+              <table style="margin-left: auto; margin-right: 0%;" cellspacing="10%">
+                <tr>
+                  <td>
+                    <div *ngIf="filterSelect == '0' || filterSelect == '1'">
+                      <mat-form-field appearance="standard" class="w-100">
+                        <mat-label>Search</mat-label>
+                        <input matInput [(ngModel)]="searchQuery" type="text">
+                        <button matSuffix mat-icon-button aria-label="Clear" (click)="loadBloodBanks()">
+                          <mat-icon>search</mat-icon>
+                        </button>
+                      </mat-form-field>
+                    </div>
+                    <div *ngIf="filterSelect == '2'" style="display: flex;">
+                      <table style="margin-left: auto; margin-right: 0%;" cellspacing="0">
+                        <td>
+                          <mat-form-field appearance="standard" class="w-100">
+                            <mat-label>Bottom Rating</mat-label>
+                            <input matInput [(ngModel)]="bottomRange" step="any" type="number">
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field appearance="standard" class="w-100">
+                            <mat-label>Top Rating</mat-label>
+                            <input matInput [(ngModel)]="topRange" step="any" type="number">
+                          </mat-form-field>
+                        </td>
+                        <td class="w-50">
+                          <button mat-icon-button (click)="findByRange()">
+                            <mat-icon matSuffix>search</mat-icon>
+                          </button>
+                        </td>
+                      </table>
+                    </div>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="standard">
+                      <mat-label>Filter</mat-label>
+                      <select matNativeControl [(ngModel)]="filterSelect" (ngModelChange)="searchQuery = ''">
+                        <option [value]="0">Name</option>
+                        <option [value]="1">Address</option>
+                        <option [value]="2">Rating</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
             </div>
-            <table mat-table [dataSource]="dataSource" matSort class="w-100">
-              <ng-container matColumnDef="name">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  Bank name
-                </th>
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.name }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="email">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  Email
-                </th>
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.email }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="address.country">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  <select matNativeControl [ngModel]="countrySelect"
-                  (ngModelChange)="countrySelect = $event;
-                  applySecondaryFilter()">
-                    <option value="">Country</option>
-                    <option [value]="country" *ngFor="let country of countries">{{country}}</option>
-                  </select>
-                </th>
-                
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.address.country }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="address.city">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  <select matNativeControl [ngModel]="citySelect"
-                  (ngModelChange)="citySelect = $event;
-                  applySecondaryFilter()">
-                    <option value="">City</option>
-                    <option [value]="city" *ngFor="let city of cities">{{city}}</option>
-                  </select>
-                </th>
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.address.city }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="address.street">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  Street
-                </th>
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.address.street }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="address.number">
-                <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
-                  Number
-                </th>
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.address.number }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="rating">
-                <th mat-header-cell *matHeaderCellDef class="cell-center">
-                  Rating
-                </th>
-                <td
-                  mat-cell
-                  *matCellDef="let bloodBank"
-                  class="clickable cell-center"
-                  (click)="chooseBloodBank(bloodBank.id)"
-                >
-                  {{ bloodBank.rating }}
-                </td>
-              </ng-container>
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedColumns; sticky: true"
-              ></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
+            <div class="course">
+              <div class="spinner-container w-100" *ngIf="bloodBankSource.loading$ | async">
+                <mat-spinner></mat-spinner>
+              </div>
+              <table mat-table [dataSource]="bloodBankSource" class="w-100 mat-elevation-z8" matSort
+                matSortDirection="asc" matSortDisableClear>
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    Bank name
+                  </th>
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.name }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    Email
+                  </th>
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.email }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="address.country">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    Country
+                  </th>
+
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.address.country }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="address.city">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    City
+                  </th>
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.address.city }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="address.street">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    Street
+                  </th>
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.address.street }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="address.number">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    Number
+                  </th>
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.address.number }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="rating">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="cell-center">
+                    Rating
+                  </th>
+                  <td mat-cell *matCellDef="let bloodBank" class="clickable cell-center"
+                    (click)="chooseBloodBank(bloodBank.id)">
+                    {{ bloodBank.rating }}
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
           </div>
         </div>
       </div>

@@ -39,6 +39,38 @@ insert into users
 values(1017, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1013);
 insert into users
 values(1018, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1013);
+insert into users
+values(1019, '1985-05-05', 'ana1@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana1', 1010);
+insert into users
+values(1020, '1995-12-10', 'marko1@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '12345', 1011);
+insert into users
+values(1021, '2000-06-03', 'saska1@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '1235', 1012);
+insert into users
+values(1022, '2000-04-04', 'mihajlo1@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo001', 1013);
+insert into users
+values(1023, '2000-05-05', 'customer2@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust001', 1013);
+insert into users
+values(1024, '1985-05-05', 'ana2@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana2', 1010);
+insert into users
+values(1025, '1995-12-10', 'marko2@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '12364', 1011);
+insert into users
+values(1026, '2000-06-03', 'saska2@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '1236', 1012);
+insert into users
+values(1027, '2000-04-04', 'mihajlo2@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo002', 1013);
+insert into users
+values(1028, '2000-05-05', 'customer3@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust002', 1013);
+insert into users
+values(1029, '2000-05-05', 'customer4@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust003', 1013);
+insert into users
+values(1030, '1985-05-05', 'ana3@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana3', 1010);
+insert into users
+values(1031, '1995-12-10', 'marko3@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '123643', 1011);
+insert into users
+values(1032, '2000-06-03', 'saska3@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '12363', 1012);
+insert into users
+values(1033, '2000-04-04', 'mihajlo3@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo0023', 1013);
+insert into users
+values(1034, '2000-05-05', 'customer5@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust0023', 1013);
 
 insert into customer
 values('123123', '066433123', 'student', 'ftn', 1017);

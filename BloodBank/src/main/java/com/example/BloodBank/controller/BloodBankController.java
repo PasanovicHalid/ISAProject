@@ -1,9 +1,15 @@
 package com.example.BloodBank.controller;
 
+import adapters.BloodBankMapper;
 import com.example.BloodBank.dto.BloodBankDTO;
+import com.example.BloodBank.dto.PagableRequestDTO;
 import com.example.BloodBank.model.*;
 import com.example.BloodBank.service.BloodBankService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,14 +17,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,26 +30,71 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/bloodbank")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BloodBankController {
     private final BloodBankService bloodBankService;
 
+    private final ModelMapper modelMapper;
+
+    private static BloodBankMapper bloodBankMapper;
+
     @Autowired
-    public BloodBankController(BloodBankService bloodBankService) {
+    public BloodBankController(BloodBankService bloodBankService, ModelMapper modelMapper) {
         this.bloodBankService = bloodBankService;
+        this.modelMapper = modelMapper;
+        bloodBankMapper = new BloodBankMapper(modelMapper);
+    }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BloodBankDTO>> getAllPaginate(@Valid @RequestBody PagableRequestDTO request){
+        try{
+            Pageable page;
+            if(request.getSortColumn().isEmpty()){
+                page = PageRequest.of(request.getPageIndex(), request.getPageSize());
+            } else {
+                if(request.getSortDirection().toLowerCase().equals("desc")){
+                    page = PageRequest.of(request.getPageIndex(), request.getPageSize(), Sort.by(request.getSortColumn()).descending());
+                } else if(request.getSortDirection().toLowerCase().equals("asc")){
+                    page = PageRequest.of(request.getPageIndex(), request.getPageSize(), Sort.by(request.getSortColumn()).ascending());
+                } else {
+                    page = PageRequest.of(request.getPageIndex(), request.getPageSize());
+                }
+            }
+            List<BloodBankDTO> bloodBanks = new ArrayList<>();
+            switch (request.getFilterType()){
+                case RATING:
+                    bloodBanks = bloodBankMapper.toBloodBankDTOList(bloodBankService.getBanksByRatingRange(request.getFilter(), page));
+                    break;
+                case DISTANCE:
+                    break;
+                case NAME_SEARCH:
+                    bloodBanks = bloodBankMapper.toBloodBankDTOList(bloodBankService.getBanksByName(request.getFilter(), page));
+                    break;
+                case ADDRESS_SEARCH:
+                    bloodBanks = bloodBankMapper.toBloodBankDTOList(bloodBankService.getBanksByAddress(request.getFilter(), page));
+                    break;
+                default:
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAll(){
-
         try{
             List<BloodBankDTO> bloodBanks = bloodBankService.GetBanksAsDTO();
-           return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
+            return new ResponseEntity<>(bloodBanks, HttpStatus.OK);
         }
         catch(Exception e){
 
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Boolean> fromPSW(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,

@@ -7,6 +7,9 @@ import { RegisterBanksComponent } from './register-banks/register-banks.componen
 import { ListBanksComponent } from './list-banks/list-banks.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 const routes: Routes = [
   { path: 'register-banks', component: RegisterBanksComponent },
@@ -20,6 +23,8 @@ const routes: Routes = [
     MaterialModule,
     MatSelectModule,
     MatSortModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     MatSortModule,

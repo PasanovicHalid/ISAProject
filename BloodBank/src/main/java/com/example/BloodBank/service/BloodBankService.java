@@ -9,9 +9,12 @@ import com.example.BloodBank.service.service_interface.IBloodBankService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,6 +105,41 @@ public class BloodBankService implements IBloodBankService {
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
+    }
+
+    @Override
+    public List<BloodBank> getBanksByRatingRange(String filter, Pageable page) throws Exception {
+        String[] numbers = filter.split("[|]");
+        if(numbers.length != 2){
+            throw new Exception("Error in filter string");
+        }
+        double temp = Double.parseDouble(numbers[0]);
+        Page<BloodBank> bloodBankPage = bloodBankRepository.findByRatingRange(Double.parseDouble(numbers[0]), Double.parseDouble(numbers[1]), page);
+        List<BloodBank> bloodBanks = new ArrayList<>();
+        for (BloodBank b: bloodBankPage) {
+            bloodBanks.add(b);
+        }
+        return bloodBanks;
+    }
+
+    @Override
+    public List<BloodBank> getBanksByName(String filter, Pageable page) throws Exception {
+        Page<BloodBank> bloodBankPage = bloodBankRepository.findAllByName(filter.toLowerCase(), page);
+        List<BloodBank> bloodBanks = new ArrayList<>();
+        for (BloodBank b: bloodBankPage) {
+            bloodBanks.add(b);
+        }
+        return bloodBanks;
+    }
+
+    @Override
+    public List<BloodBank> getBanksByAddress(String filter, Pageable page) throws Exception {
+        Page<BloodBank> bloodBankPage = bloodBankRepository.findByAddress(filter.toLowerCase(), page);
+        List<BloodBank> bloodBanks = new ArrayList<>();
+        for (BloodBank b: bloodBankPage) {
+            bloodBanks.add(b);
+        }
+        return bloodBanks;
     }
 
     public Optional<BloodBank> findByEmail(String email) {

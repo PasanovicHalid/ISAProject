@@ -20,14 +20,17 @@ public class BloodBankDTO {
     private Address address;
     private String description;
 
+    private double rating;
+
 //    @Size(min = 1, max = 10, message="Max 10 admins for a bank allowed")
 //    private ArrayList<Long> adminIDs;
 
-    public BloodBankDTO(String name, String email, Address address, String description) {
+    public BloodBankDTO(String name, String email, Address address, String description, double rating) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.description = description;
+        this.rating = rating;
     }
 
     public BloodBankDTO() {
@@ -63,6 +66,14 @@ public class BloodBankDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
 }

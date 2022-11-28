@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource } from '@angular/material/table';
 import { BloodBank } from 'src/app/model/blood-bank.model';
@@ -7,14 +7,29 @@ import { BloodBankService } from '../services/blood-bank.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Search } from '../model/search';
+import { MatPaginator } from '@angular/material/paginator';
+import { BloodBankSource } from '../data-sources/blood-bank-source';
+import { merge, tap } from 'rxjs';
+import { PagableRequest } from '../model/pagable-request';
+import { FilterType } from '../model/filter-type';
 
 @Component({
   selector: 'app-list-banks',
   templateUrl: './list-banks.component.html',
   styleUrls: ['./list-banks.component.css'],
 })
-export class ListBanksComponent implements OnInit {
-  public dataSource = new MatTableDataSource<BloodBank>();
+export class ListBanksComponent implements AfterViewInit, OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  public bloodBankSource: BloodBankSource;
+  public errorMessage: any;
+  public searchQuery: string = '';
+  public filterSelect: string = '0';
+  public bottomRange: number = 0;
+  public topRange: number = 0;
+
   public displayedColumns = [
     'name',
     'email',
@@ -24,61 +39,42 @@ export class ListBanksComponent implements OnInit {
     'address.number',
     'rating',
   ];
-  public bloodBanks: any;
-  // public bloodBanks: BloodBank[] = [];
-  public errorMessage: any;
-  public searchQuery : string = '';
-  public searchSelect : Search = Search.Name;
-  public countrySelect : string = '';
-  public citySelect : string = '';
-  public cities: string[] = [];
-  public countries: string[] = [];
 
   constructor(
     private bloodBankService: BloodBankService,
     private router: Router,
     private toastr: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer
-  ) {}
+    private _liveAnnouncer: LiveAnnouncer,
+  ) { }
 
-  @ViewChild(MatSort) sort: MatSort;
+
 
   ngOnInit(): void {
-    this.bloodBankService.getBloodBanks().subscribe(
-      (res) => {
-        this.bloodBanks = res;
-        this.dataSource.data = res;
-        var addresses = this.getFilterObject(res, 'address')
-        this.cities = this.getFilterObject(addresses, "city")
-        this.countries = this.getFilterObject(addresses, "country")
-        this.dataSource.sortingDataAccessor = this.pathDataAccessor;
-        this.dataSource.filterPredicate = (data: BloodBank, filter: string) => {
-          var firstFilter = true;
-            switch (this.searchSelect) {
-                case 'Name':
-                  firstFilter = data.name.toLowerCase().indexOf(filter.toLowerCase()) != -1;
-                  break;
-                case 'Address':
-                  let address = data.address.country.toLowerCase() + ' ' + data.address.city.toLowerCase()
-                  + ' ' + data.address.street.toLowerCase() + ' ' + data.address.number.toLowerCase();
-                  firstFilter = (address.indexOf(filter.toLowerCase()) != -1);
-                  break;
-                default:
-                  firstFilter = true;
-                  break;
-            }
-          return firstFilter && (data.address.country.toLowerCase().indexOf(this.countrySelect.toLowerCase()) != -1)
-          && (data.address.city.toLowerCase().indexOf(this.citySelect.toLowerCase())  != -1);
-        }
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
+    this.bloodBankSource = new BloodBankSource(this.bloodBankService);
+    this.bloodBankSource.loadBloodBanks();
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        tap(() => this.loadBloodBanks())
+      )
+      .subscribe();
+  }
+
+  loadBloodBanks() {
+    this.bloodBankSource.loadBloodBanks(new PagableRequest(
+      {
+        pageIndex: this.paginator.pageIndex,
+        pageSize: this.paginator.pageSize,
+        filter: this.searchQuery,
+        filterType: this.convertSearchEnumToFilterType(),
+        sortColumn: this.sort.active,
+        sortDirection: this.sort.direction
+      }));
   }
 
   announceSortChange(sortState: Sort) {
@@ -93,35 +89,25 @@ export class ListBanksComponent implements OnInit {
     }
   }
 
-  public chooseBloodBank(bankId: number) {}
-
-  private pathDataAccessor(item: any, path: string): any {
-    return path.split('.')
-      .reduce((accumulator: any, key: string) => {
-        return accumulator ? accumulator[key] : undefined;
-      }, item);
+  findByRange() {
+    this.searchQuery = this.bottomRange + "|" + this.topRange;
+    this.loadBloodBanks();
   }
 
-  applyFilter(searchQuery: string) {
-    this.searchQuery = searchQuery;
-    this.dataSource.filter = searchQuery;
+
+  private convertSearchEnumToFilterType(): FilterType {
+    if (this.filterSelect == '0') {
+      return FilterType.NAME_SEARCH
+    } else if (this.filterSelect == '1') {
+      return FilterType.ADDRESS_SEARCH
+    } else if (this.filterSelect == '2') {
+      return FilterType.RATING
+    } else {
+      return FilterType.NAME_SEARCH
+    }
   }
 
-  applySecondaryFilter() {
-    this.dataSource.filter = this.searchQuery;
-  }
+  public chooseBloodBank(bankId: number) {
 
-  getFilterObject(fullObj: any[], key: string | number) {
-    const uniqChk: any[] = [];
-    fullObj.filter((obj) => {
-      if (!uniqChk.includes(obj[key])) {
-        uniqChk.push(obj[key]);
-      }
-      return obj;
-    });
-    return uniqChk;
   }
-}
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
