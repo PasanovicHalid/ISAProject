@@ -35,6 +35,7 @@ public class ViewUserDTO {
     @NotNull
     public String role;
 
+    public int usersAmount;
     public ViewUserDTO() {
     }
 
@@ -102,5 +103,13 @@ public class ViewUserDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getUsersAmount() {
+        return usersAmount;
+    }
+
+    public void setUsersAmount(int usersAmount) {
+        this.usersAmount = usersAmount;
     }
 }

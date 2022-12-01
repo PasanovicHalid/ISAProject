@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface IUserService extends ICRUDService<User> {
     List<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page);
+    int getUsersAmountWithSearch(String search);
 }

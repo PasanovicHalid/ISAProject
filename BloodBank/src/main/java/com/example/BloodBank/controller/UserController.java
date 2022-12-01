@@ -10,6 +10,7 @@ import com.example.BloodBank.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -69,12 +70,28 @@ public class UserController {
         }
     }
 
+//    @GetMapping(path = "{page}/{size}/{search}")
     @GetMapping
-    public ResponseEntity<List<ViewUserDTO>> getUsers(Pageable page,
+    public ResponseEntity<List<ViewUserDTO>> getUsers(@RequestParam("page") Optional<String> pageNumber,
+                                                      @RequestParam("size") Optional<String> size,
                                                @RequestParam("search") Optional<String> searchTerm) {
         try {
+            Pageable page;
+            page = PageRequest.of(Integer.valueOf(pageNumber.get()), Integer.valueOf(size.get()));
             List<User> users = userService.findAllByFirstNameOrLastName(searchTerm.get(), page);
             return new ResponseEntity<>(viewUserMapper.toDTO(users), HttpStatus.OK);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(path="amount")
+    public ResponseEntity<Integer> getNumberOfUsers( @RequestParam("search") Optional<String> searchTerm) {
+        try {
+            int amount = userService.getUsersAmountWithSearch(searchTerm.get());
+            return new ResponseEntity<>(amount, HttpStatus.OK);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
