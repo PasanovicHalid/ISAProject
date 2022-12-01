@@ -17,7 +17,7 @@ export class ViewUsersComponent implements OnInit {
   public users: ViewUser[] = [];
   public search: string = '';
   public errorMessage: any;
-  page: number = 0;
+  page: number = 1;
   count: number = 0;
   tableSize: number = 5;
 
@@ -30,6 +30,7 @@ export class ViewUsersComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers(0, this.tableSize, '');
   }
+
   public getUsers(page: number = 0, size: number = 2,searchTerm : string = ''): void{
     this.userService.getUsersWithSearch(page, size, searchTerm).subscribe(
       (res) => {
