@@ -165,7 +165,7 @@ public class BloodBankService implements IBloodBankService {
 
     @Override
     public BloodBank Update(BloodBank entity) throws Exception {
-        return null;
+        return bloodBankRepository.save(entity);
     }
 
     @Override
