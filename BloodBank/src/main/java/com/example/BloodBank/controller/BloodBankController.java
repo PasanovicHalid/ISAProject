@@ -96,7 +96,7 @@ public class BloodBankController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
-    public ResponseEntity<Boolean> fromPSW(@PathVariable("bankEmail") String bankEmail,
+    public ResponseEntity<Boolean> checkBloodAvailability(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,
                                           @PathVariable("quantity") int quantity,
                                             @RequestHeader(name = HttpHeaders.AUTHORIZATION) String APIkey){
@@ -106,8 +106,8 @@ public class BloodBankController {
         }
         catch(Exception e){
             if(e.toString().contains("IllegalStateException"))
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.checkForBlood(bankEmail, bloodType, quantity));
@@ -164,5 +164,26 @@ public class BloodBankController {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "get/{bankEmail}/{bloodType}/{quantity}")
+    public ResponseEntity<Integer> sendBlood(@PathVariable("bankEmail") String bankEmail,
+                                                          @PathVariable("bloodType") String bloodType,
+                                                          @PathVariable("quantity") int quantity,
+                                                          @RequestHeader(name = HttpHeaders.AUTHORIZATION) String APIkey){
+
+        try{
+            bloodBankService.checkAPIKey(bankEmail, APIkey);
+            return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.sendBlood(bankEmail, bloodType, quantity));
+        }
+        catch(Exception e){
+            if(e.toString().contains("IllegalStateException"))
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            else if(e.toString().contains("UnsupportedOperationException"))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+
     }
 }

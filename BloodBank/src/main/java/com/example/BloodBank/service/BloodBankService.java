@@ -148,6 +148,47 @@ public class BloodBankService implements IBloodBankService {
         return bloodBankRepository.findByEmail(email);
     }
 
+    @Override
+    @Transactional
+    public Integer sendBlood(String bankEmail, String bloodType, int quantity) {
+        if(checkForBlood(bankEmail, bloodType, quantity)){
+            reduceBloodSupplies(bloodBankRepository.findByEmail(bankEmail).get(),bloodType, quantity);
+            return quantity;
+        }
+        throw new UnsupportedOperationException("Can't send blood");
+    }
+    @Transactional
+    private void reduceBloodSupplies(BloodBank bank, String bloodType, int quantity){
+        switch (bloodType) {
+            case "Aplus":
+                bank.getBlood().setAplus(bank.getBlood().getAplus() - quantity);
+                break;
+            case "ABplus":
+                bank.getBlood().setABplus(bank.getBlood().getABplus() - quantity);
+                break;
+            case "Bplus":
+                bank.getBlood().setBplus(bank.getBlood().getBplus() - quantity);
+                break;
+            case "Oplus":
+                bank.getBlood().setOplus(bank.getBlood().getOplus() - quantity);
+                break;
+            case "Aminus":
+                bank.getBlood().setAminus(bank.getBlood().getAminus() - quantity);
+                break;
+            case "ABminus":
+                bank.getBlood().setABminus(bank.getBlood().getABminus() - quantity);
+                break;
+            case "Bminus":
+                bank.getBlood().setBminus(bank.getBlood().getBminus() - quantity);
+                break;
+            case "Ominus":
+                bank.getBlood().setOminus(bank.getBlood().getOminus() - quantity);
+                break;
+            default:
+                throw new IllegalStateException("BloodType unrecognizable.");
+        }
+        bloodBankRepository.save(bank);
+    }
     public List<BloodBankDTO> GetBanksAsDTO() throws Exception {
         List<BloodBankDTO> bankDTOS = modelMapper.map(bloodBankRepository.findAll(), new TypeToken<List<BloodBankDTO>>() {}.getType());
         return bankDTOS;
