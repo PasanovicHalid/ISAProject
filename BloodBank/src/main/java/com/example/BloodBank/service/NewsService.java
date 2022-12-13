@@ -1,7 +1,10 @@
 package com.example.BloodBank.service;
 
+import com.example.BloodBank.dto.NewsDTO;
 import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.News;
+import com.example.BloodBank.repository.BloodBankRepository;
 import com.example.BloodBank.repository.NewsRepository;
 import com.example.BloodBank.service.service_interface.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +15,14 @@ import java.util.Optional;
 @Service
 public class NewsService implements INewsService {
     private final NewsRepository newsRepository;
+    private final BloodBankRepository bloodBankRepository;
     private final RabbitMQSender rabbitMQSender;
     @Autowired
     public NewsService(NewsRepository newsRepository,
+                       BloodBankRepository bloodBankRepository,
                        RabbitMQSender rabbitMQSender) {
         this.newsRepository = newsRepository;
+        this.bloodBankRepository = bloodBankRepository;
         this.rabbitMQSender = rabbitMQSender;
     }
     @Override
@@ -48,8 +54,13 @@ public class NewsService implements INewsService {
     public Iterable<News> GetAll() throws Exception {
         return newsRepository.findAll();
     }
-    public News CreateAndSendNews(News entity) throws Exception {
-        rabbitMQSender.sendNews(entity);
-        return Create(entity);
+    public News CreateAndSendNews(NewsDTO dto) throws Exception {
+        News news = new News();
+        news.setTitle(dto.getTitle());
+        news.setText(dto.getText());
+        Optional<BloodBank> bb = bloodBankRepository.findByEmail(dto.getBankEmail());
+        news.setBloodBank(bloodBankRepository.findByEmail(dto.getBankEmail()).get());
+        rabbitMQSender.sendNews(dto);
+        return Create(news);
     }
 }

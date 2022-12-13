@@ -1,8 +1,8 @@
 package com.example.BloodBank.controller;
 
+import com.example.BloodBank.dto.NewsDTO;
 import com.example.BloodBank.model.News;
 import com.example.BloodBank.service.NewsService;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +29,9 @@ public class NewsController {
             value = "/create", consumes = "application/json",
             produces = "application/json"
     )
-    public ResponseEntity<Object> createNews(@Valid @RequestBody News newNews){
+    public ResponseEntity<Object> createNews(@Valid @RequestBody NewsDTO newsDTO){
         try {
-            newsService.CreateAndSendNews(newNews);
+            newsService.CreateAndSendNews(newsDTO);
         }catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

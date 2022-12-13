@@ -1,5 +1,6 @@
 package com.example.BloodBank.service;
 
+import com.example.BloodBank.dto.NewsDTO;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,11 +27,12 @@ public class RabbitMQSender {
     	message.setContent(news);
         rabbitTemplate.convertAndSend(exchange, "newsQueue", message);
     }
+    public void sendMessageToQueue(String message, String queue){
+        rabbitTemplate.convertAndSend(exchange, queue, message);
+
+    }
 //    public void sendTo()
-    public void sendNews(News news){
-//        String message = "{_title : \"" + news.getTitle() + "\",\n" +
-//                "_text : \"" + news.getText() + "\"\n" +
-//                "}";
+    public void sendNews(NewsDTO news){
         rabbitTemplate.convertAndSend(exchange, "newsQueue", news);
     }
 }

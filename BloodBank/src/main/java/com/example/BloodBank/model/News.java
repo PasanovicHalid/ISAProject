@@ -1,6 +1,7 @@
 package com.example.BloodBank.model;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity()
 public class News {
@@ -10,7 +11,7 @@ public class News {
 	private String title;
 	private String text;
 	private Boolean isSent;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "bank_id", referencedColumnName = "bankID")
 	private BloodBank bloodBank;
 
