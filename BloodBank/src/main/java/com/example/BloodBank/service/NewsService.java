@@ -42,7 +42,7 @@ public class NewsService implements INewsService {
 
     @Override
     public News Update(News entity) throws Exception {
-        return null;
+        return newsRepository.save(entity);
     }
 
     @Override
