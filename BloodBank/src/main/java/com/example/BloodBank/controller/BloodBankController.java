@@ -19,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -148,20 +149,10 @@ public class BloodBankController {
 
 
         try{
-            System.out.println("Got it");
-            System.out.println(pdf);
             bloodBankService.checkAPIKey(bankEmail, APIkey);
-            LocalDateTime today = LocalDateTime.now();
-
-            String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy_hhmmss_"));
-            try (FileOutputStream fos = new FileOutputStream("D://Faks//3. Internet softverske arhitekture//PROJEKAT_ISA//ISAProject//BloodBank/src/report_" + formattedDate + bankEmail +".pdf")) {
-                fos.write(pdf);
-                //fos.close // no need, try-with-resources auto close
-            }
-            return new ResponseEntity<>(true, HttpStatus.OK);
+            return new ResponseEntity<>(bloodBankService.savePDF(bankEmail, pdf), HttpStatus.OK);
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
     }

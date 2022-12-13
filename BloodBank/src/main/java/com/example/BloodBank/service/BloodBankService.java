@@ -11,12 +11,19 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 
 @Service
@@ -157,6 +164,21 @@ public class BloodBankService implements IBloodBankService {
         }
         throw new UnsupportedOperationException("Can't send blood");
     }
+
+    @Override
+    public Boolean savePDF(String bankEmail, byte[] pdf) {
+        LocalDateTime today = LocalDateTime.now();
+        String filePath = new File("").getAbsolutePath();
+        System.out.println(filePath);
+        String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy_hhmm_"));
+        try (FileOutputStream fos = new FileOutputStream(filePath + "/src/report_" + formattedDate + bankEmail +".pdf")) {
+            fos.write(pdf);
+            return true;
+        }catch(Exception e){
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+
     @Transactional
     private void reduceBloodSupplies(BloodBank bank, String bloodType, int quantity){
         switch (bloodType) {

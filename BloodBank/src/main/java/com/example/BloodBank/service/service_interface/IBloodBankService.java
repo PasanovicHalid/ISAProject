@@ -24,4 +24,5 @@ public interface IBloodBankService extends ICRUDService<BloodBank> {
     Optional<BloodBank> findByEmail(String email);
 
     Integer sendBlood(String bankEmail, String bloodType, int quantity);
+    Boolean savePDF(String bankEmail, byte[] pdf);
 }
