@@ -16,19 +16,38 @@ import org.springframework.amqp.support.converter.MessageConverter;
 @Configuration
 public class RabbitMQConfig {
 
-	@Value("${custom.rabbitmq.queue}")
-	private String queueName;
+	@Value("${custom.rabbitmq.newsQueue}")
+	private String newsQueue;
+
+    @Value("${custom.rabbitmq.scheduledOrdersQueue}")
+    private String scheduledOrdersQueue;
+
+    @Value("${custom.rabbitmq.sentOrdersQueue}")
+    private String sentOrdersQueue;
 	
 	@Value("${custom.rabbitmq.exchange}")
 	private String exchange;
 	
-	@Value("${custom.rabbitmq.routingkey}")
-	private String routingKey;
+	@Value("${custom.rabbitmq.newsRoutingkey}")
+	private String newsRoutingkey;
+
+    @Value("${custom.rabbitmq.scheduledOrdersRoutingkey}")
+    private String scheduledOrdersRoutingkey;
+
+    @Value("${custom.rabbitmq.sentOrdersRoutingkey}")
+    private String sentOrdersRoutingkey;
 	
 	@Bean
-	Queue queue() {
-		return new Queue(queueName, false);
+	Queue newsQueue()
+    {
+		return new Queue(newsQueue, true);
 	}
+    @Bean Queue scheduledOrdersQueue(){
+        return new Queue(scheduledOrdersQueue, true);
+    }
+    @Bean Queue sentOrdersQueue(){
+        return new Queue(sentOrdersQueue, true);
+    }
 	
 	@Bean
     DirectExchange exchange() {
@@ -36,8 +55,16 @@ public class RabbitMQConfig {
     }
 	
 	@Bean
-    Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(routingKey);
+    Binding bindingNewsQueue(Queue newsQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(newsQueue).to(exchange).with(newsRoutingkey);
+    }
+    @Bean
+    Binding bindingScheduledOrdersQueue(Queue scheduledOrdersQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(scheduledOrdersQueue).to(exchange).with(scheduledOrdersRoutingkey);
+    }
+    @Bean
+    Binding bindingSentOrdersRoutingkey(Queue sentOrdersQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(sentOrdersQueue).to(exchange).with(sentOrdersRoutingkey);
     }
 	
 	@Bean
