@@ -5,6 +5,7 @@ public class NewsDTO {
     private String text;
     private Boolean isSent;
     private String bankEmail;
+    private String bankApi;
 
     public String getTitle() {
         return title;
@@ -36,5 +37,13 @@ public class NewsDTO {
 
     public void setBankEmail(String bankEmail) {
         this.bankEmail = bankEmail;
+    }
+
+    public String getBankApi() {
+        return bankApi;
+    }
+
+    public void setBankApi(String bankApi) {
+        this.bankApi = bankApi;
     }
 }

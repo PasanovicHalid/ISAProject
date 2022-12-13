@@ -58,8 +58,9 @@ public class NewsService implements INewsService {
         News news = new News();
         news.setTitle(dto.getTitle());
         news.setText(dto.getText());
-        Optional<BloodBank> bb = bloodBankRepository.findByEmail(dto.getBankEmail());
-        news.setBloodBank(bloodBankRepository.findByEmail(dto.getBankEmail()).get());
+        BloodBank bb = bloodBankRepository.findByEmail(dto.getBankEmail()).get();
+        news.setBloodBank(bb);
+        dto.setBankApi(bb.getAPIKey());
         rabbitMQSender.sendNews(dto);
         return Create(news);
     }
