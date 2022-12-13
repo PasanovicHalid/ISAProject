@@ -30,4 +30,14 @@ public class ScheduledOrderController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping(path = "test-send")
+    public ResponseEntity<Object> sendOrders(){
+        try{
+            scheduledOrderService.sendOrders();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

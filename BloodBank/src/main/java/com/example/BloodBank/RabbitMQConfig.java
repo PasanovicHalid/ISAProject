@@ -46,7 +46,7 @@ public class RabbitMQConfig {
         return new Queue(scheduledOrdersQueue, true);
     }
     @Bean Queue sentOrdersQueue(){
-        return new Queue(sentOrdersQueue, true);
+        return new Queue(sentOrdersQueue, false);
     }
 	
 	@Bean
