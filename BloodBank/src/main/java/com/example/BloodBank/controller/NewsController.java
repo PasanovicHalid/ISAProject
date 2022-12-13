@@ -31,7 +31,7 @@ public class NewsController {
     )
     public ResponseEntity<Object> createNews(@Valid @RequestBody News newNews){
         try {
-            newsService.Create(newNews);
+            newsService.CreateAndSendNews(newNews);
         }catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

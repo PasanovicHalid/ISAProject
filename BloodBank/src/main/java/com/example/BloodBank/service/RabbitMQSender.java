@@ -34,6 +34,6 @@ public class RabbitMQSender {
         String message = "{_title : \"" + news.getTitle() + "\",\n" +
                 "_text : \"" + news.getText() + "\"\n" +
                 "}";
-        rabbitTemplate.convertAndSend(exchange, routingKey, "news");
+        rabbitTemplate.convertAndSend(exchange, routingKey, news);
     }
 }
