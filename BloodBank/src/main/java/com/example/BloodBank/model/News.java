@@ -17,25 +17,6 @@ public class News {
 
 	public News() {
 	}
-
-//	public News(Long id, String title, String text,
-//				Boolean isSent, BloodBank bloodBank) {
-//		this.id = id;
-//		this.title = title;
-//		this.text = text;
-//		this.isSent = isSent;
-//		this.bloodBank = bloodBank;
-//	}
-
-
-//	public News(Long id, String title, String text, Boolean isSent) {
-//		this.id = id;
-//		this.title = title;
-//		this.text = text;
-//		this.isSent = isSent;
-//	}
-
-
 	public News(Long id, String title, String text,
 				Boolean isSent, BloodBank bloodBank) {
 		this.id = id;

@@ -21,10 +21,10 @@ public class ScheduledTasks {
         this.rabbitMQSender = rabbitMQSender;
     }
 //    @Scheduled(fixedRate = 3000)
-    public void sendMessage() {
-       MessageDto message = new MessageDto("AAA Random message from Java client: " + UUID.randomUUID().toString(),
-               new Date());
-        rabbitMQSender.send(message);
-        System.out.println("Sent :" + message.toString());
-    }
+//    public void sendMessage() {
+//       MessageDto message = new MessageDto("AAA Random message from Java client: " + UUID.randomUUID().toString(),
+//               new Date());
+//        rabbitMQSender.send(message);
+//        System.out.println("Sent :" + message.toString());
+//    }
 }

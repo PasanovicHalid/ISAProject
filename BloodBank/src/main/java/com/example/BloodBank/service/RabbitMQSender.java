@@ -27,7 +27,7 @@ public class RabbitMQSender {
     	message.setContent(news);
         rabbitTemplate.convertAndSend(exchange, "newsQueue", message);
     }
-    public void sendMessageToQueue(String message, String queue){
+    public void sendStringToQueue(String message, String queue){
         rabbitTemplate.convertAndSend(exchange, queue, message);
 
     }
