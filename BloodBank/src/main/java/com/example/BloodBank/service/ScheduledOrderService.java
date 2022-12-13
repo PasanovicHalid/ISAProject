@@ -7,15 +7,16 @@ import com.example.BloodBank.service.service_interface.IScheduledOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SchedulerOrderService implements IScheduledOrderService {
+public class ScheduledOrderService implements IScheduledOrderService {
 
     private final ScheduledOrdersRepository scheduledOrdersRepository;
 
     @Autowired
-    public SchedulerOrderService(ScheduledOrdersRepository scheduledOrdersRepository){
+    public ScheduledOrderService(ScheduledOrdersRepository scheduledOrdersRepository){
         this.scheduledOrdersRepository = scheduledOrdersRepository;
     }
 
@@ -45,7 +46,7 @@ public class SchedulerOrderService implements IScheduledOrderService {
     }
 
     @Override
-    public Iterable<ScheduledOrder> GetAll() throws Exception {
+    public List<ScheduledOrder> GetAll() throws Exception {
         return scheduledOrdersRepository.findAll();
     }
 }
