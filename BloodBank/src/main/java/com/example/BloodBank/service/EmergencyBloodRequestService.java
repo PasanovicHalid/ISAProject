@@ -41,7 +41,7 @@ public class EmergencyBloodRequestService extends proto.emergencyBloodRequests.E
         } catch (Exception e) {
             EmergencyResponse response = EmergencyResponse.newBuilder().setRequest(request.getRequest()).setStatus(proto.emergencyBloodRequests.SendStatus.DENIED).build();
             responseObserver.onNext(response);
-            responseObserver.onCompleted();
+            responseObserver.onError(e);
         }
     }
 
@@ -66,7 +66,7 @@ public class EmergencyBloodRequestService extends proto.emergencyBloodRequests.E
         } catch (Exception e) {
             CheckResponse response = CheckResponse.newBuilder().setRequest(request).setAvailability(proto.emergencyBloodRequests.BloodAvailability.UNAVAILABLE).build();
             responseObserver.onNext(response);
-            responseObserver.onCompleted();
+            responseObserver.onError(e);
         }
     }
 
