@@ -15,11 +15,11 @@ import { ViewUser } from '../model/view-user.model';
 export class ViewUsersComponent implements OnInit {
 
   public users: ViewUser[] = [];
-  public search: string;
+  public search: string = '';
   public errorMessage: any;
-  page: number = 0;
+  page: number = 1;
   count: number = 0;
-  tableSize: number = 2;
+  tableSize: number = 5;
 
   constructor(
     private userService: UserService,
@@ -28,14 +28,27 @@ export class ViewUsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUsers();
-    
+    this.getUsers(0, this.tableSize, '');
   }
-  public getUsers(searchTerm : string = ''): void{
-    this.userService.getUsersWithSearch(searchTerm).subscribe(
+
+  public getUsers(page: number = 0, size: number = 2,searchTerm : string = ''): void{
+    this.userService.getUsersWithSearch(page, size, searchTerm).subscribe(
       (res) => {
         this.users = res;
-        this.count = this.users.length
+        this.getNumberOfUsers(this.search);
+      },
+      (error) => {
+        this.errorMessage = error;
+      }
+    );
+  }
+  public getNumberOfUsers(searchTerm: string = ''): void{
+    this.userService.getNumberOfUsersWithSearch(searchTerm).subscribe(
+      (res) => {
+        this.count = res;
+        if(this.page -1 > (this.count/this.tableSize)){
+          this.onTableDataChange(1);
+        }
       },
       (error) => {
         this.errorMessage = error;
@@ -43,11 +56,11 @@ export class ViewUsersComponent implements OnInit {
     );
   }
   public searchUsers(name: string): void {
-    this.getUsers(this.search);
+    this.getUsers(this.page -1, this.tableSize, this.search);
   }
   onTableDataChange(event: any) {
     this.page = event;
-    this.getUsers(this.search);
+    this.getUsers(this.page-1, this.tableSize ,this.search);
   }
   
 }

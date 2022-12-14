@@ -63,11 +63,17 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> findAllByFirstNameOrLastName(String searchTerm, Pageable page) {
-        Page<User> pageUsers =  userRepository.findAllByFirstNameOrLastName(searchTerm, page);
+        Page<User> pageUsers =  userRepository.findAllByFirstNameOrLastName(searchTerm.toLowerCase(), page);
         List<User> users = new ArrayList<>();
         for (User u : pageUsers) {
             users.add(u);
         }
         return users;
+    }
+
+    @Override
+    public int getUsersAmountWithSearch(String search) {
+        List<User> users = userRepository.findAllBySearch(search.toLowerCase());
+        return users.size();
     }
 }

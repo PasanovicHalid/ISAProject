@@ -19,9 +19,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsersWithSearch(search : string = ''): Observable<ViewUser[]>{
-    return this.http.get<ViewUser[]>(this.apiHost + 'api/user?search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
+  getUsersWithSearch(page: number= 0, size: number = 2, search : string = ''): Observable<ViewUser[]>{
+    return this.http.get<ViewUser[]>(this.apiHost + 'api/user?page=' +page +'&size=' + size + '&search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
   }
+
+  getNumberOfUsersWithSearch(search: string = ''):  Observable<number>{
+    return this.http.get<number>(this.apiHost + 'api/user/amount?search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if(error.status == 406){
