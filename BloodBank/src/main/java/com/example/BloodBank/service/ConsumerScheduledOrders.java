@@ -28,8 +28,16 @@ public class ConsumerScheduledOrders {
             so.setDayOfMonth(Integer.parseInt(split[2].substring(1, 2)));
             so.setAplus(Integer.parseInt(split[4].substring(1, 2)));
             so.setBplus(Integer.parseInt(split[6].substring(1, 2)));
-            so.setBankEmail(split[9]);
-            so.setHospitalEmail(split[17]);
+            so.setABplus(Integer.parseInt(split[8].substring(1, 2)));
+            so.setOplus(Integer.parseInt(split[10].substring(1, 2)));
+
+            so.setAminus(Integer.parseInt(split[12].substring(1, 2)));
+            so.setBminus(Integer.parseInt(split[14].substring(1, 2)));
+            so.setABminus(Integer.parseInt(split[16].substring(1, 2)));
+            so.setOminus(Integer.parseInt(split[18].substring(1, 2)));
+
+            so.setBankEmail(split[21]);
+            so.setHospitalEmail(split[29]);
             scheduledOrderService.Create(so);
             System.out.println(so.toString());
         } catch (Exception e){
