@@ -23,63 +23,61 @@ values(1009, '4rijtG2K/XHcaesRU2gLHS5LC0QJoqMmKGKQrj4OmNLoxQjsjwUc+w60BFi3fR+0pO
 insert into address
 values(1010, 'Novi Sad', 'Serbia', 2,'Zeleznicka');
 insert into address
-values(1011,'Novi Sad', 'Serbia', 2,'Bulevar Kralja Petra');
+values(1011,'Novi Sad', 'Serbia', 1,'Bulevar Kralja Petra');
 insert into address
-values(1012, 'Novi Sad', 'Serbia', 2,'Temerinska');
+values(1012, 'Novi Sad', 'Serbia', 3,'Temerinska');
 insert into address
-values(1013, 'Novi Sad', 'Serbia', 2,'Bulevar Oslobodjenja');
+values(1013, 'Novi Sad', 'Serbia', 32,'Bulevar Oslobodjenja');
+insert into address
+values(1014, 'Novi Sad', 'Serbia', 12,'Zeleznicka');
+insert into address
+values(1015,'Novi Sad', 'Serbia', 26,'Bulevar Kralja Petra');
+insert into address
+values(1016, 'Novi Sad', 'Serbia', 28,'Temerinska');
+insert into address
+values(1017, 'Novi Sad', 'Serbia', 20,'Bulevar Oslobodjenja');
 
 insert into users
-values(1014, '1985-05-05', 'ana@gmail.com', 'Ana', 1, 'Savic', 'ana', 1, 'ana', 1010);
+values(1019, '2000-06-03', 'mina@gmail.com', 'Mina', 0, 'Minic', '123', 0, 'mina', 1010);
 insert into users
-values(1015, '1995-12-10', 'marko@gmail.com', 'Marko', 0, 'Markovic', 'marko', 1, '1234', 1011);
+values(1020, '1995-12-10', 'halid@gmail.com', 'Halid', 1, 'Pasanovic', '123', 1, 'halid', 1011);
 insert into users
-values(1016, '2000-06-03', 'saska@gmail.com', 'Saska', 1, 'Vujovic', 'saska', 1, '123', 1012);
+values(1021, '2000-06-03', 'saska@gmail.com', 'Saska', 0, 'Vujovic', '123', 1, 'saska', 1012);
 insert into users
-values(1017, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo00', 1013);
+values(1022, '2000-05-05', 'nikola@gmail.com', 'Nikola', 1, 'Rosic', '123', 1, 'nikola', 1013);
 insert into users
-values(1018, '2000-05-05', 'customer1@gmail.com', 'CustFi', 0, 'CustLa', 'sifra1', 3, 'cust00', 1013);
+values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Nina', '123', 2, 'nina', 1014);
 insert into users
-values(1019, '1985-05-05', 'ana1@gmail.com', 'Ana1', 1, 'Savic', 'ana', 1, 'ana1', 1010);
+values(1024, '2000-04-04', 'milka@gmail.com', 'Milka', 2, 'Milkic', '123', 2, 'milka', 1015);
 insert into users
-values(1020, '1995-12-10', 'marko1@gmail.com', 'Marko1', 0, 'Markovic', 'marko', 1, '12345', 1011);
+values(1025, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', '123', 2, 'miha', 1016);
 insert into users
-values(1021, '2000-06-03', 'saska1@gmail.com', 'Saska1', 1, 'Vujovic', 'saska', 1, '1235', 1012);
-insert into users
-values(1022, '2000-04-04', 'mihajlo1@gmail.com', 'Mihajlo1', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo001', 1013);
-insert into users
-values(1023, '2000-05-05', 'customer2@gmail.com', 'CustFi1', 0, 'CustLa', 'sifra1', 3, 'cust001', 1013);
-insert into users
-values(1024, '1985-05-05', 'ana2@gmail.com', 'Ana2', 1, 'Savic', 'ana', 1, 'ana2', 1010);
-insert into users
-values(1025, '1995-12-10', 'marko2@gmail.com', 'Marko2', 0, 'Markovic', 'marko', 1, '12364', 1011);
-insert into users
-values(1026, '2000-06-03', 'saska2@gmail.com', 'Saska2', 1, 'Vujovic', 'saska', 1, '1236', 1012);
-insert into users
-values(1027, '2000-04-04', 'mihajlo2@gmail.com', 'Mihajlo2', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo002', 1013);
-insert into users
-values(1028, '2000-05-05', 'customer3@gmail.com', 'CustFi2', 0, 'CustLa', 'sifra1', 3, 'cust002', 1013);
-insert into users
-values(1029, '2000-05-05', 'customer4@gmail.com', 'CustFi3', 0, 'CustLa', 'sifra1', 3, 'cust003', 1013);
-insert into users
-values(1030, '1985-05-05', 'ana3@gmail.com', 'Ana3', 1, 'Savic', 'ana', 1, 'ana3', 1010);
-insert into users
-values(1031, '1995-12-10', 'marko3@gmail.com', 'Marko3', 0, 'Markovic', 'marko', 1, '123643', 1011);
-insert into users
-values(1032, '2000-06-03', 'saska3@gmail.com', 'Saska3', 1, 'Vujovic', 'saska', 1, '12363', 1012);
-insert into users
-values(1033, '2000-04-04', 'mihajlo3@gmail.com', 'Mihajlo3', 0, 'Maksimovic', 'sifra123', 3, 'mihajlo0023', 1013);
-insert into users
-values(1034, '2000-05-05', 'customer5@gmail.com', 'CustFi4', 0, 'CustLa', 'sifra1', 3, 'cust0023', 1013);
+values(1026, '2000-05-05','marko@gmail.com', 'Marko', 2, 'Markovic', '123', 2, 'marko', 1017);
+
+insert into head_admins
+values(1019);
+
+insert into admin
+values(1020, 1007);
+insert into admin
+values(1021, 1008);
+insert into admin
+values(1022, 1009);
 
 insert into customer
-values('123123', '066433123', 'student', 'ftn', 1017);
+values('101010', '066111221', 'zaposlen', 'firma', 1023);
 insert into customer
-values('321321', '066433123', 'student', 'pmf', 1018);
+values('202020', '064434444', 'nezaposlena', 'domacica', 1024);
+insert into customer
+values('123123', '066422222', 'student', 'ftn', 1025);
+insert into customer
+values('321321', '066433123', 'student', 'pmf', 1026);
 
-insert into admin
-values(1014, 1007);
-insert into admin
-values(1015, 1008);
-insert into admin
-values(1016, 1009);
+insert into complaints(answer, complaint_id, complaint_status, complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
+values('', 1027, 0, 0, 'Predugo se ovde ceka', 'newlife@gmail.com','2022-12-12', 1023, null);
+insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
+values('Zao nam je zbog utiska koji zgrada ostavlja na vas.', 1028, 1, 0, 'Zgrada je ocajna', 'bloodymary@gmail.com','2022-11-12', 1023, 1019);
+insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
+values('', 1029, 0, 1, 'Jako neprijatna radnica!', 'saska@gmail.com','2022-12-02', 1023, null);
+insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
+values('Stupicemo u kontakt sa zaposlenim!', 1030, 1, 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1023, 1019);
