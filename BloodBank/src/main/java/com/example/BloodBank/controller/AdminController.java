@@ -2,7 +2,7 @@ package com.example.BloodBank.controller;
 
 
 import com.example.BloodBank.dto.AdminDTO;
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Admin;
 import com.example.BloodBank.dto.RegistrationAdminDTO;
 import com.example.BloodBank.service.AdminService;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;

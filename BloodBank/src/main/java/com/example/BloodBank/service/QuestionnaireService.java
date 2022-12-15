@@ -1,6 +1,6 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Questionnaire;
 import com.example.BloodBank.repository.QuestionnaireRepository;
 import com.example.BloodBank.service.service_interface.IQuestionnaireService;

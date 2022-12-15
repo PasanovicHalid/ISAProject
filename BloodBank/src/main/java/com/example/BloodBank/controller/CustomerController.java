@@ -3,7 +3,7 @@ package com.example.BloodBank.controller;
 import adapters.CustomerMapper;
 import com.example.BloodBank.dto.CustomerDTO;
 import com.example.BloodBank.dto.CustomerUpdateDTO;
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.service.CustomerService;

@@ -1,9 +1,8 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.excpetions.EmailTakenException;
-import com.example.BloodBank.excpetions.UsernameTakenException;
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
-import com.example.BloodBank.model.Admin;
+import com.example.BloodBank.exceptions.EmailTakenException;
+import com.example.BloodBank.exceptions.UsernameTakenException;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.repository.CustomerRepository;
 import com.example.BloodBank.service.service_interface.ICustomerService;

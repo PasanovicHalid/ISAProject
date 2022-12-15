@@ -1,4 +1,4 @@
-package com.example.BloodBank.excpetions;
+package com.example.BloodBank.exceptions;
 
 public class UsernameTakenException extends Exception {
     public  UsernameTakenException() {

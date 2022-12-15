@@ -14,16 +14,13 @@ public class Complaint {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="complaint_id")
     private long complaintID;
-
     @Column(nullable = false)
     private String description;
-
     @Column
     private String answer;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "head_admin_id", referencedColumnName = "id", nullable = true)
     private HeadAdmin headAdmin;
