@@ -104,14 +104,14 @@ public class BloodBankController {
 
         try{
             bloodBankService.checkAPIKey(bankEmail, APIkey);
+            Boolean b = bloodBankService.checkForBlood(bankEmail, bloodType, quantity);
+            return ResponseEntity.status(HttpStatus.OK).body(b);
         }
         catch(Exception e){
             if(e.toString().contains("IllegalStateException"))
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.checkForBlood(bankEmail, bloodType, quantity));
     }
     @GetMapping()
     public ResponseEntity<List<BloodBank>> getAllBloodBank() {
