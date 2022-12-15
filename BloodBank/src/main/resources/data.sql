@@ -1,5 +1,5 @@
 insert into blood(id, abminus, abplus, aminus, aplus, bminus, bplus, ominus, oplus)
-values(1001,2, 4, 0, 0, 5, 3, 2, 6);
+values(1001,2, 4, 0, 0, 5, 3, 2, 7);
 insert into blood(id, abminus, abplus, aminus, aplus, bminus, bplus, ominus, oplus)
 values(1002,1, 0, 0, 0, 0, 8, 7, 0);
 insert into blood(id, abminus, abplus, aminus, aplus, bminus, bplus, ominus, oplus)
