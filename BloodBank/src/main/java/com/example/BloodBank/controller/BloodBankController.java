@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +85,7 @@ public class BloodBankController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAll(){
         try{
@@ -113,6 +115,8 @@ public class BloodBankController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping()
     public ResponseEntity<List<BloodBank>> getAllBloodBank() {
         try {

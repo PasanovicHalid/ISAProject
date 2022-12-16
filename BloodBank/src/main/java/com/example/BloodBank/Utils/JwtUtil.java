@@ -1,8 +1,10 @@
 package com.example.BloodBank.Utils;
 
+import com.example.BloodBank.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.function.Function;
 public class JwtUtil {
 
     private String secret = "javatechie";
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -38,6 +42,9 @@ public class JwtUtil {
 
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
+        UserDetails test = userDetailsService.loadUserByUsername(username);
+        userDetailsService.loadUserByUsername(username).getAuthorities();
+        claims.put("role", userDetailsService.loadUserByUsername(username).getAuthorities().toArray()[0]);
         return createToken(claims, username);
     }
 
