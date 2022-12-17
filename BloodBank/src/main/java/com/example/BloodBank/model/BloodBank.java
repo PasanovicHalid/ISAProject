@@ -4,6 +4,7 @@ package com.example.BloodBank.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,9 +30,19 @@ public class BloodBank{
     private String APIKey;
     private String description;
     private double rating;
+    @Column(nullable = false)
+    private Time startDayWorkTime;
+    @Column(nullable = false)
+    private Time endDayWorkTime;
+    @Column(nullable = false)
+    private int numberOfWorkingDaysInWeek;
     @OneToMany(mappedBy = "bloodBank", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Admin> admins;
+
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Appointment> appointments;
     public BloodBank() {
     }
 
@@ -136,5 +147,37 @@ public class BloodBank{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Time getStartDayWorkTime() {
+        return startDayWorkTime;
+    }
+
+    public void setStartDayWorkTime(Time startDayWorkTime) {
+        this.startDayWorkTime = startDayWorkTime;
+    }
+
+    public Time getEndDayWorkTime() {
+        return endDayWorkTime;
+    }
+
+    public void setEndDayWorkTime(Time endDayWorkTime) {
+        this.endDayWorkTime = endDayWorkTime;
+    }
+
+    public int getNumberOfWorkingDaysInWeek() {
+        return numberOfWorkingDaysInWeek;
+    }
+
+    public void setNumberOfWorkingDaysInWeek(int numberOfWorkingDaysInWeek) {
+        this.numberOfWorkingDaysInWeek = numberOfWorkingDaysInWeek;
+    }
+
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }

@@ -14,11 +14,11 @@ insert into address
 values(1006,'Novi Sad', 'Serbia', 24,'Bulevar Jase Tomica');
 
 insert into blood_bank
-values(1007, 'tLeiJ6w79JdrILqI34F6kYM3UAWENV8RjeZvi0LVtJochrXWJ7mpt0Cdedka8lVWUPnCFLZOhJbcS8ao9VFgwQ==', 'Best blood bank', 'newlife@gmail.com',  'New Life', 4.4, 1004, 1001);
+values(1007, 'tLeiJ6w79JdrILqI34F6kYM3UAWENV8RjeZvi0LVtJochrXWJ7mpt0Cdedka8lVWUPnCFLZOhJbcS8ao9VFgwQ==', 'Best blood bank', 'newlife@gmail.com', '21:00', 'New Life', 5, 4.4, '08:00', 1004, 1001);
 insert into blood_bank
-values(1008, 'W3QW1vpKFX9NUJ94HF0klON+lRaPBaSgx7mwAgV0b0ml4uVu7t2+2FoNDLqweFKzw4drCuaf0mPRbylQaja3Nw==', 'Best blood bank', 'bloodyhell@gmail.com',  'Bloody Hell', 3.4, 1005, 1002);
+values(1008, 'W3QW1vpKFX9NUJ94HF0klON+lRaPBaSgx7mwAgV0b0ml4uVu7t2+2FoNDLqweFKzw4drCuaf0mPRbylQaja3Nw==', 'Best blood bank', 'bloodyhell@gmail.com', '20:00', 'Bloody Hell', 6, 3.4 , '08:00', 1005, 1002);
 insert into blood_bank
-values(1009, '4rijtG2K/XHcaesRU2gLHS5LC0QJoqMmKGKQrj4OmNLoxQjsjwUc+w60BFi3fR+0pO/BtrSma8yEJ1+bwAoQHQ==', 'Best blood bank', 'bloodymary@gmail.com',  'Bloody Mary', 2.4, 1006, 1003);
+values(1009, '4rijtG2K/XHcaesRU2gLHS5LC0QJoqMmKGKQrj4OmNLoxQjsjwUc+w60BFi3fR+0pO/BtrSma8yEJ1+bwAoQHQ==', 'Best blood bank', 'bloodymary@gmail.com', '19:00', 'Bloody Mary', 4, 2.4 , '07:00', 1006, 1003);
 
 insert into address
 values(1010, 'Novi Sad', 'Serbia', 2,'Zeleznicka');
@@ -81,3 +81,6 @@ insert into complaints(answer, complaint_id, complaint_status,complaint_type, de
 values('', 1029, 0, 1, 'Jako neprijatna radnica!', 'saska@gmail.com','2022-12-02', 1025, null);
 insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
 values('Stupicemo u kontakt sa zaposlenim!', 1030, 1, 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1026, 1019);
+
+insert into appointment(id, appointment_date, start_time, end_time, blood_bank_id, customer_id)
+values(10, '2022-12-19', '11:00', '11:45', 1007, 1023)
