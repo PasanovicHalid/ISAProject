@@ -17,6 +17,9 @@ public class Appointment {
 
     private Time endTime;
 
+    @Column(nullable = false)
+    private AppointmentStatus executed;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = true)
     private Customer takenBy;
@@ -29,13 +32,14 @@ public class Appointment {
     @Column(columnDefinition = "integer DEFAULT 0", nullable = false)
     private Integer version;
 
-    public Appointment(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location) {
+    public Appointment(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
         this.id = id;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.takenBy = takenBy;
         this.location = location;
+        this.executed = status;
     }
 
     public Appointment() {
@@ -95,5 +99,13 @@ public class Appointment {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public AppointmentStatus getExecuted() {
+        return executed;
+    }
+
+    public void setExecuted(AppointmentStatus executed) {
+        this.executed = executed;
     }
 }
