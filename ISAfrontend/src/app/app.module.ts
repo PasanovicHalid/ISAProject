@@ -15,6 +15,7 @@ import { BloodBankModule } from './modules/blood-bank/blood-bank.module';
 import { ToastrModule } from 'ngx-toastr';
 import { UserModule } from './modules/user/user.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AppointmentsModule } from './modules/appointments/appointments.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     BloodBankModule,
     UserModule,
+    AppointmentsModule,
     ToastrModule.forRoot(),
     NgxPaginationModule
   ],
