@@ -28,25 +28,16 @@ export class ComplaintService {
       .pipe(catchError(this.handleError));
   }
 
-  // getComplaints(): Observable<Complaint[]> {
-  //   return this.http
-  //     .get<Complaint[]>(this.apiHost + 'api/complaint', {
-  //       headers: this.headers,
-  //     })
-  //     .pipe(catchError(this.handleError));
-  // }
-
-  // getBloodBanksPagable(request: PagableRequest): Observable<BloodBank[]> {
-  //   return this.http
-  //     .put<BloodBank[]>(this.apiHost + 'api/bloodbank', request, {
-  //       headers: this.headers,
-  //     }).pipe(
-  //       catchError(this.handleError),
-  //     );
-  // }
-
   getAll(): Observable<Complaint[]> {
     return this.http.get<Complaint[]>(this.apiHost + 'api/complaint', { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  getUnansweredComplaints(page: number= 0, size: number = 5): Observable<Complaint[]>{
+    return this.http.get<Complaint[]>(this.apiHost + 'api/complaint?page=' +page +'&size=' + size, {headers: this.headers}).pipe(catchError(this.handleError));
+  }
+
+  getNumberOfUnansweredComplaintss():  Observable<number>{
+    return this.http.get<number>(this.apiHost + 'api/complaint/amount', {headers: this.headers}).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -27,7 +27,22 @@ const routes: Routes = [
     AnswerComplaintComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    NgxPaginationModule
   ]
 })
 export class ComplaintModule { }
