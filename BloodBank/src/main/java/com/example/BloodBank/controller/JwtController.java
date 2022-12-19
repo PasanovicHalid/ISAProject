@@ -2,6 +2,7 @@ package com.example.BloodBank.controller;
 
 import com.example.BloodBank.Utils.JwtUtil;
 import com.example.BloodBank.model.AuthRequest;
+import com.example.BloodBank.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,9 @@ public class JwtController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
     @GetMapping("/")
     public String weclcome() {
         return  "Welcome";
@@ -24,6 +28,7 @@ public class JwtController {
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest) throws Exception{
         try{
+            emailSenderService.sendSimpleEmail("mihajlo2000@gmail.com", "TestSubj", "Test body");
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName()
                             ,authRequest.getPassword())
