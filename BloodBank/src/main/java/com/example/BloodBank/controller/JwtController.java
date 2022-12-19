@@ -47,12 +47,12 @@ public class JwtController {
     public NotActivatedUser registerNotActivated(@RequestBody NotActivatedUser user) throws Exception{
         try{
             notActivatedUserService.Create(user);
-            return null;
+            return user;
         } catch (Exception ex) {
             throw new Exception("Invalid info");
         }
     }
-    @PostMapping("/activate/{activationCode}")
+    @GetMapping("/activate/{activationCode}")
     public ResponseEntity<Boolean> activateUser(@PathVariable("activationCode") String activationCode) throws Exception{
         try {
             Boolean retVal = notActivatedUserService.Activate(activationCode);

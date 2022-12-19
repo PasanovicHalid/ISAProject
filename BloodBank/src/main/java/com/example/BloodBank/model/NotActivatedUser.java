@@ -1,11 +1,16 @@
 package com.example.BloodBank.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name="not_activated_user")
 @Table
 public class NotActivatedUser {
@@ -25,24 +30,24 @@ public class NotActivatedUser {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-    private String activationCode;
+    private String activation;
 
-    public NotActivatedUser(Long id, String firstName, String lastName,
-                            String username, String password, String email,
-                            Gender gender, LocalDate dob, Role role,
-                            Address address, String activationCode) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.role = role;
-        this.address = address;
-        this.activationCode = activationCode;
-    }
+//    public NotActivatedUser(Long id, String firstName, String lastName,
+//                            String username, String password, String email,
+//                            Gender gender, LocalDate dob, Role role,
+//                            Address address, String activationCode) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//        this.gender = gender;
+//        this.dob = dob;
+//        this.role = role;
+//        this.address = address;
+//        this.activation = activationCode;
+//    }
 
     public Long getId() {
         return id;
@@ -124,11 +129,11 @@ public class NotActivatedUser {
         this.address = address;
     }
 
-    public String getActivationCode() {
-        return activationCode;
+    public String getActivation() {
+        return activation;
     }
 
-    public void setActivationCode(String activationCode) {
-        this.activationCode = activationCode;
+    public void setActivation(String activation) {
+        this.activation = activation;
     }
 }

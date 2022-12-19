@@ -2,7 +2,9 @@ package com.example.BloodBank.service;
 
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.NotActivatedUser;
+import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.NotActivatedUserRepository;
+import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.INotActivatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +15,21 @@ import java.util.UUID;
 @Service
 public class NotActivatedUserService implements INotActivatedUserService {
     private final NotActivatedUserRepository notActivatedUserRepository;
+    private final UserRepository userRepository;
     @Autowired
     private EmailSenderService emailSenderService;
 
     @Autowired
-    public NotActivatedUserService(NotActivatedUserRepository notActivatedUserRepository){
+    public NotActivatedUserService(NotActivatedUserRepository notActivatedUserRepository,
+                                   UserRepository userRepository){
         this.notActivatedUserRepository = notActivatedUserRepository;
+        this.userRepository = userRepository;
     }
     @Override
     public NotActivatedUser Create(NotActivatedUser entity) throws Exception {
         String uuid = UUID.randomUUID().toString();
         emailSenderService.sendSimpleEmail(entity.getEmail(), "Blood bank activation", "http://localhost:8086/activate/"+uuid);
-        entity.setActivationCode(uuid);
+        entity.setActivation(uuid);
         return notActivatedUserRepository.save(entity);
     }
 
@@ -53,7 +58,7 @@ public class NotActivatedUserService implements INotActivatedUserService {
         return notActivatedUserRepository.findAll();
     }
     public NotActivatedUser ReadByActivationCode(String code) throws Exception {
-        Optional<NotActivatedUser> user = notActivatedUserRepository.findByActivationCode(code);
+        Optional<NotActivatedUser> user = notActivatedUserRepository.findByActivation(code);
         if(user.isPresent()){
             return user.get();
         } else {
@@ -62,6 +67,11 @@ public class NotActivatedUserService implements INotActivatedUserService {
     }
     public Boolean Activate(String activationCode) throws Exception{
         System.out.println("in activation!");
+        NotActivatedUser notActivatedUser = ReadByActivationCode(activationCode);
+        User newUser = new User();
+        newUser.setUsername(notActivatedUser.getUsername());
+        newUser.setEmail(notActivatedUser.getEmail());
+        userRepository.save(newUser);
         return true;
     }
 }
