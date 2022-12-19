@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { ComplaintService } from '../services/complaint.service';
 import { NgForm } from '@angular/forms';
 import { Complaint } from '../model/complaint.model';
@@ -15,12 +16,28 @@ export class AnswerComplaintComponent implements OnInit {
   public complaint: Complaint = new Complaint();
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
+  private routeSub: Subscription;
 
-  constructor(private complaintService: ComplaintService, private router: Router,private toastr: ToastrService) { }
+  constructor(private complaintService: ComplaintService, private router: Router,
+    private toastr: ToastrService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.routeSub = this.route.params.subscribe(params => {
+      this.getComplaint(params['id']);
+    }, (error) => {
+      this.errorMessage = error;
+    });
   }
-
+  public getComplaint(id: number){
+    this.complaintService.getComplaint(id).subscribe(res => {
+        this.complaint = res;
+        //this.date = this.datepipe.transform(this.request.requiredForDate, 'MM-dd-yyyy')!;
+        
+      }, (error) => {
+        this.errorMessage = error;
+      });
+  }
+  
   public answerComplaint(){
 
     this.complaintService.answerComplaint(this.complaint).subscribe( res => 
@@ -51,5 +68,8 @@ export class AnswerComplaintComponent implements OnInit {
     } else {
       this.toastr.error(this.errorMessage.message);
     }
+  }
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 }

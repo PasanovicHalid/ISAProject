@@ -25,6 +25,7 @@ public class ComplaintMapper {
         ComplaintDTO complaintDTO = modelMapper.map(complaint, ComplaintDTO.class);
         String type = complaintDTO.getComplaintType();
         complaintDTO.setComplaintType(type.substring(0, 1) + type.substring(1).toLowerCase());
+        complaintDTO.setCustomerName(complaint.getCustomer().getFirstName() + " "+ complaint.getCustomer().getLastName());
         return complaintDTO;
     }
 
@@ -42,7 +43,6 @@ public class ComplaintMapper {
                 String type = complaintDTO.getComplaintType();
                 complaintDTO.setComplaintType(type.substring(0, 1) + type.substring(1).toLowerCase());
             }
-            System.out.println(complaintsDTO);
             return complaintsDTO;
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -50,17 +50,3 @@ public class ComplaintMapper {
         return null;
     }
 }
-//    ArrayList<ComplaintDTO> complaintsDTO = new ArrayList<ComplaintDTO>();
-//            for(Complaint complaint : complaints){
-//                    ComplaintDTO complaintDTO = toDTO(complaint);
-//                    complaintDTO.setCustomerName(complaint.getCustomer().getFirstName() + " " + complaint.getCustomer().getLastName());
-//                    if(complaint.getComplaintType().equals(ComplaintType.FACILITY))
-//                    complaintDTO.setDefendantName(bloodBankService.findByEmail(complaint.getEmailOfDefendant()).get().getName());
-//                    else{
-//                    Customer c = customerService.findByEmail(complaint.getEmailOfDefendant()).get();
-//                    complaintDTO.setDefendantName(c.getFirstName() + " " + c.getLastName());
-//                    }
-//
-//                    System.out.println(complaintDTO);
-//                    complaintsDTO.add(complaintDTO);
-//                    }

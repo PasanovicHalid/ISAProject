@@ -32,6 +32,9 @@ export class ComplaintService {
     return this.http.get<Complaint[]>(this.apiHost + 'api/complaint', { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
+  getComplaint(id : number): Observable<Complaint> {
+    return this.http.get<Complaint>(this.apiHost + 'api/complaint/' + id, {headers: this.headers}).pipe(catchError(this.handleError))
+  }
   getUnansweredComplaints(page: number= 0, size: number = 5): Observable<Complaint[]>{
     return this.http.get<Complaint[]>(this.apiHost + 'api/complaint?page=' +page +'&size=' + size, {headers: this.headers}).pipe(catchError(this.handleError));
   }

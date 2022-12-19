@@ -21,10 +21,10 @@
                                       currentPage: page,
                                       totalItems: count
                                     };">
-                    <td>{{complaint.customerName}}</td>
-                    <td>{{complaint.submissionDate}}</td>
-                    <td>{{complaint.complaintType}}</td>
-                    <td>{{complaint.defendantName}}</td>
+                    <td class="clickable cell-center"  (click)="answerComplaint(complaint)">{{complaint.customerName}}</td>
+                    <td class="clickable cell-center"  (click)="answerComplaint(complaint)">{{complaint.submissionDate}}</td>
+                    <td class="clickable cell-center"  (click)="answerComplaint(complaint)">{{complaint.complaintType}}</td>
+                    <td class="clickable cell-center"  (click)="answerComplaint(complaint)">{{complaint.defendantName}}</td>
                   </tr>
                 </tbody>
               </table>

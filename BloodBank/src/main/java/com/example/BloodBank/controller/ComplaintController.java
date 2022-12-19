@@ -3,6 +3,7 @@ package com.example.BloodBank.controller;
 import adapters.ComplaintMapper;
 import adapters.CreationComplaintMapper;
 import com.example.BloodBank.dto.*;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Complaint;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.AdminService;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -76,14 +78,13 @@ public class ComplaintController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ComplaintDTO>> getUsers(@RequestParam("page") Optional<String> pageNumber,
+    public ResponseEntity<List<ComplaintDTO>> getComplaints(@RequestParam("page") Optional<String> pageNumber,
                                                        @RequestParam("size") Optional<String> size) {
         try {
             Pageable page;
             page = PageRequest.of(Integer.valueOf(pageNumber.get()), Integer.valueOf(size.get()));
             List<Complaint> complaints = complaintService.findAllByComplaintStatus(page);
-            List<ComplaintDTO> complaintDTOS = complaintService.GetNecessaryInfo(complaintMapper.toDTOList(complaints), complaints);
-            return new ResponseEntity<>(complaintDTOS, HttpStatus.OK);
+            return new ResponseEntity<>(complaintService.getDefendantAndCustomerName(complaintMapper.toDTOList(complaints), complaints), HttpStatus.OK);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -99,6 +100,15 @@ public class ComplaintController {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ComplaintDTO> FindByID(@PathVariable("id") Long id){
+        try {
+            ComplaintDTO complaintDTO = complaintMapper.toDTO(complaintService.findById(id).get());
+            return new ResponseEntity<>(complaintService.getDefendantName(complaintDTO, complaintService.findById(id).get()), HttpStatus.OK);
+        } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

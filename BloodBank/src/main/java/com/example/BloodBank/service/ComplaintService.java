@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ComplaintService implements IComplaintService {
@@ -67,24 +68,33 @@ public class ComplaintService implements IComplaintService {
     public int getUnansweredComplaintsAmount() {
         List<Complaint> complaints = complaintRepository.getComplaintsByComplaintStatusAmount(ComplaintStatus.UNANSWERED);
         return complaints.size();
-
     }
-
     @Override
-    public List<ComplaintDTO> GetNecessaryInfo(List<ComplaintDTO> complaintDTOS, List<Complaint> complaints) {
+    public List<ComplaintDTO> getDefendantAndCustomerName(List<ComplaintDTO> complaintDTOS, List<Complaint> complaints) {
         for(ComplaintDTO c : complaintDTOS){
             Complaint realComplaint = complaints.get(complaintDTOS.indexOf(c));
             c.setCustomerName(realComplaint.getCustomer().getFirstName() + " " +
                     realComplaint.getCustomer().getLastName());
-
-            if(realComplaint.getComplaintType().equals(ComplaintType.FACILITY))
-                c.setDefendantName(bloodBankService.findByEmail(realComplaint.getEmailOfDefendant()).get().getName());
-            else{
-                Admin admin = adminService.findByEmail(realComplaint.getEmailOfDefendant()).get();
-                c.setDefendantName(admin.getFirstName() + " " + admin.getLastName());
-            }
+            c = getDefendantName(c, realComplaint);
         }
         return  complaintDTOS;
+    }
+
+    @Override
+    public ComplaintDTO getDefendantName(ComplaintDTO complaintDTO, Complaint complaint) {
+        if(complaint.getComplaintType().equals(ComplaintType.FACILITY))
+            complaintDTO.setDefendantName(bloodBankService.findByEmail(complaint.getEmailOfDefendant()).get().getName());
+        else{
+            Admin admin = adminService.findByEmail(complaint.getEmailOfDefendant()).get();
+            complaintDTO.setDefendantName(admin.getFirstName() + " " + admin.getLastName());
+        }
+        return complaintDTO;
+    }
+
+    public Optional<Complaint> findById(Number id) {
+        if(!complaintRepository.findById(id).isPresent())
+            throw new IllegalStateException("Customer with that kind of email doesn't exist!");
+        return complaintRepository.findById(id);
     }
 
 }

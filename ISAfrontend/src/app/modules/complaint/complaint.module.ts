@@ -18,7 +18,7 @@ import { AnswerComplaintComponent } from './answer-complaint/answer-complaint.co
 
 const routes: Routes = [
   { path: 'admin-view-complaints', component: AdminViewComplaintsComponent },
-  { path: 'answer-complaint', component: AnswerComplaintComponent},
+  { path: 'answer-complaint/:id', component: AnswerComplaintComponent},
 ];
 
 @NgModule({

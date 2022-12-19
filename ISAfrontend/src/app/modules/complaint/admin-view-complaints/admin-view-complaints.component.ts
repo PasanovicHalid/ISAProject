@@ -58,4 +58,9 @@ export class AdminViewComplaintsComponent implements OnInit {
     this.getUnansweredComplaints(this.page-1, this.tableSize);
   }
 
+  public answerComplaint(selectedComplaint: Complaint){   
+    this.router.navigate(['/answer-complaint', selectedComplaint.id]);
+    
+  }
+
 }
