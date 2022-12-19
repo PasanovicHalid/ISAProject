@@ -29,6 +29,7 @@ public class Complaint {
     @NotNull
     private ComplaintType complaintType;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private ComplaintStatus complaintStatus;
     @NotNull
     private String emailOfDefendant;

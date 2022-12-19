@@ -32,6 +32,7 @@ export class AdminViewComplaintsComponent implements OnInit {
     this.complaintService.getUnansweredComplaints(page, size).subscribe(
       (res) => {
         this.complaints = res;
+        console.log(this.complaints)
         this.getNumberOfUnansweredComplaintss();
       },
       (error) => {

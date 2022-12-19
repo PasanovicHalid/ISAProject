@@ -1,8 +1,7 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.model.Complaint;
-import com.example.BloodBank.model.ComplaintStatus;
-import com.example.BloodBank.model.User;
+import com.example.BloodBank.dto.ComplaintDTO;
+import com.example.BloodBank.model.*;
 import com.example.BloodBank.repository.ComplaintRepository;
 import com.example.BloodBank.service.service_interface.IComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,15 @@ import java.util.List;
 public class ComplaintService implements IComplaintService {
     private final ComplaintRepository complaintRepository;
     private final CustomerService customerService;
+    private final BloodBankService bloodBankService;
+    private final AdminService adminService;
     @Autowired
-    public ComplaintService(ComplaintRepository complaintRepository,CustomerService customerService) {
+    public ComplaintService(ComplaintRepository complaintRepository,CustomerService customerService,
+                            BloodBankService bloodBankService, AdminService adminService) {
         this.complaintRepository = complaintRepository;
         this.customerService = customerService;
+        this.bloodBankService = bloodBankService;
+        this.adminService = adminService;
     }
 
     @Override
@@ -63,6 +67,24 @@ public class ComplaintService implements IComplaintService {
     public int getUnansweredComplaintsAmount() {
         List<Complaint> complaints = complaintRepository.getComplaintsByComplaintStatusAmount(ComplaintStatus.UNANSWERED);
         return complaints.size();
+
+    }
+
+    @Override
+    public List<ComplaintDTO> GetNecessaryInfo(List<ComplaintDTO> complaintDTOS, List<Complaint> complaints) {
+        for(ComplaintDTO c : complaintDTOS){
+            Complaint realComplaint = complaints.get(complaintDTOS.indexOf(c));
+            c.setCustomerName(realComplaint.getCustomer().getFirstName() + " " +
+                    realComplaint.getCustomer().getLastName());
+
+            if(realComplaint.getComplaintType().equals(ComplaintType.FACILITY))
+                c.setDefendantName(bloodBankService.findByEmail(realComplaint.getEmailOfDefendant()).get().getName());
+            else{
+                Admin admin = adminService.findByEmail(realComplaint.getEmailOfDefendant()).get();
+                c.setDefendantName(admin.getFirstName() + " " + admin.getLastName());
+            }
+        }
+        return  complaintDTOS;
     }
 
 }

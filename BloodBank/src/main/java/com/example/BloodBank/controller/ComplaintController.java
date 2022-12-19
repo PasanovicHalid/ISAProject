@@ -82,7 +82,8 @@ public class ComplaintController {
             Pageable page;
             page = PageRequest.of(Integer.valueOf(pageNumber.get()), Integer.valueOf(size.get()));
             List<Complaint> complaints = complaintService.findAllByComplaintStatus(page);
-            return new ResponseEntity<>(complaintMapper.toDTOList(complaints), HttpStatus.OK);
+            List<ComplaintDTO> complaintDTOS = complaintService.GetNecessaryInfo(complaintMapper.toDTOList(complaints), complaints);
+            return new ResponseEntity<>(complaintDTOS, HttpStatus.OK);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
