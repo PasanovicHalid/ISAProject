@@ -1,6 +1,7 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.ComplaintDTO;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.*;
 import com.example.BloodBank.repository.ComplaintRepository;
 import com.example.BloodBank.service.service_interface.IComplaintService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +42,16 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
+    @Transactional
     public Complaint Update(Complaint entity) throws Exception {
-        return null;
+        Optional<Complaint> complaint = complaintRepository.findById(entity.getComplaintID());
+        if(complaint.isPresent()){
+            complaint.get().setComplaintStatus(ComplaintStatus.ANSWERED);
+            complaint.get().setAnswer(entity.getAnswer());
+            return complaintRepository.save(complaint.get());
+        } else {
+            throw new EntityDoesntExistException(entity.getComplaintID());
+        }
     }
 
     @Override

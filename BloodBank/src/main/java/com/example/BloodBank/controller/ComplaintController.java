@@ -32,6 +32,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/complaint")
+@CrossOrigin("http://localhost:4200")
 public class ComplaintController {
 
     private final ComplaintService complaintService;
@@ -109,6 +110,20 @@ public class ComplaintController {
             ComplaintDTO complaintDTO = complaintMapper.toDTO(complaintService.findById(id).get());
             return new ResponseEntity<>(complaintService.getDefendantName(complaintDTO, complaintService.findById(id).get()), HttpStatus.OK);
         } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ComplaintDTO> Update(@Valid @RequestBody ComplaintDTO complaintDTO){
+        try {
+            Complaint complaint = complaintMapper.fromDTO(complaintDTO);
+            complaintService.Update(complaint);
+            return new ResponseEntity<>(complaintDTO, HttpStatus.OK);
+        } catch (Exception e){
+            if(e instanceof EntityDoesntExistException){
+               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

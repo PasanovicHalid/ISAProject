@@ -17,6 +17,7 @@ export class AdminViewComplaintsComponent implements OnInit {
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
+  noComplaints: boolean = false;
 
   constructor(
     private complaintService: ComplaintService,
@@ -32,7 +33,8 @@ export class AdminViewComplaintsComponent implements OnInit {
     this.complaintService.getUnansweredComplaints(page, size).subscribe(
       (res) => {
         this.complaints = res;
-        console.log(this.complaints)
+        if(this.complaints.length == 0)
+          this.noComplaints = true;
         this.getNumberOfUnansweredComplaintss();
       },
       (error) => {

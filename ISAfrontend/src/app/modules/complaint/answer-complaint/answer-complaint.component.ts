@@ -30,19 +30,16 @@ export class AnswerComplaintComponent implements OnInit {
   }
   public getComplaint(id: number){
     this.complaintService.getComplaint(id).subscribe(res => {
-        this.complaint = res;
-        //this.date = this.datepipe.transform(this.request.requiredForDate, 'MM-dd-yyyy')!;
-        
+        this.complaint = res;        
       }, (error) => {
         this.errorMessage = error;
       });
   }
-  
-  public answerComplaint(){
 
+  public answerComplaint(){
     this.complaintService.answerComplaint(this.complaint).subscribe( res => 
       {
-        console.log("reEEs")
+        this.router.navigate(['/admin-view-complaint']);
       }, (error) => {
         console.log(error)
         this.errorMessage = error;

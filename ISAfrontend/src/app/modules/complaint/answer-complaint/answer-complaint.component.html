@@ -69,7 +69,8 @@
                 <div class="row">
                   <div class="col-md-12 mb-4 align-items-center">
                     <div class="form-group">
-                        <input type="text" class="form-control" rows="3" id="description" style="resize: none;" [(ngModel)]="complaint.description" name="description" readonly/>
+                        <input type="text" class="form-control" rows="3" id="description" style="resize: none;" 
+                        [(ngModel)]="complaint.description" name="description" readonly/>
                         <label for="description">Description</label>
                       </div>
                   </div>
@@ -77,7 +78,16 @@
                 <div class="row">
                   <div class="col-md-12 mb-4 align-items-center">
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="answer" style="resize: none;" [(ngModel)]="complaint.answer" name="answer"></textarea>
+                        <textarea class="form-control" rows="3" id="answer" style="resize: none;" 
+                        [(ngModel)]="complaint.answer" name="answer" #answerVar="ngModel"
+                        required
+                        [ngClass]="{'is-invalid': (answerVar.touched || answerVar.dirty) && !answerVar.valid }"></textarea>
+                        <span class="invalid-feedback">
+                          <span *ngIf="answerVar.errors?.['required']">
+                              Please enter an answer.
+                          </span>
+                        </span>
+                        
                         <label for="description">Answer</label>
                       </div>
                   </div>
