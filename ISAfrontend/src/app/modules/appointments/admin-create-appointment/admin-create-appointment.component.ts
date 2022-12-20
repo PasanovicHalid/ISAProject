@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Gender } from '../../user/edit-user/model/gender';
 import { Role } from '../../user/edit-user/model/role';
 import { CustomerService } from '../../user/services/customer-service.service';
+import { AppointmentCreation } from '../model/appointment-creation';
+import { AppointmentService } from '../services/appointment.service';
 
 @Component({
   selector: 'app-admin-create-appointment',
@@ -12,55 +14,20 @@ import { CustomerService } from '../../user/services/customer-service.service';
 })
 export class AdminCreateAppointmentComponent implements OnInit {
 
-  public genders = Object.values(Gender);
-  public roles = Object.values(Role);
-  public user : any;
-  public errorMessage: Error = new Error;
-  public errorMap: Map<string, string> = new Map();
-  private sub: any;
+  public appointment: AppointmentCreation = new AppointmentCreation();
+  public startDayWorkTime: any;
+  public endDayWorkTime: any;
+  public errorMessage : any;
 
-  constructor(private customerService: CustomerService, private router: Router,private toastr: ToastrService,
-    private route: ActivatedRoute) { }
+  constructor(private router: Router, private toastr: ToastrService, private appointmentService: AppointmentService) { }
 
-  ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.customerService.getCustomerByID(+params['id']).subscribe(res => {
-        this.user = res
-      }, (error) => {
-        console.log(error)
-        this.errorMessage = error;
-        this.toastError();
-      })
-    })
-  }
+  ngOnInit(): void { }
 
-  public editCustomer(){
-    this.customerService.updateCustomer(this.user).subscribe( res => 
-      {
-        console.log("reEEs")
-      }, (error) => {
-        console.log(error)
-        this.errorMessage = error;
-        this.toastError();
-      });
-  }
-
-  private toastError() {
-    if (String(this.errorMessage).includes('406')){
-      var error = localStorage.getItem('errormap')!;
-      this.errorMap = new Map(JSON.parse(error));
-
-      for (let entry of this.errorMap.entries()) {
-        this.toastr.error('Validation error: ' + entry[1]);
+  createAppointment() {
+    this.appointmentService.createAppointment(this.appointment).subscribe(res => { this.toastr.success("Succsesfuly created an appointment") },
+      (error) => {
+        this.toastr.error(error.message);
       }
-    }
-    else{
-      this.toastr.error(this.errorMessage.message);
-    }
+    );
   }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
 }

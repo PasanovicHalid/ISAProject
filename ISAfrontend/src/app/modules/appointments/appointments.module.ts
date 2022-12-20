@@ -17,13 +17,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminCreateAppointmentComponent } from './admin-create-appointment/admin-create-appointment.component';
 import { FindAppointmentComponent } from './find-appointment/find-appointment.component';
-import { AnswerQuestionaireComponent } from './answer-questionaire/answer-questionaire.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   { path: 'calendar', component: AdminCalendarComponent },
   { path: 'create-appointment', component: AdminCreateAppointmentComponent },
   { path: 'find-appointment', component: FindAppointmentComponent },
-  { path: 'answer-questionaire', component: AnswerQuestionaireComponent },
 ];
 
 @NgModule({
@@ -31,13 +32,12 @@ const routes: Routes = [
     AdminCalendarComponent,
     AdminCreateAppointmentComponent,
     FindAppointmentComponent,
-    AnswerQuestionaireComponent
   ],
   imports: [
     CommonModule,
     FullCalendarModule,
     MaterialModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -49,6 +49,9 @@ const routes: Routes = [
     MatTableModule,
     MatDatepickerModule,
     NgxPaginationModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
     RouterModule.forChild(routes),
   ],
 })

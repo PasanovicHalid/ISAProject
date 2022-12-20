@@ -83,4 +83,8 @@ insert into complaints(answer, complaint_id, complaint_status,complaint_type, de
 values('Stupicemo u kontakt sa zaposlenim!', 1030, 1, 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1026, 1019);
 
 insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id)
-values(10, '2022-12-19', '11:00', '11:45', 2, 1007, 1023)
+values
+    (10, '2022-12-19', '11:00', '11:45', 2, 1007, 1023),
+    (11, '2022-12-19', '11:30', '11:45', 1, 1008, 1023),
+    (12, '2022-12-19', '11:31', '11:45', 1, 1009, 1023),
+    (13, '2022-12-19', '11:32', '11:45', 1, 1007, 1023);
