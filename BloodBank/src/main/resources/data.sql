@@ -82,5 +82,5 @@ values('', 1029, 0, 1, 'Jako neprijatna radnica!', 'saska@gmail.com','2022-12-02
 insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
 values('Stupicemo u kontakt sa zaposlenim!', 1030, 1, 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1026, 1019);
 
-insert into appointment(id, appointment_date, start_time, end_time, blood_bank_id, customer_id)
-values(10, '2022-12-19', '11:00', '11:45', 1007, 1023)
+insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id)
+values(10, '2022-12-19', '11:00', '11:45', 2, 1007, 1023)
