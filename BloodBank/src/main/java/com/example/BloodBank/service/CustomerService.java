@@ -4,20 +4,28 @@ import com.example.BloodBank.exceptions.EmailTakenException;
 import com.example.BloodBank.exceptions.UsernameTakenException;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Customer;
+import com.example.BloodBank.model.Role;
+import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.CustomerRepository;
+import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerService implements ICustomerService {
     private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
     @Autowired
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository){
         this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
     }
     public void registerCustomer(Customer customer) throws Exception {
 
@@ -66,6 +74,15 @@ public class CustomerService implements ICustomerService {
             throw new EntityDoesntExistException(id);
         }
     }
+    @Override
+    public List<Customer> findAllByFirstNameOrLastName(String searchTerm, Pageable page){
+        Page<User> pageUsers =  userRepository.findAllCustomersByFirstNameOrLastName(searchTerm.toLowerCase(), page);
+         List<Customer> returnList = new ArrayList<>();
+        for(User u : pageUsers){
+            returnList.add(customerRepository.findById(u.getId()).get());
+        }
+        return returnList;
+    }
 
     @Override
     public Customer Update(Customer entity) throws Exception {
@@ -81,4 +98,10 @@ public class CustomerService implements ICustomerService {
     public Iterable<Customer> GetAll() throws Exception {
         return customerRepository.findAll();
     }
+    @Override
+    public int getCustomersAmountWithSearch(String search) {
+        List<User> users = userRepository.findAllCustomersBySearch(search.toLowerCase());
+        return users.size();
+    }
+
 }

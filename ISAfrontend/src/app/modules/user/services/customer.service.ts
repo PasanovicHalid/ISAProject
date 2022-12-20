@@ -5,7 +5,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import { User } from 'src/app/model/Users/user';
+import { Customer } from 'src/app/model/Users/customer';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +25,12 @@ export class CustomerService {
       })
       .pipe(catchError(this.handleValidationError));
   }
+  getCustemerWithSearch({ page = 0, size = 2, search = '' }: { page?: number; size?: number; search?: string; } = {}): Observable<Customer[]>{
+    return this.http.get<Customer[]>(this.apiHost + 'api/customer/search?page=' + page + '&size=' + size + '&search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
+  }
+  getNumberOfCustomersWithSearch(search: string = ''): Observable<number>{
+    return this.http.get<number>(this.apiHost + 'api/customer/amount?search=' + search,{headers: this.headers}).pipe(catchError(this.handleValidationError));
+  }
 
   private handleValidationError(error: HttpErrorResponse) {
     var map = new Map<string, string>();
@@ -36,5 +42,17 @@ export class CustomerService {
     return throwError(
       () => new Error(error.status + '\n' + error.error.message)
     );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if(error.status == 400){
+      var map = new Map<string, string>();
+      Object.keys(error.error).forEach(key => {  
+        map.set(key, error.error[key] )
+      });
+      localStorage.setItem('errormap', JSON.stringify(Array.from(map.entries())));
+    }
+
+    return throwError(() => new Error(error.status + '\n' + error.error));
   }
 }

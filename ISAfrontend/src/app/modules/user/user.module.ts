@@ -21,6 +21,7 @@ import { AdminsProfileComponent } from './admins-profile/admins-profile.componen
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewCustomersComponent } from './view-customers/view-customers.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'register-customer', component: RegisterCustomerComponent },
   { path: 'register-admin', component: RegisterAdminComponent },
   { path: 'fill-form', component: FillFormComponent },
-  { path: 'view-users', component: ViewUsersComponent }
+  { path: 'view-users', component: ViewUsersComponent },
+  { path: 'view-customers', component: ViewCustomersComponent}
 
 ];
 
@@ -46,7 +48,8 @@ const routes: Routes = [
     RegisterCustomerComponent,
     RegisterAdminComponent,
     FillFormComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    ViewCustomersComponent
 
   ],
   imports: [

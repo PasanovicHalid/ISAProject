@@ -14,5 +14,5 @@ public class AppointmentExecute {
     private Appointment appointment;
 
     private String comment;
-    
+
 }
