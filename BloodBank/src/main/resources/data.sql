@@ -84,9 +84,9 @@ values('Stupicemo u kontakt sa zaposlenim!', 1030, 1, 1, 'Izderao se na mene u h
 
 insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id)
 values
-    (10, '2022-12-19', '11:00', '11:45', 2, 1007, 1023),
-    (11, '2022-12-19', '11:30', '11:45', 1, 1008, 1023),
-    (12, '2022-12-19', '11:31', '11:45', 1, 1009, 1023),
+    (10, '2022-12-19', '11:00', '11:45', 3, 1007, null),
+    (11, '2022-12-19', '11:30', '11:45', 3, 1008, null),
+    (12, '2022-12-19', '11:31', '11:45', 3, 1009, null),
     (13, '2022-12-19', '11:32', '11:45', 1, 1007, 1023);
 
 insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)

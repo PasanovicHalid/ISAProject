@@ -2,7 +2,9 @@ package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.model.AppointmentStatus;
 import com.example.BloodBank.repository.AppointmentRepository;
+import com.example.BloodBank.repository.CustomerRepository;
 import com.example.BloodBank.service.service_interface.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,10 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class AppointmentService implements IAppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final CustomerRepository customerRepository;
+    
 
     @Autowired
-    public AppointmentService(AppointmentRepository appointmentRepository) {
+    public AppointmentService(AppointmentRepository appointmentRepository,
+                              CustomerRepository customerRepository) {
         this.appointmentRepository = appointmentRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -53,10 +59,21 @@ public class AppointmentService implements IAppointmentService {
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
         return appointmentRepository.findAll(page);
     }
+    @Transactional(readOnly = false)
     public Boolean BookAppointment(BookAppointmentDTO dto) throws Exception {
+        //check if appointment is free
         //check if customer filled questionnaire
         //check if customer donated blood in last 6 months
+
         //book appointment
+        Appointment appointment = appointmentRepository.findById(dto.appointmentId).orElseThrow();
+        appointment.setExecuted(AppointmentStatus.PENDING);
+        appointment.setTakenBy(customerRepository.findById(dto.customerId).orElseThrow());
+        appointmentRepository.save(appointment);
+
+        //send verification
+
+
         return true;
     }
 }

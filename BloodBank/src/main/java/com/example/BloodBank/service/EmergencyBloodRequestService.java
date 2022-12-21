@@ -36,6 +36,7 @@ public class EmergencyBloodRequestService extends proto.emergencyBloodRequests.E
                     EmergencyResponse response = EmergencyResponse.newBuilder().setRequest(request.getRequest()).setStatus(proto.emergencyBloodRequests.SendStatus.SENT).build();
                     responseObserver.onNext(response);
                     responseObserver.onCompleted();
+                    return ;
                 }
             }
         } catch (Exception e) {

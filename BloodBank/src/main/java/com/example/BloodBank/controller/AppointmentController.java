@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,7 +67,7 @@ public class AppointmentController {
         }
     }
     @PostMapping(value = "/book")
-    public ResponseEntity<Object> bookAppointment(@RequestParam BookAppointmentDTO dto){
+    public ResponseEntity<Object> bookAppointment(@Valid @RequestBody BookAppointmentDTO dto){
         try {
             appointmentService.BookAppointment(dto);
             return new ResponseEntity<>(HttpStatus.OK);
