@@ -2,6 +2,7 @@ package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.RegistrationAdminDTO;
 import com.example.BloodBank.model.BloodBank;
+import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.repository.AdminRepository;
 import com.example.BloodBank.service.service_interface.IAdminService;
 import org.modelmapper.ModelMapper;
@@ -79,5 +80,10 @@ public class AdminService implements IAdminService {
             System.out.println(e.getMessage());
             throw new UnsupportedOperationException("Can't save admin!");
         }
+    }
+    public Optional<Admin> findByEmail(String email) {
+        if(!adminRepository.findByEmail(email).isPresent())
+            throw new IllegalStateException("Customer with that kind of email doesn't exist!");
+        return adminRepository.findByEmail(email);
     }
 }

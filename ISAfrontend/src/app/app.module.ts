@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BloodBankModule } from './modules/blood-bank/blood-bank.module';
 import { ToastrModule } from 'ngx-toastr';
 import { UserModule } from './modules/user/user.module';
+import { ComplaintModule } from './modules/complaint/complaint.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginUserComponent } from './modules/login-user/login-user.component';
 import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
@@ -38,6 +39,7 @@ import { UserService } from './modules/user/services/user.service';
     UserModule,
     ToastrModule.forRoot(),
     NgxPaginationModule,
+    ComplaintModule
   ],
   providers: [
     UserService,
