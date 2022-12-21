@@ -12,6 +12,7 @@ export class LoginUserComponent implements OnInit {
   public loginUser: LoginUser = new LoginUser();
   public token: string = '';
   public role: string = '';
+  public id: string = '';
 
   constructor(
     private toastr: ToastrService,
@@ -30,6 +31,9 @@ export class LoginUserComponent implements OnInit {
         this.role = decodedJWT.role.authority;
         localStorage.setItem('loggedUserRole', this.role);
         console.log(this.role);
+        this.id = decodedJWT.id.authority;
+        localStorage.setItem('loggedUserId', this.id);
+        console.log(this.id);
         this.toastr.success('Successfully logged in');
         // if(this.role == 'ROLE_STAFF')
         // window.location.href = '/staff-profile';
