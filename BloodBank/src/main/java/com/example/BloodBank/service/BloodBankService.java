@@ -1,6 +1,8 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.BloodBankDTO;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
+import com.example.BloodBank.model.Admin;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.repository.AddressRepository;
 import com.example.BloodBank.repository.BloodBankRepository;
@@ -223,7 +225,12 @@ public class BloodBankService implements IBloodBankService {
 
     @Override
     public BloodBank Read(Long id) throws Exception {
-        return null;
+        Optional<BloodBank> bloodBank = bloodBankRepository.findById(id);
+        if(bloodBank.isPresent()){
+            return bloodBank.get();
+        } else {
+            throw new EntityDoesntExistException(id);
+        }
     }
 
     @Override

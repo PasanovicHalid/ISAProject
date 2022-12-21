@@ -20,11 +20,21 @@ import { FindAppointmentComponent } from './find-appointment/find-appointment.co
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { SelectAppointmentComponent } from './select-appointment/select-appointment.component';
+import { AnswerFormComponent } from './answer-form/answer-form.component';
+import { Guard } from '../auth/guard';
 
 const routes: Routes = [
   { path: 'calendar', component: AdminCalendarComponent },
-  { path: 'create-appointment', component: AdminCreateAppointmentComponent },
+  {
+    path: 'create-appointment', 
+    component: AdminCreateAppointmentComponent, 
+    canActivate: [Guard],
+    data: { permittedRoles: ['ROLE_ADMIN'] }
+  },
   { path: 'find-appointment', component: FindAppointmentComponent },
+  { path: 'select-appointment/:id', component: SelectAppointmentComponent },
+  { path: 'answer-form', component: AnswerFormComponent },
 ];
 
 @NgModule({
@@ -32,6 +42,8 @@ const routes: Routes = [
     AdminCalendarComponent,
     AdminCreateAppointmentComponent,
     FindAppointmentComponent,
+    SelectAppointmentComponent,
+    AnswerFormComponent,
   ],
   imports: [
     CommonModule,

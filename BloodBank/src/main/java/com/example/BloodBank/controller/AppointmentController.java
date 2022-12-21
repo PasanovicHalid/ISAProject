@@ -1,11 +1,12 @@
 package com.example.BloodBank.controller;
 
 import adapters.AppointmentMapper;
-import com.example.BloodBank.dto.AppointmentDTO;
+import com.example.BloodBank.dto.AppointmentCreationDTO;
 import com.example.BloodBank.dto.AppointmentViewDTO;
 import com.example.BloodBank.dto.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
 import com.example.BloodBank.service.AppointmentService;
+import com.example.BloodBank.service.BloodBankService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -25,12 +27,14 @@ import java.util.stream.Collectors;
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
+    private final BloodBankService bloodBankService;
 
     private static AppointmentMapper appointmentMapper;
 
     @Autowired
-    public AppointmentController(AppointmentService appointmentService, ModelMapper modelMapper) {
+    public AppointmentController(AppointmentService appointmentService, BloodBankService bloodBankService, ModelMapper modelMapper) {
         this.appointmentService = appointmentService;
+        this.bloodBankService = bloodBankService;
         this.appointmentMapper = new AppointmentMapper(modelMapper);
     }
 
@@ -47,12 +51,27 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "/pageable")
-    public ResponseEntity<Object> getAllPagable(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
+    public ResponseEntity<Object> getAllPageable(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
         try {
             Page<Appointment> appointments = appointmentService.GetAllPageable(page);
             PageImpl<AppointmentViewDTO> result = new PageImpl<>(appointments.getContent().stream().map(AppointmentMapper::toAppointmentViewDTO).collect(Collectors.toList()),
             page, appointments.getTotalElements());
             return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value ="/free")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Object> createFreeAppointment(@RequestBody AppointmentCreationDTO appointmentDTO) {
+        try {
+            Appointment appointment = appointmentMapper.fromAppointmentCreationDTO(appointmentDTO);
+            appointment.setLocation(bloodBankService.Read(appointmentDTO.getBankID()));
+            if(!appointment.validate()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid time");
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(appointmentService.Create(appointment));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
