@@ -3,6 +3,7 @@ package com.example.BloodBank.controller;
 import adapters.AppointmentMapper;
 import com.example.BloodBank.dto.AppointmentDTO;
 import com.example.BloodBank.dto.AppointmentViewDTO;
+import com.example.BloodBank.dto.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
 import com.example.BloodBank.service.AppointmentService;
 import org.modelmapper.ModelMapper;
@@ -60,6 +61,15 @@ public class AppointmentController {
     public ResponseEntity<Object> getAll() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(appointmentService.GetAll());
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping(value = "/book")
+    public ResponseEntity<Object> bookAppointment(@RequestParam BookAppointmentDTO dto){
+        try {
+            appointmentService.BookAppointment(dto);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

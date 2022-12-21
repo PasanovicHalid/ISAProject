@@ -1,5 +1,6 @@
 package com.example.BloodBank.service;
 
+import com.example.BloodBank.dto.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
 import com.example.BloodBank.repository.AppointmentRepository;
 import com.example.BloodBank.service.service_interface.IAppointmentService;
@@ -51,5 +52,11 @@ public class AppointmentService implements IAppointmentService {
 
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
         return appointmentRepository.findAll(page);
+    }
+    public Boolean BookAppointment(BookAppointmentDTO dto) throws Exception {
+        //check if customer filled questionnaire
+        //check if customer donated blood in last 6 months
+        //book appointment
+        return true;
     }
 }
