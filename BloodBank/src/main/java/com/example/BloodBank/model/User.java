@@ -15,21 +15,21 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     @Column(unique=true)
     private String username;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String password;
     @Column(unique=true)
-    @NotNull
-    @NotBlank
-    @Email
+//    @NotNull
+//    @NotBlank
+//    @Email
     private String email;
     private Gender gender;
     private LocalDate dob;
-    @NotNull
+//    @NotNull
     private Role role;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
