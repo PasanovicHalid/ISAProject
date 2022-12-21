@@ -39,7 +39,7 @@ export class AnswerComplaintComponent implements OnInit {
   public answerComplaint(){
     this.complaintService.answerComplaint(this.complaint).subscribe( res => 
       {
-        this.router.navigate(['/admin-view-complaint']);
+        this.router.navigate(['/admin-view-complaints']);
       }, (error) => {
         console.log(error)
         this.errorMessage = error;
