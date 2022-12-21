@@ -1,4 +1,4 @@
-package com.example.BloodBank.excpetions;
+package com.example.BloodBank.exceptions;
 
 public class EntityDoesntExistException extends Exception {
     public EntityDoesntExistException() {

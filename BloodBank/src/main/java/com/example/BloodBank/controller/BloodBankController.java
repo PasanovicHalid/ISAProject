@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,8 @@ public class BloodBankController {
         bloodBankMapper = new BloodBankMapper(modelMapper);
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAllPaginate(@Valid @RequestBody PagableRequestDTO request){
         try{
@@ -84,6 +87,8 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAll(){
         try{
@@ -96,6 +101,8 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Boolean> checkBloodAvailability(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,
@@ -113,7 +120,10 @@ public class BloodBankController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
-    @GetMapping()
+
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
+    @GetMapping(path = "/allBloodBanks")
     public ResponseEntity<List<BloodBank>> getAllBloodBank() {
         try {
             System.out.println("in getAllBloodBank()");
@@ -157,6 +167,8 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "get/{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Integer> sendBlood(@PathVariable("bankEmail") String bankEmail,
                                                           @PathVariable("bloodType") String bloodType,

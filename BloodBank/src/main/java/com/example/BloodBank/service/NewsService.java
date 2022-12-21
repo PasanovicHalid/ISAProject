@@ -1,7 +1,7 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.dto.NewsDTO;
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.News;
 import com.example.BloodBank.repository.BloodBankRepository;

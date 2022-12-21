@@ -5,6 +5,7 @@ import com.example.BloodBank.service.QuestionnaireService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,6 +29,8 @@ public class QuestionnaireController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+//    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @PostMapping(
             value = "/create", consumes = "application/json",
             produces = "application/json"

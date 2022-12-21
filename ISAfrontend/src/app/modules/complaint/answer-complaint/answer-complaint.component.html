@@ -1,0 +1,106 @@
+<section class="vh-100 gradient-custom" style="color: #121212;">
+    <div class="container py-5 h-100" >
+      <div class="row justify-content-center align-items-center h-100 " >
+        <div class="col-12 col-lg-9 col-xl-7" >
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #F5F5F5;">
+            <div class="card-body p-4 p-md-5" >
+              <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">Answer complaint</h3>
+              <form novalidate #answerComplaintForm="ngForm" (ngSubmit)="saveComplaint(answerComplaintForm)">
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input type="text" id="name" class="form-control" 
+                      name="name"
+                      required
+                      pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*"
+                      [(ngModel)]="complaint.customerName"
+                          #nameVar="ngModel"
+                            readonly/>                  
+                      <label class="form-label" for="firstName">Customer name</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+    
+                    <div class="form-outline datepicker w-100">
+                      <input type="date" min="1900-01-01" class="form-control" id="dob" name="dob"
+                      required 
+                      [(ngModel)]="complaint.submissionDate"
+                          #dobVar="ngModel" readonly/>
+                            
+                      <label for="dob" class="form-label">Submission date</label>
+                    </div>
+  
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input type="text" id="type" class="form-control" 
+                      name="type"
+                      required
+                      pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*"
+                      [(ngModel)]="complaint.complaintType"
+                          #typeVar="ngModel"
+                            readonly/>
+                      <label class="form-label" for="type">Complaint type</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input type="text" id="defendantName" class="form-control" 
+                      name="defendantName"
+                      required
+                      pattern="([A-Z][a-z]+)(\s[A-Z]?[a-z]+)*"
+                      [(ngModel)]="complaint.defendantName"
+                          #nameVar="ngModel" readonly/>
+                      <label class="form-label" for="defendantName">Complaint for</label>
+                    </div>
+  
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-12 mb-4 align-items-center">
+                    <div class="form-group">
+                        <input type="text" class="form-control" rows="3" id="description" style="resize: none;" 
+                        [(ngModel)]="complaint.description" name="description" readonly/>
+                        <label for="description">Description</label>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mb-4 align-items-center">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="answer" style="resize: none;" 
+                        [(ngModel)]="complaint.answer" name="answer" #answerVar="ngModel"
+                        required
+                        [ngClass]="{'is-invalid': (answerVar.touched || answerVar.dirty) && !answerVar.valid }"></textarea>
+                        <span class="invalid-feedback">
+                          <span *ngIf="answerVar.errors?.['required']">
+                              Please enter an answer.
+                          </span>
+                        </span>
+                        
+                        <label for="description">Answer</label>
+                      </div>
+                  </div>
+                </div>
+
+                <div>
+                  <input class="btn btn-primary submit" type="submit" value="Answer complaint"  [disabled]="!answerComplaintForm.valid"/>
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

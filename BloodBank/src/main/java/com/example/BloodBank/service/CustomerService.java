@@ -1,9 +1,9 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.excpetions.EmailTakenException;
-import com.example.BloodBank.excpetions.UsernameTakenException;
-import com.example.BloodBank.excpetions.EntityDoesntExistException;
-import com.example.BloodBank.model.Admin;
+import com.example.BloodBank.exceptions.EmailTakenException;
+import com.example.BloodBank.exceptions.UsernameTakenException;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
+import com.example.BloodBank.model.BloodBank;
 import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.repository.CustomerRepository;
 import com.example.BloodBank.service.service_interface.ICustomerService;
@@ -81,5 +81,11 @@ public class CustomerService implements ICustomerService {
     @Override
     public Iterable<Customer> GetAll() throws Exception {
         return customerRepository.findAll();
+    }
+
+    public Optional<Customer> findByEmail(String email) {
+        if(!customerRepository.findByEmail(email).isPresent())
+            throw new IllegalStateException("Customer with that kind of email doesn't exist!");
+        return customerRepository.findByEmail(email);
     }
 }

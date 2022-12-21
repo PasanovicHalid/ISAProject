@@ -3,7 +3,7 @@ package com.example.BloodBank.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name="head_admins")
 public class HeadAdmin extends User{
 
 
