@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditUserComponent } from './edit-user/edit-user.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,16 +12,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { EditUserComponent } from './edit-user/edit-user.component';
 import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 import { FillFormComponent } from './fill-form/fill-form.component';
-import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginUserComponent } from '../login-user/login-user.component';
 import { Guard } from '../auth/guard';
+import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },

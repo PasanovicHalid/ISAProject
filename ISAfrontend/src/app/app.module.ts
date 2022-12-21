@@ -20,6 +20,7 @@ import { LoginUserComponent } from './modules/login-user/login-user.component';
 import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 import { TokenInterceptor } from './modules/auth/TokenInterceptor';
 import { UserService } from './modules/user/services/user.service';
+import { AppointmentsModule } from './modules/appointments/appointments.module';
 
 @NgModule({
   declarations: [AppComponent, LoginUserComponent, ForbiddenComponent],
@@ -37,6 +38,7 @@ import { UserService } from './modules/user/services/user.service';
     BrowserAnimationsModule,
     BloodBankModule,
     UserModule,
+    AppointmentsModule,
     ToastrModule.forRoot(),
     NgxPaginationModule,
     ComplaintModule
