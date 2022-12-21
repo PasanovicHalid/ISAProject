@@ -1,6 +1,7 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
+import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.NotActivatedUser;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.NotActivatedUserRepository;
@@ -27,6 +28,7 @@ public class NotActivatedUserService implements INotActivatedUserService {
     }
     @Override
     public NotActivatedUser Create(NotActivatedUser entity) throws Exception {
+        //check if username or email are taken by some user or notActivatedUser
         String uuid = UUID.randomUUID().toString();
         emailSenderService.sendSimpleEmail(entity.getEmail(), "Blood bank activation", "http://localhost:8086/activate/"+uuid);
         entity.setActivation(uuid);
@@ -66,12 +68,35 @@ public class NotActivatedUserService implements INotActivatedUserService {
         }
     }
     public Boolean Activate(String activationCode) throws Exception{
-        System.out.println("in activation!");
         NotActivatedUser notActivatedUser = ReadByActivationCode(activationCode);
+        User newUser = makeUserFromNotActivated(notActivatedUser);
+        userRepository.save(newUser);
+        //delete not activated from base
+        return true;
+    }
+    private Address createAddressFromNotActivated(NotActivatedUser user){
+        Address add = new Address();
+        if (user.getAddress() != null){
+            add.setCountry(user.getAddress().getCountry());
+            add.setCity(user.getAddress().getCity());
+            add.setStreet(user.getAddress().getStreet());
+            add.setNumber(user.getAddress().getNumber());
+        }
+        return add;
+    }
+    private User makeUserFromNotActivated(NotActivatedUser notActivatedUser){
+        Address add = createAddressFromNotActivated(notActivatedUser);
+
         User newUser = new User();
         newUser.setUsername(notActivatedUser.getUsername());
+        newUser.setPassword(notActivatedUser.getPassword());
         newUser.setEmail(notActivatedUser.getEmail());
-        userRepository.save(newUser);
-        return true;
+//        newUser.setAddress(add);
+        newUser.setDob(notActivatedUser.getDob());
+        newUser.setGender(notActivatedUser.getGender());
+        newUser.setRole(notActivatedUser.getRole());
+        newUser.setFirstName(notActivatedUser.getFirstName());
+        newUser.setLastName(notActivatedUser.getLastName());
+        return  newUser;
     }
 }

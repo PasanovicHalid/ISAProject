@@ -8,12 +8,17 @@ import { ListBanksComponent } from './list-banks/list-banks.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Guard } from '../auth/guard';
 
 const routes: Routes = [
   { path: 'register-banks', component: RegisterBanksComponent },
-  { path: 'list-banks', component: ListBanksComponent },
+  {
+    path: 'list-banks',
+    component: ListBanksComponent,
+    canActivate: [Guard],
+    data: { permittedRoles: ['ROLE_HEADADMIN'] },
+  },
 ];
 
 @NgModule({

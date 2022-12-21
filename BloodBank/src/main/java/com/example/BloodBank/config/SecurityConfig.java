@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll().and().authorizeRequests().antMatchers("/registerNotActivated")
                 .permitAll().and().authorizeRequests().antMatchers("/activate/**").permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().cors();
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);;
     }
 }

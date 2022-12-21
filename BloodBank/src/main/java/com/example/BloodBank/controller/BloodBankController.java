@@ -47,6 +47,8 @@ public class BloodBankController {
         bloodBankMapper = new BloodBankMapper(modelMapper);
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAllPaginate(@Valid @RequestBody PagableRequestDTO request){
         try{
@@ -85,6 +87,7 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAll(){
@@ -98,6 +101,8 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Boolean> checkBloodAvailability(@PathVariable("bankEmail") String bankEmail,
                                           @PathVariable("bloodType") String bloodType,
@@ -116,8 +121,9 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
     @PreAuthorize("hasRole('ROLE_HEADADMIN')")
-    @GetMapping()
+    @GetMapping(path = "/allBloodBanks")
     public ResponseEntity<List<BloodBank>> getAllBloodBank() {
         try {
             System.out.println("in getAllBloodBank()");
@@ -161,6 +167,8 @@ public class BloodBankController {
         }
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "get/{bankEmail}/{bloodType}/{quantity}")
     public ResponseEntity<Integer> sendBlood(@PathVariable("bankEmail") String bankEmail,
                                                           @PathVariable("bloodType") String bloodType,

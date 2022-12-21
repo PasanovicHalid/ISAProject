@@ -19,7 +19,6 @@ import { FilterType } from '../model/filter-type';
   styleUrls: ['./list-banks.component.css'],
 })
 export class ListBanksComponent implements AfterViewInit, OnInit {
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -44,10 +43,8 @@ export class ListBanksComponent implements AfterViewInit, OnInit {
     private bloodBankService: BloodBankService,
     private router: Router,
     private toastr: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer,
-  ) { }
-
-
+    private _liveAnnouncer: LiveAnnouncer
+  ) {}
 
   ngOnInit(): void {
     this.bloodBankSource = new BloodBankSource(this.bloodBankService);
@@ -55,26 +52,24 @@ export class ListBanksComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
     merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        tap(() => this.loadBloodBanks())
-      )
+      .pipe(tap(() => this.loadBloodBanks()))
       .subscribe();
   }
 
   loadBloodBanks() {
-    this.bloodBankSource.loadBloodBanks(new PagableRequest(
-      {
+    this.bloodBankSource.loadBloodBanks(
+      new PagableRequest({
         pageIndex: this.paginator.pageIndex,
         pageSize: this.paginator.pageSize,
         filter: this.searchQuery,
         filterType: this.convertSearchEnumToFilterType(),
         sortColumn: this.sort.active,
-        sortDirection: this.sort.direction
-      }));
+        sortDirection: this.sort.direction,
+      })
+    );
   }
 
   announceSortChange(sortState: Sort) {
@@ -90,24 +85,21 @@ export class ListBanksComponent implements AfterViewInit, OnInit {
   }
 
   findByRange() {
-    this.searchQuery = this.bottomRange + "|" + this.topRange;
+    this.searchQuery = this.bottomRange + '|' + this.topRange;
     this.loadBloodBanks();
   }
 
-
   private convertSearchEnumToFilterType(): FilterType {
     if (this.filterSelect == '0') {
-      return FilterType.NAME_SEARCH
+      return FilterType.NAME_SEARCH;
     } else if (this.filterSelect == '1') {
-      return FilterType.ADDRESS_SEARCH
+      return FilterType.ADDRESS_SEARCH;
     } else if (this.filterSelect == '2') {
-      return FilterType.RATING
+      return FilterType.RATING;
     } else {
-      return FilterType.NAME_SEARCH
+      return FilterType.NAME_SEARCH;
     }
   }
 
-  public chooseBloodBank(bankId: number) {
-
-  }
+  public chooseBloodBank(bankId: number) {}
 }
