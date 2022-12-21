@@ -1,9 +1,12 @@
 package com.example.BloodBank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Customer extends User {
@@ -19,6 +22,10 @@ public class Customer extends User {
     @NotNull
     @NotBlank
     private String professionInfo;
+
+    @OneToMany(mappedBy = "takenBy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Appointment> appointments;
     public Customer(Long id, String firstName, String lastName,
                     String username, String password,
                     String email, Gender gender, LocalDate dob,
@@ -101,4 +108,12 @@ public class Customer extends User {
     public void setProfessionInfo(String professionInfo) {
         this.professionInfo = professionInfo;
     }
+
+    /*public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
+    }*/
 }
