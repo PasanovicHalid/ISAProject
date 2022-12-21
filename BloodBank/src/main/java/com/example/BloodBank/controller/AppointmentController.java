@@ -1,9 +1,11 @@
 package com.example.BloodBank.controller;
 
 import adapters.AppointmentMapper;
-import com.example.BloodBank.dto.AppointmentDTO;
+import adapters.CalendarAppointmentMapper;
 import com.example.BloodBank.dto.AppointmentViewDTO;
+import com.example.BloodBank.dto.CalendarAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.service.AdminService;
 import com.example.BloodBank.service.AppointmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,16 @@ import java.util.stream.Collectors;
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
-
+    private final AdminService adminService;
     private static AppointmentMapper appointmentMapper;
+    private static CalendarAppointmentMapper calendarAppointmentMapper;
 
     @Autowired
-    public AppointmentController(AppointmentService appointmentService, ModelMapper modelMapper) {
+    public AppointmentController(AppointmentService appointmentService, AdminService adminService, ModelMapper modelMapper) {
         this.appointmentService = appointmentService;
+        this.adminService = adminService;
         this.appointmentMapper = new AppointmentMapper(modelMapper);
+        this.calendarAppointmentMapper = new CalendarAppointmentMapper(modelMapper);
     }
 
     @GetMapping(value = "/{id}")
@@ -60,6 +65,17 @@ public class AppointmentController {
     public ResponseEntity<Object> getAll() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(appointmentService.GetAll());
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping(path="calendar/{adminID}")
+    public ResponseEntity<List<CalendarAppointmentDTO>> getDoneAndPendingAppointmentsForBloodBank(@PathVariable("adminID") long adminID) {
+        try {
+            List<Appointment> appointments = appointmentService.getDoneAndPendingAppointmentsForBloodBank(
+                                            adminService.Read(adminID).getBloodBank().getBankID());
+            List<CalendarAppointmentDTO> appointmentDTOS = calendarAppointmentMapper.toCalendarAppointmentDTOList(appointments);
+            return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

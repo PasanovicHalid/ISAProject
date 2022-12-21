@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 @Entity
+@Table(name="appointment")
 public class Appointment {
 
     @Id
@@ -18,6 +19,7 @@ public class Appointment {
     private Time endTime;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private AppointmentStatus executed;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -25,7 +27,7 @@ public class Appointment {
     private Customer takenBy;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bloodBank_id", referencedColumnName = "bankID", nullable = false)
+    @JoinColumn(name = "blood_bank_id", referencedColumnName = "bankID", nullable = false)
     private BloodBank location;
 
     @Version

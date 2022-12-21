@@ -32,7 +32,6 @@ public class ComplaintMapper {
     public static Complaint fromDTO(ComplaintDTO complaintDTO){
         complaintDTO.setComplaintType(complaintDTO.getComplaintType().toUpperCase());
         Complaint complaint = modelMapper.map(complaintDTO, Complaint.class);
-        System.out.println(complaint);
         return complaint;
     }
 

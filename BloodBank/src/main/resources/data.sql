@@ -46,7 +46,7 @@ values(1021, '2000-06-03', 'saska@gmail.com', 'Saska', 0, 'Vujovic', '123', 1, '
 insert into users
 values(1022, '2000-05-05', 'nikola@gmail.com', 'Nikola', 1, 'Rosic', '123', 1, 'nikola', 1013);
 insert into users
-values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Nina', '123', 2, 'nina', 1014);
+values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Ninic', '123', 2, 'nina', 1014);
 insert into users
 values(1024, '2000-04-04', 'milka@gmail.com', 'Milka', 2, 'Milkic', '123', 2, 'milka', 1015);
 insert into users
@@ -84,7 +84,12 @@ values('Stupicemo u kontakt sa zaposlenim!', 1030, 'ANSWERED', 1, 'Izderao se na
 
 insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id)
 values
-    (10, '2022-12-19', '11:00', '11:45', 2, 1007, 1023),
-    (11, '2022-12-19', '11:30', '11:45', 1, 1008, 1023),
-    (12, '2022-12-19', '11:31', '11:45', 1, 1009, 1023),
-    (13, '2022-12-19', '11:32', '11:45', 1, 1007, 1023);
+    (1031, '2022-12-19', '11:00', '11:09', 'DONE', 1007, 1023),
+    (1032, '2022-12-29', '11:30', '11:45', 'PENDING', 1008, 1023),
+    (1033, '2022-12-19', '11:31', '11:45', 'DONE', 1009, 1024),
+    (1034, '2022-12-19', '11:31', '11:45', 'CANCELLED', 1007, 1023),
+    (1035, '2022-12-19', '11:31', '11:45', 'CANCELLED', 1007, 1024),
+    (1036, '2022-12-19', '11:31', '11:45', 'DONE', 1009, 1023),
+    (1037, '2022-12-30', '11:31', '11:45', 'PENDING', 1008, 1024),
+    (1038, '2022-12-29', '11:31', '11:45', 'PENDING', 1009, 1023),
+    (1039, '2022-12-28', '8:32', '10:31', 'PENDING', 1007, 1024);

@@ -1,6 +1,7 @@
 package com.example.BloodBank.service;
 
 import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.model.AppointmentStatus;
 import com.example.BloodBank.repository.AppointmentRepository;
 import com.example.BloodBank.service.service_interface.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -51,5 +55,18 @@ public class AppointmentService implements IAppointmentService {
 
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
         return appointmentRepository.findAll(page);
+    }
+
+    @Override
+    public List<Appointment> getDoneAndPendingAppointmentsForBloodBank(Long bankId) {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        List<Appointment> doneAndPendingApp = new ArrayList<Appointment>();
+        for(Appointment a : appointments){
+            if((a.getExecuted().equals(AppointmentStatus.DONE) || a.getExecuted().equals(AppointmentStatus.PENDING))
+                    && a.getLocation().getBankID() == bankId)
+                doneAndPendingApp.add(a);
+        }
+        return doneAndPendingApp;
+//        return null;
     }
 }

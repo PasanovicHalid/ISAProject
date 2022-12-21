@@ -20,11 +20,15 @@ import { FindAppointmentComponent } from './find-appointment/find-appointment.co
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { AdminCalendarViewComponent } from './admin-calendar-view/admin-calendar-view.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
   { path: 'calendar', component: AdminCalendarComponent },
   { path: 'create-appointment', component: AdminCreateAppointmentComponent },
   { path: 'find-appointment', component: FindAppointmentComponent },
+  { path: 'admin-calendar', component: AdminCalendarViewComponent },
 ];
 
 @NgModule({
@@ -32,6 +36,7 @@ const routes: Routes = [
     AdminCalendarComponent,
     AdminCreateAppointmentComponent,
     FindAppointmentComponent,
+    AdminCalendarViewComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +58,10 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatSortModule,
     RouterModule.forChild(routes),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
 })
 export class AppointmentsModule { }

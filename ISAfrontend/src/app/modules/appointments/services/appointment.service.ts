@@ -35,4 +35,8 @@ export class AppointmentService {
       .set('sort', request.sortColumn + ',' + request.sortDirection)
     return this.http.get<any>(this.apiHost + 'api/appointment/pageable', { headers: this.headers, params: httpParams }).pipe(catchError(this.handleError));
   }
+
+  getDoneAndPendingAppointmentsForBloodBank(adminID: number): Observable<any>{
+    return this.http.get<any>(this.apiHost + 'api/appointment/calendar/' + adminID, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
 }

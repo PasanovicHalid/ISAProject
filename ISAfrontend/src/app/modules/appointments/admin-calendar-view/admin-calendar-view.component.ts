@@ -1,4 +1,5 @@
 import { OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -18,6 +19,7 @@ import {
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
 import { AppointmentService } from '../services/appointment.service';
+import { aD } from '@fullcalendar/core/internal-common';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -43,11 +45,8 @@ export class AdminCalendarViewComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any> | undefined;
 
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
-
   month: Date = new Date();
 
   modalData: {
@@ -56,12 +55,13 @@ export class AdminCalendarViewComponent implements OnInit {
   } | undefined;
 
   refresh = new Subject<void>();
-
   events!: CalendarEvent[];
-
   activeDayIsOpen: boolean = true;
 
-  constructor(private appointmentService: AppointmentService) {}
+  public errorMessage: Error = new Error();
+  public errorMap: Map<string, string> = new Map();
+
+  constructor(private appointmentService: AppointmentService, private toastr: ToastrService) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -100,7 +100,6 @@ export class AdminCalendarViewComponent implements OnInit {
     this.viewDate = new Date(this.month)
   }
 
-
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -111,26 +110,39 @@ export class AdminCalendarViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let token = localStorage.getItem('token');
-    let bloodBankCenterId;
-    if(token != null) {
-      let decodedJWT = JSON.parse(window.atob(token.split(".")[1]))
-      bloodBankCenterId = decodedJWT.bloodBankCenterId;
+    let adminId = localStorage.getItem('loggedUserId');
+    if(adminId != null) {
+      this.getDoneAndPendingAppointmentsForBloodBank(Number(adminId));
     }
+  }
 
-    this.appointmentService.findByBloodBank(bloodBankCenterId).subscribe(
+  getDoneAndPendingAppointmentsForBloodBank(adminId: number){
+    this.appointmentService.getDoneAndPendingAppointmentsForBloodBank(adminId).subscribe(
       (response: CalendarEvent[]) => {
         response.forEach(element => {
           element.start = new Date(element.start);
-          element.end = new Date(element.start.getTime() + 30*60000);
+          element.end = new Date(element.end!);
         });
         this.events = response;
         console.log(this.events)
       },
       (error) => {
-        console.log(error.message);
-      }
-     );
+        this.errorMessage = error;
+        this.toastError();
+    }
+    );
   }
 
+  private toastError() {
+    if (String(this.errorMessage).includes('406')) {
+      var error = localStorage.getItem('errormap')!;
+      this.errorMap = new Map(JSON.parse(error));
+
+      for (let entry of this.errorMap.entries()) {
+        this.toastr.error('Validation error: ' + entry[1]);
+      }
+    } else {
+      this.toastr.error(this.errorMessage.message);
+    }
+  }
 }

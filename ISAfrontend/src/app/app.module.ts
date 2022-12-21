@@ -21,6 +21,8 @@ import { ForbiddenComponent } from './modules/forbidden/forbidden.component';
 import { TokenInterceptor } from './modules/auth/TokenInterceptor';
 import { UserService } from './modules/user/services/user.service';
 import { AppointmentsModule } from './modules/appointments/appointments.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [AppComponent, LoginUserComponent, ForbiddenComponent],
@@ -41,7 +43,11 @@ import { AppointmentsModule } from './modules/appointments/appointments.module';
     AppointmentsModule,
     ToastrModule.forRoot(),
     NgxPaginationModule,
-    ComplaintModule
+    ComplaintModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     UserService,
