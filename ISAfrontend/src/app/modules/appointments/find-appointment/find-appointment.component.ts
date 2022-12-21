@@ -67,7 +67,7 @@ export class FindAppointmentComponent implements OnInit {
   }
 
   public chooseAppointment(bankId: number) {
-
+      this.router.navigate(["select-appointment/", bankId])
   }
 
 }

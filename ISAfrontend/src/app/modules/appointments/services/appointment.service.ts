@@ -17,9 +17,13 @@ export class AppointmentService {
   getAllAppointments(): Observable<any> {
     return this.http.get<any>(this.apiHost + 'api/appointment', { headers: this.headers }).pipe(catchError(this.handleError));
   }
+  
+  readAppointment(id: any): Observable<any> {
+    return this.http.get<any>(this.apiHost + 'api/appointment/'+ id, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
 
   createAppointment(appointment: AppointmentCreation): Observable<AppointmentCreation> {
-    return this.http.post<any>(this.apiHost + 'api/appointment', appointment, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http.post<any>(this.apiHost + 'api/appointment/free', appointment, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
