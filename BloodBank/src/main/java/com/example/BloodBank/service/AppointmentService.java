@@ -60,7 +60,7 @@ public class AppointmentService implements IAppointmentService {
         return appointmentRepository.findAll(page);
     }
     @Transactional(readOnly = false)
-    public Boolean BookAppointment(BookAppointmentDTO dto) throws Exception {
+    public Appointment BookAppointment(BookAppointmentDTO dto) throws Exception {
         //check if appointment is free
         //check if customer filled questionnaire
         //check if customer donated blood in last 6 months
@@ -74,6 +74,6 @@ public class AppointmentService implements IAppointmentService {
         //send verification
 
 
-        return true;
+        return appointment;
     }
 }

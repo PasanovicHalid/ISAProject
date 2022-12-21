@@ -28,7 +28,7 @@ public class AppointmentMapper {
                 appointment.getEndTime(),
                 new BloodBankAppointmentViewDTO(appointment.getLocation().getName(),
                         appointment.getLocation().getAddress().toString(),
-                        appointment.getLocation().getRating()));
+                        appointment.getLocation().getRating()),appointment.getExecuted());
     }
 
     public static Appointment fromAppointmentDTO(AppointmentDTO appointmentDTO){

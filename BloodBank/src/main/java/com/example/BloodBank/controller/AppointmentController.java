@@ -69,8 +69,8 @@ public class AppointmentController {
     @PostMapping(value = "/book")
     public ResponseEntity<Object> bookAppointment(@Valid @RequestBody BookAppointmentDTO dto){
         try {
-            appointmentService.BookAppointment(dto);
-            return new ResponseEntity<>(HttpStatus.OK);
+            Appointment app = appointmentService.BookAppointment(dto);
+            return new ResponseEntity<>(app, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
