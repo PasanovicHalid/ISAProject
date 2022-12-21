@@ -20,20 +20,27 @@ import { FillFormComponent } from './fill-form/fill-form.component';
 import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { LoginUserComponent } from '../login-user/login-user.component';
+import { Guard } from '../auth/guard';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
   { path: 'register-admin', component: RegisterAdminComponent },
-  { path: 'admin-home-page', component: AdminHomePageComponent},
-  { path: 'admins-profile', component: AdminsProfileComponent},
-  { path: 'admins-blood-bank', component: AdminsBloodbankComponent},
+  { path: 'admin-home-page', component: AdminHomePageComponent },
+  { path: 'admins-profile', component: AdminsProfileComponent },
+  { path: 'admins-blood-bank', component: AdminsBloodbankComponent },
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
   { path: 'register-admin', component: RegisterAdminComponent },
-  { path: 'fill-form', component: FillFormComponent },
-  { path: 'view-users', component: ViewUsersComponent }
-
+  {
+    path: 'fill-form',
+    component: FillFormComponent,
+    canActivate: [Guard],
+    data: { permittedRoles: ['ROLE_HEADADMIN'] },
+  },
+  { path: 'view-users', component: ViewUsersComponent },
+  { path: 'login', component: LoginUserComponent },
 ];
 
 @NgModule({
@@ -46,8 +53,7 @@ const routes: Routes = [
     RegisterCustomerComponent,
     RegisterAdminComponent,
     FillFormComponent,
-    ViewUsersComponent
-
+    ViewUsersComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +71,7 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
 })
 export class UserModule {}

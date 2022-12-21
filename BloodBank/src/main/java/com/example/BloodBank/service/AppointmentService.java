@@ -19,7 +19,7 @@ public class AppointmentService implements IAppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final CustomerRepository customerRepository;
-    
+
 
     @Autowired
     public AppointmentService(AppointmentRepository appointmentRepository,

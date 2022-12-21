@@ -10,15 +10,12 @@ public class CreationComplaintDTO {
     @NotNull
     @NotBlank
     private String description;
-
     @NotNull
     @NotBlank
     @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message="Invalid email address!")
     private String emailOfDefendant;
-
     @NotNull
     private ComplaintType complaintType;
-
     @NotNull
     @NotBlank
     private String customerUsername;
