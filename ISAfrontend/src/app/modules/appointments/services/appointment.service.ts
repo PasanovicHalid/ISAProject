@@ -55,7 +55,13 @@ export class AppointmentService {
       })
       .pipe(catchError(this.handleError));
   }
-  bookAppointment(appointmentBook: AppointmentBook): Observable<any> {
+  bookAppointment(appointmentBook: any): Observable<any> {
+    console.log('in service');
+    // return this.http
+    //   .post<any>(this.apiHost + 'api/appointment/book', appointmentBook, {
+    //     headers: this.headers,
+    //   })
+    //   .pipe(catchError(this.handleError));
     return this.http
       .post<any>(this.apiHost + 'api/appointment/book', appointmentBook, {
         headers: this.headers,

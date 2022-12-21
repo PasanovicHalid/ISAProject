@@ -38,4 +38,5 @@ public class Appointment {
     @Version
     @Column(columnDefinition = "integer DEFAULT 0", nullable = false)
     private Integer version;
+    private String confirmationCode;
 }
