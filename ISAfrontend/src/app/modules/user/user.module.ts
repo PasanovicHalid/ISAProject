@@ -23,6 +23,7 @@ import { ViewUsersComponent } from './view-users/view-users.component';
 import { LoginUserComponent } from '../login-user/login-user.component';
 import { Guard } from '../auth/guard';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
+import { RegisterHeadAdminComponent } from './register-head-admin/register-head-admin.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   },
   { path: 'view-users', component: ViewUsersComponent },
   { path: 'login', component: LoginUserComponent },
+  { path: 'register-head-admin', component: RegisterHeadAdminComponent },
 ];
 
 @NgModule({
@@ -54,6 +56,7 @@ const routes: Routes = [
     RegisterAdminComponent,
     FillFormComponent,
     ViewUsersComponent,
+    RegisterHeadAdminComponent,
   ],
   imports: [
     CommonModule,

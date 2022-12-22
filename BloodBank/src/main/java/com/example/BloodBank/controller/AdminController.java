@@ -78,7 +78,7 @@ public class AdminController {
         }
         try{
             adminService.registerAdmin(registrationAdminDTO);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(true,HttpStatus.OK);
         }
         catch(Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

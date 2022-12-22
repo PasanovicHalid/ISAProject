@@ -18,13 +18,16 @@ export class RegisterBanksComponent implements OnInit {
   constructor(private bloodBankService: BloodBankService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
+      this.router.navigate(['/forbidden']);
   }
 
   public registerBloodBank(){
 
     this.bloodBankService.registerBloodBank(this.bloodBank).subscribe( res => 
       {
-        console.log("reEEs")
+        this.toastr.success("You successfully created a blood bank!");
+        this.router.navigate(['/']);
       }, (error) => {
         console.log(error)
         this.errorMessage = error;

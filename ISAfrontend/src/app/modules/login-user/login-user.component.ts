@@ -35,8 +35,7 @@ export class LoginUserComponent implements OnInit {
         localStorage.setItem('loggedUserId', this.id);
         console.log(this.id);
         this.toastr.success('Successfully logged in');
-        // if(this.role == 'ROLE_STAFF')
-        // window.location.href = '/staff-profile';
+        window.location.href = '#';
       },
       (error) => {
         console.log(error.message);

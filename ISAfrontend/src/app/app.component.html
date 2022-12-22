@@ -12,19 +12,17 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse navbar-div" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto navbar-div">
       <li class="nav-item active">
         <a class="nav-link navbar_labels" href="list-banks">List banks</a>
         <!-- <span class="sr-only">(current)</span>  VRV POKAZUJE DA LI SMO NA TOJ STRANI-->
       </li>
-      <li class="nav-item active">
-        <a class="nav-link navbar_labels" href="login">Login</a>
-      </li>
+      
       <li class="nav-item">
         <a class="nav-link navbar_labels" href="fill-form">Fill form</a>
       </li>
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle navbar_labels"
           id="navbarDropdown"
@@ -43,21 +41,37 @@
             >Something else here</a
           >
         </div>
+      </li> -->
+      <li class="nav-item" *ngIf="role == 'ROLE_HEADADMIN' || role == 'ROLE_ADMIN'">
+        <a class="nav-link navbar_labels" href="view-users">Users</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link navbar_labels" href="view-users">View users</a>
-      </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="role == 'ROLE_HEADADMIN'">
         <a class="nav-link navbar_labels" href="register-banks"
           >Register banks</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="role == 'ROLE_HEADADMIN'">
         <a class="nav-link navbar_labels" href="register-admin"
           >Register admins</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="role == 'ROLE_HEADADMIN'">
+        <a class="nav-link navbar_labels" href="admin-view-complaints"
+          >Complaints</a>
+      </li>
+      <li class="nav-item" *ngIf="role == 'ROLE_HEADADMIN'">
+        <a class="nav-link navbar_labels" href="register-head-admin"
+          >Register head admins</a>
+      </li>
+      <li class="nav-item active" style="float : right;" 
+          *ngIf="role != 'ROLE_HEADADMIN' && role != 'ROLE_ADMIN' && role != 'ROLE_CUSTOMER' || role==null">
+        <a class="nav-link navbar_labels" href="login">Log in</a>
+      </li>
+      <li class="nav-item active" style="float : right;"
+      *ngIf="role == 'ROLE_HEADADMIN' || role == 'ROLE_ADMIN' || role == 'ROLE_CUSTOMER'">
+        <a class="nav-link navbar_labels" (click)="onLogout()" href="#">Log out</a>
+      </li>
+      <!-- <li class="nav-item">
         <a
           class="nav-link disabled navbar_labels"
           href="#"
@@ -65,7 +79,7 @@
           aria-disabled="true"
           >Disabled</a
         >
-      </li>
+      </li> -->
     </ul>
     <!-- <form class="form-inline my-2 my-lg-0">
       <input

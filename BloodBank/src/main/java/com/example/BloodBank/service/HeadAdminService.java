@@ -10,8 +10,10 @@ import com.example.BloodBank.repository.HeadAdminRepository;
 import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IHeadAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class HeadAdminService implements IHeadAdminService {
     private final HeadAdminRepository headAdminRepository;
     private final UserRepository userRepository;
@@ -37,7 +39,6 @@ public class HeadAdminService implements IHeadAdminService {
     @Override
     @Transactional
     public HeadAdmin Create(HeadAdmin entity) throws Exception {
-        entity.setPasswordChanged(false);
         entity.setRole(Role.HEADADMIN);
         headAdminRepository.save(entity);
         return entity;

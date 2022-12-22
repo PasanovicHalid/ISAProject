@@ -26,7 +26,12 @@ export class AdminViewComplaintsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUnansweredComplaints(0, this.tableSize);
+    if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
+      this.router.navigate(['/forbidden']);
+    else{
+      this.getUnansweredComplaints(0, this.tableSize);
+    }
+    
   }
 
   public getUnansweredComplaints(page: number = 0, size: number = 5): void{

@@ -35,9 +35,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 public class BloodBankController {
     private final BloodBankService bloodBankService;
-
     private final ModelMapper modelMapper;
-
     private static BloodBankMapper bloodBankMapper;
 
     @Autowired
