@@ -23,6 +23,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { SelectAppointmentComponent } from './select-appointment/select-appointment.component';
 import { AnswerFormComponent } from './answer-form/answer-form.component';
 import { Guard } from '../auth/guard';
+import { AdminCalendarViewComponent } from './admin-calendar-view/admin-calendar-view.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
   { path: 'calendar', component: AdminCalendarComponent },
@@ -38,6 +41,7 @@ const routes: Routes = [
   component: AnswerFormComponent,
   canActivate: [Guard],
   data: { permittedRoles: ['ROLE_CUSTOMER'] } },
+  { path: 'admin-calendar', component: AdminCalendarViewComponent },
 ];
 
 @NgModule({
@@ -47,6 +51,7 @@ const routes: Routes = [
     FindAppointmentComponent,
     SelectAppointmentComponent,
     AnswerFormComponent,
+    AdminCalendarViewComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +73,10 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatSortModule,
     RouterModule.forChild(routes),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
 })
 export class AppointmentsModule { }

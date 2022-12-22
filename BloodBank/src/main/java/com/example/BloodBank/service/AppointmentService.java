@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -75,7 +76,6 @@ public class AppointmentService implements IAppointmentService {
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
         return appointmentRepository.findAll(page);
     }
-
     public Page<Appointment> GetAllPageableFree(Pageable page) throws Exception {
         return appointmentRepository.findAllAvailable(page);
     }
@@ -149,4 +149,16 @@ public class AppointmentService implements IAppointmentService {
         }
     }
 
+    @Override
+    public List<Appointment> getDoneAndPendingAppointmentsForBloodBank(Long bankId) {
+        List<Appointment> appointments = appointmentRepository.findDoneAndPendingAppointmentsByBankId(bankId);
+//        List<Appointment> doneAndPendingApp = new ArrayList<Appointment>();
+//        for(Appointment a : appointments){
+//            if((a.getExecuted().equals(AppointmentStatus.DONE) || a.getExecuted().equals(AppointmentStatus.PENDING))
+//                    && a.getLocation().getBankID() == bankId)
+//                doneAndPendingApp.add(a);
+//        }
+//        return doneAndPendingApp;
+        return appointments;
+    }
 }
