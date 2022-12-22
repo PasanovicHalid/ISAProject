@@ -74,6 +74,8 @@ export class FindAppointmentComponent implements OnInit {
     this.id = localStorage.getItem('loggedUserId');
     bookDto.customerId = this.id;
     console.log(bookDto);
-    this.appointmentService.bookAppointment(bookDto);
+    this.appointmentService.bookAppointment(bookDto).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
