@@ -2,8 +2,8 @@ package com.example.BloodBank.controller;
 
 import adapters.UserMapper;
 import adapters.ViewUserMapper;
-import com.example.BloodBank.dto.UserDTO;
-import com.example.BloodBank.dto.ViewUserDTO;
+import com.example.BloodBank.dto.userDTOs.UserDTO;
+import com.example.BloodBank.dto.userDTOs.ViewUserDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.UserService;
@@ -94,6 +94,15 @@ public class UserController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(path="/{id}")
+    public ResponseEntity<Object> getUser( @PathVariable("id") long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userMapper.toDTO(userService.Read(id)));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }

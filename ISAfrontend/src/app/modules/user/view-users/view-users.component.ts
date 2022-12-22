@@ -5,8 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../services/user.service';
 import { ViewUser } from '../model/view-user.model';
 
-
-
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',

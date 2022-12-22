@@ -3,6 +3,9 @@ import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import { AppointmentService } from '../services/appointment.service';
+import { AppointmentCalendar } from '../model/appointment-calendar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-calendar',
@@ -11,21 +14,32 @@ import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 })
 export class AdminCalendarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appointmentService: AppointmentService, private router: Router) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
-    nowIndicator: true,
+    aspectRatio: 1,
+    height: 650,
     plugins: [timeGridPlugin, bootstrap5Plugin],
     themeSystem: 'bootstrap5',
-    events: [
-      { title: 'event 1', start: '2022-12-18 12:00', end : '2022-12-18 16:00', color : 'black'},
-      { title: 'event 1', start: '2022-12-18 12:10', end : '2022-12-18 16:00', color : 'black'},
-      { title: 'event 1', start: '2022-12-18 12:20', end : '2022-12-18 16:00', color : 'black'},
-    ]
+    slotDuration: '00:15:00',
   };
 
   ngOnInit(): void {
+    this.LoadEventsForCalendar();
   }
 
+  private LoadEventsForCalendar() {
+    this.appointmentService.getAllAppointments().subscribe(res => {
+      var result: AppointmentCalendar[] = [];
+      res.forEach((element: any) => {
+        result.push(new AppointmentCalendar(element));
+      });
+      this.calendarOptions.events = result;
+    });
+  }
+
+  addApointment() {
+    this.router.navigate(['create-appointment']);
+  }
 }

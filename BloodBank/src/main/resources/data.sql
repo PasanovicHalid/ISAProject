@@ -46,16 +46,16 @@ values(1021, '2000-06-03', 'saska@gmail.com', 'Saska', 0, 'Vujovic', '123', 1, '
 insert into users
 values(1022, '2000-05-05', 'nikola@gmail.com', 'Nikola', 1, 'Rosic', '123', 1, 'nikola', 1013);
 insert into users
-values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Nina', '123', 2, 'nina', 1014);
+values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Ninic', '123', 2, 'nina', 1014);
 insert into users
 values(1024, '2000-04-04', 'milka@gmail.com', 'Milka', 2, 'Milkic', '123', 2, 'milka', 1015);
 insert into users
-values(1025, '2000-04-04', 'mihajlo@gmail.com', 'Mihajlo', 0, 'Maksimovic', '123', 2, 'miha', 1016);
+values(1025, '2000-04-04', 'mihajlo2000@gmail.com', 'Mihajlo', 0, 'Maksimovic', '123', 2, 'miha', 1016);
 insert into users
 values(1026, '2000-05-05','marko@gmail.com', 'Marko', 2, 'Markovic', '123', 2, 'marko', 1017);
 
 insert into head_admins
-values(1019);
+values('false', 1019);
 
 insert into admin
 values(1020, 1007);
@@ -64,7 +64,7 @@ values(1021, 1008);
 insert into admin
 values(1022, 1009);
 
-insert into customer
+insert into customer(jmbg, phone_number, profession, profession_info, id)
 values('101010', '066111221', 'zaposlen', 'firma', 1023);
 insert into customer
 values('202020', '064434444', 'nezaposlena', 'domacica', 1024);
@@ -74,13 +74,29 @@ insert into customer
 values('321321', '066433123', 'student', 'pmf', 1026);
 
 insert into complaints(answer, complaint_id, complaint_status, complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
-values('', 1027, 0, 0, 'Predugo se ovde ceka', 'newlife@gmail.com','2022-12-12', 1023, null);
+values('', 1027, 'UNANSWERED', 0, 'Predugo se ovde ceka', 'newlife@gmail.com','2022-12-12', 1023, null);
 insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
-values('Zao nam je zbog utiska koji zgrada ostavlja na vas.', 1028, 1, 0, 'Zgrada je ocajna', 'bloodymary@gmail.com','2022-11-12', 1024, 1019);
+values('Zao nam je zbog utiska koji zgrada ostavlja na vas.', 1028, 'ANSWERED', 0, 'Zgrada je ocajna', 'bloodymary@gmail.com','2022-11-12', 1024, 1019);
 insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
-values('', 1029, 0, 1, 'Jako neprijatna radnica!', 'saska@gmail.com','2022-12-02', 1025, null);
+values('', 1029, 'UNANSWERED', 1, 'Jako neprijatna radnica!', 'saska@gmail.com','2022-12-02', 1025, null);
 insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
-values('Stupicemo u kontakt sa zaposlenim!', 1030, 1, 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1026, 1019);
+values('Stupicemo u kontakt sa zaposlenim!', 1030, 'ANSWERED', 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1026, 1019);
+
+--insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id, confirmation_code)
+insert into appointment(id, appointment_date, confirmation_code, end_time, executed, start_time, version, blood_bank_id, customer_id)
+values
+    (1031, '2022-12-19', 'ff', '11:09', 'DONE', '11:00', 0, 1007, 1023),
+    (1032, '2022-12-29', 'ff', '11:45', 'PENDING', '11:30', 0, 1008, 1023),
+    (1033, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1024),
+    (1034, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1023),
+    (1035, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1024),
+    (1036, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1023),
+    (1037, '2022-12-30', 'ff', '11:45', 'PENDING', '11:31', 0, 1008, 1024),
+    (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023),
+    (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024);
+
+--insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
+--values(20, false, false, false, 123123, true, '2022-12-19', false, false, false, false, 1023);
 
 insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id, type_of_blood, quantity_of_blood, comment)
 values(10, '2022-12-19', '11:00', '11:45', 2, 1007, 1023, 2, 0, 'odlicno')

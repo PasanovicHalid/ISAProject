@@ -12,4 +12,5 @@ public interface ICustomerService extends ICRUDService<Customer> {
     List<Customer> findAllByFirstNameOrLastName(String searchTerm, Pageable page);
     Customer FindByUsername(String username) throws Exception;
     int getCustomersAmountWithSearch(String search);
+
 }

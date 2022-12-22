@@ -1,17 +1,21 @@
 package com.example.BloodBank.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity(name="head_admins")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class HeadAdmin extends User{
 
-
-    public HeadAdmin(String firstName, String lastName, String username, String password, String email, Gender gender,
-                     LocalDate dob, Role role, Address address) {
-        super(firstName, lastName, username, password, email, gender, dob, role, address);
-    }
-
-    public HeadAdmin() {
-    }
+    @NotNull
+    private boolean isPasswordChanged;
 }

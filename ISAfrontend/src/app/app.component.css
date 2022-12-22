@@ -1,6 +1,13 @@
-.navbar_looks{
-    background-color : #F5F5F5;
+.navbar_looks {
+    background-color: #F5F5F5;
 }
-.navbar_labels{
+
+.navbar_labels {
     color: #121212;
 }
+
+.nav-item {
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+

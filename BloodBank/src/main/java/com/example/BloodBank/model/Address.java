@@ -83,4 +83,9 @@ public class Address {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return street + " " + number + "," + city + "," + country;
+    }
 }

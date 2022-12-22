@@ -1,16 +1,25 @@
 package com.example.BloodBank.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
-@Entity
+
+@Entity(name="appointment")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false)
     private Date appointmentDate;
     private String comment;
     private Time startTime;
@@ -20,9 +29,15 @@ public class Appointment {
 
 
     private int quantityOfBlood;
-    private Time endTime;
 
     @Column(nullable = false)
+    private Time startTime;
+
+    @Column(nullable = false)
+    private Time endTime;
+
+    @Column(nullable = true, updatable = true)
+    @Enumerated(EnumType.STRING)
     private AppointmentStatus executed;
 
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -36,6 +51,7 @@ public class Appointment {
     @Version
     @Column(columnDefinition = "integer DEFAULT 0", nullable = false)
     private Integer version;
+    private String confirmationCode;
 
 
     public Appointment(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
@@ -131,6 +147,11 @@ public class Appointment {
 
     public void setExecuted(AppointmentStatus executed) {
         this.executed = executed;
+    public boolean validate() {
+        return startTime.after(location.getStartDayWorkTime())
+                && startTime.before(location.getEndDayWorkTime())
+                && endTime.after(location.getStartDayWorkTime())
+                && endTime.before(location.getEndDayWorkTime());
     }
 
     public String getComment() {
