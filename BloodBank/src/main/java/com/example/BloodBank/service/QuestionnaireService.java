@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 @Service
@@ -34,6 +35,9 @@ public class QuestionnaireService implements IQuestionnaireService {
     public Questionnaire CreateDTO(QuestionnaireDTO dto){
         Questionnaire questionnaire = new Questionnaire();
         Customer customer = customerRepository.findById(Long.valueOf(dto.getCustomerId())).get();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-DD");
+//        formatter = formatter.withLocale( putAppropriateLocaleHere );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+        LocalDate date = LocalDate.parse(dto.getDate());
 
         questionnaire.setCustomer(customer);
         questionnaire.setDenied(dto.getDenied());
@@ -43,7 +47,7 @@ public class QuestionnaireService implements IQuestionnaireService {
         questionnaire.setDangerousJob(dto.getDangerousJob());
         questionnaire.setPregnant(dto.getPregnant());
         questionnaire.setDonorNumber(dto.getDonorNumber());
-        questionnaire.setFillDate(dto.getFillDate());
+        questionnaire.setFillDate(date);
         questionnaire.setMenstruating(dto.getMenstruating());
         questionnaire.setSecondState(dto.getSecondState());
         questionnaireRepository.save(questionnaire);

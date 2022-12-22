@@ -20,6 +20,7 @@ public class QuestionnaireDTO {
     private Boolean secondState;
     private Boolean menstruating;
     private Boolean pregnant;
+
     private String donorNumber;
-    private LocalDate fillDate;
+    private String date;
 }
