@@ -19,7 +19,9 @@ export class FillFormComponent implements OnInit {
   public questionnaire: FormDTO = new FormDTO();
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
-  public loggedCustomer: any = null;
+  public loggedCustomer: any = { gender: 'FEMALE' };
+  // public loggedCustomer: any = null;
+
   genders = Gender;
   constructor(
     public userService: UserService,
@@ -29,6 +31,7 @@ export class FillFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loggedCustomer.gender = Gender.FEMALE;
     this.userService
       .getUserById(localStorage.getItem('loggedUserId'))
       .subscribe((res) => {
@@ -46,7 +49,7 @@ export class FillFormComponent implements OnInit {
     this.createQuestionnaire();
   }
   public createQuestionnaire() {
-    if (this.loggedCustomer.gender.valueOf() !== 2) {
+    if (this.loggedCustomer.gender !== 'FEMALE') {
       console.log('not female');
       this.questionnaire.secondState = false;
       this.questionnaire.menstruating = false;
