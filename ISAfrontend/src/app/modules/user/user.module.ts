@@ -24,6 +24,7 @@ import { LoginUserComponent } from '../login-user/login-user.component';
 import { Guard } from '../auth/guard';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 import { RegisterHeadAdminComponent } from './register-head-admin/register-head-admin.component';
+import { HeadAdminPasswordChangeComponent } from './head-admin-password-change/head-admin-password-change.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'view-users', component: ViewUsersComponent },
   { path: 'login', component: LoginUserComponent },
   { path: 'register-head-admin', component: RegisterHeadAdminComponent },
+  { path: 'password-change', component: HeadAdminPasswordChangeComponent }
 ];
 
 @NgModule({
@@ -57,6 +59,7 @@ const routes: Routes = [
     FillFormComponent,
     ViewUsersComponent,
     RegisterHeadAdminComponent,
+    HeadAdminPasswordChangeComponent,
   ],
   imports: [
     CommonModule,

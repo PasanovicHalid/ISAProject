@@ -55,7 +55,7 @@ insert into users
 values(1026, '2000-05-05','marko@gmail.com', 'Marko', 2, 'Markovic', '123', 2, 'marko', 1017);
 
 insert into head_admins
-values('false', 1019);
+values('true', 1019);
 
 insert into admin
 values(1020, 1007);
@@ -95,6 +95,12 @@ values
     (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023),
     (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024);
 
+insert into address
+values(1040, 'Novi Sad', 'Serbia', 1,'Bulevar Patrijarha Pavla');
+insert into users
+values(1041, '1995-10-10','hana@gmail.com', 'Hana', 2, 'Lalic', '321', 0, 'hana', 1040);
+insert into head_admins
+values('false', 1041);
+
 --insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
 --values(20, false, false, false, 123123, true, '2022-12-19', false, false, false, false, 1023);
-

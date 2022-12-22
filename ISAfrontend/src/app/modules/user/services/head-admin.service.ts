@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HeadAdmin } from '../model/head-admin.model';
+import { HeadPasswordChange } from '../model/head-password-change.model';
 
 
 @Injectable({
@@ -28,6 +29,10 @@ export class HeadAdminService {
       .pipe(catchError(this.handleValidationError));
   }
 
+  savePasswordChanges(admin: HeadPasswordChange): Observable<Boolean>{
+    return this.http.put<Boolean>(this.apiHost + 'api/head_admin/', admin, {headers: this.headers}).pipe(catchError(this.handleValidationError));
+  }
+  
   private handleValidationError(error: HttpErrorResponse) {
     var map = new Map<string, string>();
     Object.keys(error.error).forEach((key) => {

@@ -2,16 +2,15 @@ package com.example.BloodBank.service;
 
 import com.example.BloodBank.exceptions.EmailTakenException;
 import com.example.BloodBank.exceptions.UsernameTakenException;
-import com.example.BloodBank.model.Customer;
-import com.example.BloodBank.model.HeadAdmin;
-import com.example.BloodBank.model.Role;
-import com.example.BloodBank.model.User;
+import com.example.BloodBank.model.*;
 import com.example.BloodBank.repository.HeadAdminRepository;
 import com.example.BloodBank.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IHeadAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class HeadAdminService implements IHeadAdminService {
@@ -62,5 +61,12 @@ public class HeadAdminService implements IHeadAdminService {
     @Override
     public Iterable<HeadAdmin> GetAll() throws Exception {
         return null;
+    }
+    @Override
+    public boolean isAdminWithNotChangedPassword(AuthRequest authRequest) {
+        Optional<HeadAdmin> admin = headAdminRepository.findByUsername(authRequest.getUserName());
+        if(admin.isPresent() && admin.get().getPassword().equals(authRequest.getPassword()) && !admin.get().isPasswordChanged())
+            return true;
+        return false;
     }
 }

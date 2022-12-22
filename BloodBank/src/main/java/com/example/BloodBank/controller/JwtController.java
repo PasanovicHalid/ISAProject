@@ -4,27 +4,30 @@ import com.example.BloodBank.Utils.JwtUtil;
 import com.example.BloodBank.model.AuthRequest;
 import com.example.BloodBank.model.NotActivatedUser;
 import com.example.BloodBank.service.EmailSenderService;
+import com.example.BloodBank.service.HeadAdminService;
 import com.example.BloodBank.service.NotActivatedUserService;
+import com.example.BloodBank.service.UserService;
 import com.example.BloodBank.service.service_interface.INotActivatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class JwtController {
     @Autowired
     private JwtUtil jwtUtil;
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private EmailSenderService emailSenderService;
     @Autowired
     private NotActivatedUserService notActivatedUserService;
+    @Autowired
+    private HeadAdminService headAdminService;
 
     @GetMapping("/")
     public String weclcome() {
@@ -33,7 +36,10 @@ public class JwtController {
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest) throws Exception{
         try{
-            authenticationManager.authenticate(
+            if(headAdminService.isAdminWithNotChangedPassword(authRequest))
+                return "HeadAdmin with an unchanged password.";
+
+            Authentication a = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName()
                             ,authRequest.getPassword())
             );
