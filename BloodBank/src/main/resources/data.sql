@@ -55,7 +55,7 @@ insert into users
 values(1026, '2000-05-05','marko@gmail.com', 'Marko', 2, 'Markovic', '123', 2, 'marko', 1017);
 
 insert into head_admins
-values(1019);
+values('false', 1019);
 
 insert into admin
 values(1020, 1007);
