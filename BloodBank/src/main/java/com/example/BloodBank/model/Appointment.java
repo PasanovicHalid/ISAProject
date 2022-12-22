@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
-@Entity
+@Entity(name="appointment")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -41,6 +41,7 @@ public class Appointment {
     @Version
     @Column(columnDefinition = "integer DEFAULT 0", nullable = false)
     private Integer version;
+    private String confirmationCode;
 
     public Appointment(Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
         this.id = id;
@@ -58,5 +59,4 @@ public class Appointment {
                 && endTime.after(location.getStartDayWorkTime())
                 && endTime.before(location.getEndDayWorkTime());
     }
-
 }

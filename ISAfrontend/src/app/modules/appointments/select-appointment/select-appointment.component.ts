@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Appointment } from '../model/appointment';
+import { BookAppointment } from '../model/book-appointment';
 import { AppointmentService } from '../services/appointment.service';
 
 @Component({
@@ -34,7 +35,23 @@ export class SelectAppointmentComponent implements OnInit {
   }
 
   reserveAppointment() {
-
+    var userId = localStorage.getItem('loggedUserId') ?? '-1'
+    this.appointmentService.checkIfCustomerDidSurvey(userId).subscribe(res => {
+      if (res) {
+        var bookAppointment = new BookAppointment();
+        bookAppointment.appointmentId = this.appointment.id.toLocaleString()
+        bookAppointment.customerId = userId;
+        this.appointmentService.reserveAppointment(bookAppointment).subscribe(res => { 
+          this.toastr.success("Succsesfuly reserved appointment")
+        },(error) => {
+          this.toastr.error(error);
+        });
+      } else {
+        this.router.navigate(['answer-form/', this.appointment.id])
+      }
+    }, (error) => {
+      this.toastr.error(error);
+    });
   }
 
 }

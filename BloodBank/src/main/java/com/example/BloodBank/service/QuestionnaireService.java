@@ -7,6 +7,8 @@ import com.example.BloodBank.service.service_interface.IQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 @Service
 public class QuestionnaireService implements IQuestionnaireService {
@@ -53,4 +55,12 @@ public class QuestionnaireService implements IQuestionnaireService {
         return questionnaireRepository.findAll();
     }
 
+    @Override
+    public boolean checkQuestionnaire(long id) {
+        Questionnaire questionnaire = questionnaireRepository.findByCustomerId(id);
+        if(questionnaire == null){
+            return false;
+        }
+        return questionnaire.checkIfValidForReservationOfAppointment();
+    }
 }
