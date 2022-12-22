@@ -33,7 +33,10 @@ public class QuestionnaireService implements IQuestionnaireService {
     }
 
     public Questionnaire CreateDTO(QuestionnaireDTO dto){
-        Questionnaire questionnaire = new Questionnaire();
+        Questionnaire questionnaire = questionnaireRepository.findByCustomerId((Long.valueOf(dto.getCustomerId())));
+        if (questionnaire == null){
+            questionnaire = new Questionnaire();
+        }
         Customer customer = customerRepository.findById(Long.valueOf(dto.getCustomerId())).get();
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-DD");
 //        formatter = formatter.withLocale( putAppropriateLocaleHere );  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
