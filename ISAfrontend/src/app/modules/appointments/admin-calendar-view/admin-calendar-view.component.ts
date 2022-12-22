@@ -20,6 +20,7 @@ import {
 import { EventColor } from 'calendar-utils';
 import { AppointmentService } from '../services/appointment.service';
 import { aD } from '@fullcalendar/core/internal-common';
+import { Router } from '@angular/router';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -61,7 +62,7 @@ export class AdminCalendarViewComponent implements OnInit {
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
 
-  constructor(private appointmentService: AppointmentService, private toastr: ToastrService) {}
+  constructor(private appointmentService: AppointmentService, private toastr: ToastrService, private router: Router) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -131,6 +132,10 @@ export class AdminCalendarViewComponent implements OnInit {
         this.toastError();
     }
     );
+  }
+
+  addNewAppointment(){
+    this.router.navigate(['create-appointment']);
   }
 
   private toastError() {
