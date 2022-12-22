@@ -48,7 +48,7 @@ public class BloodBankController {
     }
 
     @CrossOrigin("http://localhost:4200")
-    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
+//    @PreAuthorize("hasRole('ROLE_HEADADMIN')")
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BloodBankDTO>> getAllPaginate(@Valid @RequestBody PagableRequestDTO request){
         try{

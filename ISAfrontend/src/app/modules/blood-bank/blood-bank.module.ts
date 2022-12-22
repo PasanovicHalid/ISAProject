@@ -16,8 +16,6 @@ const routes: Routes = [
   {
     path: 'list-banks',
     component: ListBanksComponent,
-    canActivate: [Guard],
-    data: { permittedRoles: ['ROLE_HEADADMIN'] },
   },
 ];
 

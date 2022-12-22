@@ -48,7 +48,7 @@ export class Guard implements CanActivate {
       }
       return true;
     } else {
-      this.router.navigate(['/login-user']);
+      this.router.navigate(['/login']);
       return false;
     }
   }
