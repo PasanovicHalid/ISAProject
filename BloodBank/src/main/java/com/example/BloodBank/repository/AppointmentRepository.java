@@ -1,5 +1,6 @@
 package com.example.BloodBank.repository;
 
+import com.example.BloodBank.model.Admin;
 import com.example.BloodBank.model.Appointment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+    Optional<Appointment> findByConfirmationCode(String confirmationCode);
 
     @Query("SELECT appointment FROM appointment appointment \n" +
             "WHERE (appointment.takenBy.id = :id) AND :Months6 < appointment.appointmentDate")

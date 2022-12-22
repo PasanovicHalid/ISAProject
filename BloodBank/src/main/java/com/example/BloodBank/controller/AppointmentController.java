@@ -107,6 +107,8 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/book")
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<Object> bookAppointment(@Valid @RequestBody BookAppointmentDTO dto){
@@ -114,6 +116,25 @@ public class AppointmentController {
             return ResponseEntity.status(HttpStatus.OK).body(appointmentService.BookAppointment(dto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+    @GetMapping("confirm/{confirmationCode}")
+    public ResponseEntity<Object> confirmBooking(@PathVariable("confirmationCode") String confirmationCode)throws Exception {
+        try {
+            Appointment appointment = appointmentService.ConfirmAppointment(confirmationCode);
+            return new ResponseEntity<>(appointment, HttpStatus.OK);
+        } catch (Exception ex) {
+            throw new Exception("Confirmation failed");
+        }
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/cancel")
+    public ResponseEntity<Object> cancelAppointment(@Valid @RequestBody BookAppointmentDTO dto){
+        try {
+            Appointment appointment = appointmentService.CancelAppointment(dto);
+            return new ResponseEntity<>(appointment, HttpStatus.OK);
+        } catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
