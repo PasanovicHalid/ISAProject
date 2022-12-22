@@ -48,6 +48,6 @@ export class AppointmentService {
       .set('page', request.pageIndex)
       .set('size', request.pageSize)
       .set('sort', request.sortColumn + ',' + request.sortDirection)
-    return this.http.get<any>(this.apiHost + 'api/appointment/pageable', { headers: this.headers, params: httpParams }).pipe(catchError(this.handleError));
+    return this.http.get<any>(this.apiHost + 'api/appointment/pageable/free', { headers: this.headers, params: httpParams }).pipe(catchError(this.handleError));
   }
 }

@@ -67,6 +67,10 @@ public class AppointmentService implements IAppointmentService {
     }
 
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
+        return appointmentRepository.findAll(page);
+    }
+
+    public Page<Appointment> GetAllPageableFree(Pageable page) throws Exception {
         return appointmentRepository.findAllAvailable(page);
     }
     @Transactional(readOnly = false)

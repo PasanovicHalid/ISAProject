@@ -60,12 +60,24 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "/pageable")
-    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<Object> getAllPageable(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
         try {
             Page<Appointment> appointments = appointmentService.GetAllPageable(page);
             PageImpl<AppointmentViewDTO> result = new PageImpl<>(appointments.getContent().stream().map(AppointmentMapper::toAppointmentViewDTO).collect(Collectors.toList()),
             page, appointments.getTotalElements());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/pageable/free")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    public ResponseEntity<Object> getAllPageableFree(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
+        try {
+            Page<Appointment> appointments = appointmentService.GetAllPageableFree(page);
+            PageImpl<AppointmentViewDTO> result = new PageImpl<>(appointments.getContent().stream().map(AppointmentMapper::toAppointmentViewDTO).collect(Collectors.toList()),
+                    page, appointments.getTotalElements());
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
