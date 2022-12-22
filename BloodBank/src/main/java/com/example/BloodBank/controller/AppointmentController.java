@@ -85,5 +85,15 @@ public class AppointmentController {
             throw new Exception("Confirmation failed");
         }
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/cancel")
+    public ResponseEntity<Object> cancelAppointment(@Valid @RequestBody BookAppointmentDTO dto){
+        try {
+            Appointment appointment = appointmentService.CancelAppointment(dto);
+            return new ResponseEntity<>(appointment, HttpStatus.OK);
+        } catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }

@@ -85,6 +85,28 @@ public class AppointmentService implements IAppointmentService {
 
         return appointment;
     }
+    @Transactional(readOnly = false)
+    public Appointment CancelAppointment(BookAppointmentDTO dto) throws Exception {
+        Appointment appointment = appointmentRepository.findById(dto.appointmentId).get();
+        Customer customer = customerRepository.findById(dto.customerId).get();
+
+        //provera da li je za manje od 24h
+
+        //provera da li je za appointment trenutno dodeljen ovaj korisnik
+        if(appointment.getTakenBy().getId() != customer.getId()){
+            return appointment;
+        }
+        //provera da li je booked ili pending
+        if(appointment.getExecuted() != AppointmentStatus.BOOKED && appointment.getExecuted() != AppointmentStatus.PENDING){
+            return appointment;
+        }
+        //namesti polja
+        appointment.setExecuted(AppointmentStatus.FREE);
+        appointment.setTakenBy(null);
+        appointmentRepository.save(appointment);
+        return appointment;
+
+    }
     private void SendConfirmationCode(Appointment app){
         Customer customer = customerRepository.findById(app.getTakenBy().getId()).get();
         emailSenderService.sendSimpleEmail(customer.getEmail(), "Confirm booked appointment", "Appointment activation link is: http://localhost:8086/api/appointment/confirm/"+ app.getConfirmationCode());
@@ -100,4 +122,5 @@ public class AppointmentService implements IAppointmentService {
             throw new Exception("Error confirming booking");
         }
     }
+
 }
