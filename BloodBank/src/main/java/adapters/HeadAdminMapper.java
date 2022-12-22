@@ -11,12 +11,12 @@ public class HeadAdminMapper {
         this.modelMapper = modelMapper;
     }
 
-    public static RegisterHeadAdminDTO toRegisterHeadAdminDTO(HeadAdmin headAdmin){
+    public static RegisterHeadAdminDTO toDTO(HeadAdmin headAdmin){
         RegisterHeadAdminDTO registerHeadAdminDTO = modelMapper.map(headAdmin, RegisterHeadAdminDTO.class);
         return registerHeadAdminDTO;
     }
 
-    public static HeadAdmin fromRegisterHeadAdminDTO(RegisterHeadAdminDTO registerHeadAdminDTO){
+    public static HeadAdmin fromDTO(RegisterHeadAdminDTO registerHeadAdminDTO){
         HeadAdmin headAdmin = modelMapper.map(registerHeadAdminDTO, HeadAdmin.class);
         return headAdmin;
     }
