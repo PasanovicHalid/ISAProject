@@ -1,9 +1,11 @@
 package adapters;
 
+import com.example.BloodBank.dto.AppointmentCreationDTO;
 import com.example.BloodBank.dto.AppointmentDTO;
 import com.example.BloodBank.dto.AppointmentViewDTO;
 import com.example.BloodBank.dto.BloodBankAppointmentViewDTO;
 import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.model.AppointmentStatus;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 
@@ -33,6 +35,10 @@ public class AppointmentMapper {
 
     public static Appointment fromAppointmentDTO(AppointmentDTO appointmentDTO){
         return modelMapper.map(appointmentDTO, Appointment.class);
+    }
+
+    public static Appointment fromAppointmentCreationDTO(AppointmentCreationDTO appointmentDTO){
+        return new Appointment(appointmentDTO.getDate(), appointmentDTO.getStart(), appointmentDTO.getEnd(), null, null, AppointmentStatus.FREE);
     }
 
     public static List<AppointmentDTO> toAppointmentDTOList(List<Appointment> appointments){

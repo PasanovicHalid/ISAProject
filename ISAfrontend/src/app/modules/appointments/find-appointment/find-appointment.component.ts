@@ -68,14 +68,8 @@ export class FindAppointmentComponent implements OnInit {
     );
   }
 
-  public chooseAppointment(appointmentId: number) {
-    let bookDto = new AppointmentBook();
-    bookDto.appointmentId = appointmentId;
-    this.id = localStorage.getItem('loggedUserId');
-    bookDto.customerId = this.id;
-    console.log(bookDto);
-    this.appointmentService.bookAppointment(bookDto).subscribe((res) => {
-      console.log(res);
-    });
+
+  public chooseAppointment(bankId: number) {
+      this.router.navigate(["select-appointment/", bankId])
   }
 }
