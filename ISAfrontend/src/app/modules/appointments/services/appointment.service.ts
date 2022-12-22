@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, filter, Observable, throwError } from 'rxjs';
 import { Appointment } from '../model/appointment';
 import { AppointmentCreation } from '../model/appointment-creation';
+import { BookAppointment } from '../model/book-appointment';
 import { PageRequest } from '../requests/page-request';
 
 @Injectable({
@@ -24,6 +25,16 @@ export class AppointmentService {
 
   createAppointment(appointment: AppointmentCreation): Observable<AppointmentCreation> {
     return this.http.post<any>(this.apiHost + 'api/appointment/free', appointment, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  reserveAppointment(bookAppointment: BookAppointment): Observable<any> {
+    return this.http.post<any>(this.apiHost + 'api/appointment/book', bookAppointment, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  checkIfCustomerDidSurvey(customerId : string): Observable<boolean> {
+    var httpParams = new HttpParams()
+      .set('customerId', customerId);
+    return this.http.get<boolean>(this.apiHost + "api/questionnaire/check", { headers: this.headers, params: httpParams }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -90,4 +90,4 @@ values
     (13, '2022-12-19', '11:32', '11:45', 1, 1007, 1023);
 
 insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
-values(20, false, false, false, 123123, true, '2022-10-19', false, false, false, false, 1023)
+values(20, false, false, false, 123123, true, '2022-12-19', false, false, false, false, 1023)

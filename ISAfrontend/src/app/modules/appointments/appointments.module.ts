@@ -34,7 +34,10 @@ const routes: Routes = [
   },
   { path: 'find-appointment', component: FindAppointmentComponent },
   { path: 'select-appointment/:id', component: SelectAppointmentComponent },
-  { path: 'answer-form', component: AnswerFormComponent },
+  { path: 'answer-form/:id', 
+  component: AnswerFormComponent,
+  canActivate: [Guard],
+  data: { permittedRoles: ['ROLE_CUSTOMER'] } },
 ];
 
 @NgModule({

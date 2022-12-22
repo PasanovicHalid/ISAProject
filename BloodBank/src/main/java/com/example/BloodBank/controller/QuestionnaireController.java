@@ -43,4 +43,14 @@ public class QuestionnaireController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/check")
+    //@PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    public ResponseEntity<Object> checkQuestionnaire(@RequestParam long customerId){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(questionnaireService.checkQuestionnaire(customerId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }

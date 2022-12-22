@@ -2,11 +2,15 @@ package com.example.BloodBank.controller;
 
 import adapters.AppointmentMapper;
 import com.example.BloodBank.dto.AppointmentCreationDTO;
+import com.example.BloodBank.dto.AppointmentReserveDTO;
 import com.example.BloodBank.dto.AppointmentViewDTO;
 import com.example.BloodBank.dto.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.service.AppointmentService;
 import com.example.BloodBank.service.BloodBankService;
+import com.example.BloodBank.service.service_interface.ICustomerService;
+import com.example.BloodBank.service.service_interface.IQuestionnaireService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,12 +32,18 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
     private final BloodBankService bloodBankService;
 
+    private final ICustomerService customerService;
+
+    private final IQuestionnaireService questionnaireService;
+
     private static AppointmentMapper appointmentMapper;
 
     @Autowired
-    public AppointmentController(AppointmentService appointmentService, BloodBankService bloodBankService, ModelMapper modelMapper) {
+    public AppointmentController(AppointmentService appointmentService, BloodBankService bloodBankService, ICustomerService customerService, IQuestionnaireService questionnaireService, ModelMapper modelMapper) {
         this.appointmentService = appointmentService;
         this.bloodBankService = bloodBankService;
+        this.customerService = customerService;
+        this.questionnaireService = questionnaireService;
         this.appointmentMapper = new AppointmentMapper(modelMapper);
     }
 
@@ -51,6 +60,7 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "/pageable")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<Object> getAllPageable(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
         try {
             Page<Appointment> appointments = appointmentService.GetAllPageable(page);
@@ -86,12 +96,12 @@ public class AppointmentController {
         }
     }
     @PostMapping(value = "/book")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<Object> bookAppointment(@Valid @RequestBody BookAppointmentDTO dto){
         try {
-            appointmentService.BookAppointment(dto);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(appointmentService.BookAppointment(dto));
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
