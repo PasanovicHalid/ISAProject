@@ -1,6 +1,7 @@
 package com.example.BloodBank.controller;
 
 import adapters.CustomerMapper;
+import adapters.HeadAdminMapper;
 import com.example.BloodBank.service.AdminService;
 import com.example.BloodBank.service.CustomerService;
 import org.modelmapper.ModelMapper;
@@ -15,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class HeadAdminController {
     private final AdminService adminService;
     private final ModelMapper modelMapper;
-    //private CustomerMapper customerMapper;
+    private HeadAdminMapper headAdminMapper;
     @Autowired
     public HeadAdminController(AdminService adminService, ModelMapper modelMapper){
         this.adminService = adminService;
         this.modelMapper = modelMapper;
-        //this.customerMapper = new CustomerMapper(modelMapper);
+        this.headAdminMapper = new HeadAdminMapper(modelMapper);
     }
 }
