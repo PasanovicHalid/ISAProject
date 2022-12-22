@@ -71,6 +71,9 @@ public class AppointmentService implements IAppointmentService {
     public Iterable<Appointment> GetAll() throws Exception {
         return appointmentRepository.findAll();
     }
+    public Iterable<Appointment> GetForCustomerId(String id) {
+        return  appointmentRepository.findByCustomerId(Long.valueOf(id));
+    }
 
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
         return appointmentRepository.findAll(page);

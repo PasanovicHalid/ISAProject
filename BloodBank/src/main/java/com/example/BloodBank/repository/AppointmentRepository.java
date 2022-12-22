@@ -24,4 +24,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("SELECT appointment FROM appointment appointment \n" +
             "WHERE appointment.executed = 3")
     Page<Appointment> findAllAvailable(Pageable page);
+
+    @Query("SELECT appointment FROM appointment appointment \n" +
+            "WHERE appointment.takenBy.id = :id")
+    List<Appointment> findByCustomerId(@Param("id") long customerId);
 }

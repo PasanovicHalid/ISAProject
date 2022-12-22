@@ -137,6 +137,15 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @CrossOrigin(origins = )
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/forCustomer/{id}")
+    public ResponseEntity<Object> getAppointmentsForCustomer(@PathVariable("id") String id) throws Exception {
+        try{
+            return new ResponseEntity<>(appointmentService.GetForCustomerId(id), HttpStatus.OK);
+
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
