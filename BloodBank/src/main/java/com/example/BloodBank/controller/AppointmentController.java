@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.stream.Collectors;
 
 @RestController
@@ -75,12 +79,27 @@ public class AppointmentController {
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public ResponseEntity<Object> getAllPageableFree(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
         try {
-            Page<Appointment> appointments = appointmentService.GetAllPageableFree(page);
+            Page<Appointment> appointments;
+            if(validFilter(startDate, startTime)){
+                appointments = appointmentService.GetAllPageableFreeDateFilter(page, Date.valueOf(startDate), Time.valueOf(startTime + ":00"));
+            } else {
+                appointments = appointmentService.GetAllPageableFree(page);
+            }
             PageImpl<AppointmentViewDTO> result = new PageImpl<>(appointments.getContent().stream().map(AppointmentMapper::toAppointmentViewDTO).collect(Collectors.toList()),
                     page, appointments.getTotalElements());
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    private boolean validFilter(String startDate, String startTime) {
+        try {
+            Date.valueOf(startDate);
+            LocalTime.parse(startTime);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 

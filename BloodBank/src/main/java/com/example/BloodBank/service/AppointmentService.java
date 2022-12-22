@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -72,6 +73,10 @@ public class AppointmentService implements IAppointmentService {
 
     public Page<Appointment> GetAllPageableFree(Pageable page) throws Exception {
         return appointmentRepository.findAllAvailable(page);
+    }
+
+    public Page<Appointment> GetAllPageableFreeDateFilter(Pageable page, Date startDate, Time startTime) throws Exception {
+        return appointmentRepository.findAllAvailableDateFilter(page, startDate, startTime);
     }
     @Transactional(readOnly = false)
     public Boolean BookAppointment(BookAppointmentDTO dto) throws Exception {

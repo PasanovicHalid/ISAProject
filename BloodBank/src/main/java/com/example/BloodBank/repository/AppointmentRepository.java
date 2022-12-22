@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +23,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("SELECT appointment FROM appointment appointment \n" +
             "WHERE appointment.executed = 3")
     Page<Appointment> findAllAvailable(Pageable page);
+
+    @Query("SELECT appointment FROM appointment appointment \n" +
+            "WHERE appointment.executed = 3 AND appointment.appointmentDate = :startDate AND appointment.startTime = :startTime")
+    Page<Appointment> findAllAvailableDateFilter(Pageable page, @Param("startDate") Date startDate, @Param("startTime") Time startTime);
 }
