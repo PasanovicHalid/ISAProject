@@ -37,7 +37,7 @@ const routes: Routes = [
     path: 'fill-form',
     component: FillFormComponent,
     canActivate: [Guard],
-    data: { permittedRoles: ['ROLE_HEADADMIN'] },
+    data: { permittedRoles: ['ROLE_HEADADMIN', 'ROLE_CUSTOMER'] },
   },
   { path: 'view-users', component: ViewUsersComponent },
   { path: 'login', component: LoginUserComponent },

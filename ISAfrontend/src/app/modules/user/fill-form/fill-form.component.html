@@ -254,10 +254,7 @@
                 </div>
               </div>
 
-              <div
-                class="row"
-                *ngIf="questionnaire.customer.gender.valueOf() === 1"
-              >
+              <div class="row" *ngIf="loggedCustomer.gender.valueOf() === 1">
                 <div class="col-md-6 mb-4">
                   <h6 class="mb-2 pb-1 secondState">
                     24. Are you in second state:

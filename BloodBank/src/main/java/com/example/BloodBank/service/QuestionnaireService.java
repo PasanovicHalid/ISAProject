@@ -1,25 +1,53 @@
 package com.example.BloodBank.service;
 
+import com.example.BloodBank.dto.QuestionnaireDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
+import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.model.Questionnaire;
+import com.example.BloodBank.repository.CustomerRepository;
 import com.example.BloodBank.repository.QuestionnaireRepository;
 import com.example.BloodBank.service.service_interface.IQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 @Service
 public class QuestionnaireService implements IQuestionnaireService {
     private final QuestionnaireRepository questionnaireRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public QuestionnaireService(QuestionnaireRepository questionnaireRepository) { this.questionnaireRepository = questionnaireRepository;}
+    public QuestionnaireService(QuestionnaireRepository questionnaireRepository,
+                                CustomerRepository customerRepository) {
+        this.questionnaireRepository = questionnaireRepository;
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public Questionnaire Create(Questionnaire entity) throws Exception {
         return questionnaireRepository.save(entity);
+    }
+
+    public Questionnaire CreateDTO(QuestionnaireDTO dto){
+        Questionnaire questionnaire = new Questionnaire();
+        Customer customer = customerRepository.findById(Long.valueOf(dto.getCustomerId())).get();
+
+        questionnaire.setCustomer(customer);
+        questionnaire.setDenied(dto.getDenied());
+        questionnaire.setEaten(dto.getEaten());
+        questionnaire.setDonated(dto.getDonated());
+        questionnaire.setHealthy(dto.getHealthy());
+        questionnaire.setDangerousJob(dto.getDangerousJob());
+        questionnaire.setPregnant(dto.getPregnant());
+        questionnaire.setDonorNumber(dto.getDonorNumber());
+        questionnaire.setFillDate(dto.getFillDate());
+        questionnaire.setMenstruating(dto.getMenstruating());
+        questionnaire.setSecondState(dto.getSecondState());
+        questionnaireRepository.save(questionnaire);
+        return  questionnaire;
     }
 
     @Override

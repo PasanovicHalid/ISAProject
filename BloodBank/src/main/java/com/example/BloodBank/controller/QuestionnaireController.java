@@ -1,5 +1,6 @@
 package com.example.BloodBank.controller;
 
+import com.example.BloodBank.dto.QuestionnaireDTO;
 import com.example.BloodBank.model.Questionnaire;
 import com.example.BloodBank.service.QuestionnaireService;
 import org.modelmapper.ModelMapper;
@@ -35,9 +36,9 @@ public class QuestionnaireController {
             value = "/create", consumes = "application/json",
             produces = "application/json"
     )
-    public ResponseEntity<Object> createQuestionnaire(@Valid @RequestBody Questionnaire newQuestionnaire){
+    public ResponseEntity<Object> createQuestionnaire(@Valid @RequestBody QuestionnaireDTO newQuestionnaire){
         try {
-            questionnaireService.Create(newQuestionnaire);
+            questionnaireService.CreateDTO(newQuestionnaire);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
@@ -51,6 +52,14 @@ public class QuestionnaireController {
             return ResponseEntity.status(HttpStatus.OK).body(questionnaireService.checkQuestionnaire(customerId));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+    @GetMapping(value = "/getAll")
+    public  ResponseEntity<Object> getAll(){
+        try{
+            return new ResponseEntity<>(questionnaireService.GetAll(), HttpStatus.OK);
+        } catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

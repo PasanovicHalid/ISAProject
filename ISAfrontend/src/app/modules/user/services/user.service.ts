@@ -7,9 +7,10 @@ import {
 import { Observable, catchError, throwError } from 'rxjs';
 import { User } from 'src/app/model/Users/user';
 import { ViewUser } from '../model/view-user.model';
+import { Customer } from 'src/app/model/Users/customer';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   apiHost: string = 'http://localhost:8086/';
@@ -17,24 +18,50 @@ export class UserService {
     'Content-Type': 'application/json',
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getUsersWithSearch(page: number= 0, size: number = 2, search : string = ''): Observable<ViewUser[]>{
-    return this.http.get<ViewUser[]>(this.apiHost + 'api/user?page=' +page +'&size=' + size + '&search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
+  getUsersWithSearch(
+    page: number = 0,
+    size: number = 2,
+    search: string = ''
+  ): Observable<ViewUser[]> {
+    return this.http
+      .get<ViewUser[]>(
+        this.apiHost +
+          'api/user?page=' +
+          page +
+          '&size=' +
+          size +
+          '&search=' +
+          search,
+        { headers: this.headers }
+      )
+      .pipe(catchError(this.handleError));
   }
 
-  getNumberOfUsersWithSearch(search: string = ''):  Observable<number>{
-    return this.http.get<number>(this.apiHost + 'api/user/amount?search=' + search, {headers: this.headers}).pipe(catchError(this.handleError));
+  getNumberOfUsersWithSearch(search: string = ''): Observable<number> {
+    return this.http
+      .get<number>(this.apiHost + 'api/user/amount?search=' + search, {
+        headers: this.headers,
+      })
+      .pipe(catchError(this.handleError));
   }
-
+  getUserById(id: any): Observable<any> {
+    return this.http
+      .get<any>(this.apiHost + 'api/user/' + id, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse) {
-    if(error.status == 406){
+    if (error.status == 406) {
       var map = new Map<string, string>();
-      Object.keys(error.error).forEach(key => {  
-        map.set(key, error.error[key] )
+      Object.keys(error.error).forEach((key) => {
+        map.set(key, error.error[key]);
       });
-      localStorage.setItem('errormap', JSON.stringify(Array.from(map.entries())));
+      localStorage.setItem(
+        'errormap',
+        JSON.stringify(Array.from(map.entries()))
+      );
     }
 
     return throwError(() => new Error(error.status + '\n' + error.error));
