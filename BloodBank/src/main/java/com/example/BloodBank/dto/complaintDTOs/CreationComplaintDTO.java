@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.complaintDTOs;
 
 import com.example.BloodBank.model.ComplaintType;
 

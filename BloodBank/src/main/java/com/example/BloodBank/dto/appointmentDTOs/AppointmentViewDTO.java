@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.appointmentDTOs;
 
 import com.example.BloodBank.model.AppointmentStatus;
 import lombok.AllArgsConstructor;

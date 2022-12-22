@@ -2,11 +2,10 @@ package com.example.BloodBank.controller;
 
 import adapters.ComplaintMapper;
 import adapters.CreationComplaintMapper;
-import com.example.BloodBank.dto.*;
+import com.example.BloodBank.dto.complaintDTOs.ComplaintDTO;
+import com.example.BloodBank.dto.complaintDTOs.CreationComplaintDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Complaint;
-import com.example.BloodBank.model.User;
-import com.example.BloodBank.service.AdminService;
 import com.example.BloodBank.service.ComplaintService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -80,7 +79,7 @@ public class ComplaintController {
 
     @GetMapping
     public ResponseEntity<List<ComplaintDTO>> getComplaints(@RequestParam("page") Optional<String> pageNumber,
-                                                       @RequestParam("size") Optional<String> size) {
+                                                            @RequestParam("size") Optional<String> size) {
         try {
             Pageable page;
             page = PageRequest.of(Integer.valueOf(pageNumber.get()), Integer.valueOf(size.get()));

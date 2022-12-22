@@ -1,12 +1,8 @@
 package adapters;
 
-import com.example.BloodBank.dto.AppointmentDTO;
-import com.example.BloodBank.dto.AppointmentViewDTO;
-import com.example.BloodBank.dto.BloodBankAppointmentViewDTO;
-import com.example.BloodBank.dto.CalendarAppointmentDTO;
+import com.example.BloodBank.dto.appointmentDTOs.CalendarAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 
 import java.sql.Date;
 import java.time.LocalDate;

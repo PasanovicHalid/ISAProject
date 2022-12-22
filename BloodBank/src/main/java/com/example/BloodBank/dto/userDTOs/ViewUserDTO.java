@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.userDTOs;
 
 import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.Gender;

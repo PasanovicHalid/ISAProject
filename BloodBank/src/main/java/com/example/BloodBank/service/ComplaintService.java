@@ -1,6 +1,6 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.dto.ComplaintDTO;
+import com.example.BloodBank.dto.complaintDTOs.ComplaintDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.*;
 import com.example.BloodBank.repository.ComplaintRepository;

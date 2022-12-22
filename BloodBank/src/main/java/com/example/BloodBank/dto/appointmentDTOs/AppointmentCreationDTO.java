@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.appointmentDTOs;
 
 import java.sql.Date;
 import java.sql.Time;

@@ -1,9 +1,9 @@
 package adapters;
 
-import com.example.BloodBank.dto.AppointmentCreationDTO;
-import com.example.BloodBank.dto.AppointmentDTO;
-import com.example.BloodBank.dto.AppointmentViewDTO;
-import com.example.BloodBank.dto.BloodBankAppointmentViewDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentCreationDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentViewDTO;
+import com.example.BloodBank.dto.appointmentDTOs.BloodBankAppointmentViewDTO;
 import com.example.BloodBank.model.Appointment;
 import com.example.BloodBank.model.AppointmentStatus;
 import org.modelmapper.ModelMapper;

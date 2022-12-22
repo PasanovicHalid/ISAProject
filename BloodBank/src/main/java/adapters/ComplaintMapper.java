@@ -1,15 +1,10 @@
 package adapters;
 
-import com.example.BloodBank.dto.ComplaintDTO;
-import com.example.BloodBank.dto.CreationComplaintDTO;
-import com.example.BloodBank.dto.ViewUserDTO;
+import com.example.BloodBank.dto.complaintDTOs.ComplaintDTO;
 import com.example.BloodBank.model.Complaint;
-import com.example.BloodBank.model.ComplaintStatus;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.modelmapper.TypeToken;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

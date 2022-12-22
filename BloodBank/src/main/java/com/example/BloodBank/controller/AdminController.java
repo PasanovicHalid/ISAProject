@@ -1,10 +1,10 @@
 package com.example.BloodBank.controller;
 
 
-import com.example.BloodBank.dto.AdminDTO;
+import com.example.BloodBank.dto.userDTOs.AdminDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Admin;
-import com.example.BloodBank.dto.RegistrationAdminDTO;
+import com.example.BloodBank.dto.userDTOs.RegistrationAdminDTO;
 import com.example.BloodBank.service.AdminService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

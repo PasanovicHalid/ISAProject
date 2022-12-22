@@ -2,8 +2,8 @@ package com.example.BloodBank.controller;
 
 import adapters.UserMapper;
 import adapters.ViewUserMapper;
-import com.example.BloodBank.dto.UserDTO;
-import com.example.BloodBank.dto.ViewUserDTO;
+import com.example.BloodBank.dto.userDTOs.UserDTO;
+import com.example.BloodBank.dto.userDTOs.ViewUserDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.UserService;

@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.appointmentDTOs;
 
 public class BloodBankAppointmentViewDTO {
     private String name;

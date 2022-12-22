@@ -1,7 +1,6 @@
 package adapters;
 
-import com.example.BloodBank.dto.UserDTO;
-import com.example.BloodBank.dto.ViewUserDTO;
+import com.example.BloodBank.dto.userDTOs.ViewUserDTO;
 import com.example.BloodBank.model.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

@@ -1,16 +1,12 @@
 package com.example.BloodBank.controller;
 
 import adapters.AppointmentMapper;
-import com.example.BloodBank.dto.AppointmentCreationDTO;
-import com.example.BloodBank.dto.AppointmentReserveDTO;
-import com.example.BloodBank.dto.AppointmentViewDTO;
-import com.example.BloodBank.dto.BookAppointmentDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentCreationDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentViewDTO;
+import com.example.BloodBank.dto.appointmentDTOs.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
-import com.example.BloodBank.model.Customer;
 import adapters.CalendarAppointmentMapper;
-import com.example.BloodBank.dto.AppointmentViewDTO;
-import com.example.BloodBank.dto.CalendarAppointmentDTO;
-import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.dto.appointmentDTOs.CalendarAppointmentDTO;
 import com.example.BloodBank.service.AdminService;
 import com.example.BloodBank.service.AppointmentService;
 import com.example.BloodBank.service.BloodBankService;
