@@ -21,7 +21,7 @@ import { AdminsProfileComponent } from './admins-profile/admins-profile.componen
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
 import { ViewCustomersComponent } from './view-customers/view-customers.component';
-import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component'
+import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 
 const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
@@ -49,8 +49,7 @@ const routes: Routes = [
     RegisterAdminComponent,
     FillFormComponent,
     ViewUsersComponent,
-    ViewCustomersComponent
-
+    ViewCustomersComponent,
   ],
   imports: [
     CommonModule,

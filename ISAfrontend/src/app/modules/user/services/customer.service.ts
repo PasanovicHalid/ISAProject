@@ -11,6 +11,7 @@ import { Customer } from 'src/app/model/Users/customer';
   providedIn: 'root',
 })
 export class CustomerService {
+  public customer: Customer
   apiHost: string = 'http://localhost:8086/';
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',

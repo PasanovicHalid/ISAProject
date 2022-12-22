@@ -18,12 +18,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminCreateAppointmentComponent } from './admin-create-appointment/admin-create-appointment.component';
 import { FindAppointmentComponent } from './find-appointment/find-appointment.component';
 import { AnswerQuestionaireComponent } from './answer-questionaire/answer-questionaire.component';
+import { ViewCustomersAppointmentComponent } from './view-customers-appointment/view-customers-appointment.component';
+import { StartAppointmentComponent } from './start-appointment/start-appointment.component';
 
 const routes: Routes = [
   { path: 'calendar', component: AdminCalendarComponent },
   { path: 'create-appointment', component: AdminCreateAppointmentComponent },
   { path: 'find-appointment', component: FindAppointmentComponent },
   { path: 'answer-questionaire', component: AnswerQuestionaireComponent },
+  { path: 'view-customers-appiontments', component: ViewCustomersAppointmentComponent},
+  { path: 'start-appointment', component: StartAppointmentComponent}
 ];
 
 @NgModule({
@@ -31,11 +35,12 @@ const routes: Routes = [
     AdminCalendarComponent,
     AdminCreateAppointmentComponent,
     FindAppointmentComponent,
-    AnswerQuestionaireComponent
+    AnswerQuestionaireComponent,
+    ViewCustomersAppointmentComponent,
+    StartAppointmentComponent
   ],
   imports: [
     CommonModule,
-    FullCalendarModule,
     MaterialModule,
     FormsModule, 
     ReactiveFormsModule,
@@ -50,6 +55,7 @@ const routes: Routes = [
     MatDatepickerModule,
     NgxPaginationModule,
     RouterModule.forChild(routes),
+    FullCalendarModule,
   ],
 })
 export class AppointmentsModule { }

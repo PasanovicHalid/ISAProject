@@ -67,6 +67,7 @@ public class UserController {
         }
     }
 
+
 //    @GetMapping(path = "{page}/{size}/{search}")
     @GetMapping
     public ResponseEntity<List<ViewUserDTO>> getUsers(@RequestParam("page") Optional<String> pageNumber,

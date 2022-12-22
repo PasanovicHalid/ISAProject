@@ -1,6 +1,7 @@
 import { Address } from './address.model';
 
 export class BloodBank {
+  bankID: number = -1;
   name: string = '';
   email: string = '';
   description: string = '';

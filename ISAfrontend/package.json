@@ -24,6 +24,7 @@
     "@fullcalendar/bootstrap5": "^6.0.0",
     "@fullcalendar/core": "^6.0.0",
     "@fullcalendar/daygrid": "^6.0.0",
+    "@fullcalendar/interaction": "^6.0.0",
     "@fullcalendar/timegrid": "^6.0.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",

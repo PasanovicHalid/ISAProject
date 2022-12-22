@@ -12,25 +12,31 @@ public class Appointment {
     private long id;
 
     private Date appointmentDate;
-
+    private String comment;
     private Time startTime;
 
+    private TypeOfBlood typeOfBlood;
+
+
+
+    private int quantityOfBlood;
     private Time endTime;
 
     @Column(nullable = false)
     private AppointmentStatus executed;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = true)
     private Customer takenBy;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "bloodBank_id", referencedColumnName = "bankID", nullable = false)
     private BloodBank location;
 
     @Version
     @Column(columnDefinition = "integer DEFAULT 0", nullable = false)
     private Integer version;
+
 
     public Appointment(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
         this.id = id;
@@ -51,6 +57,13 @@ public class Appointment {
 
     public void setId(long id) {
         this.id = id;
+    }
+    public TypeOfBlood getTypeOfBlood() {
+        return typeOfBlood;
+    }
+
+    public void setTypeOfBlood(TypeOfBlood typeOfBlood) {
+        this.typeOfBlood = typeOfBlood;
     }
 
     public Date getAppointmentDate() {
@@ -73,9 +86,20 @@ public class Appointment {
         return endTime;
     }
 
+    public int getQuantityOfBlood() {
+        return quantityOfBlood;
+    }
+
+    public void setQuantityOfBlood(int quantityOfBlood) {
+        this.quantityOfBlood = quantityOfBlood;
+    }
+
     public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
+
+
+
 
     public Customer getTakenBy() {
         return takenBy;
@@ -108,4 +132,13 @@ public class Appointment {
     public void setExecuted(AppointmentStatus executed) {
         this.executed = executed;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 }

@@ -47,6 +47,11 @@ export class ViewCustomersComponent implements OnInit {
       }
     );
   }
+  public navigateToProfile(customer: Customer){
+    console.log(customer);
+    this.customerService.customer = customer;
+    this.router.navigate(['view-customers-appointments']);
+  }; 
 
   public getNumberOfCustomers(searchTerm: string): void{
     this.customerService.getNumberOfCustomersWithSearch(searchTerm).subscribe(

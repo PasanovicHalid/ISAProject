@@ -30,13 +30,13 @@
                                       currentPage: page,
                                       totalItems: count
                                     };">
-                    <td>{{user.firstName}} {{user.lastName}}</td>
-                    <td>{{user.dob}}</td>
-                    <td>{{user.gender}}</td>
-                    <td>{{user.address.street}} {{user.address.number}}, {{user.address.city}}, {{user.address.country}}
+                    <td (click)="navigateToProfile(user)">{{user.firstName}} {{user.lastName}}</td>
+                    <td (click)="navigateToProfile(user)">{{user.dob}}</td>
+                    <td (click)="navigateToProfile(user)">{{user.gender}}</td>
+                    <td (click)="navigateToProfile(user)">{{user.address.street}} {{user.address.number}}, {{user.address.city}}, {{user.address.country}}
                     </td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.role}}</td>
+                    <td (click)="navigateToProfile(user)">{{user.email}}</td>
+                    <td (click)="navigateToProfile(user)">{{user.role}}</td>
                   </tr>
                 </tbody>
               </table>
