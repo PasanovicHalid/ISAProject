@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -28,7 +27,6 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
-  { path: 'calendar', component: AdminCalendarComponent },
   {
     path: 'create-appointment', 
     component: AdminCreateAppointmentComponent, 
@@ -46,7 +44,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AdminCalendarComponent,
     AdminCreateAppointmentComponent,
     FindAppointmentComponent,
     SelectAppointmentComponent,
