@@ -44,9 +44,11 @@ export class StartAppointmentComponent implements OnInit {
   console.log(this.selectedAppointment);
   this.appointmentService.updateAppointment(this.selectedAppointment).subscribe(res => {
     console.log(res);
-    
   });
+}
 
+seeQuestionnaire(){
+  this.router.navigate(['answer-form/', this.selectedAppointment.id]);
 }
 
 }

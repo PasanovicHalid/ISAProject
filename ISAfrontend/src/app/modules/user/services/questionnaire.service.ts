@@ -25,6 +25,7 @@ export class QuestionnaireService {
       .pipe(catchError(this.handleValidationError));
   }
 
+
   private handleValidationError(error: HttpErrorResponse) {
     var map = new Map<string, string>();
     Object.keys(error.error).forEach((key) => {

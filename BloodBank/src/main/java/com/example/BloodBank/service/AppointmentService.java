@@ -84,7 +84,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public Iterable<Appointment> GetByCustomerId(Long id) throws Exception {
+    public List<Appointment> GetByCustomerId(Long id) throws Exception {
         List<Appointment> retVal = new ArrayList<>();
         Iterable<Appointment> appointments = appointmentRepository.findAll();
         for(Appointment appointment : appointments) {

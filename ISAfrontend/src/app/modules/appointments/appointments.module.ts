@@ -45,7 +45,7 @@ const routes: Routes = [
     path: 'answer-form/:id',
     component: AnswerFormComponent,
     canActivate: [Guard],
-    data: { permittedRoles: ['ROLE_CUSTOMER'] }
+    data: { permittedRoles: ['ROLE_CUSTOMER','ROLE_ADMIN'] }
   },
   { path: 'admin-calendar', component: AdminCalendarViewComponent },
 ];
