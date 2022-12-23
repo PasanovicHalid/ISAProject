@@ -99,19 +99,18 @@ public class CustomerService implements ICustomerService {
     public Iterable<Customer> GetAll() throws Exception {
         return customerRepository.findAll();
     }
-<<<<<<< HEAD
+
     @Override
     public int getCustomersAmountWithSearch(String search) {
         List<User> users = userRepository.findAllCustomersBySearch(search.toLowerCase());
         return users.size();
     }
 
-=======
+
 
     public Optional<Customer> findByEmail(String email) {
         if(!customerRepository.findByEmail(email).isPresent())
             throw new IllegalStateException("Customer with that kind of email doesn't exist!");
         return customerRepository.findByEmail(email);
     }
->>>>>>> ebd029f29c0e680f0114e762f1e69253970af4ad
 }
