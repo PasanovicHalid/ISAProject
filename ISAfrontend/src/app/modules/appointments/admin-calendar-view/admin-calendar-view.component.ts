@@ -61,6 +61,7 @@ export class AdminCalendarViewComponent implements OnInit {
 
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
+  public monthAndYear: Date = new Date();
 
   constructor(private appointmentService: AppointmentService, private toastr: ToastrService, private router: Router) {}
 
@@ -105,6 +106,7 @@ export class AdminCalendarViewComponent implements OnInit {
     console.log(this.viewDate)
     console.log(this.month)
     this.viewDate = new Date(this.month)
+    console.log(this.viewDate)
   }
 
   setView(view: CalendarView) {
@@ -158,6 +160,10 @@ export class AdminCalendarViewComponent implements OnInit {
       this.toastr.error(this.errorMessage.message);
     }
   }
-
+  public monthChanged(value: any, widget: any): void {
+    this.monthAndYear = value;
+    this.viewDate = new Date(this.monthAndYear!)
+    widget.close();
+  }
 
 }

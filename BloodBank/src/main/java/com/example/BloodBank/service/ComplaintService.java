@@ -20,14 +20,16 @@ public class ComplaintService implements IComplaintService {
     private final ComplaintRepository complaintRepository;
     private final CustomerService customerService;
     private final BloodBankService bloodBankService;
+    private final HeadAdminService headAdminService;
     private final AdminService adminService;
     @Autowired
     public ComplaintService(ComplaintRepository complaintRepository,CustomerService customerService,
-                            BloodBankService bloodBankService, AdminService adminService) {
+                            BloodBankService bloodBankService, AdminService adminService,HeadAdminService headAdminService) {
         this.complaintRepository = complaintRepository;
         this.customerService = customerService;
         this.bloodBankService = bloodBankService;
         this.adminService = adminService;
+        this.headAdminService = headAdminService;
     }
 
     @Override
@@ -48,6 +50,7 @@ public class ComplaintService implements IComplaintService {
         if(complaint.isPresent()){
             complaint.get().setComplaintStatus(ComplaintStatus.ANSWERED);
             complaint.get().setAnswer(entity.getAnswer());
+            complaint.get().setHeadAdmin(headAdminService.Read(entity.getHeadAdmin().getId()));
             return complaintRepository.save(complaint.get());
         } else {
             throw new EntityDoesntExistException(entity.getComplaintID());
