@@ -46,7 +46,7 @@ public class HeadAdminService implements IHeadAdminService {
 
     @Override
     public HeadAdmin Read(Long id) throws Exception {
-        return null;
+        return headAdminRepository.findById(id).get();
     }
 
     @Override
