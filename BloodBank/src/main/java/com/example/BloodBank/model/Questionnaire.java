@@ -1,5 +1,6 @@
 package com.example.BloodBank.model;
 
+import com.example.BloodBank.dto.QuestionnaireDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,4 +39,5 @@ public class Questionnaire {
     public boolean checkIfValidForReservationOfAppointment() {
         return fillDate.isAfter(LocalDate.now().minusMonths(1));
     }
+
 }

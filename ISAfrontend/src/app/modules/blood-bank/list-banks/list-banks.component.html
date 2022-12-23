@@ -12,7 +12,7 @@
                 <tr>
                   <td>
                     <div *ngIf="filterSelect == '0' || filterSelect == '1'">
-                      <mat-form-field appearance="standard" class="w-100">
+                      <mat-form-field class="w-100">
                         <mat-label>Search</mat-label>
                         <input matInput [(ngModel)]="searchQuery" type="text">
                         <button matSuffix mat-icon-button aria-label="Clear" (click)="loadBloodBanks()">
@@ -23,13 +23,13 @@
                     <div *ngIf="filterSelect == '2'" style="display: flex;">
                       <table style="margin-left: auto; margin-right: 0%;" cellspacing="0">
                         <td>
-                          <mat-form-field appearance="standard" class="w-100">
+                          <mat-form-field class="w-100">
                             <mat-label>Bottom Rating</mat-label>
                             <input matInput [(ngModel)]="bottomRange" step="any" type="number">
                           </mat-form-field>
                         </td>
                         <td>
-                          <mat-form-field appearance="standard" class="w-100">
+                          <mat-form-field class="w-100">
                             <mat-label>Top Rating</mat-label>
                             <input matInput [(ngModel)]="topRange" step="any" type="number">
                           </mat-form-field>
@@ -43,7 +43,7 @@
                     </div>
                   </td>
                   <td>
-                    <mat-form-field appearance="standard">
+                    <mat-form-field>
                       <mat-label>Filter</mat-label>
                       <select matNativeControl [(ngModel)]="filterSelect" (ngModelChange)="searchQuery = ''">
                         <option [value]="0">Name</option>

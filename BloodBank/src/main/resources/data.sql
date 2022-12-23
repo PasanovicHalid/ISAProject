@@ -100,4 +100,5 @@ values
     (1042, '2022-12-19', 'ff', '11:31', 'FREE', '11:45', 0, 1009, null),
     (1043, '2022-12-19', 'ff', '11:32', 'FREE', '11:45', 0, 1007, null);
 
-
+insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
+values(20, false, false, false, 123123, true, '2022-10-19', false, false, false, false, 1023)

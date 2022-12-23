@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,4 +34,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("select a from appointment a where (a.executed = 'DONE' or a.executed = 'PENDING') and  a.location.bankID = ?1")
     List<Appointment> findDoneAndPendingAppointmentsByBankId(Long bankId);
 
+    @Query("SELECT appointment FROM appointment appointment \n" +
+            "WHERE appointment.executed = 'FREE' AND appointment.appointmentDate = :startDate AND appointment.startTime = :startTime")
+    Page<Appointment> findAllAvailableDateFilter(Pageable page, @Param("startDate") Date startDate, @Param("startTime") Time startTime);
 }

@@ -8,12 +8,13 @@
         >
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">
-              Please fill out the questionnaire
+              Please update the questionnaire so that you will be able to book
+              appointment
             </h3>
             <form
               novalidate
               #questionnaireForm="ngForm"
-              (ngSubmit)="saveQuestionnaire()"
+              (ngSubmit)="updateQuestionnaireAndReserveAppointment()"
             >
               <div class="row">
                 <div class="col-md-6 mb-4">
@@ -24,7 +25,6 @@
                       class="form-control form-control-lg"
                       name="donorNumber"
                       required
-                      disabled
                       pattern="([0-9]+)"
                       [(ngModel)]="questionnaire.donorNumber"
                       #donorNumberVar="ngModel"
@@ -33,6 +33,7 @@
                           (donorNumberVar.touched || donorNumberVar.dirty) &&
                           !donorNumberVar.valid
                       }"
+                      [disabled]="questionairePresent"
                     />
                     <span class="invalid-feedback">
                       <span *ngIf="donorNumberVar.errors?.['pattern']">
@@ -58,8 +59,8 @@
                       name="date"
                       required
                       disabled
-                      [ngModel]="questionnaire.date | date : 'yyyy-MM-dd'"
-                      (ngModelChange)="questionnaire.date = $event"
+                      [ngModel]="questionnaire.fillDate | date : 'yyyy-MM-dd'"
+                      (ngModelChange)="questionnaire.fillDate = $event"
                       #dateVar="ngModel"
                     />
 
@@ -84,7 +85,7 @@
                       type="radio"
                       name="donatedOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.donated"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -96,7 +97,7 @@
                       type="radio"
                       name="donatedOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.donated"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -113,7 +114,7 @@
                       type="radio"
                       name="deniedOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.denied"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -125,7 +126,7 @@
                       type="radio"
                       name="deniedOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.denied"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -143,7 +144,7 @@
                       type="radio"
                       name="healthyOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.healthy"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -155,7 +156,7 @@
                       type="radio"
                       name="healthyOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.healthy"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -172,7 +173,7 @@
                       type="radio"
                       name="eatenOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.eaten"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -184,7 +185,7 @@
                       type="radio"
                       name="eatenOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.eaten"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -204,7 +205,7 @@
                       type="radio"
                       name="dangerousJobOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.dangerousJob"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -216,7 +217,7 @@
                       type="radio"
                       name="dangerousJobOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.dangerousJob"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -233,7 +234,7 @@
                       type="radio"
                       name="takingMedicineOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.takingMedicine"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -245,7 +246,7 @@
                       type="radio"
                       name="takingMedicineOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.takingMedicine"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -253,7 +254,7 @@
                 </div>
               </div>
 
-              <div class="row" *ngIf="loggedCustomer.gender.valueOf() === 1">
+              <div class="row" *ngIf="gender == 1">
                 <div class="col-md-6 mb-4">
                   <h6 class="mb-2 pb-1 secondState">
                     24. Are you in second state:
@@ -265,7 +266,7 @@
                       type="radio"
                       name="secondStateOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.secondState"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -277,7 +278,7 @@
                       type="radio"
                       name="secondStateOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.secondState"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -294,7 +295,7 @@
                       type="radio"
                       name="menstruatingOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.menstruating"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -306,7 +307,7 @@
                       type="radio"
                       name="menstruatingOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.menstruating"
                     />
                     <label class="form-check-label" for="false">False</label>
@@ -323,7 +324,7 @@
                       type="radio"
                       name="pregnantOptions"
                       id="true"
-                      value="true"
+                      [value]="true"
                       [(ngModel)]="questionnaire.pregnant"
                     />
                     <label class="form-check-label" for="true">True</label>
@@ -335,7 +336,7 @@
                       type="radio"
                       name="pregnantOptions"
                       id="false"
-                      value="false"
+                      [value]="false"
                       [(ngModel)]="questionnaire.pregnant"
                     />
                     <label class="form-check-label" for="false">False</label>

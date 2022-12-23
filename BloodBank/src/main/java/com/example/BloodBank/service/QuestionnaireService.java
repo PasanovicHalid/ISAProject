@@ -3,6 +3,7 @@ package com.example.BloodBank.service;
 import com.example.BloodBank.dto.QuestionnaireDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Customer;
+import com.example.BloodBank.exceptions.QuestionnaireForCustomerDoesntExist;
 import com.example.BloodBank.model.Questionnaire;
 import com.example.BloodBank.repository.CustomerRepository;
 import com.example.BloodBank.repository.QuestionnaireRepository;
@@ -77,7 +78,7 @@ public class QuestionnaireService implements IQuestionnaireService {
 //
 //            return questionnaireRepository.save(temp);
 //        }
-        return null;
+        return questionnaireRepository.save(entity);
     }
 
     @Override
@@ -97,5 +98,14 @@ public class QuestionnaireService implements IQuestionnaireService {
             return false;
         }
         return questionnaire.checkIfValidForReservationOfAppointment();
+    }
+
+    @Override
+    public Questionnaire getForCustomer(long id) throws Exception {
+        Questionnaire questionnaire = questionnaireRepository.findByCustomerId(id);
+        if(questionnaire == null){
+            throw new QuestionnaireForCustomerDoesntExist();
+        }
+        return questionnaire;
     }
 }
