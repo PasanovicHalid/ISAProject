@@ -27,26 +27,28 @@ import { SelectAppointmentComponent } from './select-appointment/select-appointm
 import { AnswerFormComponent } from './answer-form/answer-form.component';
 import { Guard } from '../auth/guard';
 import { AdminCalendarViewComponent } from './admin-calendar-view/admin-calendar-view.component';
-//import { CalendarModule, DateAdapter } from 'angular-calendar';
-//import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
   { path: 'calendar', component: AdminCalendarComponent },
   {
-    path: 'create-appointment', 
-    component: AdminCreateAppointmentComponent, 
+    path: 'create-appointment',
+    component: AdminCreateAppointmentComponent,
     canActivate: [Guard],
     data: { permittedRoles: ['ROLE_ADMIN'] }
   },
   { path: 'find-appointment', component: FindAppointmentComponent },
   //{ path: 'answer-questionaire', component: AnswerQuestionaireComponent },
-  { path: 'view-customers-appiontments', component: ViewCustomersAppointmentComponent},
-  { path: 'start-appointment', component: StartAppointmentComponent}
+  { path: 'view-customers-appiontments', component: ViewCustomersAppointmentComponent },
+  { path: 'start-appointment', component: StartAppointmentComponent },
   { path: 'select-appointment/:id', component: SelectAppointmentComponent },
-  { path: 'answer-form/:id', 
-  component: AnswerFormComponent,
-  canActivate: [Guard],
-  data: { permittedRoles: ['ROLE_CUSTOMER'] } },
+  {
+    path: 'answer-form/:id',
+    component: AnswerFormComponent,
+    canActivate: [Guard],
+    data: { permittedRoles: ['ROLE_CUSTOMER'] }
+  },
   { path: 'admin-calendar', component: AdminCalendarViewComponent },
 ];
 
@@ -81,12 +83,12 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatSortModule,
     RouterModule.forChild(routes),
-   FullCalendarModule,
-   // CalendarModule.forRoot({
-   //   provide: DateAdapter,
-   //   useFactory: adapterFactory,
-    //}
-    //),
+    FullCalendarModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }
+    ),
   ],
 })
 export class AppointmentsModule { }

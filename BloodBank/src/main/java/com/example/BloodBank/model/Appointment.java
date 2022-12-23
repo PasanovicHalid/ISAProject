@@ -54,7 +54,6 @@ public class Appointment {
     private String confirmationCode;
 
     public Appointment(Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
-        this.id = id;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
         this.endTime = endTime;

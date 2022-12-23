@@ -88,11 +88,14 @@ public class AppointmentService implements IAppointmentService {
         List<Appointment> retVal = new ArrayList<>();
         Iterable<Appointment> appointments = appointmentRepository.findAll();
         for(Appointment appointment : appointments) {
-            Long aId = appointment.getTakenBy().getId();
-            boolean isTrue = aId.equals(id);
-            if(isTrue){
-                retVal.add(appointment);
+            if(appointment.getTakenBy() != null){
+                Long aId = appointment.getTakenBy().getId();
+                boolean isTrue = aId.equals(id);
+                if(isTrue){
+                    retVal.add(appointment);
+                }
             }
+
         }
         return  retVal;
     }
