@@ -30,7 +30,7 @@ export class HeadAdminService {
   }
 
   savePasswordChanges(admin: HeadPasswordChange): Observable<Boolean>{
-    return this.http.put<Boolean>(this.apiHost + 'api/head_admin/', admin, {headers: this.headers}).pipe(catchError(this.handleValidationError));
+    return this.http.put<Boolean>(this.apiHost + 'api/head_admin/change_pass', admin, {headers: this.headers}).pipe(catchError(this.handleValidationError));
   }
   
   private handleValidationError(error: HttpErrorResponse) {

@@ -29,20 +29,23 @@ export class LoginUserComponent implements OnInit {
         if(response == "HeadAdmin with an unchanged password."){
           localStorage.setItem("HeadAdminUsername", this.loginUser.userName);
           localStorage.setItem("HeadAdminPassword", this.loginUser.password);
+          localStorage.setItem("ForbiddenAccessToHeadAdmin", 'true');
           this.router.navigate(['/password-change']);
         }else{
           this.token = response;
-        localStorage.setItem('token', this.token);
-        console.log(this.token);
-        let decodedJWT = JSON.parse(window.atob(this.token.split('.')[1]));
-        this.role = decodedJWT.role.authority;
-        localStorage.setItem('loggedUserRole', this.role);
-        console.log(this.role);
-        this.id = decodedJWT.id.authority;
-        localStorage.setItem('loggedUserId', this.id);
-        console.log(this.id);
-        this.toastr.success('Successfully logged in');
-        this.router.navigate(['/']);
+          localStorage.setItem('token', this.token);
+          console.log(this.token);
+          let decodedJWT = JSON.parse(window.atob(this.token.split('.')[1]));
+          this.role = decodedJWT.role.authority;
+          localStorage.setItem('loggedUserRole', this.role);
+          console.log(this.role);
+          this.id = decodedJWT.id.authority;
+          localStorage.setItem('loggedUserId', this.id);
+          console.log(this.id);
+          this.toastr.success('Successfully logged in');
+          this.router.navigate(['/']);
+          window.location.reload();
+          
         }    
       },
       (error) => {

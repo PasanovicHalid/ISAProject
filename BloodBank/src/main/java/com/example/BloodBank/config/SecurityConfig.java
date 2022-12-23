@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers("/**")
+                .permitAll().and().authorizeRequests().antMatchers("/api/head_admin/change_pass")
                 .permitAll().and().authorizeRequests().antMatchers("/registerNotActivated")
                 .permitAll().and().authorizeRequests().antMatchers("/api/appointment/confirm/**")
                 .permitAll().and().authorizeRequests().antMatchers("/activate/**").permitAll().anyRequest().authenticated()

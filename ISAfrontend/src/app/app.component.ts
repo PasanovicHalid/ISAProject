@@ -19,7 +19,6 @@ export class AppComponent {
     this.store.setLoginStatus(0);
     console.log(localStorage.getItem('token'));
     localStorage.clear();
-    //location.reload();
-    this.router.navigate(['/']);
+    window.location.reload();
   }
 }

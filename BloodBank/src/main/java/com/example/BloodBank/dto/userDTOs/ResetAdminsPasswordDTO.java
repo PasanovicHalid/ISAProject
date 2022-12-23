@@ -22,7 +22,7 @@ public class ResetAdminsPasswordDTO {
     @NotNull
     @NotBlank
     @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid password input!")
-    private String oldPassword;
+    private String password;
     @NotNull
     @NotBlank
     @Pattern(regexp="([A-Za-z0-9]{3,})", message="Invalid password input!")

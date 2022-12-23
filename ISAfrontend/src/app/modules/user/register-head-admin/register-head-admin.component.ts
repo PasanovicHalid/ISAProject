@@ -24,8 +24,12 @@ export class RegisterHeadAdminComponent implements OnInit {
   constructor(private headAdminService: HeadAdminService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
-      this.router.navigate(['/forbidden']);
+    if(localStorage.getItem('ForbiddenAccessToHeadAdmin') == 'true')
+      this.router.navigate(['/password-change']);
+    else{
+      if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
+        this.router.navigate(['/forbidden']);
+    }
   }
 
   public registerHeadAdmin(){

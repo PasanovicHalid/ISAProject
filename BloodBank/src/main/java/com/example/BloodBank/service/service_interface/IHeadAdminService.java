@@ -7,4 +7,5 @@ import com.example.BloodBank.model.HeadAdmin;
 public interface IHeadAdminService extends ICRUDService<HeadAdmin>{
     void registerHeadAdmin(HeadAdmin headAdmin) throws Exception;
     boolean isAdminWithNotChangedPassword(AuthRequest authRequest);
+    boolean resetAdminsPassword(HeadAdmin admin, String newPass);
 }

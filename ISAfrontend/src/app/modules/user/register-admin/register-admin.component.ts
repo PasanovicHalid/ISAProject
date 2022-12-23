@@ -24,17 +24,22 @@ export class RegisterAdminComponent implements OnInit {
           private bloodBankService: BloodBankService) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
-      this.router.navigate(['/forbidden']);
+    if(localStorage.getItem('ForbiddenAccessToHeadAdmin') == 'true')
+      this.router.navigate(['/password-change']);
     else{
-      this.bloodBankService.getAll().subscribe( res => 
-        {
-          this.bloodBanks = res;
-         }, (error) => {
-          this.errorMessage = error;
-          this.toastError();
-        });
-    }  
+      if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
+        this.router.navigate(['/forbidden']);
+      else{
+        this.bloodBankService.getAll().subscribe( res => 
+          {
+            this.bloodBanks = res;
+          }, (error) => {
+            this.errorMessage = error;
+            this.toastError();
+          });
+    }
+    }
+      
   }
 
   public registerAdmin(){

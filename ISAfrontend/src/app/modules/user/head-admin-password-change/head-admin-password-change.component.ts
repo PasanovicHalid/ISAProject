@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from '../services/admin.service';
 import { FormGroup, NgForm, FormControl } from '@angular/forms';
-import { RegistrationAdmin } from '../model/registration-admin.model';
-import { BloodBank } from '../../../model/blood-bank.model';
-import { BloodBankService } from '../../blood-bank/services/blood-bank.service';
 import { HeadAdminService } from '../services/head-admin.service';
-import { HeadAdmin } from '../model/head-admin.model';
 import { HeadPasswordChange } from '../model/head-password-change.model';
 
 @Component({
@@ -28,7 +23,7 @@ export class HeadAdminPasswordChangeComponent implements OnInit {
 
   ngOnInit(): void {
     this.admin.username = localStorage.getItem('HeadAdminUsername')!;
-    this.admin.oldPassword = localStorage.getItem('HeadAdminPassword')!;
+    this.admin.password = localStorage.getItem('HeadAdminPassword')!;
     this.admin.newPassword = '';
   }
 
@@ -42,11 +37,18 @@ export class HeadAdminPasswordChangeComponent implements OnInit {
     console.log(this.admin)
     this.headAdminService.savePasswordChanges(this.admin).subscribe(res =>
       {
-        console.log(res);
-        if(res == true)
+        if(res == true){
+          localStorage.removeItem('HeadAdminUsername');
+          localStorage.removeItem('HeadAdminPassword');
+          localStorage.removeItem('ForbiddenAccessToHeadAdmin');
           this.toastr.success("Password successfully changed!");
-        else
+          this.toastr.info("Please login with your new password again!");
+          this.router.navigate(['/login']);
+        }
+        else{
           this.toastr.info("Something went wrong, please try again later!");
+          this.router.navigate(['/']);
+        }
       }, (error) => {
         console.log(error)
         this.errorMessage = error;
@@ -55,7 +57,7 @@ export class HeadAdminPasswordChangeComponent implements OnInit {
   }
 
   checkPassword(){
-    if(this.oldPass == this.admin.oldPassword && this.verifyPass == this.admin.newPassword)
+    if(this.oldPass == this.admin.password && this.verifyPass == this.admin.newPassword)
       this.isDisabled = false;
     else
       this.isDisabled = true;

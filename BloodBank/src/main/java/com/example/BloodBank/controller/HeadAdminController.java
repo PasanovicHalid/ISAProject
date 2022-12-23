@@ -43,13 +43,13 @@ public class HeadAdminController {
     }
 
     @PutMapping(consumes = "application/json",
-            produces = "application/json"
+            produces = "application/json",
+            path = "change_pass"
     )
     @CrossOrigin("http://localhost:4200")
     public ResponseEntity<Object> resetAdminsPassword(@Valid @RequestBody ResetAdminsPasswordDTO resetAdminsPasswordDTO){
         try {
-            //headAdminService.registerHeadAdmin(headAdminMapper.fromDTO(headAdminDTO));
-            return new ResponseEntity<>(true,
+            return new ResponseEntity<>(headAdminService.resetAdminsPassword(headAdminMapper.fromDTO(resetAdminsPasswordDTO), resetAdminsPasswordDTO.getNewPassword()),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

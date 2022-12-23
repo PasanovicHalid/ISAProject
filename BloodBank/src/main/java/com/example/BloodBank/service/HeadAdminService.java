@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class HeadAdminService implements IHeadAdminService {
@@ -50,7 +51,7 @@ public class HeadAdminService implements IHeadAdminService {
 
     @Override
     public HeadAdmin Update(HeadAdmin entity) throws Exception {
-        return null;
+        return headAdminRepository.save(entity);
     }
 
     @Override
@@ -67,6 +68,24 @@ public class HeadAdminService implements IHeadAdminService {
         Optional<HeadAdmin> admin = headAdminRepository.findByUsername(authRequest.getUserName());
         if(admin.isPresent() && admin.get().getPassword().equals(authRequest.getPassword()) && !admin.get().isPasswordChanged())
             return true;
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean resetAdminsPassword(HeadAdmin admin, String newPass){
+        Optional<HeadAdmin> headAdmin = headAdminRepository.findByUsername(admin.getUsername());
+        if(headAdmin.isPresent() && headAdmin.get().getPassword().equals(admin.getPassword()) && !headAdmin.get().isPasswordChanged()){
+            HeadAdmin updatableAdmin = headAdmin.get();
+            updatableAdmin.setPassword(newPass);
+            updatableAdmin.setPasswordChanged(true);
+            try{
+                Update(updatableAdmin);
+                return true;
+            }catch (Exception e){
+                throw new UnsupportedOperationException("Can not update head admin!");
+            }
+        }
         return false;
     }
 }
