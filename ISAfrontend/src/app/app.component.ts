@@ -9,7 +9,7 @@ import { StoreService } from './modules/user/services/store.service';
 })
 export class AppComponent {
   title = 'ISAfrontend';
-
+  role = localStorage.getItem("loggedUserRole");
   loggedUserJwt = localStorage.getItem('token');
 
   constructor(private router: Router, public store: StoreService) {}
@@ -18,6 +18,7 @@ export class AppComponent {
     localStorage.removeItem('token');
     this.store.setLoginStatus(0);
     console.log(localStorage.getItem('token'));
-    location.reload();
+    localStorage.clear();
+    window.location.reload();
   }
 }

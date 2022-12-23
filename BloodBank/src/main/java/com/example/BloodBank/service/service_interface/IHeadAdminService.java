@@ -1,4 +1,11 @@
 package com.example.BloodBank.service.service_interface;
 
-public interface IHeadAdminService {
+import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.model.AuthRequest;
+import com.example.BloodBank.model.HeadAdmin;
+
+public interface IHeadAdminService extends ICRUDService<HeadAdmin>{
+    void registerHeadAdmin(HeadAdmin headAdmin) throws Exception;
+    boolean isAdminWithNotChangedPassword(AuthRequest authRequest);
+    boolean resetAdminsPassword(HeadAdmin admin, String newPass);
 }

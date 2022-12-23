@@ -78,6 +78,12 @@ export class AdminCalendarViewComponent implements OnInit {
     }
   }
 
+  eventClicked(action: string, event: CalendarEvent): void {
+    console.log("usla u handleeee sam")
+    this.modalData = { event, action };
+    console.log(this.modalData.event)
+  }
+
   eventTimesChanged({
     event,
     newStart,
@@ -110,11 +116,14 @@ export class AdminCalendarViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    let adminId = localStorage.getItem('loggedUserId');
-    if(adminId != null) {
-      this.getDoneAndPendingAppointmentsForBloodBank(Number(adminId));
-    }
+    if(localStorage.getItem("loggedUserRole") != "ROLE_ADMIN")
+        this.router.navigate(['/forbidden']);
+    else{
+      let adminId = localStorage.getItem('loggedUserId');
+      if(adminId != null) {
+        this.getDoneAndPendingAppointmentsForBloodBank(Number(adminId));
+      }
+    } 
   }
 
   getDoneAndPendingAppointmentsForBloodBank(adminId: number){
@@ -125,7 +134,6 @@ export class AdminCalendarViewComponent implements OnInit {
           element.end = new Date(element.end!);
         });
         this.events = response;
-        console.log(this.events)
       },
       (error) => {
         this.errorMessage = error;
@@ -150,4 +158,6 @@ export class AdminCalendarViewComponent implements OnInit {
       this.toastr.error(this.errorMessage.message);
     }
   }
+
+
 }

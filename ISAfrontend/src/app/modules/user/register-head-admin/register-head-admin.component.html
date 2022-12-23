@@ -4,8 +4,8 @@
         <div class="col-12 col-lg-9 col-xl-9">
           <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #F5F5F5;">
             <div class="card-body p-4 p-md-5">
-                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Admin Registration Form</h3>
-              <form novalidate #registrationForm="ngForm" (ngSubmit)="saveAdmin(registrationForm)">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 title_black">Admin Registration Form</h3>
+              <form novalidate #registrationForm="ngForm" (ngSubmit)="saveHeadAdmin(registrationForm)">
   
                 <div class="row">
                   <div class="col-md-6 mb-4">
@@ -62,7 +62,7 @@
                               [ngClass]="{'is-invalid': (usernameVar.touched || usernameVar.dirty) && !usernameVar.valid }"/>
                           <span class="invalid-feedback">
                               <span *ngIf="usernameVar.errors?.['pattern']">
-                                  Please use first capital letter.
+                                  Please use at least three characters.
                               </span>
                               <span *ngIf="usernameVar.errors?.['required']">
                                   Please enter username.
@@ -84,7 +84,7 @@
                                 [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }"/>
                             <span class="invalid-feedback">
                                 <span *ngIf="passwordVar.errors?.['pattern']">
-                                    Please use first capital letter.
+                                    Please use at least three characters.
                                 </span>
                                 <span *ngIf="passwordVar.errors?.['required']">
                                     Please enter password.
@@ -93,7 +93,7 @@
                           <label class="form-label" for="lastName">Password</label>
                         </div>
                     </div>
-                  </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6 mb-4 d-flex align-items-center">
     
@@ -106,7 +106,7 @@
                               
                                 <span class="invalid-feedback">
                                     <span *ngIf="dobVar.errors?.['required']">
-                                        Please enter your date of birth.
+                                        Please enter date of birth.
                                     </span>
                                 </span>
                         <label for="dob" class="form-label">Date of birth</label>
@@ -135,9 +135,8 @@
                       </div>
     
                     </div>
-                  </div>
-                  
-                
+                </div>
+                    
                 <div class="row">
                   <div class="col-md-6 mb-4 pb-2">
   
@@ -240,29 +239,12 @@
                                 Please use convention 'aa@aa.aa'.
                             </span>
                             <span *ngIf="emailVar.errors?.['required']">
-                                Please enter bank email.
+                                Please enter head admins email.
                             </span>
                         </span>
                         <label class="form-label" for="email">Email</label>
                     </div>
-                    <div class=" form-outline col-md-6 mb-4 pb-2">
-    
-                        <select class="select form-control" [(ngModel)]="admin.bankEmail" [value]="0" name="bank" required
-                        #selectVar="ngModel"
-                              [ngClass]="{'is-invalid': (selectVar.touched || selectVar.dirty) && !selectVar.valid }">
-                          <option value="0" disabled>Choose a bank for admin</option>
-                          <option *ngFor="let bank of bloodBanks" [value]="bank.email">
-                              {{bank.name}}
-                            </option>
-                        </select>
-                        <span class="invalid-feedback">
-                          <span *ngIf="selectVar.errors?.['required']">
-                              Please choose a bank.
-                          </span>
-                      </span>
-                        <label class="form-label select-label">Choose a bank</label>
-      
-                      </div>
+                    
                 </div>
   
                 <div>

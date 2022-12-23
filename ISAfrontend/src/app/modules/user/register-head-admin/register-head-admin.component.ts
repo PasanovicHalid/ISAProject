@@ -6,22 +6,22 @@ import { FormGroup, NgForm, FormControl } from '@angular/forms';
 import { RegistrationAdmin } from '../model/registration-admin.model';
 import { BloodBank } from '../../../model/blood-bank.model';
 import { BloodBankService } from '../../blood-bank/services/blood-bank.service';
+import { HeadAdminService } from '../services/head-admin.service';
+import { HeadAdmin } from '../model/head-admin.model';
+
 
 @Component({
-  selector: 'app-register-admin',
-  templateUrl: './register-admin.component.html',
-  styleUrls: ['./register-admin.component.css']
+  selector: 'app-register-head-admin',
+  templateUrl: './register-head-admin.component.html',
+  styleUrls: ['./register-head-admin.component.css']
 })
-export class RegisterAdminComponent implements OnInit {
-  public bloodBanks : BloodBank[] = [];
-  public admin: RegistrationAdmin = new RegistrationAdmin({user:{address:{}}});
+export class RegisterHeadAdminComponent implements OnInit {
+  public admin: HeadAdmin = new HeadAdmin();
   public errorMessage: Error = new Error;
   public errorMap: Map<string, string> = new Map();
   private pastDate: Date = new Date(1900,1,1);
   public todaysDate: Date = new Date();
-
-  constructor(private adminService: AdminService, private router: Router,private toastr: ToastrService,
-          private bloodBankService: BloodBankService) { }
+  constructor(private headAdminService: HeadAdminService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('ForbiddenAccessToHeadAdmin') == 'true')
@@ -29,39 +29,32 @@ export class RegisterAdminComponent implements OnInit {
     else{
       if(localStorage.getItem("loggedUserRole") != "ROLE_HEADADMIN")
         this.router.navigate(['/forbidden']);
-      else{
-        this.bloodBankService.getAll().subscribe( res => 
-          {
-            this.bloodBanks = res;
-          }, (error) => {
-            this.errorMessage = error;
-            this.toastError();
-          });
     }
-    }
-      
   }
 
-  public registerAdmin(){
-    this.adminService.registerAdmin(this.admin).subscribe( res => 
-      {
-        this.toastr.success("You successfully created an admin!");
-        this.router.navigate(["/"]);
-      }, (error) => {
-        console.log(error)
-        this.errorMessage = error;
-        this.toastError();
-      });
+  public registerHeadAdmin(){
+
+    this.headAdminService.registerHeadAdmin(this.admin).subscribe( res => 
+    {
+      if(res == true)
+        this.toastr.success("You successfully created a head admin!");
+      else
+        this.toastr.info("Something went wrong, please try again later!");
+      this.router.navigate(["/"]);
+    }, (error) => {
+      console.log(error)
+      this.errorMessage = error;
+      this.toastError();
+    });
 
   }
 
-  saveAdmin(registrationForm: NgForm): void {
+  saveHeadAdmin(registrationForm: NgForm): void {
     if (registrationForm.dirty && registrationForm.valid) {
-        this.registerAdmin();
+      this.registerHeadAdmin();
     }
-    
   }
- 
+
   private toastError() {
     if (String(this.errorMessage).includes('406')){
       var error = localStorage.getItem('errormap')!;
@@ -75,5 +68,4 @@ export class RegisterAdminComponent implements OnInit {
       this.toastr.error(this.errorMessage.message);
     }
   }
-
 }

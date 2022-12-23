@@ -1,6 +1,7 @@
 package adapters;
 
 import com.example.BloodBank.dto.userDTOs.RegisterHeadAdminDTO;
+import com.example.BloodBank.dto.userDTOs.ResetAdminsPasswordDTO;
 import com.example.BloodBank.model.HeadAdmin;
 import org.modelmapper.ModelMapper;
 
@@ -11,13 +12,18 @@ public class HeadAdminMapper {
         this.modelMapper = modelMapper;
     }
 
-    public static RegisterHeadAdminDTO toRegisterHeadAdminDTO(HeadAdmin headAdmin){
+    public static RegisterHeadAdminDTO toDTO(HeadAdmin headAdmin){
         RegisterHeadAdminDTO registerHeadAdminDTO = modelMapper.map(headAdmin, RegisterHeadAdminDTO.class);
         return registerHeadAdminDTO;
     }
 
-    public static HeadAdmin fromRegisterHeadAdminDTO(RegisterHeadAdminDTO registerHeadAdminDTO){
+    public static HeadAdmin fromDTO(RegisterHeadAdminDTO registerHeadAdminDTO){
         HeadAdmin headAdmin = modelMapper.map(registerHeadAdminDTO, HeadAdmin.class);
+        return headAdmin;
+    }
+
+    public static HeadAdmin fromDTO(ResetAdminsPasswordDTO resetAdminsPasswordDTO){
+        HeadAdmin headAdmin = modelMapper.map(resetAdminsPasswordDTO, HeadAdmin.class);
         return headAdmin;
     }
 

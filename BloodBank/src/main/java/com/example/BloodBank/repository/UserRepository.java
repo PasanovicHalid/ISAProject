@@ -18,4 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from users u where lower(u.firstName) like %?1% or lower(u.lastName) like %?1%")
     List<User> findAllBySearch(String searchTerm);
     Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
 }

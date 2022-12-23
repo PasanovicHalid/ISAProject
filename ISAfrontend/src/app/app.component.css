@@ -11,3 +11,11 @@
     letter-spacing: 1px;
 }
 
+.navbar-div{
+    width: 100%;
+}
+
+.navbar-div>li:last-child{
+    right: 0;
+    position: absolute;
+}

@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests().antMatchers("/authenticate")
                 .permitAll().and().authorizeRequests().antMatchers("/registerNotActivated")
                 .permitAll().and().authorizeRequests().antMatchers("/api/bloodbank")
+                .permitAll().and().authorizeRequests().antMatchers("/api/head_admin/change_pass")
                 .permitAll().and().authorizeRequests().antMatchers("/api/appointment/confirm/**")
                 .permitAll().and().authorizeRequests().antMatchers("/activate/**").permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()
