@@ -1,0 +1,35 @@
+<p>{{selectedAppointment.location.name}}</p>
+<section class="vh-100 gradient-custom" style="color: #121212">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-10">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #F5F5F5;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class=" pb-2 pb-md-0 mb-md-5">APPOINTMENT:</h3>
+               <p>Quantity of blood:</p> 
+              <input type="number" [(ngModel)]="selectedAppointment.quantityOfBlood">
+              <br>
+              <br>
+              <p>Type of blood:</p> 
+              <div class="col-md-9 pe-5">        
+                <div id="blood-example" class="md-form md-outline input-with-post-icon mat-select" inline="true">
+                    <mat-form-field appearance="fill">
+                        <mat-select name="bloodTypes" id="bloodTypes" 
+                        [(ngModel)]="this.selectedBloodType" matInput>
+                        <mat-option *ngFor="let  bloodType of bloodTypes" [value]="bloodType">{{bloodType}}</mat-option>
+                        </mat-select>
+                    </mat-form-field >
+                </div>
+                <br>
+                <br>
+                <p>Comment:</p>
+                <textarea [(ngModel)]="selectedAppointment.comment"></textarea>
+            </div>
+              <button (click)="UpdateAppointment()">Submit</button>
+            
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

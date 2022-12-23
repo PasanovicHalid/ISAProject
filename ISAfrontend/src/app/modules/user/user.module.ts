@@ -20,6 +20,7 @@ import { FillFormComponent } from './fill-form/fill-form.component';
 import { AdminsProfileComponent } from './admins-profile/admins-profile.component';
 import { AdminsBloodbankComponent } from './admins-bloodbank/admins-bloodbank.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { ViewCustomersComponent } from './view-customers/view-customers.component';
 import { LoginUserComponent } from '../login-user/login-user.component';
 import { Guard } from '../auth/guard';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
   { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'fill-form', component: FillFormComponent },
+  { path: 'view-users', component: ViewUsersComponent },
+  { path: 'view-customers', component: ViewCustomersComponent},
+
   {
     path: 'fill-form',
     component: FillFormComponent,
@@ -57,6 +62,7 @@ const routes: Routes = [
     FillFormComponent,
     ViewUsersComponent,
     MyAppointmentsComponent,
+    ViewCustomersComponent,
   ],
   imports: [
     CommonModule,

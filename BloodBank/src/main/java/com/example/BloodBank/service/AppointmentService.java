@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.sql.Date;
 import java.sql.Time;
@@ -57,7 +58,15 @@ public class AppointmentService implements IAppointmentService {
     @Override
     @Transactional(readOnly = false)
     public Appointment Update(Appointment entity) throws Exception {
-        return appointmentRepository.save(entity);
+        if(entity.getExecuted() == AppointmentStatus.CANCELLED){
+            //TODO: dodati penal
+            entity.setTakenBy(appointmentRepository.findById(entity.getId()).get().getTakenBy());
+            entity.setLocation(appointmentRepository.findById(entity.getId()).get().getLocation());
+            entity.setVersion(appointmentRepository.findById(entity.getId()).get().getVersion());
+            return appointmentRepository.save(entity);
+        }else{
+            return appointmentRepository.save(entity);
+        }
     }
 
     @Override
@@ -72,6 +81,20 @@ public class AppointmentService implements IAppointmentService {
     }
     public Iterable<Appointment> GetForCustomerId(String id) {
         return  appointmentRepository.findByCustomerId(Long.valueOf(id));
+    }
+
+    @Override
+    public Iterable<Appointment> GetByCustomerId(Long id) throws Exception {
+        List<Appointment> retVal = new ArrayList<>();
+        Iterable<Appointment> appointments = appointmentRepository.findAll();
+        for(Appointment appointment : appointments) {
+            Long aId = appointment.getTakenBy().getId();
+            boolean isTrue = aId.equals(id);
+            if(isTrue){
+                retVal.add(appointment);
+            }
+        }
+        return  retVal;
     }
 
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {

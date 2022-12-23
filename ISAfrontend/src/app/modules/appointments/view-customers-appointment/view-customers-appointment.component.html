@@ -1,0 +1,42 @@
+<section class="vh-100 gradient-custom" style="color: #121212">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-10">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #F5F5F5;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class=" pb-2 pb-md-0 mb-md-5">CUSTOMER:</h3>
+              <label>FIRSTNAME:..............</label>
+                <label>{{customer.firstName}}</label>
+                <br>
+                <label>LASTNAME:...............</label>
+                <label>{{customer.lastName}}</label>
+                <br>
+                <label>EMAIL........................</label>
+                <label>{{customer.email}}</label>
+                <br>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <th scope="col">Date</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let appointment of appointments">
+                          <td (click)="selectAppointment(appointment)">{{appointment.appointmentDate}}</td>
+                          <td (click)="selectAppointment(appointment)">{{appointment.startTime}}</td>
+                          <td (click)="selectAppointment(appointment)">{{appointment.endTime}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button [disabled]="disabled" (click)="updateNotCome()">Customer did not come</button>
+                <br>
+                <br>
+                <button [disabled]="disabled" (click)="updateCome()">Customer comes</button>
+          
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

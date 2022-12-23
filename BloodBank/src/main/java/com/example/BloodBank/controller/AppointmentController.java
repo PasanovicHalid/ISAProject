@@ -1,12 +1,12 @@
 package com.example.BloodBank.controller;
 
 import adapters.AppointmentMapper;
-import com.example.BloodBank.dto.appointmentDTOs.AppointmentCreationDTO;
-import com.example.BloodBank.dto.appointmentDTOs.AppointmentViewDTO;
-import com.example.BloodBank.dto.appointmentDTOs.BookAppointmentDTO;
+import com.example.BloodBank.dto.appointmentDTOs.*;
+import com.example.BloodBank.exceptions.EntityDoesntExistException;
+import com.example.BloodBank.model.Appointment;
+import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.model.Appointment;
 import adapters.CalendarAppointmentMapper;
-import com.example.BloodBank.dto.appointmentDTOs.CalendarAppointmentDTO;
 import com.example.BloodBank.service.AdminService;
 import com.example.BloodBank.service.AppointmentService;
 import com.example.BloodBank.service.BloodBankService;
@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,6 +58,18 @@ public class AppointmentController {
         this.calendarAppointmentMapper = new CalendarAppointmentMapper(modelMapper);
     }
 
+    @GetMapping(path="customer")
+    public ResponseEntity<Object> readByCustomerId(@RequestParam("id") Optional<Long> id) {
+        try {
+            List<Appointment> appointments =(List<Appointment>)  appointmentService.GetByCustomerId(Long.valueOf(id.get()));
+            return new  ResponseEntity<>(appointmentMapper.toAppointmentDTOList(appointments), HttpStatus.OK);
+        } catch (Exception e){
+            if(e instanceof EntityNotFoundException){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> read(@PathVariable("id") long id) {
         try {
@@ -68,6 +82,21 @@ public class AppointmentController {
         }
     }
 
+
+    @PostMapping(path ="byAdmin",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> Update(@RequestBody AppointmentDTO appointmentDTO){
+        try{
+            Appointment appointment = appointmentMapper.fromAppointmentDTO(appointmentDTO);
+           // appointment.setLocation(appointmentService.Read(appointment.getId()).getLocation());
+            appointment.setVersion(appointmentService.Read(appointment.getId()).getVersion());
+            appointmentService.Update(appointment);
+            return ResponseEntity.status(HttpStatus.OK).body(appointmentService.Read(appointment.getId()));
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
     @GetMapping(value = "/pageable")
     public ResponseEntity<Object> getAllPageable(@RequestParam String startDate, @RequestParam String startTime, Pageable page) {
         try {

@@ -24,6 +24,7 @@
     "@fullcalendar/bootstrap5": "^6.0.0",
     "@fullcalendar/core": "^6.0.0",
     "@fullcalendar/daygrid": "^6.0.0",
+    "@fullcalendar/interaction": "^6.0.0",
     "@fullcalendar/timegrid": "^6.0.0",
     "angular-calendar": "^0.31.0",
     "bootstrap": "^5.2.3",
