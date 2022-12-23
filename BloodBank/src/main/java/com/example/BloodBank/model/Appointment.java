@@ -53,92 +53,14 @@ public class Appointment {
     private Integer version;
     private String confirmationCode;
 
-
-
-
-    public Appointment() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public Appointment(Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
         this.id = id;
-    }
-    public TypeOfBlood getTypeOfBlood() {
-        return typeOfBlood;
-    }
-
-    public void setTypeOfBlood(TypeOfBlood typeOfBlood) {
-        this.typeOfBlood = typeOfBlood;
-    }
-
-    public Date getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
-    }
-
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Time startTime) {
         this.startTime = startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
-    }
-
-    public int getQuantityOfBlood() {
-        return quantityOfBlood;
-    }
-
-    public void setQuantityOfBlood(int quantityOfBlood) {
-        this.quantityOfBlood = quantityOfBlood;
-    }
-
-    public void setEndTime(Time endTime) {
         this.endTime = endTime;
-    }
-
-
-
-
-    public Customer getTakenBy() {
-        return takenBy;
-    }
-
-    public void setTakenBy(Customer takenBy) {
         this.takenBy = takenBy;
-    }
-
-    public BloodBank getLocation() {
-        return location;
-    }
-
-    public void setLocation(BloodBank location) {
         this.location = location;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public AppointmentStatus getExecuted() {
-        return executed;
-    }
-
-    public void setExecuted(AppointmentStatus executed) {
-        this.executed = executed;
+        this.executed = status;
     }
 
     public boolean validate() {
@@ -146,14 +68,6 @@ public class Appointment {
                 && startTime.before(location.getEndDayWorkTime())
                 && endTime.after(location.getStartDayWorkTime())
                 && endTime.before(location.getEndDayWorkTime());
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
 }
