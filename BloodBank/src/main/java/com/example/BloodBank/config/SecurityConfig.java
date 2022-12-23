@@ -45,8 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/**")
+        http.csrf().disable().authorizeRequests().antMatchers("/authenticate")
                 .permitAll().and().authorizeRequests().antMatchers("/registerNotActivated")
+                .permitAll().and().authorizeRequests().antMatchers("/api/bloodbank")
                 .permitAll().and().authorizeRequests().antMatchers("/api/appointment/confirm/**")
                 .permitAll().and().authorizeRequests().antMatchers("/activate/**").permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()

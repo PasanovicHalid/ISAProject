@@ -42,7 +42,7 @@ public class QuestionnaireController {
         try {
             Questionnaire questionnaire = questionnaireService.getForCustomer(customerId);
             QuestionnaireDTO questionnaireDTO = modelMapper.map(questionnaire,QuestionnaireDTO.class);
-            questionnaireDTO.setCustomerId(questionnaire.getCustomer().getId());
+            questionnaireDTO.setCustomerId(String.valueOf(questionnaire.getCustomer().getId()));
             return ResponseEntity.status(HttpStatus.OK).body(questionnaireDTO);
         } catch (QuestionnaireForCustomerDoesntExist e) {
             return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -56,9 +56,9 @@ public class QuestionnaireController {
             value = "/create", consumes = "application/json",
             produces = "application/json"
     )
-    public ResponseEntity<Object> createQuestionnaire(@Valid @RequestBody Questionnaire newQuestionnaire){
+    public ResponseEntity<Object> createQuestionnaire(@Valid @RequestBody QuestionnaireDTO newQuestionnaire){
         try {
-            questionnaireService.Create(newQuestionnaire);
+            questionnaireService.CreateDTO(newQuestionnaire);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
@@ -99,12 +99,12 @@ public class QuestionnaireController {
     public ResponseEntity<Object> createQuestionnaireWhenNotPresent(@Valid @RequestBody QuestionnaireDTO questionnaireDTO){
         try {
             try{
-                Questionnaire questionnaireFromDB = questionnaireService.getForCustomer(questionnaireDTO.getCustomerId());
+                Questionnaire questionnaireFromDB = questionnaireService.getForCustomer(Long.valueOf(questionnaireDTO.getCustomerId()));
                 return new ResponseEntity<>("Questionnaire already exists", HttpStatus.BAD_REQUEST);
             } catch (Exception ignored){}
             Questionnaire questionnaire = modelMapper.map(questionnaireDTO, Questionnaire.class);
             questionnaire.setId(null);
-            questionnaire.setCustomer(customerService.Read(questionnaireDTO.customerId));
+            questionnaire.setCustomer(customerService.Read(Long.valueOf(questionnaireDTO.getCustomerId())));
             questionnaire.setFillDate(LocalDate.now());
             questionnaireService.Create(questionnaire);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -120,6 +120,14 @@ public class QuestionnaireController {
             return ResponseEntity.status(HttpStatus.OK).body(questionnaireService.checkQuestionnaire(customerId));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+    @GetMapping(value = "/getAll")
+    public  ResponseEntity<Object> getAll(){
+        try{
+            return new ResponseEntity<>(questionnaireService.GetAll(), HttpStatus.OK);
+        } catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

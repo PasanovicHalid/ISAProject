@@ -12,15 +12,17 @@ import java.time.LocalDate;
 @Data
 public class QuestionnaireDTO {
     public long id;
-    public long customerId;
-    public Boolean donated;
-    public Boolean denied;
-    public Boolean healthy;
-    public Boolean eaten;
-    public Boolean dangerousJob;
-    public Boolean secondState;
-    public Boolean menstruating;
-    public Boolean pregnant;
-    public String donorNumber;
-    public LocalDate fillDate;
+    private String customerId;
+    private Boolean donated;
+    private Boolean denied;
+    private Boolean healthy;
+    private Boolean eaten;
+    private Boolean dangerousJob;
+    //FEMALES ONLY
+    private Boolean secondState;
+    private Boolean menstruating;
+    private Boolean pregnant;
+
+    private String donorNumber;
+    private String date;
 }

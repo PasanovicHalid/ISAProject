@@ -7,6 +7,8 @@ import { QuestionnaireService } from '../services/questionnaire.service';
 import { Gender } from '../edit-user/model/gender';
 import { Role } from '../edit-user/model/role';
 import { Customer } from 'src/app/model/Users/customer';
+import { UserService } from '../services/user.service';
+import { FormDTO } from '../model/formDTO.model';
 
 @Component({
   selector: 'app-fill-form',
@@ -14,48 +16,40 @@ import { Customer } from 'src/app/model/Users/customer';
   styleUrls: ['./fill-form.component.css'],
 })
 export class FillFormComponent implements OnInit {
-  public questionnaire: Questionnaire = new Questionnaire();
+  public questionnaire: FormDTO = new FormDTO();
   public errorMessage: Error = new Error();
   public errorMap: Map<string, string> = new Map();
-  public logedCustomer: Customer = new Customer();
+  public loggedCustomer: any = { gender: 'FEMALE' };
+  // public loggedCustomer: any = null;
+
   genders = Gender;
   constructor(
+    public userService: UserService,
     private questionnaireService: QuestionnaireService,
     private router: Router,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.logedCustomer = {
-      id: -1,
-      firstName: 'Loged',
-      lastName: 'Customer',
-      username: 'logCus99',
-      password: 'sadfsdf123',
-      email: 'logCus1@gmail.com',
-      gender: Gender.FEMALE,
-      dob: new Date(),
-      role: Role.CUSTOMER,
-      address: {
-        country: 'Aasdflk',
-        city: 'Asdf',
-        street: 'Skljk',
-        number: '123',
-      },
-      jmbg: '123321',
-      phoneNumber: '066555333',
-      profession: 'student',
-      professionInfo: 'ftn',
-    };
+    this.loggedCustomer.gender = Gender.FEMALE;
+    this.userService
+      .getUserById(localStorage.getItem('loggedUserId'))
+      .subscribe((res) => {
+        console.log('res');
+        console.log(res);
+        this.loggedCustomer = res;
+      });
+    console.log('customer');
+    console.log(this.loggedCustomer);
   }
   public saveQuestionnaire(): void {
     //umesto ovoga ce biti trenutno ulogovani korisnik
 
-    this.questionnaire.customer = this.logedCustomer;
+    this.questionnaire.customerId = localStorage.getItem('loggedUserId');
     this.createQuestionnaire();
   }
   public createQuestionnaire() {
-    if (this.questionnaire.customer.gender.valueOf() !== 2) {
+    if (this.loggedCustomer.gender !== 'FEMALE') {
       console.log('not female');
       this.questionnaire.secondState = false;
       this.questionnaire.menstruating = false;

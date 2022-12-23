@@ -3,6 +3,7 @@ package com.example.BloodBank.service;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.NotActivatedUser;
+import com.example.BloodBank.model.Role;
 import com.example.BloodBank.model.User;
 import com.example.BloodBank.repository.NotActivatedUserRepository;
 import com.example.BloodBank.repository.UserRepository;
@@ -30,6 +31,7 @@ public class NotActivatedUserService implements INotActivatedUserService {
     public NotActivatedUser Create(NotActivatedUser entity) throws Exception {
         //check if username or email are taken by some user or notActivatedUser
         String uuid = UUID.randomUUID().toString();
+        entity.setRole(Role.CUSTOMER);
         emailSenderService.sendSimpleEmail(entity.getEmail(), "Blood bank activation", "http://localhost:8086/activate/"+uuid);
         entity.setActivation(uuid);
         return notActivatedUserRepository.save(entity);

@@ -1,0 +1,7 @@
+<div *ngFor="let content of customerAppointments">
+  <span>{{ content.id }}</span>
+  <p>
+    {{ content.executed }}
+  </p>
+  <button (click)="cancelAppointment(content.id)">Cancel</button>
+</div>

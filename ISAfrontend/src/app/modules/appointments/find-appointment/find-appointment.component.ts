@@ -31,7 +31,7 @@ export class FindAppointmentComponent implements OnInit {
     'bloodBank.name',
     'bloodBank.address',
     'location.rating',
-    'executed'
+    'executed',
   ];
 
   constructor(
@@ -67,8 +67,7 @@ export class FindAppointmentComponent implements OnInit {
     );
   }
 
-
   public chooseAppointment(bankId: number) {
-      this.router.navigate(["select-appointment/", bankId])
+    this.router.navigate(['select-appointment/', bankId]);
   }
 }

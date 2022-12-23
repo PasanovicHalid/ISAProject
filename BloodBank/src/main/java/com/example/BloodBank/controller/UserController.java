@@ -99,6 +99,7 @@ public class UserController {
     @GetMapping(path="/{id}")
     public ResponseEntity<Object> getUser( @PathVariable("id") long id) {
         try {
+            User user = userService.Read(id);
             return ResponseEntity.status(HttpStatus.OK).body(userMapper.toDTO(userService.Read(id)));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

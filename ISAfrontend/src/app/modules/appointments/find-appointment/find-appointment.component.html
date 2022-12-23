@@ -23,7 +23,7 @@
                         cellspacing="0"
                       >
                         <td>
-                          <mat-form-field  class="w-100">
+                          <mat-form-field class="w-100">
                             <mat-label>Start date</mat-label>
                             <input
                               [ngModel]="startDate | date : 'yyyy-MM-dd'"
@@ -172,6 +172,7 @@
                     {{ appointment.executed }}
                   </td>
                 </ng-container>
+
                 <tr
                   mat-header-row
                   *matHeaderRowDef="displayedColumns; sticky: true"

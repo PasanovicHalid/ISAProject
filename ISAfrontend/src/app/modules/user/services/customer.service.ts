@@ -20,7 +20,7 @@ export class CustomerService {
   //change customer: any to customer: Customer later
   registerCustomer(customer: any): Observable<any> {
     return this.http
-      .post<any>(this.apiHost + 'api/customer/register', customer, {
+      .post<any>(this.apiHost + 'registerNotActivated', customer, {
         headers: this.headers,
       })
       .pipe(catchError(this.handleValidationError));

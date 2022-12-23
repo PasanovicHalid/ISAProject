@@ -36,6 +36,7 @@ public class JwtController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName()
                             ,authRequest.getPassword())
+            //
             );
         } catch (Exception ex){
             throw new Exception("Invalid username/password");

@@ -2,21 +2,39 @@
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-2 pb-2 pb-md-0 mb-md-5">
-              Please update the questionnaire so that you will be able to book appointment
+              Please update the questionnaire so that you will be able to book
+              appointment
             </h3>
-            <form novalidate #questionnaireForm="ngForm" (ngSubmit)="updateQuestionnaireAndReserveAppointment()">
+            <form
+              novalidate
+              #questionnaireForm="ngForm"
+              (ngSubmit)="updateQuestionnaireAndReserveAppointment()"
+            >
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="donorNumber" class="form-control form-control-lg" name="donorNumber" required
-                      pattern="([0-9]+)" [(ngModel)]="questionnaire.donorNumber" #donorNumberVar="ngModel" [ngClass]="{
-                          'is-invalid':
-                            (donorNumberVar.touched || donorNumberVar.dirty) &&
-                            !donorNumberVar.valid
-                        }" [disabled]="questionairePresent" />
+                    <input
+                      type="text"
+                      id="donorNumber"
+                      class="form-control form-control-lg"
+                      name="donorNumber"
+                      required
+                      pattern="([0-9]+)"
+                      [(ngModel)]="questionnaire.donorNumber"
+                      #donorNumberVar="ngModel"
+                      [ngClass]="{
+                        'is-invalid':
+                          (donorNumberVar.touched || donorNumberVar.dirty) &&
+                          !donorNumberVar.valid
+                      }"
+                      [disabled]="questionairePresent"
+                    />
                     <span class="invalid-feedback">
                       <span *ngIf="donorNumberVar.errors?.['pattern']">
                         Please use only numbers.
@@ -25,15 +43,26 @@
                         Please enter donor number.
                       </span>
                     </span>
-                    <label class="form-label" for="donorNumber">Donor number</label>
+                    <label class="form-label" for="donorNumber"
+                      >Donor number</label
+                    >
                   </div>
                 </div>
 
                 <div class="col-md-6 mb-4 d-flex align-items-center">
                   <div class="form-outline datepicker w-100">
-                    <input type="date" min="1900-01-01" class="form-control form-control-lg" id="date" name="date"
-                      required disabled [ngModel]="questionnaire.fillDate| date:'yyyy-MM-dd'"
-                      (ngModelChange)="questionnaire.fillDate = $event" #dateVar="ngModel" />
+                    <input
+                      type="date"
+                      min="1900-01-01"
+                      class="form-control form-control-lg"
+                      id="date"
+                      name="date"
+                      required
+                      disabled
+                      [ngModel]="questionnaire.fillDate | date : 'yyyy-MM-dd'"
+                      (ngModelChange)="questionnaire.fillDate = $event"
+                      #dateVar="ngModel"
+                    />
 
                     <span class="invalid-feedback">
                       <span *ngIf="dateVar.errors?.['required']">
@@ -51,14 +80,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="donatedOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.donated" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="donatedOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.donated"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="donatedOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.donated" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="donatedOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.donated"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -68,14 +109,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="deniedOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.denied" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="deniedOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.denied"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="deniedOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.denied" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="deniedOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.denied"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -86,14 +139,26 @@
                   <h6 class="mb-2 pb-1 healthy">3. Are you fealing healthy:</h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="healthyOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.healthy" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="healthyOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.healthy"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="healthyOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.healthy" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="healthyOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.healthy"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -103,14 +168,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="eatenOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.eaten" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="eatenOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.eaten"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="eatenOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.eaten" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="eatenOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.eaten"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -123,14 +200,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="dangerousJobOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.dangerousJob" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dangerousJobOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.dangerousJob"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="dangerousJobOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.dangerousJob" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="dangerousJobOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.dangerousJob"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -140,14 +229,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="takingMedicineOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.takingMedicine" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="takingMedicineOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.takingMedicine"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="takingMedicineOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.takingMedicine" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="takingMedicineOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.takingMedicine"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -160,14 +261,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="secondStateOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.secondState" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="secondStateOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.secondState"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="secondStateOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.secondState" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="secondStateOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.secondState"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -177,14 +290,26 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="menstruatingOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.menstruating" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="menstruatingOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.menstruating"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="menstruatingOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.menstruating" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="menstruatingOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.menstruating"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
@@ -194,22 +319,38 @@
                   </h6>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="pregnantOptions" id="true" [value]="true"
-                      [(ngModel)]="questionnaire.pregnant" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="pregnantOptions"
+                      id="true"
+                      [value]="true"
+                      [(ngModel)]="questionnaire.pregnant"
+                    />
                     <label class="form-check-label" for="true">True</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="pregnantOptions" id="false" [value]="false"
-                      [(ngModel)]="questionnaire.pregnant" />
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="pregnantOptions"
+                      id="false"
+                      [value]="false"
+                      [(ngModel)]="questionnaire.pregnant"
+                    />
                     <label class="form-check-label" for="false">False</label>
                   </div>
                 </div>
               </div>
 
               <div>
-                <input class="btn btn-primary btn-lg submit" type="submit" value="Send"
-                  [disabled]="!questionnaireForm.valid" />
+                <input
+                  class="btn btn-primary btn-lg submit"
+                  type="submit"
+                  value="Send"
+                  [disabled]="!questionnaireForm.valid"
+                />
               </div>
             </form>
           </div>

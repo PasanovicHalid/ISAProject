@@ -28,6 +28,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
             "WHERE appointment.executed = 'FREE'")
     Page<Appointment> findAllAvailable(Pageable page);
 
+    @Query("SELECT appointment FROM appointment appointment \n" +
+            "WHERE appointment.takenBy.id = :id")
+    List<Appointment> findByCustomerId(@Param("id") long customerId);
     @Query("select a from appointment a where (a.executed = 'DONE' or a.executed = 'PENDING') and  a.location.bankID = ?1")
     List<Appointment> findDoneAndPendingAppointmentsByBankId(Long bankId);
 

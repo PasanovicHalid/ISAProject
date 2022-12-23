@@ -37,11 +37,12 @@ export class RegisterCustomerComponent implements OnInit {
     console.log(this.customer.password);
     if (this.confirmPassword === this.customer.password) {
       console.log('password check passed');
-      this.customer.role = Role.CUSTOMER;
+      // this.customer.role = Role.CUSTOMER;
       this.customerService.registerCustomer(this.customer).subscribe(
         (res) => {
           console.log('Registered customer');
           this.toastr.success('Registered user');
+          this.router.navigate(['/list-banks']);
         },
         (error) => {
           console.log(error.message);
