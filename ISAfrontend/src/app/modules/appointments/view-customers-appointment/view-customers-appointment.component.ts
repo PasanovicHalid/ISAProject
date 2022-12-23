@@ -6,6 +6,7 @@ import { CustomerService } from '../../user/services/customer.service';
 import { AppointmentStatus } from '../model/appointment-status.enum';
 import { Appointment } from '../model/appointment.model';
 import { AppointmentService } from '../service/appointment.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
   selector: 'app-view-customers-appointment',
@@ -13,7 +14,6 @@ import { AppointmentService } from '../service/appointment.service';
   styleUrls: ['./view-customers-appointment.component.css']
 })
 export class ViewCustomersAppointmentComponent implements OnInit {
-
   public customer : Customer;
   public appointments: Appointment[];
   selectedAppointment: Appointment;
@@ -45,6 +45,7 @@ export class ViewCustomersAppointmentComponent implements OnInit {
 
   updateCome(){
     this.appointmentService.selectedAppointment = this.selectedAppointment;
+    console.log(this.appointmentService.selectedAppointment);
     this.router.navigate(['start-appointment']);
   }
 

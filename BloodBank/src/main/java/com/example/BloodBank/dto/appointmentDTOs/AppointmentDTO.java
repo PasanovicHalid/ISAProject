@@ -28,15 +28,17 @@ public class AppointmentDTO {
     private int quantityOfBlood;
     private Customer takenBy;
 
-    private BloodBank location;
+   // private BloodBank location;
 
-    public AppointmentDTO(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location) {
+    public AppointmentDTO(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy
+                        //  ,BloodBank location
+    ) {
         this.id = id;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.takenBy = takenBy;
-        this.location = location;
+        //this.location = location;
     }
 
     public AppointmentDTO() {
@@ -116,12 +118,12 @@ public class AppointmentDTO {
     public void setTakenBy(Customer takenBy) {
         this.takenBy = takenBy;
     }
-
-    public BloodBank getLocation() {
-        return location;
-    }
-
-    public void setLocation(BloodBank location) {
-        this.location = location;
-    }
+//
+//    public BloodBank getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(BloodBank location) {
+//        this.location = location;
+//    }
 }

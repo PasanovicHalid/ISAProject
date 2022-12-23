@@ -3,7 +3,7 @@
     <div class="container py-5 h-100">
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-12 col-lg-9 col-xl-10">
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #F5F5F5;">
+          <div  class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #F5F5F5;">
             <div class="card-body p-4 p-md-5">
               <h3 class=" pb-2 pb-md-0 mb-md-5">APPOINTMENT:</h3>
                <p>Quantity of blood:</p> 
@@ -26,7 +26,10 @@
                 <textarea [(ngModel)]="selectedAppointment.comment"></textarea>
             </div>
               <button (click)="UpdateAppointment()">Submit</button>
-            
+            <br>
+            <br>
+            <br>
+            <button (click)="seeQuestionnaire()">See questionnaire</button>
             </div>
         </div>
       </div>

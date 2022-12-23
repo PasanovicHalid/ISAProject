@@ -61,7 +61,7 @@ public class AppointmentController {
     @GetMapping(path="customer")
     public ResponseEntity<Object> readByCustomerId(@RequestParam("id") Optional<Long> id) {
         try {
-            List<Appointment> appointments =(List<Appointment>)  appointmentService.GetByCustomerId(Long.valueOf(id.get()));
+            List<Appointment> appointments = appointmentService.GetByCustomerId(Long.valueOf(id.get()));
             return new  ResponseEntity<>(appointmentMapper.toAppointmentDTOList(appointments), HttpStatus.OK);
         } catch (Exception e){
             if(e instanceof EntityNotFoundException){

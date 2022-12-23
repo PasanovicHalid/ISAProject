@@ -10,6 +10,7 @@ export class BloodBank {
 
   public constructor(obj?: any) {
     if (obj) {
+      this.bankID = obj?.name ?? 0;
       this.name = obj?.name ?? '';
       this.email = obj?.email ?? '';
       this.description = obj?.description ?? '';
