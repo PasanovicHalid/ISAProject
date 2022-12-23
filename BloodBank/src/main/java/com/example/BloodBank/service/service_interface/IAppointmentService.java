@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 public interface IAppointmentService extends ICRUDService<Appointment> {
+    Iterable<Appointment> GetByCustomerId(Long id) throws Exception;
 
     Page<Appointment> GetAllPageableFreeDateFilter(Pageable page, Date startDate, Time startTime) throws Exception;
 

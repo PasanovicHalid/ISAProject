@@ -21,6 +21,14 @@ public class Appointment {
 
     @Column(nullable = false)
     private Date appointmentDate;
+    private String comment;
+
+
+    private TypeOfBlood typeOfBlood;
+
+
+
+    private int quantityOfBlood;
 
     @Column(nullable = false)
     private Time startTime;
@@ -46,7 +54,6 @@ public class Appointment {
     private String confirmationCode;
 
     public Appointment(Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location, AppointmentStatus status) {
-        this.id = id;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -61,4 +68,5 @@ public class Appointment {
                 && endTime.after(location.getStartDayWorkTime())
                 && endTime.before(location.getEndDayWorkTime());
     }
+
 }

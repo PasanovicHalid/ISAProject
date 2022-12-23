@@ -16,6 +16,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminCreateAppointmentComponent } from './admin-create-appointment/admin-create-appointment.component';
 import { FindAppointmentComponent } from './find-appointment/find-appointment.component';
+//import { AnswerQuestionaireComponent } from './answer-questionaire/answer-questionaire.component';
+import { ViewCustomersAppointmentComponent } from './view-customers-appointment/view-customers-appointment.component';
+import { StartAppointmentComponent } from './start-appointment/start-appointment.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
@@ -28,17 +31,22 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
   {
-    path: 'create-appointment', 
-    component: AdminCreateAppointmentComponent, 
+    path: 'create-appointment',
+    component: AdminCreateAppointmentComponent,
     canActivate: [Guard],
     data: { permittedRoles: ['ROLE_ADMIN'] }
   },
   { path: 'find-appointment', component: FindAppointmentComponent },
+  //{ path: 'answer-questionaire', component: AnswerQuestionaireComponent },
+  { path: 'view-customers-appiontments', component: ViewCustomersAppointmentComponent },
+  { path: 'start-appointment', component: StartAppointmentComponent },
   { path: 'select-appointment/:id', component: SelectAppointmentComponent },
-  { path: 'answer-form/:id', 
-  component: AnswerFormComponent,
-  canActivate: [Guard],
-  data: { permittedRoles: ['ROLE_CUSTOMER'] } },
+  {
+    path: 'answer-form/:id',
+    component: AnswerFormComponent,
+    canActivate: [Guard],
+    data: { permittedRoles: ['ROLE_CUSTOMER'] }
+  },
   { path: 'admin-calendar', component: AdminCalendarViewComponent },
 ];
 
@@ -46,13 +54,15 @@ const routes: Routes = [
   declarations: [
     AdminCreateAppointmentComponent,
     FindAppointmentComponent,
+    ViewCustomersAppointmentComponent,
+    StartAppointmentComponent,
     SelectAppointmentComponent,
     AnswerFormComponent,
     AdminCalendarViewComponent,
+    //AnswerQuestionaireComponent,
   ],
   imports: [
     CommonModule,
-    FullCalendarModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
@@ -70,10 +80,12 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatSortModule,
     RouterModule.forChild(routes),
+    FullCalendarModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),
+    }
+    ),
   ],
 })
 export class AppointmentsModule { }

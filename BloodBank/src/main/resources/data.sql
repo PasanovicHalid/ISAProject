@@ -84,21 +84,21 @@ values('Stupicemo u kontakt sa zaposlenim!', 1030, 'ANSWERED', 1, 'Izderao se na
 
 --insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id, confirmation_code)
 --
-insert into appointment(id, appointment_date, confirmation_code, end_time, executed, start_time, version, blood_bank_id, customer_id)
+insert into appointment(id, appointment_date, confirmation_code, end_time, executed, start_time, version, blood_bank_id, customer_id, type_of_blood, quantity_of_blood, comment)
 values
-    (1031, '2022-12-19', 'ff', '11:09', 'DONE', '11:00', 0, 1007, 1023),
-    (1032, '2022-12-29', 'ff', '11:45', 'PENDING', '11:30', 0, 1008, 1023),
-    (1033, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1024),
-    (1034, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1023),
-    (1035, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1024),
-    (1036, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1023),
-    (1037, '2022-12-30', 'ff', '11:45', 'PENDING', '11:31', 0, 1008, 1024),
-    (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023),
-    (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024),
-    (1040, '2022-12-19', 'ff','11:00', 'FREE', '11:45', 0, 1007, null),
-    (1041, '2022-12-19', 'ff', '11:30', 'FREE', '11:45', 0, 1008, null),
-    (1042, '2022-12-19', 'ff', '11:31', 'FREE', '11:45', 0, 1009, null),
-    (1043, '2022-12-19', 'ff', '11:32', 'FREE', '11:45', 0, 1007, null);
+    (1031, '2022-12-19', 'ff', '11:09', 'DONE', '11:00', 0, 1007, 1023, 2, 0, 'odlicno'),
+    (1032, '2022-12-29', 'ff', '11:45', 'PENDING', '11:30', 0, 1008, 1023, 2, 0, 'odlicno'),
+    (1033, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1024, 2, 0, 'odlicno'),
+    (1034, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1023, 2, 0, 'odlicno'),
+    (1035, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1024, 2, 0, 'odlicno'),
+    (1036, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1023, 2, 0, 'odlicno'),
+    (1037, '2022-12-30', 'ff', '11:45', 'PENDING', '11:31', 0, 1008, 1024, 2, 0, 'odlicno'),
+    (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023, 2, 0, 'odlicno'),
+    (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024, 2, 0, 'odlicno'),
+    (1040, '2022-12-19', 'ff','11:00', 'FREE', '11:45', 0, 1007, null, 2, 0, 'odlicno'),
+    (1041, '2022-12-19', 'ff', '11:30', 'FREE', '11:45', 0, 1008, null, 2, 0, 'odlicno'),
+    (1042, '2022-12-19', 'ff', '11:31', 'FREE', '11:45', 0, 1009, null, 2, 0, 'odlicno'),
+    (1043, '2022-12-19', 'ff', '11:32', 'FREE', '11:45', 0, 1007, null, 2, 0, 'odlicno');
 
 
 

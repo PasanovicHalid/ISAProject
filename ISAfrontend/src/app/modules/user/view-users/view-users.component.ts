@@ -44,6 +44,8 @@ export class ViewUsersComponent implements OnInit {
       (res) => {
         this.users = res;
         this.getNumberOfUsers(this.search);
+        console.log(res);
+        
       },
       (error) => {
         this.errorMessage = error;

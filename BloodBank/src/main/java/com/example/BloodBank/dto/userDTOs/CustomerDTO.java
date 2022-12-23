@@ -1,5 +1,6 @@
 package com.example.BloodBank.dto.userDTOs;
 
+import com.example.BloodBank.model.Appointment;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
 
@@ -7,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 public class CustomerDTO {
     private String firstName;
@@ -24,6 +26,7 @@ public class CustomerDTO {
     private LocalDate dob;
     @NotNull
     private Role role;
+    private Set<Appointment> appointments;
 
     public CustomerDTO(String firstName, String lastName,
                        String username, String password,

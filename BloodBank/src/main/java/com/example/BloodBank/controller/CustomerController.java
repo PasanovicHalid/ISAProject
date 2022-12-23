@@ -6,16 +6,21 @@ import com.example.BloodBank.dto.userDTOs.CustomerUpdateDTO;
 import com.example.BloodBank.exceptions.EntityDoesntExistException;
 import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.Customer;
+import com.example.BloodBank.model.User;
 import com.example.BloodBank.service.CustomerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/customer")
@@ -35,6 +40,26 @@ public class CustomerController {
         try {
             return new ResponseEntity<>(customerService.getAll(), HttpStatus.OK);
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/search")
+    public ResponseEntity<Object> getCustomers(@RequestParam("page") Optional<String> pageNumber,
+                                               @RequestParam("size") Optional<String> size,
+                                               @RequestParam("search") Optional<String> searchTerm){
+        try{
+            Pageable page;
+            page = PageRequest.of(Integer.valueOf(pageNumber.get()), Integer.valueOf(size.get()));
+            List<Customer> customers = customerService.findAllByFirstNameOrLastName(searchTerm.get(),page);
+
+            if(customers.size() == 0){
+                return new  ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }else{
+                return new ResponseEntity<>(customers, HttpStatus.OK);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -76,6 +101,17 @@ public class CustomerController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(path="amount")
+    public ResponseEntity<Integer> getNumberOfCustomers( @RequestParam("search") Optional<String> searchTerm) {
+        try{
+            int amount = customerService.getCustomersAmountWithSearch(searchTerm.get());
+            return new ResponseEntity<>(amount, HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

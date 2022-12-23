@@ -3,6 +3,11 @@ package com.example.BloodBank.dto.appointmentDTOs;
 import com.example.BloodBank.dto.BloodBankDTO;
 import com.example.BloodBank.dto.userDTOs.CustomerDTO;
 
+import com.example.BloodBank.model.AppointmentStatus;
+import com.example.BloodBank.model.BloodBank;
+import com.example.BloodBank.model.Customer;
+import com.example.BloodBank.model.TypeOfBlood;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -15,11 +20,17 @@ public class AppointmentDTO {
 
     private Time endTime;
 
-    private CustomerDTO takenBy;
+    private AppointmentStatus executed;
+    private String comment;
 
-    private BloodBankDTO location;
 
-    public AppointmentDTO(long id, Date appointmentDate, Time startTime, Time endTime, CustomerDTO takenBy, BloodBankDTO location) {
+    private TypeOfBlood typeOfBlood;
+    private int quantityOfBlood;
+    private Customer takenBy;
+
+    private BloodBank location;
+
+    public AppointmentDTO(long id, Date appointmentDate, Time startTime, Time endTime, Customer takenBy, BloodBank location) {
         this.id = id;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
@@ -30,6 +41,41 @@ public class AppointmentDTO {
 
     public AppointmentDTO() {
     }
+
+    public AppointmentStatus getExecuted() {
+        return executed;
+    }
+
+    public void setExecuted(AppointmentStatus executed) {
+        this.executed = executed;
+    }
+    public int getQuantityOfBlood() {
+        return quantityOfBlood;
+    }
+
+    public void setQuantityOfBlood(int quatityOfBlood) {
+        this.quantityOfBlood = quatityOfBlood;
+    }
+
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public TypeOfBlood getTypeOfBlood() {
+        return typeOfBlood;
+    }
+
+    public void setTypeOfBlood(TypeOfBlood typeOfBlood) {
+        this.typeOfBlood = typeOfBlood;
+    }
+
+
+
 
     public long getId() {
         return id;
@@ -63,19 +109,19 @@ public class AppointmentDTO {
         this.endTime = endTime;
     }
 
-    public CustomerDTO getTakenBy() {
+    public Customer getTakenBy() {
         return takenBy;
     }
 
-    public void setTakenBy(CustomerDTO takenBy) {
+    public void setTakenBy(Customer takenBy) {
         this.takenBy = takenBy;
     }
 
-    public BloodBankDTO getLocation() {
+    public BloodBank getLocation() {
         return location;
     }
 
-    public void setLocation(BloodBankDTO location) {
+    public void setLocation(BloodBank location) {
         this.location = location;
     }
 }
