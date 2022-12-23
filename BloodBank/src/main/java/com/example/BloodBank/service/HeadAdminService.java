@@ -3,15 +3,14 @@ package com.example.BloodBank.service;
 import com.example.BloodBank.exceptions.EmailTakenException;
 import com.example.BloodBank.exceptions.UsernameTakenException;
 import com.example.BloodBank.model.*;
-import com.example.BloodBank.repository.HeadAdminRepository;
-import com.example.BloodBank.repository.UserRepository;
+import com.example.BloodBank.service.service_interface.repository.HeadAdminRepository;
+import com.example.BloodBank.service.service_interface.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IHeadAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class HeadAdminService implements IHeadAdminService {
