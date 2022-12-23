@@ -28,6 +28,8 @@ export class SelectAppointmentComponent implements OnInit {
         this.appointmentService.readAppointment(params['id']).subscribe(
           (res) => {
             this.appointment = res;
+            console.log('this.appointment');
+            console.log(this.appointment);
           },
           (error) => {
             this.toastr.error(error);
@@ -46,8 +48,14 @@ export class SelectAppointmentComponent implements OnInit {
       (res) => {
         if (res) {
           var bookAppointment = new BookAppointment();
-          bookAppointment.appointmentId = this.appointment.id.toLocaleString();
+          console.log('this.appointment.id');
+          console.log(this.appointment.id);
+          console.log('this.appointment.id  string');
+          console.log(this.appointment.id.toString());
+          bookAppointment.appointmentId = this.appointment.id.toString();
           bookAppointment.customerId = userId;
+          console.log('bookAppointment');
+          console.log(bookAppointment);
           this.appointmentService.reserveAppointment(bookAppointment).subscribe(
             (res) => {
               this.toastr.success('Succsesfuly reserved appointment');
