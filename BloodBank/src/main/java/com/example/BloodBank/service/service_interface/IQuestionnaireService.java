@@ -5,4 +5,6 @@ import com.example.BloodBank.model.Questionnaire;
 public interface IQuestionnaireService extends ICRUDService<Questionnaire> {
 
     boolean checkQuestionnaire(long id);
+
+    Questionnaire getForCustomer(long id) throws Exception;
 }

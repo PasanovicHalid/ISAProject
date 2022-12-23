@@ -23,7 +23,7 @@
                         cellspacing="0"
                       >
                         <td>
-                          <mat-form-field appearance="standard" class="w-100">
+                          <mat-form-field appearance="fill" class="w-100">
                             <mat-label>Start date</mat-label>
                             <input
                               [ngModel]="startDate | date : 'yyyy-MM-dd'"
@@ -35,7 +35,7 @@
                           </mat-form-field>
                         </td>
                         <td>
-                          <mat-form-field appearance="standard" class="w-100">
+                          <mat-form-field appearance="fill" class="w-100">
                             <mat-label>Start time</mat-label>
                             <input
                               [(ngModel)]="startTime"
@@ -170,24 +170,6 @@
                     (click)="chooseAppointment(appointment.id)"
                   >
                     {{ appointment.executed }}
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="bookButton">
-                  <th
-                    mat-header-cell
-                    mat-sort-header
-                    *matHeaderCellDef
-                    class="cell-center"
-                  >
-                    Status
-                  </th>
-                  <td
-                    mat-cell
-                    *matCellDef="let appointment"
-                    class="clickable cell-center"
-                    (click)="chooseAppointment(appointment.id)"
-                  >
-                    <button type="button">Book</button>
                   </td>
                 </ng-container>
                 <tr

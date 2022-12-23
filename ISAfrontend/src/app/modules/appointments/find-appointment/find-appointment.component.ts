@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -31,8 +31,7 @@ export class FindAppointmentComponent implements OnInit {
     'bloodBank.name',
     'bloodBank.address',
     'location.rating',
-    'executed',
-    'bookButton',
+    'executed'
   ];
 
   constructor(

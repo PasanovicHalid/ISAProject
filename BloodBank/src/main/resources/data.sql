@@ -93,8 +93,12 @@ values
     (1036, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1023),
     (1037, '2022-12-30', 'ff', '11:45', 'PENDING', '11:31', 0, 1008, 1024),
     (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023),
-    (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024);
+    (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024),
+    (10, '2022-12-19', 'ff', '11:00', 'FREE', '11:45', 0, 1007, null),
+    (11, '2022-12-19', 'ff', '11:30', 'FREE', '11:45', 0, 1008, null),
+    (12, '2022-12-19', 'ff', '11:30', 'FREE', '11:45', 0, 1009, null),
+    (13, '2022-12-19', 'ff', '11:31', 'FREE', '11:45', 0, 1009, null),
+    (14, '2022-12-19', 'ff', '11:32', 'FREE', '11:45', 0, 1007, null);
 
---insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
---values(20, false, false, false, 123123, true, '2022-12-19', false, false, false, false, 1023);
-
+insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
+values(20, false, false, false, 123123, true, '2022-10-19', false, false, false, false, 1023)

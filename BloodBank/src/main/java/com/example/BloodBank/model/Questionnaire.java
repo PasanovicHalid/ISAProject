@@ -1,5 +1,6 @@
 package com.example.BloodBank.model;
 
+import com.example.BloodBank.dto.QuestionnaireDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class Questionnaire {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
@@ -38,4 +39,5 @@ public class Questionnaire {
     public boolean checkIfValidForReservationOfAppointment() {
         return fillDate.isAfter(LocalDate.now().minusMonths(1));
     }
+
 }
