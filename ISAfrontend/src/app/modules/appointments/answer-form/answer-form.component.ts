@@ -10,6 +10,7 @@ import { Questionnaire } from '../model/questionnaire';
 import { AppointmentService } from '../services/appointment.service';
 import { CustomerService } from '../services/customer.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import { UserService } from '../../user/services/user.service';
 
 @Component({
   selector: 'app-answer-form',

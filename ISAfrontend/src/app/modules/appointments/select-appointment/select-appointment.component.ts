@@ -66,8 +66,8 @@ export class SelectAppointmentComponent implements OnInit {
           );
         } else {
           this.toastr.error('Please fill out a form');
-          this.router.navigate(['fill-form']);
-          // this.router.navigate(['answer-form/', this.appointment.id])
+          // this.router.navigate(['fill-form']);
+          this.router.navigate(['answer-form/', this.appointment.id]);
         }
       },
       (error) => {

@@ -31,11 +31,7 @@ export class FindAppointmentComponent implements OnInit {
     'bloodBank.name',
     'bloodBank.address',
     'location.rating',
-<<<<<<< HEAD
     'executed',
-=======
-    'executed'
->>>>>>> 66bea467f7e4a673ffabe11b2a6b7688c2941893
   ];
 
   constructor(
