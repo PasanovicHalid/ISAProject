@@ -1,10 +1,8 @@
 package adapters;
 
-import com.example.BloodBank.dto.CustomerDTO;
-import com.example.BloodBank.dto.CustomerUpdateDTO;
-import com.example.BloodBank.dto.UserDTO;
+import com.example.BloodBank.dto.userDTOs.CustomerDTO;
+import com.example.BloodBank.dto.userDTOs.CustomerUpdateDTO;
 import com.example.BloodBank.model.Customer;
-import com.example.BloodBank.model.User;
 import org.modelmapper.ModelMapper;
 
 public class CustomerMapper {

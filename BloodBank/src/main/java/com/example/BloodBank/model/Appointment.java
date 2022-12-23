@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
+
 @Entity(name="appointment")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +29,7 @@ public class Appointment {
     private Time endTime;
 
     @Column(nullable = true, updatable = true)
+    @Enumerated(EnumType.STRING)
     private AppointmentStatus executed;
 
     @ManyToOne(cascade = CascadeType.MERGE)

@@ -1,5 +1,6 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.userDTOs;
 
+import com.example.BloodBank.dto.AddressDTO;
 import com.example.BloodBank.model.Gender;
 import com.example.BloodBank.model.Role;
 

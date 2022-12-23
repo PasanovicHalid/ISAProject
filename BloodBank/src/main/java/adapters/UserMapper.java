@@ -1,11 +1,8 @@
 package adapters;
 
-import com.example.BloodBank.dto.UserDTO;
+import com.example.BloodBank.dto.userDTOs.UserDTO;
 import com.example.BloodBank.model.User;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
-
-import java.util.List;
 
 public class UserMapper {
     private static ModelMapper modelMapper;

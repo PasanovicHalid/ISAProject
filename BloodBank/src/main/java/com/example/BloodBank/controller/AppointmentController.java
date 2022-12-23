@@ -1,12 +1,13 @@
 package com.example.BloodBank.controller;
 
 import adapters.AppointmentMapper;
-import com.example.BloodBank.dto.AppointmentCreationDTO;
-import com.example.BloodBank.dto.AppointmentReserveDTO;
-import com.example.BloodBank.dto.AppointmentViewDTO;
-import com.example.BloodBank.dto.BookAppointmentDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentCreationDTO;
+import com.example.BloodBank.dto.appointmentDTOs.AppointmentViewDTO;
+import com.example.BloodBank.dto.appointmentDTOs.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
-import com.example.BloodBank.model.Customer;
+import adapters.CalendarAppointmentMapper;
+import com.example.BloodBank.dto.appointmentDTOs.CalendarAppointmentDTO;
+import com.example.BloodBank.service.AdminService;
 import com.example.BloodBank.service.AppointmentService;
 import com.example.BloodBank.service.BloodBankService;
 import com.example.BloodBank.service.service_interface.ICustomerService;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,20 +33,23 @@ public class AppointmentController {
 
     private final AppointmentService appointmentService;
     private final BloodBankService bloodBankService;
-
     private final ICustomerService customerService;
-
     private final IQuestionnaireService questionnaireService;
-
+    private final AdminService adminService;
     private static AppointmentMapper appointmentMapper;
+    private static CalendarAppointmentMapper calendarAppointmentMapper;
 
     @Autowired
-    public AppointmentController(AppointmentService appointmentService, BloodBankService bloodBankService, ICustomerService customerService, IQuestionnaireService questionnaireService, ModelMapper modelMapper) {
+    public AppointmentController(AppointmentService appointmentService, BloodBankService bloodBankService,
+                                 ICustomerService customerService, IQuestionnaireService questionnaireService,
+                                 AdminService adminService, ModelMapper modelMapper) {
         this.appointmentService = appointmentService;
         this.bloodBankService = bloodBankService;
         this.customerService = customerService;
         this.questionnaireService = questionnaireService;
+        this.adminService = adminService;
         this.appointmentMapper = new AppointmentMapper(modelMapper);
+        this.calendarAppointmentMapper = new CalendarAppointmentMapper(modelMapper);
     }
 
     @GetMapping(value = "/{id}")
@@ -107,7 +112,7 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/book")
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
@@ -148,4 +153,15 @@ public class AppointmentController {
         }
     }
 
+    @GetMapping(path="calendar/{adminID}")
+    public ResponseEntity<List<CalendarAppointmentDTO>> getDoneAndPendingAppointmentsForBloodBank(@PathVariable("adminID") long adminID) {
+        try {
+            List<Appointment> appointments = appointmentService.getDoneAndPendingAppointmentsForBloodBank(
+                    adminService.Read(adminID).getBloodBank().getBankID());
+            List<CalendarAppointmentDTO> appointmentDTOS = calendarAppointmentMapper.toCalendarAppointmentDTOList(appointments);
+            return new ResponseEntity<>(appointmentDTOS, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

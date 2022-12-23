@@ -1,8 +1,7 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.dto.RegistrationAdminDTO;
+import com.example.BloodBank.dto.userDTOs.RegistrationAdminDTO;
 import com.example.BloodBank.model.BloodBank;
-import com.example.BloodBank.model.Customer;
 import com.example.BloodBank.repository.AdminRepository;
 import com.example.BloodBank.service.service_interface.IAdminService;
 import org.modelmapper.ModelMapper;

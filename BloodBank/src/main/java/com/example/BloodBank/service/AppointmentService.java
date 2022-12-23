@@ -1,6 +1,6 @@
 package com.example.BloodBank.service;
 
-import com.example.BloodBank.dto.BookAppointmentDTO;
+import com.example.BloodBank.dto.appointmentDTOs.BookAppointmentDTO;
 import com.example.BloodBank.model.Appointment;
 import com.example.BloodBank.model.AppointmentStatus;
 import com.example.BloodBank.model.Customer;
@@ -11,8 +11,6 @@ import com.example.BloodBank.service.service_interface.IQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,7 +76,6 @@ public class AppointmentService implements IAppointmentService {
     public Page<Appointment> GetAllPageable(Pageable page) throws Exception {
         return appointmentRepository.findAll(page);
     }
-
     public Page<Appointment> GetAllPageableFree(Pageable page) throws Exception {
         return appointmentRepository.findAllAvailable(page);
     }
@@ -152,4 +149,16 @@ public class AppointmentService implements IAppointmentService {
         }
     }
 
+    @Override
+    public List<Appointment> getDoneAndPendingAppointmentsForBloodBank(Long bankId) {
+        List<Appointment> appointments = appointmentRepository.findDoneAndPendingAppointmentsByBankId(bankId);
+//        List<Appointment> doneAndPendingApp = new ArrayList<Appointment>();
+//        for(Appointment a : appointments){
+//            if((a.getExecuted().equals(AppointmentStatus.DONE) || a.getExecuted().equals(AppointmentStatus.PENDING))
+//                    && a.getLocation().getBankID() == bankId)
+//                doneAndPendingApp.add(a);
+//        }
+//        return doneAndPendingApp;
+        return appointments;
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.userDTOs;
 
 import javax.validation.constraints.NotNull;
 

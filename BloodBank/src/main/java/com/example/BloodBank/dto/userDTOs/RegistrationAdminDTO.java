@@ -1,4 +1,4 @@
-package com.example.BloodBank.dto;
+package com.example.BloodBank.dto.userDTOs;
 
 import com.example.BloodBank.model.Address;
 import com.example.BloodBank.model.Gender;
@@ -7,7 +7,7 @@ import com.example.BloodBank.model.Role;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class RegistrationAdminDTO extends UserDTO{
+public class RegistrationAdminDTO extends UserDTO {
 
     @NotNull
     @NotBlank

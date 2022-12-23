@@ -1,6 +1,6 @@
 package adapters;
 
-import com.example.BloodBank.dto.CreationComplaintDTO;
+import com.example.BloodBank.dto.complaintDTOs.CreationComplaintDTO;
 import com.example.BloodBank.model.Complaint;
 import com.example.BloodBank.model.ComplaintStatus;
 import org.modelmapper.ModelMapper;

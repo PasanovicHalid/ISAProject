@@ -46,7 +46,7 @@ values(1021, '2000-06-03', 'saska@gmail.com', 'Saska', 0, 'Vujovic', '123', 1, '
 insert into users
 values(1022, '2000-05-05', 'nikola@gmail.com', 'Nikola', 1, 'Rosic', '123', 1, 'nikola', 1013);
 insert into users
-values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Nina', '123', 2, 'nina', 1014);
+values(1023, '1995-12-10', 'nina@gmail.com', 'Nina', 1, 'Ninic', '123', 2, 'nina', 1014);
 insert into users
 values(1024, '2000-04-04', 'milka@gmail.com', 'Milka', 2, 'Milkic', '123', 2, 'milka', 1015);
 insert into users
@@ -55,7 +55,7 @@ insert into users
 values(1026, '2000-05-05','marko@gmail.com', 'Marko', 2, 'Markovic', '123', 2, 'marko', 1017);
 
 insert into head_admins
-values(1019);
+values('false', 1019);
 
 insert into admin
 values(1020, 1007);
@@ -82,12 +82,21 @@ values('', 1029, 'UNANSWERED', 1, 'Jako neprijatna radnica!', 'saska@gmail.com',
 insert into complaints(answer, complaint_id, complaint_status,complaint_type, description, email_of_defendant, submission_date, customer_id, head_admin_id)
 values('Stupicemo u kontakt sa zaposlenim!', 1030, 'ANSWERED', 1, 'Izderao se na mene u hodniku', 'halid@gmail.com','2022-10-23', 1026, 1019);
 
-insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id, confirmation_code)
+--insert into appointment(id, appointment_date, start_time, end_time, executed, blood_bank_id, customer_id, confirmation_code)
+insert into appointment(id, appointment_date, confirmation_code, end_time, executed, start_time, version, blood_bank_id, customer_id)
 values
     (10, '2022-12-19', '11:00', '11:45', 3, 1007, null, ''),
     (11, '2022-12-19', '11:30', '11:45', 3, 1008, null, ''),
     (12, '2022-12-19', '11:31', '11:45', 4, 1009, 1023, ''),
     (13, '2022-12-19', '11:32', '11:45', 4, 1007, 1023, '');
+    (1031, '2022-12-19', 'ff', '11:09', 'DONE', '11:00', 0, 1007, 1023),
+    (1032, '2022-12-29', 'ff', '11:45', 'PENDING', '11:30', 0, 1008, 1023),
+    (1033, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1024),
+    (1034, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1023),
+    (1035, '2022-12-19', 'ff', '11:45', 'CANCELLED', '11:31', 0, 1007, 1024),
+    (1036, '2022-12-19', 'ff', '11:45', 'DONE', '11:31', 0, 1009, 1023),
+    (1037, '2022-12-30', 'ff', '11:45', 'PENDING', '11:31', 0, 1008, 1024),
+    (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023),
+    (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024);
 
-insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
-values(20, false, false, false, 123123, true, '2022-12-19', false, false, false, false, 1023)
+
