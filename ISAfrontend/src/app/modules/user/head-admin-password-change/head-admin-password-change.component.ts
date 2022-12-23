@@ -22,6 +22,7 @@ export class HeadAdminPasswordChangeComponent implements OnInit {
   verifyPass: String = '';
   public errorMessage: Error = new Error;
   public errorMap: Map<string, string> = new Map();
+  isDisabled: boolean =  true;
 
   constructor(private headAdminService: HeadAdminService, private router: Router,private toastr: ToastrService) { }
 
@@ -31,17 +32,35 @@ export class HeadAdminPasswordChangeComponent implements OnInit {
     this.admin.newPassword = '';
   }
 
+  saveChanges(registrationForm: NgForm): void {
+    if (registrationForm.dirty && registrationForm.valid) {
+      this.changePassword();
+    }
+  }
+
   changePassword() :void {
     console.log(this.admin)
     this.headAdminService.savePasswordChanges(this.admin).subscribe(res =>
       {
         console.log(res);
+        if(res == true)
+          this.toastr.success("Password successfully changed!");
+        else
+          this.toastr.info("Something went wrong, please try again later!");
       }, (error) => {
         console.log(error)
         this.errorMessage = error;
         this.toastError();
       });
   }
+
+  checkPassword(){
+    if(this.oldPass == this.admin.oldPassword && this.verifyPass == this.admin.newPassword)
+      this.isDisabled = false;
+    else
+      this.isDisabled = true;
+  }
+
   private toastError() {
     if (String(this.errorMessage).includes('406')){
       var error = localStorage.getItem('errormap')!;
