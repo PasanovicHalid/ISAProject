@@ -65,6 +65,7 @@ export class AdminCalendarViewComponent implements OnInit {
   constructor(private appointmentService: AppointmentService, private toastr: ToastrService, private router: Router) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log("ovde sam")
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -76,6 +77,12 @@ export class AdminCalendarViewComponent implements OnInit {
       }
       this.viewDate = date;
     }
+  }
+
+  eventClicked(action: string, event: CalendarEvent): void {
+    console.log("usla u handleeee sam")
+    this.modalData = { event, action };
+    console.log(this.modalData.event)
   }
 
   eventTimesChanged({
@@ -128,7 +135,6 @@ export class AdminCalendarViewComponent implements OnInit {
           element.end = new Date(element.end!);
         });
         this.events = response;
-        console.log(this.events)
       },
       (error) => {
         this.errorMessage = error;
@@ -153,4 +159,6 @@ export class AdminCalendarViewComponent implements OnInit {
       this.toastr.error(this.errorMessage.message);
     }
   }
+
+
 }
