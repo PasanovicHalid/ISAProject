@@ -28,8 +28,6 @@ public class Appointment {
     @Column(nullable = true)
     private TypeOfBlood typeOfBlood;
 
-
-    @Column(nullable = true)
     private int quantityOfBlood;
 
     @Column(nullable = false)

@@ -95,10 +95,10 @@ values
     (1037, '2022-12-30', 'ff', '11:45', 'PENDING', '11:31', 0, 1008, 1024, 2, 0, 'odlicno'),
     (1038, '2022-12-29', 'ff', '11:45', 'PENDING', '11:31', 0, 1009, 1023, 2, 0, 'odlicno'),
     (1039, '2022-12-28', 'ff', '10:31', 'PENDING', '8:32', 0, 1007, 1024, 2, 0, 'odlicno'),
-    (1040, '2022-12-19', 'ff','11:00', 'FREE', '11:45', 0, 1007, null, 2, 0, 'odlicno'),
-    (1041, '2022-12-19', 'ff', '11:30', 'FREE', '11:45', 0, 1008, null, 2, 0, 'odlicno'),
-    (1042, '2022-12-19', 'ff', '11:31', 'FREE', '11:45', 0, 1009, null, 2, 0, 'odlicno'),
-    (1043, '2022-12-19', 'ff', '11:32', 'FREE', '11:45', 0, 1007, null, null, null, null);
+    (1040, '2022-12-19', 'ff','11:32', 'FREE', '11:00', 0, 1007, null, 2, 0, 'odlicno'),
+    (1041, '2022-12-19', 'ff', '11:30', 'FREE', '11:10', 0, 1008, null, 2, 0, 'odlicno'),
+    (1042, '2022-12-19', 'ff', '11:31', 'FREE', '11:20', 0, 1009, null, 2, 0, 'odlicno'),
+    (1043, '2022-12-19', 'ff', '11:32', 'FREE', '11:20', 0, 1007, null, null, 0, null);
 
 
 
@@ -111,3 +111,22 @@ values('false', 1045);
 
 --insert into questionnaire(id, dangerous_job, denied, donated, donor_number, eaten, fill_date, healthy, menstruating, pregnant, second_state, customer_id)
 --values(20, false, false, false, 123123, true, '2022-10-19', false, false, false, false, 1023)
+
+insert into blood_bank
+values(10, 't125J6w79JdrILqI34F6kYM3UAWENV8RjeZvi0LVtJochrXWJ7mpt0Cdedka8lVWUPnCFLZOhJbcS8ao9VFgwQ==', 'Best blood bank', 'newlife123@gmail.com', '21:00', 'New Life21341', 5, 4.4, '08:00', 1004, 1001);
+
+insert into users
+values(101, '1995-12-10', 'halidpasanovic1000@gmail.com', 'Halid', 1, 'Pasanovic', '123', 1, 'halidpasa', 1011);
+insert into users
+values(102, '2000-06-03', 'saska213@gmail.com', 'Saska', 0, 'Vujovic', '123', 2, 'uros', 1012);
+insert into users
+values(103, '2000-05-05', 'nikola436346@gmail.com', 'Nikola', 1, 'Rosic', '123', 2, 'milica', 1013);
+
+insert into admin
+values(101, 10);
+
+insert into customer(jmbg, phone_number, profession, profession_info, id)
+values('101010', '066111221', 'zaposlen', 'firma', 102);
+insert into customer
+values('202020', '064434444', 'nezaposlena', 'domacica', 103);
+
