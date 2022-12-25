@@ -113,6 +113,23 @@ public class BloodBankController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "{bloodType}/{quantity}")
+    public ResponseEntity<Boolean> checkBloodAvailabilityWithoutEmail(
+                                                          @PathVariable("bloodType") String bloodType,
+                                                          @PathVariable("quantity") int quantity,
+                                                          @RequestHeader(name = HttpHeaders.AUTHORIZATION) String APIkey){
+
+        try{
+            Boolean b = bloodBankService.checkForBloodWithoutEmail(bloodType, quantity);
+            return ResponseEntity.status(HttpStatus.OK).body(b);
+        }
+        catch(Exception e){
+            if(e.toString().contains("IllegalStateException"))
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
     @GetMapping()
     public ResponseEntity<List<BloodBank>> getAllBloodBank() {
         try {
@@ -174,7 +191,22 @@ public class BloodBankController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+    }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "getEmergency/{bloodType}/{quantity}")
+    public ResponseEntity<Integer> sendEmergencyBlood(
+                                             @PathVariable("bloodType") String bloodType,
+                                             @PathVariable("quantity") int quantity){
 
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(bloodBankService.sendBloodEmergency(bloodType, quantity));
+        }
+        catch(Exception e){
+            if(e.toString().contains("IllegalStateException"))
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            else if(e.toString().contains("UnsupportedOperationException"))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

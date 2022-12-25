@@ -41,7 +41,6 @@ public class BloodBankService implements IBloodBankService {
     }
 
     public boolean checkForBlood(String bankEmail, String bloodType, int quantity){
-
         for(BloodBank bank : bloodBankRepository.findAll()){
             if(bank.getEmail().equals(bankEmail)){
                 switch (bloodType) {
@@ -78,6 +77,88 @@ public class BloodBankService implements IBloodBankService {
                             return false;
                         return bank.getBlood().getOminus() >= quantity;
                 }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkForEmergency(String bankEmail, String bloodType, int quantity){
+        for(BloodBank bank : bloodBankRepository.findAll()){
+            if(bank.getEmail().equals(bankEmail)){
+                switch (bloodType) {
+                    case "Ap":
+                        if(bank.getBlood().getAplus() == 0)
+                            return false;
+                        return bank.getBlood().getAplus() >= quantity;
+                    case "ABp":
+                        if(bank.getBlood().getABplus() == 0)
+                            return false;
+                        return bank.getBlood().getABplus() >= quantity;
+                    case "Bp":
+                        if(bank.getBlood().getBplus() == 0)
+                            return false;
+                        return bank.getBlood().getBplus() >= quantity;
+                    case "Op":
+                        if(bank.getBlood().getOplus() == 0)
+                            return false;
+                        return bank.getBlood().getOplus() >= quantity;
+                    case "An":
+                        if(bank.getBlood().getAminus() == 0)
+                            return false;
+                        return bank.getBlood().getAminus() >= quantity;
+                    case "ABn":
+                        if(bank.getBlood().getABminus() == 0)
+                            return false;
+                        return bank.getBlood().getABminus() >= quantity;
+                    case "Bn":
+                        if(bank.getBlood().getBminus() == 0)
+                            return false;
+                        return bank.getBlood().getBminus() >= quantity;
+                    case "On":
+                        if(bank.getBlood().getOminus() == 0)
+                            return false;
+                        return bank.getBlood().getOminus() >= quantity;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkForBloodWithoutEmail(String bloodType, int quantity){
+        for(BloodBank bank : bloodBankRepository.findAll()){
+            switch (bloodType) {
+                case "Aplus":
+                    if(bank.getBlood().getAplus() == 0)
+                        return false;
+                    return bank.getBlood().getAplus() >= quantity;
+                case "ABplus":
+                    if(bank.getBlood().getABplus() == 0)
+                        return false;
+                    return bank.getBlood().getABplus() >= quantity;
+                case "Bplus":
+                    if(bank.getBlood().getBplus() == 0)
+                        return false;
+                    return bank.getBlood().getBplus() >= quantity;
+                case "Oplus":
+                    if(bank.getBlood().getOplus() == 0)
+                        return false;
+                    return bank.getBlood().getOplus() >= quantity;
+                case "Aminus":
+                    if(bank.getBlood().getAminus() == 0)
+                        return false;
+                    return bank.getBlood().getAminus() >= quantity;
+                case "ABminus":
+                    if(bank.getBlood().getABminus() == 0)
+                        return false;
+                    return bank.getBlood().getABminus() >= quantity;
+                case "Bminus":
+                    if(bank.getBlood().getBminus() == 0)
+                        return false;
+                    return bank.getBlood().getBminus() >= quantity;
+                case "Ominus":
+                    if(bank.getBlood().getOminus() == 0)
+                        return false;
+                    return bank.getBlood().getOminus() >= quantity;
             }
         }
         return false;
@@ -165,6 +246,17 @@ public class BloodBankService implements IBloodBankService {
         throw new UnsupportedOperationException("Can't send blood");
     }
 
+    @Transactional
+    public Integer sendBloodEmergency(String bloodType, int quantity) {
+        for(BloodBank bank : bloodBankRepository.findAll()) {
+            if(checkForEmergency(bank.getEmail(), bloodType, quantity)){
+                reduceBloodSuppliesEmergency(bank,bloodType, quantity);
+                return quantity;
+            }
+        }
+        throw new UnsupportedOperationException("Can't send blood");
+    }
+
     @Override
     public Boolean savePDF(String bankEmail, byte[] pdf) {
         LocalDateTime today = LocalDateTime.now();
@@ -204,6 +296,39 @@ public class BloodBankService implements IBloodBankService {
                 bank.getBlood().setBminus(bank.getBlood().getBminus() - quantity);
                 break;
             case "Ominus":
+                bank.getBlood().setOminus(bank.getBlood().getOminus() - quantity);
+                break;
+            default:
+                throw new IllegalStateException("BloodType unrecognizable.");
+        }
+        bloodBankRepository.save(bank);
+    }
+
+    @Transactional
+    private void reduceBloodSuppliesEmergency(BloodBank bank, String bloodType, int quantity){
+        switch (bloodType) {
+            case "Ap":
+                bank.getBlood().setAplus(bank.getBlood().getAplus() - quantity);
+                break;
+            case "ABp":
+                bank.getBlood().setABplus(bank.getBlood().getABplus() - quantity);
+                break;
+            case "Bp":
+                bank.getBlood().setBplus(bank.getBlood().getBplus() - quantity);
+                break;
+            case "Op":
+                bank.getBlood().setOplus(bank.getBlood().getOplus() - quantity);
+                break;
+            case "An":
+                bank.getBlood().setAminus(bank.getBlood().getAminus() - quantity);
+                break;
+            case "ABn":
+                bank.getBlood().setABminus(bank.getBlood().getABminus() - quantity);
+                break;
+            case "Bn":
+                bank.getBlood().setBminus(bank.getBlood().getBminus() - quantity);
+                break;
+            case "On":
                 bank.getBlood().setOminus(bank.getBlood().getOminus() - quantity);
                 break;
             default:
