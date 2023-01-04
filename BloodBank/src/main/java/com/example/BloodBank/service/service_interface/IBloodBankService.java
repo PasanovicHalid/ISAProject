@@ -47,7 +47,7 @@ public interface IBloodBankService  {
     Page<BloodBank> getBanksByRatingRange(String filter, Pageable page) throws Exception;
 
 
-    @Cacheable(value = "bloodBanksPageable", condition = "#filter.isEmpty()",key="new org.springframework.cache.interceptor.SimpleKey(#root.methodName, #filter, #page.getPageNumber(), #page.getPageSize())")
+    @Cacheable(value = "bloodBanksPageable", condition = "#filter.isEmpty() && #page.getPageNumber() == 0",key="new org.springframework.cache.interceptor.SimpleKey(#root.methodName, #filter, #page.getPageNumber(), #page.getPageSize())")
     Page<BloodBank> getBanksByName(String filter, Pageable page) throws Exception;
 
     Page<BloodBank> getBanksByAddress(String filter, Pageable page) throws Exception;
