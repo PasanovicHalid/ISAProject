@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @Entity(name="not_activated_user")
 @Table
-public class NotActivatedCustomer {
+public class NotActivatedCustomer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

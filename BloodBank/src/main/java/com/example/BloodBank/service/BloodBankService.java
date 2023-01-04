@@ -10,6 +10,7 @@ import com.example.BloodBank.service.service_interface.IBloodBankService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -113,38 +114,22 @@ public class BloodBankService implements IBloodBankService {
     }
 
     @Override
-    public List<BloodBank> getBanksByRatingRange(String filter, Pageable page) throws Exception {
+    public Page<BloodBank> getBanksByRatingRange(String filter, Pageable page) throws Exception {
         String[] numbers = filter.split("[|]");
         if(numbers.length != 2){
             throw new Exception("Error in filter string");
         }
-        double temp = Double.parseDouble(numbers[0]);
-        Page<BloodBank> bloodBankPage = bloodBankRepository.findByRatingRange(Double.parseDouble(numbers[0]), Double.parseDouble(numbers[1]), page);
-        List<BloodBank> bloodBanks = new ArrayList<>();
-        for (BloodBank b: bloodBankPage) {
-            bloodBanks.add(b);
-        }
-        return bloodBanks;
+        return bloodBankRepository.findByRatingRange(Double.parseDouble(numbers[0]), Double.parseDouble(numbers[1]), page);
     }
 
     @Override
-    public List<BloodBank> getBanksByName(String filter, Pageable page) throws Exception {
-        Page<BloodBank> bloodBankPage = bloodBankRepository.findAllByName(filter.toLowerCase(), page);
-        List<BloodBank> bloodBanks = new ArrayList<>();
-        for (BloodBank b: bloodBankPage) {
-            bloodBanks.add(b);
-        }
-        return bloodBanks;
+    public Page<BloodBank> getBanksByName(String filter, Pageable page) throws Exception {
+        return bloodBankRepository.findAllByName(filter.toLowerCase(), page);
     }
 
     @Override
-    public List<BloodBank> getBanksByAddress(String filter, Pageable page) throws Exception {
-        Page<BloodBank> bloodBankPage = bloodBankRepository.findByAddress(filter.toLowerCase(), page);
-        List<BloodBank> bloodBanks = new ArrayList<>();
-        for (BloodBank b: bloodBankPage) {
-            bloodBanks.add(b);
-        }
-        return bloodBanks;
+    public Page<BloodBank> getBanksByAddress(String filter, Pageable page) throws Exception {
+        return bloodBankRepository.findByAddress(filter.toLowerCase(), page);
     }
 
     public Optional<BloodBank> findByEmail(String email) {

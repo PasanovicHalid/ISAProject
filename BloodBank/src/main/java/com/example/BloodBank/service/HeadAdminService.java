@@ -7,6 +7,7 @@ import com.example.BloodBank.service.service_interface.repository.HeadAdminRepos
 import com.example.BloodBank.service.service_interface.repository.UserRepository;
 import com.example.BloodBank.service.service_interface.IHeadAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,11 +50,13 @@ public class HeadAdminService implements IHeadAdminService {
     }
 
     @Override
+    @CacheEvict(cacheNames = {"userInfo"}, allEntries = true, key = "#entity.getUsername()")
     public HeadAdmin Update(HeadAdmin entity) throws Exception {
         return headAdminRepository.save(entity);
     }
 
     @Override
+    @CacheEvict(cacheNames = {"userInfo"}, allEntries = true, key = "#entity.getUsername()")
     public void Delete(HeadAdmin entity) throws Exception {
 
     }

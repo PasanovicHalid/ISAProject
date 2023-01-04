@@ -26,15 +26,14 @@ export class EditUserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.customerService.getCustomerByID(+params['id']).subscribe(res => {
+    var userId = localStorage.getItem('loggedUserId') ?? '-1';
+      this.customerService.getCustomerByID(userId).subscribe(res => {
         this.user = res
       }, (error) => {
         console.log(error)
         this.errorMessage = error;
         this.toastError();
       })
-    })
   }
 
   public editCustomer(){

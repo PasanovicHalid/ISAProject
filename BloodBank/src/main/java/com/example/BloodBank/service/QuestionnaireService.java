@@ -9,6 +9,7 @@ import com.example.BloodBank.service.service_interface.repository.CustomerReposi
 import com.example.BloodBank.service.service_interface.repository.QuestionnaireRepository;
 import com.example.BloodBank.service.service_interface.IQuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ public class QuestionnaireService implements IQuestionnaireService {
         return questionnaireRepository.save(entity);
     }
 
+    @CacheEvict(value = {"questionnaire", "questionnaires"}, allEntries = true)
     public Questionnaire CreateDTO(QuestionnaireDTO dto){
         Questionnaire questionnaire = questionnaireRepository.findByCustomerId((Long.valueOf(dto.getCustomerId())));
         if (questionnaire == null){

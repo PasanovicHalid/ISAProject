@@ -118,7 +118,7 @@ values(10, 't125J6w79JdrILqI34F6kYM3UAWENV8RjeZvi0LVtJochrXWJ7mpt0Cdedka8lVWUPnC
 insert into users
 values(101, '1995-12-10', 'halidpasanovic1000@gmail.com', 'Halid', 1, 'Pasanovic', '123', 1, 'halidpasa', 1011);
 insert into users
-values(102, '2000-06-03', 'saska213@gmail.com', 'Saska', 0, 'Vujovic', '123', 2, 'uros', 1012);
+values(102, '2000-06-03', 'saskaasdsadsdasda@gmail.com', 'Saska', 0, 'Vujovic', '123', 2, 'uros', 1012);
 insert into users
 values(103, '2000-05-05', 'nikola436346@gmail.com', 'Nikola', 1, 'Rosic', '123', 2, 'milica', 1013);
 
